@@ -37,8 +37,8 @@
 /* Nested includes                                                           */
 /*---------------------------------------------------------------------------*/
      
-#include "/home/wangchen/Research/cudd/cudd-2.5.0/util/util.h"
-#include "/home/wangchen/Research/cudd/cudd-2.5.0/cudd/cudd.h"
+#include "../util/util.h"
+#include "../cudd/cudd.h"
 
 #ifdef __cplusplus
 extern "C" {
