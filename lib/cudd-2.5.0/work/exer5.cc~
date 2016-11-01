@@ -1,0 +1,20 @@
+/*
+ * test program for using cudd with c++
+ */
+ 
+#include "cuddObj.hh"
+
+int 
+main() 
+{
+ Cudd mgr(0, 0);
+ BDD x = mgr.bddVar();
+ BDD y = mgr.bddVar();
+ BDD f = x + !y;
+ BDD z = mgr.bddVar();
+ BDD t = f*!z;
+ mgr.ReduceHeap((Cudd_ReorderingType)2, 2);
+ cout << "t"; 
+ t.print(3, 4);
+ return 0;
+}
