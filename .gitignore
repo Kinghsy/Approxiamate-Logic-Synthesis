@@ -33,3 +33,5 @@
 *.su
 .idea/
 bin/
+deprecated/
+
