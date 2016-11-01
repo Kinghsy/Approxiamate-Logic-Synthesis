@@ -6,7 +6,7 @@
 #define VE490_OBJECT_H
 
 class Object {
-    virtual Object *clone() = ;
+    virtual Object *clone() = 0;
     virtual ~Object() = 0;
 };
 

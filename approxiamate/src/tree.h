@@ -43,6 +43,8 @@ public:
     public:
         BTreeNodeRef left();
         BTreeNodeRef right();
+        void setLeft(BTreeNodeRef *leftNode);
+        void setRight(BTreeNodeRef *rightNode);
     };
 
     virtual BTreeNodeRef& getRoot();
