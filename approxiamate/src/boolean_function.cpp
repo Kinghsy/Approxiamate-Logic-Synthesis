@@ -6,10 +6,13 @@
 #include <memory>
 #include <cstring>
 #include "conts.h"
+#include <tuple>
 
 using std::unique_ptr;
 using std::shared_ptr;
 using std::tuple;
+using std::tie;
+using std::get;
 
 //======================================================================================
 
@@ -114,18 +117,18 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>> BooleanFunction:
 
     // maybe some errors would come this way but now sure. it mainly concerned about the usage of unique_ptr.
 
-    if ( ((method4.get<2>()<=method1.get<2>()) && (method4.get<2>()<=method2.get<2>())) && (method4.get<2>()<=method3.get<2>()) ) {
+    if ( ((get<2>(method4)<=get<2>(method1)) && (get<2>(method4)<=get<2>(method2))) && (get<2>(method4)<=get<2>(method3)) ) {
         // method 4 is choosen.
-        return std::tie( std::move(method4.get<0>()), std::move(method4.get<1>()) );
-    } else if ((method1.get<2>()<=method2.get<2>()) && (method1.get<2>()<=method3.get<2>())) {
+        return make_tuple( move(get<0>(method4)), move(get<1>(method4)) );
+    } else if ((get<2>(method1)<=get<2>(method2)) && (get<2>(method1)<=get<2>(method3))) {
         // method 1 is choosen.
-        return std::tie( std::move(method1.get<0>()), std::move(method1.get<1>()) );
-    } else if (method2.get<2>()<=method3.get<2>()) {
+        return make_tuple( move(get<0>(method1)), move(get<1>(method1)) );
+    } else if (get<2>(method2)<=get<2>(method3)) {
         // method 2 is choosen.
-        return std::tie( std::move(method2.get<0>()), std::move(method2.get<1>()) );
+        return make_tuple( move(get<0>(method2)), move(get<1>(method2)) );
     } else {
         // method 3 is choosen.
-        return std::tie( std::move(method3.get<0>()), std::move(method3.get<1>()) );
+        return make_tuple( move(get<0>(method3)), move(get<1>(method3)) );
     }
 
 }
@@ -171,6 +174,6 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int> BooleanFunc
     delete[] tempRes1;
     delete[] tempRes2;
 
-    return std::tie(std::move(p1), std::move(p2), error);
+    return make_tuple(move(p1), move(p2), error);
 
 };
