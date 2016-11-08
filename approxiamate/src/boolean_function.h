@@ -14,33 +14,39 @@
 using std::unique_ptr;
 using std::tuple;
 
-class KMap : public Object {
-    int *height, *width;
-    int **table;
+class KMap {//: public Object {
 
 public:
-    KMap();
-    KMap(int *hei, int *wid, int **tab);
-    ~KMap();
 
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>> divide();
+    int height, width;
+    int *(*table);
+
+    KMap();
+    KMap(int &hei, int &wid, int **tab);
+    ~KMap();
 
 
 };
 
-class BooleanFunction : public Object {
+class BooleanFunction {//: public Object {
 
-    int portName[PORT_SIZE];
-    int truthTable[TRUTH_TABLE_SIZE];
+    int portSize;
+    int *portName;//[PORT_SIZE];
+    int *truthTable;//[TRUTH_TABLE_SIZE];
+
+    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int> findMinError1(const KMap &kmap, int *portPart1, int *portPart2);
+    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int> findMinError2(const KMap &kmap, int *portPart1, int *portPart2);
+    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int> findMinError3(const KMap &kmap, int *portPart1, int *portPart2);
+    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int> findMinError4(const KMap &kmap, int *portPart1, int *portPart2);
 
 public:
 
-    unique_ptr<KMap> *getKMap(int *portPart1, int *portPart2);
+    unique_ptr<KMap> getKMap(int *portPart1, int *portPart2);
     tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>> divide(int *portPart1, int *portPart2);
 
-    bool operator() (int64_t input);
+    //bool operator() (int64_t input);
     BooleanFunction();
-    BooleanFunction(int *portname, int portSize, int *truthtable);
+    BooleanFunction(int *portname, int portsize, int *truthtable);
     ~BooleanFunction();
 
 };

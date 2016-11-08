@@ -6,6 +6,7 @@
 #define VE490_OBJECT_H
 
 class Object {
+public:
     virtual Object *clone() = 0;
     virtual ~Object() = 0;
 };
