@@ -27,4 +27,20 @@ int main() {
         cout << endl;
     }
 
+    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result = bf->divide(part1, part2);
+
+    unique_ptr<BooleanFunction> p1=move(get<0>(result));
+    unique_ptr<BooleanFunction> p2=move(get<1>(result));
+    int error=get<2>(result);
+    int oper=get<3>(result);
+
+    cout << p1->toString() << endl;
+    cout << p2->toString() << endl;
+    cout << error << endl;
+    cout << oper << endl;
+
+
+    cout << error << endl;
+
+
 }
