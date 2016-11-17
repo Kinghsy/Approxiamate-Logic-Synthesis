@@ -15,4 +15,9 @@ class ExceptionOutOfRange :             public ExceptionDataset {};
 
 class ExceptionGeneratorEmpty : public ExceptionGenerator {};
 
+class ExceptionTruthTable : public Exception {};
+
+class ExceptionInvalidVectorAssignment : public ExceptionTruthTable {};
+class ExceptionTruthTableInvalidSize : public ExceptionTruthTable {};
+
 #endif //VE281_FA16_EXCEPTION_H
