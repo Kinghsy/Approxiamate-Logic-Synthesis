@@ -8,4 +8,4 @@ list(APPEND SOURCE_FILES src/main.c)
 add_subdirectory(testcase)
 
 # The default target
-add_executable(p1 ${SOURCE_FILES})
+add_executable(approxiamate ${SOURCE_FILES})

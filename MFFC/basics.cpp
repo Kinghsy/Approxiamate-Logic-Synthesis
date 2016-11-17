@@ -11,8 +11,8 @@
 #include <cassert>
 #include <ctime>
 #include <sys/timeb.h>
-#include "head/queue.h"
-#include "head/bnet.h"
+#include "queue.h"
+#include "bnet.h"
 
 using namespace std;
 
@@ -313,7 +313,9 @@ void find_insig_MFFC(BnetNetwork *net, map<char*, set<char*> > &MFFC_set, map<ch
 
 
 
-void write_MFFC(BnetNetwork *net, ofstream &fout, char *cnode, set<char*> &cMFFC, map<char*, char*> &in_sig)
+void write_MFFC(BnetNetwork *net,
+				ostream &fout, char *cnode, set<char*> &cMFFC,
+                map<char*, char*> &in_sig)
 {
 	set<char*>::iterator itrs;
 	map<char*, char*>::iterator itrm_cc;

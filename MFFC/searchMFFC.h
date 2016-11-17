@@ -14,7 +14,7 @@
 
 using namespace std; 
 
-void find_print_candidate_MFFC(BnetNetwork *net, string &oufile, int num_input_min, int num_input_max);
+void searchMFFC(BnetNetwork *net, ostream &oufile, int num_input_min, int num_input_max);
 
 
 #endif

@@ -3,8 +3,8 @@
 #include <cstdlib>
 #include <cstdio>
 #include <string>
-#include "./head/queue.h"
-#include "./head/bnet.h"
+#include "queue.h"
+#include "bnet.h"
 
 using namespace std; 
 	

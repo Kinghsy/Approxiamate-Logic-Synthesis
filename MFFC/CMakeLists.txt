@@ -18,19 +18,27 @@ link_directories("../lib/cudd-2.5.0/mtr")
 
 set(SOURCE_FILES
         main.cpp
-        basics.cpp
-        find_print_candidate_MFFC.cpp
-        queue.cpp)
+        searchMFFC.cpp searchMFFC.h
+        print_truth_table.cpp print_truth_table.h)
 
-set(SOURCE_LIB_BNET
-        bnet.cpp
+set(SOURCE_LIB
+        basics.cpp basics.h
+        queue.cpp queue.h
+        bnet.cpp bnet.h
+        ntr.cpp ntr.h
+        cudd_build_v2.cpp cudd_build_v2.h
         )
 
-add_library(mffc_bnet ${SOURCE_LIB_BNET})
+add_library(mffc_static ${SOURCE_LIB})
 
-add_executable(mffc ${SOURCE_FILES})
+add_library(mffc ${SOURCE_LIB}
+        interface.cpp
+        searchMFFC.cpp searchMFFC.h
+        print_truth_table.cpp print_truth_table.h)
 
-target_link_libraries(mffc
-        mffc_bnet dddmp cudd mtr st util epd
+add_executable(mffc_test ${SOURCE_FILES})
+
+target_link_libraries(mffc_test
+        mffc_static dddmp cudd mtr st util epd
         dl readline termcap pthread rt)
 #add_subdirectory(testcase)

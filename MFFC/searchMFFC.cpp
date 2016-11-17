@@ -10,9 +10,9 @@
 #include <cassert>
 #include <ctime>
 #include <sys/timeb.h>
-#include "head/queue.h"
-#include "head/basics.h"
-#include "head/bnet.h"
+#include "queue.h"
+#include "basics.h"
+#include "bnet.h"
 
 
 using namespace std;
@@ -27,7 +27,10 @@ functions in this file:
 //Global variables and external variables
 
 
-void find_print_candidate_MFFC(BnetNetwork *net, string &outfile, int num_input_min, int num_input_max)
+void searchMFFC(BnetNetwork *net,
+                ostream &ostr,
+                int num_input_min,
+                int num_input_max)
 {
     //variables
     struct timeb startTime, endTime; 
@@ -61,8 +64,6 @@ void find_print_candidate_MFFC(BnetNetwork *net, string &outfile, int num_input_
  	//Get MFFC for each node and find input signals for each MFFC
     cout << "****************************" << endl;
     cout << "step3. print MFFC to the output file: " << endl;
-    ofstream fout;
-    fout.open(outfile.c_str(), ios::out);	
 
     int LUTs_saved_number_max = 0;
     int candidate_MFFC_index = 0;
@@ -108,7 +109,7 @@ void find_print_candidate_MFFC(BnetNetwork *net, string &outfile, int num_input_
 	itrm_cm = insig_MFFC.find(nd->name);
 	map<char*, char*> insig = itrm_cm->second;
 	//cout << "debug2" << endl;
-	write_MFFC(net, fout, cnode, this_MFFC, insig);
+	write_MFFC(net, ostr, cnode, this_MFFC, insig);
 	//cout << "debug3" << endl;
 	/*
 	
@@ -135,7 +136,6 @@ void find_print_candidate_MFFC(BnetNetwork *net, string &outfile, int num_input_
 	*/
 	cout << "candidate_MFFC_index = " << candidate_MFFC_index << endl;
 	cout << "LUTs_saved_number_max = " << LUTs_saved_number_max << endl;
-	fout.close();
 }
 
 

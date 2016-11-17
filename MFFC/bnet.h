@@ -144,15 +144,16 @@ typedef struct BnetNetwork {
 
 extern BnetNetwork * Bnet_ReadNetwork (FILE *fp);
 extern void Bnet_PrintNetwork (BnetNetwork *net);
-//extern void Bnet_PrintNetwork_v2(BnetNetwork * net, FILE *fp);
+extern void Bnet_PrintNetwork_v2(BnetNetwork * net, FILE *fp);
 extern void Bnet_FreeNetwork (BnetNetwork *net);
-/*extern int Bnet_BuildNodeBDD (DdManager *dd, BnetNode *nd, st_table *hash, int params, int nodrop);
+extern void Bnet_FreeNetwork_Bdd(BnetNetwork * net, DdManager *dd);
+extern int Bnet_BuildNodeBDD (DdManager *dd, BnetNode *nd, st_table *hash, int params, int nodrop);
 extern int Bnet_DfsVariableOrder (DdManager *dd, BnetNetwork *net);
 extern int Bnet_bddDump (DdManager *dd, BnetNetwork *network, char *dfile, int dumpFmt, int reencoded);
 extern int Bnet_bddArrayDump (DdManager *dd, BnetNetwork *network, const char *dfile, DdNode **outputs, char **onames, int noutputs, int dumpFmt);
 extern int Bnet_ReadOrder (DdManager *dd, char *ordFile, BnetNetwork *net, int locGlob, int nodrop);
 extern int Bnet_PrintOrder (BnetNetwork * net, DdManager *dd);
-*/
+
 /**AutomaticEnd***************************************************************/
 
 #ifdef __cplusplus
