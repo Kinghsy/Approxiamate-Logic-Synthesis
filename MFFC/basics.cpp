@@ -49,28 +49,28 @@ void topSort(BnetNetwork **net, vector<char*> &sort_list)
     {
     	sort_queue.traverse();
         char *pnode = sort_queue.pop(); 
-//        cout << endl << "pop: " << pnode << endl;
+//        //cout << endl << "pop: " << pnode << endl;
         st_lookup((*net)->hash, pnode, &tmp);
         sort_list.push_back(tmp->name);
         for(int i = 0; i < tmp->nfo; i++)
         {        	
             char *outnode = tmp->fanouts[i];
             st_lookup((*net)->hash, outnode, &auxnd);
-//            cout << "output: " << auxnd->name;
+//            //cout << "output: " << auxnd->name;
             itrm_si = indegree_list.find(auxnd->name);
             if(itrm_si == indegree_list.end())
             {
-            	cout << " not exist!";
+            	//cout << " not exist!";
             	exit(1);
             }
             else 
             {
             	itrm_si->second = itrm_si->second - 1;
-//            	cout << ", num: " << itrm_si->second << endl;
+//            	//cout << ", num: " << itrm_si->second << endl;
             	if(itrm_si->second == 0)
             	{
                 	sort_queue.push(auxnd->name);
-//                	cout << "node " << auxnd->name << " is enqueued. " << endl;
+//                	//cout << "node " << auxnd->name << " is enqueued. " << endl;
             	}
             }
         }         
@@ -95,9 +95,9 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
 		ind_sort.insert(pair<int, char*>(i, sort_list[i]));
 		sort_ind.insert(pair<char*, int>(sort_list[i], i));
 	}
-/*	cout << "ind_sort" << endl;
+/*	//cout << "ind_sort" << endl;
 	for(itrm_ic = ind_sort.begin(); itrm_ic != ind_sort.end(); itrm_ic++)
-		cout << itrm_ic->first << ", " << itrm_ic->second << endl;
+		//cout << itrm_ic->first << ", " << itrm_ic->second << endl;
 */	
 	map<int, char*> this_TFI;
 	map<int, char*> pred_TFI;
@@ -107,7 +107,7 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
         char *cnode = itrm_ic->second;
         st_lookup(net->hash, cnode, &nd);
 		int cind = itrm_ic->first;
-//		cout << "cnode = " << cnode << endl;
+//		//cout << "cnode = " << cnode << endl;
 		
         this_TFI.clear();
         this_TFI.insert(pair<int, char*>(cind, nd->name));
@@ -118,7 +118,7 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
         	itrm_cm = TFI_set.find(tmp->name);
         	if(itrm_cm == TFI_set.end())
         	{
-        		cout << "this innode is not in TFI_set" << endl;
+        		//cout << "this innode is not in TFI_set" << endl;
         		exit(1);
         	}
         	pred_TFI = itrm_cm->second;
@@ -163,12 +163,12 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
 	        		else
 	        			continue;
 	        	}
-//	        	cout << "checking node " << mnode << endl;
+//	        	//cout << "checking node " << mnode << endl;
 	        	st_lookup(net->hash, mnode, &tmp);
 	        	for(int j = 0; j < tmp->nfo; j++)
 	        	{
 	        		char *outnode = tmp->fanouts[j];
-//	        		cout << "outnode " << outnode << endl;
+//	        		//cout << "outnode " << outnode << endl;
 	        		st_lookup(net->hash, outnode, &auxnd);
 	        		itrm_ci = sort_ind.find(auxnd->name);
 	        		int ind = itrm_ci->second;
@@ -176,20 +176,20 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
 	        		itrm_ic2 = delete_list.find(ind);
 	        		if((itrm_ic1 == current_MFFC.end()) || (itrm_ic2 != delete_list.end()))
 	        		{
-//	        			cout << "node " << mnode << " is to deleted." << endl;
+//	        			//cout << "node " << mnode << " is to deleted." << endl;
 						itrm_cm1 = TFI_set.find(tmp->name);
 						if(itrm_cm1 == TFI_set.end())
 						{
-							cout << "current fanout node " << outnode << " is not in TFI_set" << endl;
+							//cout << "current fanout node " << outnode << " is not in TFI_set" << endl;
 							exit(1);
 						}
 	        			map<int, char*> delete_tfi = itrm_cm1->second;
 	        			for(itrm_ic3 = delete_tfi.begin(); itrm_ic3 != delete_tfi.end(); itrm_ic3++)
 	        				delete_list.insert(pair<int, char*>(itrm_ic3->first, itrm_ic3->second));
-/*	        			cout << "delete_list: " << endl;
+/*	        			//cout << "delete_list: " << endl;
 						for(itrm_ic3 = delete_list.begin(); itrm_ic3 != delete_list.end(); itrm_ic3++)
-							cout << itrm_ic3->second << " ";
-						cout << endl;	        			
+							//cout << itrm_ic3->second << " ";
+						//cout << endl;	        			
 */
 						break;
 	        		}	        		
@@ -204,12 +204,12 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
         char *mnode = itrm_ic->second;        	
         if(strcmp(cnode, mnode))
 		{
-//			cout << "checking node " << mnode << endl;
+//			//cout << "checking node " << mnode << endl;
 	        st_lookup(net->hash, mnode, &tmp);
 	        for(int j = 0; j < tmp->nfo; j++)
 	        {
 	        	char *outnode = tmp->fanouts[j];
-//	        	cout << "outnode " << outnode << endl;
+//	        	//cout << "outnode " << outnode << endl;
 	        	st_lookup(net->hash, outnode, &auxnd);
 	        	itrm_ci = sort_ind.find(auxnd->name);
 	        	int ind = itrm_ci->second;
@@ -217,20 +217,20 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
 	        	itrm_ic2 = delete_list.find(ind);
 	        	if((itrm_ic1 == current_MFFC.end()) || (itrm_ic2 != delete_list.end()))
 	        	{
-//	        		cout << "node " << mnode << " is to deleted." << endl;
+//	        		//cout << "node " << mnode << " is to deleted." << endl;
 					itrm_cm1 = TFI_set.find(tmp->name);
 					if(itrm_cm1 == TFI_set.end())
 					{
-						cout << "current fanout node " << outnode << " is not in TFI_set" << endl;
+						//cout << "current fanout node " << outnode << " is not in TFI_set" << endl;
 						exit(1);
 					}
 	        		map<int, char*> delete_tfi = itrm_cm1->second;
 	        		for(itrm_ic3 = delete_tfi.begin(); itrm_ic3 != delete_tfi.end(); itrm_ic3++)
 	        			delete_list.insert(pair<int, char*>(itrm_ic3->first, itrm_ic3->second));
-/*	        		cout << "delete_list: " << endl;
+/*	        		//cout << "delete_list: " << endl;
 					for(itrm_ic3 = delete_list.begin(); itrm_ic3 != delete_list.end(); itrm_ic3++)
-						cout << itrm_ic3->second << " ";
-					cout << endl;	
+						//cout << itrm_ic3->second << " ";
+					//cout << endl;	
 */
 					break;      
 	        	}	        	
@@ -266,13 +266,13 @@ void find_insig_MFFC(BnetNetwork *net, map<char*, set<char*> > &MFFC_set, map<ch
     		nd = nd->next;
             continue;   
     	}
-    	cout << endl << "cnode: " << nd->name << endl;
+    	//cout << endl << "cnode: " << nd->name << endl;
  		itrm_cs = MFFC_set.find(nd->name);
         set<char*> cMFFC = itrm_cs->second;
-        cout << "cMFFC: ";
-        for(itrs = cMFFC.begin(); itrs != cMFFC.end(); itrs++)
-        	cout << *itrs << " ";
-        cout << endl;
+        //cout << "cMFFC: ";
+        //for(itrs = cMFFC.begin(); itrs != cMFFC.end(); itrs++)
+        	//cout << *itrs << " ";
+        //cout << endl;
                
         if(cMFFC.size() == 1)
         {
@@ -284,12 +284,12 @@ void find_insig_MFFC(BnetNetwork *net, map<char*, set<char*> > &MFFC_set, map<ch
         for(itrs = cMFFC.begin(); itrs != cMFFC.end(); itrs++)
         {
         	char *cnode = *itrs;
-//        	cout << "MFFC node: " << cnode << endl;
+//        	//cout << "MFFC node: " << cnode << endl;
         	st_lookup(net->hash, cnode, &tmp);
         	for(int i = 0; i < tmp->ninp; i++)
         	{
         		char *innode = tmp->inputs[i];
-//        		cout << "innode: " << innode << endl;
+//        		//cout << "innode: " << innode << endl;
         		st_lookup(net->hash, innode, &auxnd);
         		if(auxnd->type == BNET_INPUT_NODE)
         			in_sig.insert(pair<char*, char*>(auxnd->name, auxnd->name));
@@ -302,10 +302,10 @@ void find_insig_MFFC(BnetNetwork *net, map<char*, set<char*> > &MFFC_set, map<ch
         	}
         }
         
-        cout << "this insig: " << endl;
-        for(itrm_cc = in_sig.begin(); itrm_cc != in_sig.end(); itrm_cc++)
-        	cout << itrm_cc->first << " ";
-        cout << endl;
+        //cout << "this insig: " << endl;
+        //for(itrm_cc = in_sig.begin(); itrm_cc != in_sig.end(); itrm_cc++)
+        	//cout << itrm_cc->first << " ";
+        //cout << endl;
         insig_MFFC.insert(pair<char*, map<char*, char*> >(nd->name, in_sig));
         nd = nd->next;
     }

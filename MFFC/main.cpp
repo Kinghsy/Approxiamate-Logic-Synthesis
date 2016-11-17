@@ -15,9 +15,6 @@
 
 using namespace std;
 
-int numPI_ini, numPO_ini;
-
-
 int main(int argc, char **argv)
 {
     if(argc != 5)

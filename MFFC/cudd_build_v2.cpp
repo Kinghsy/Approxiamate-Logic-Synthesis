@@ -113,7 +113,7 @@ void cudd_build_v2(BnetNetwork *net, DdManager **dd, const char *filename, int p
     Cudd_CheckKeys(*dd);
 #endif
   
-    (void) printf("total time = %s\n", util_print_time(util_cpu_time() - option->initialTime));
+    //(void) printf("total time = %s\n", util_print_time(util_cpu_time() - option->initialTime));
     freeOption(option);
 //    util_print_cpu_stats(stdout);
 

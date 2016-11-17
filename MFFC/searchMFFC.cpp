@@ -17,16 +17,6 @@
 
 using namespace std;
 
-extern int numPI_ini;
-
-/*
-functions in this file:
-
-*/
-
-//Global variables and external variables
-
-
 void searchMFFC(BnetNetwork *net,
                 ostream &ostr,
                 int num_input_min,
@@ -44,17 +34,17 @@ void searchMFFC(BnetNetwork *net,
 
         
     //Topological sort
-    cout << "****************************" << endl;
-    cout << "step1. topSort: " << endl;	
+    //cout << "****************************" << endl;
+    //cout << "step1. topSort: " << endl;	
     vector<char*> sort_list;
     topSort(&net, sort_list);
-    for(int i = 0; i < sort_list.size(); i++)
-    	cout << sort_list[i] << " ";
-    cout << endl;
+    //for(int i = 0; i < sort_list.size(); i++)
+    	//cout << sort_list[i] << " ";
+    //cout << endl;
     
     //Get MFFC for each node and find input signals for each MFFC
-    cout << "****************************" << endl;
-    cout << "step2. get_MFFC & find_insig_MFFC: " << endl;	
+    //cout << "****************************" << endl;
+    //cout << "step2. get_MFFC & find_insig_MFFC: " << endl;	
     map<char*, set<char*> > TFI_set, MFFC_set;
     get_MFFC(net, sort_list, TFI_set, MFFC_set);
     map<char*, map<char*, char*> > insig_MFFC;
@@ -62,8 +52,8 @@ void searchMFFC(BnetNetwork *net,
 
 
  	//Get MFFC for each node and find input signals for each MFFC
-    cout << "****************************" << endl;
-    cout << "step3. print MFFC to the output file: " << endl;
+    //cout << "****************************" << endl;
+    //cout << "step3. print MFFC to the output file: " << endl;
 
     int LUTs_saved_number_max = 0;
     int candidate_MFFC_index = 0;
@@ -83,13 +73,13 @@ void searchMFFC(BnetNetwork *net,
 		itrm_cm = insig_MFFC.find(nd->name);
 		map<char*, char*> insig = itrm_cm->second;	
 
-		cout << "insig.size() = " << insig.size() << endl;
+		//cout << "insig.size() = " << insig.size() << endl;
 		
 		if(insig.size() <= num_input_max && insig.size() >= num_input_min)
 		{
 			count_2input_LUTs = this_MFFC.size();
 			LUTs_potentially_saved = count_2input_LUTs - (insig.size() - 1);
-			cout << "LUTs_potentially_saved = " << LUTs_potentially_saved << endl;
+			//cout << "LUTs_potentially_saved = " << LUTs_potentially_saved << endl;
 						
 			if(LUTs_potentially_saved > LUTs_saved_number_max)
 			{				
@@ -102,15 +92,15 @@ void searchMFFC(BnetNetwork *net,
 		i++;
 	}
 
-	//cout << "debug1" << endl;
+	////cout << "debug1" << endl;
 	char *cnode = itrm_candidate_MFFC->first;
 	set<char*> this_MFFC = itrm_candidate_MFFC->second;
 	st_lookup(net->hash, cnode, &nd);
 	itrm_cm = insig_MFFC.find(nd->name);
 	map<char*, char*> insig = itrm_cm->second;
-	//cout << "debug2" << endl;
+	////cout << "debug2" << endl;
 	write_MFFC(net, ostr, cnode, this_MFFC, insig);
-	//cout << "debug3" << endl;
+	////cout << "debug3" << endl;
 	/*
 	
 	for(itrm_cs = MFFC_set.begin(); itrm_cs != MFFC_set.end(); itrm_cs++)
@@ -134,8 +124,8 @@ void searchMFFC(BnetNetwork *net,
 		}
 	}
 	*/
-	cout << "candidate_MFFC_index = " << candidate_MFFC_index << endl;
-	cout << "LUTs_saved_number_max = " << LUTs_saved_number_max << endl;
+	//cout << "candidate_MFFC_index = " << candidate_MFFC_index << endl;
+	//cout << "LUTs_saved_number_max = " << LUTs_saved_number_max << endl;
 }
 
 
