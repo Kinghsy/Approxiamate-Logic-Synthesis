@@ -1,0 +1,12 @@
+/****************************************************************
+ * 
+ * Head file for blif package
+ *
+ ****************************************************************/
+
+EXTERN FILE * open_file(  char * filename, char * mode);
+EXTERN DdManager * startCudd(NtrOptions * option, int  nvars);
+EXTERN NtrOptions * mainInit();
+EXTERN int ntrReadTree(DdManager * dd, char * treefile, int  nvars);
+EXTERN int printBdd (BnetNetwork *net1, DdManager *dd);
+ 

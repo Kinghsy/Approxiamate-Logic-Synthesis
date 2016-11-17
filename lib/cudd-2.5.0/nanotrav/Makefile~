@@ -1,0 +1,20 @@
+DIR = /home/wuyi/usr/CUDD/cudd-2.5.0
+BDIR = /home/wuyi/usr/CUDD/work
+CC = gcc
+MAINSRCS = exer4.c
+OTHSRCS = blif.c bnet.c ntr.c ntrHeap.c
+SRCS = $(MAINSRCS) $(OTHSRCS)
+OBJFILES = $(SRCS:.c=.o)
+TARGET = $(MAINSRCS:.c=)
+CFLAGS = -g -I$(DIR)/include -I$(DIR)/nanotrav -L$(DIR)/cudd -L$(DIR)/mtr -L$(DIR)/st -L$(DIR)/util -L$(DIR)/epd -L$(DIR)/obj
+
+LIBS = -lcudd -lmtr -lst -lutil -lepd -lobj -lm
+
+$(TARGET): $(OBJFILES)
+	$(CC) -o $(TARGET) $(CFLAGS) $(OBJFILES) $(LIBS)
+
+$(OBJFILES): $(SRCS)
+	$(CC) -c $(CFLAGS) $(SRCS)
+
+clean: 
+	\rm -f $(OBJFILES) $(TARGET)
