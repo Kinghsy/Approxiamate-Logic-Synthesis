@@ -19,8 +19,10 @@ using std::get;
 using std::make_tuple;
 using std::string;
 using std::stringstream;
+using std::cout;
 
 //======================================================================================
+
 
 KMap::KMap() {
     height=0;
@@ -29,7 +31,7 @@ KMap::KMap() {
     return ;
 }
 
-KMap::KMap(int &hei, int &wid, int **tab) {
+KMap::KMap(const int &hei, const int &wid, int **tab) {
     height=hei;
     width=wid;
     table=tab;
@@ -44,6 +46,23 @@ KMap::~KMap() {
     return ;
 }
 
+bool KMap::operator==(const KMap &b) {
+    if ( (this->height != b.height) || (this->width != b.width) ) return false;
+    for (int i = 0; i < this->height; ++i)
+        for (int j = 0; j < this->width; ++j)
+            if (this->table[i][j] != b.table[i][j]) return false;
+    return true;
+}
+
+void KMap::display() {
+    for (int i = 0; i < this->height; ++i) {
+        for (int j = 0; j < this->width; ++j) {
+            cout << this->table[i][j] << " ";
+        }
+        cout << "\n";
+    }
+    return ;
+}
 
 BooleanFunction::BooleanFunction() {
     portSize=0;
@@ -72,6 +91,16 @@ BooleanFunction::~BooleanFunction() {
     delete[] portName;
     delete[] truthTable;
     return ;
+}
+
+bool BooleanFunction::operator== (const BooleanFunction &b) {
+    if (this->portSize != b.portSize) return false;
+    int sum = 0;
+    for (int i = 0; i < portSize; ++i)
+        if (this->portName[i] != b.portName[i]) return false;
+    for (int i = 0; i < (1 << sum); ++i)
+        if (this->truthTable[i] != b.truthTable[i]) return false;
+    return true;
 }
 
 unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {

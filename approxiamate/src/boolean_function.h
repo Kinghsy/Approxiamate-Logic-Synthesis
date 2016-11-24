@@ -18,8 +18,11 @@ public:
     int height, width;
     int *(*table);
 
+    bool operator==(const KMap &b);
+    void display();
+
     KMap();
-    KMap(int &hei, int &wid, int **tab);
+    KMap(const int &hei, const int &wid, int **tab);
     ~KMap();
 
 
@@ -51,6 +54,7 @@ public:
     std::string toString();
 
     //bool operator() (int64_t input);
+    bool operator== (const BooleanFunction &b);
     BooleanFunction();
     BooleanFunction(int *portname, int portsize, int *truthtable);
     ~BooleanFunction();
