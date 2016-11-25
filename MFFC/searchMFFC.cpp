@@ -35,12 +35,13 @@ void searchMFFC(BnetNetwork *net,
         
     //Topological sort
     //cout << "****************************" << endl;
-    //cout << "step1. topSort: " << endl;	
-    vector<char*> sort_list;
-    topSort(&net, sort_list);
-    //for(int i = 0; i < sort_list.size(); i++)
-    	//cout << sort_list[i] << " ";
-    //cout << endl;
+    //cout << "step1. topSort: " << endl;
+    vector<char*> sort_list = topSort(&net);
+    //vector<char*> raw_sort_list;
+    //for (auto it = sort_list.begin(); it != sort_list.end(); it++)
+    //    raw_sort_list.push_back((char*)(it->c_str()));
+    for (auto str : sort_list) cout << str << " ";
+    cout <<endl;
     
     //Get MFFC for each node and find input signals for each MFFC
     //cout << "****************************" << endl;
@@ -48,7 +49,7 @@ void searchMFFC(BnetNetwork *net,
     map<char*, set<char*> > TFI_set, MFFC_set;
     get_MFFC(net, sort_list, TFI_set, MFFC_set);
     map<char*, map<char*, char*> > insig_MFFC;
-    find_insig_MFFC(net, MFFC_set, insig_MFFC);
+    //find_insig_MFFC(net, MFFC_set, insig_MFFC);
 
 
  	//Get MFFC for each node and find input signals for each MFFC

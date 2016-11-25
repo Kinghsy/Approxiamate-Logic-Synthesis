@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <climits>
 #include <vector>
+#include <list>
 #include <set>
 #include <map>
 #include <cmath>
@@ -13,6 +14,7 @@
 #include <sys/timeb.h>
 #include "queue.h"
 #include "bnet.h"
+#include "basics.h"
 
 using namespace std;
 
@@ -25,65 +27,86 @@ functions in this file:
 
 //Global variables and external variables
 
+BnetNode* getNodeFromNet(BnetNetwork **net, const BnetNodeID& nodeID) {
+    BnetNode *tmp = NULL;
+    st_lookup((*net)->hash, (void*)(nodeID.c_str()), &tmp);
+    return tmp;
+}
+
 
 /*topSort()*/
-void topSort(BnetNetwork **net, vector<char*> &sort_list)
+vector<char *> topSort(BnetNetwork **net)
 {
-	BnetNode *nd, *auxnd, *tmp;
-    queue sort_queue;
-    map<char*, int> indegree_list; 
-    map<char*, int>::iterator itrm_si;
-    
-    nd = (*net)->nodes;
-    int i = 0;
-    string name_str;
-    while (nd != NULL) 
+    /*
+    vector<BnetNodeID> sortedList;
+    list<BnetNodeID> sortingQueue;
+    map<BnetNodeID, int> indegreeTable;
+
+    for (BnetNode *nd = (*net)->nodes; nd != NULL; nd = nd->next)
     {
-    	indegree_list.insert(pair<char*, int>(nd->name, nd->ninp));
-    	if(nd->ninp == 0)
-    		sort_queue.push(nd->name);
-		nd = nd->next;
+        indegreeTable[nd->name] = nd->ninp;
+        if(nd->ninp == 0) sortingQueue.push_back(nd->name);
     }
-    
-    while(!sort_queue.empty())
+
+    while(!sortingQueue.empty())
     {
-    	sort_queue.traverse();
-        char *pnode = sort_queue.pop(); 
-//        //cout << endl << "pop: " << pnode << endl;
-        st_lookup((*net)->hash, pnode, &tmp);
-        sort_list.push_back(tmp->name);
-        for(int i = 0; i < tmp->nfo; i++)
-        {        	
-            char *outnode = tmp->fanouts[i];
-            st_lookup((*net)->hash, outnode, &auxnd);
-//            //cout << "output: " << auxnd->name;
-            itrm_si = indegree_list.find(auxnd->name);
-            if(itrm_si == indegree_list.end())
-            {
-            	//cout << " not exist!";
-            	exit(1);
-            }
-            else 
-            {
-            	itrm_si->second = itrm_si->second - 1;
-//            	//cout << ", num: " << itrm_si->second << endl;
-            	if(itrm_si->second == 0)
-            	{
-                	sort_queue.push(auxnd->name);
-//                	//cout << "node " << auxnd->name << " is enqueued. " << endl;
-            	}
-            }
-        }         
-    }     
+        BnetNodeID& pnode = sortingQueue.front();
+        sortingQueue.pop_front();
+        BnetNode *tmp = getNodeFromNet(net, pnode);
+        sortedList.push_back(pnode);
+        for(int i = 0; i < tmp->nfo; i++) {
+            BnetNodeID outnode = tmp->fanouts[i];
+            indegreeTable.at(outnode) -= 1;
+            if (indegreeTable[outnode] == 0)
+                sortingQueue.push_back(outnode);
+        }
+    }
+    return sortedList;
+    */
+
+	BnetNode *nd, *auxnd, *tmp;
+	queue sort_queue;
+	vector<char*> sort_list;
+    map<char*, int> indegree_list;
+	map<char*, int>::iterator itrm_si;
+	nd = (*net)->nodes;
+	int i = 0;
+	string name_str;
+	while (nd != NULL) {
+		indegree_list.insert(pair<char*, int>(nd->name, nd->ninp));
+		if(nd->ninp == 0)
+			sort_queue.push(nd->name);
+		nd = nd->next;
+	}
+
+	while(!sort_queue.empty()) {
+		sort_queue.traverse();
+		char *pnode = sort_queue.pop();
+		st_lookup((*net)->hash, pnode, &tmp);
+		sort_list.push_back(tmp->name);
+		for(int i = 0; i < tmp->nfo; i++) {
+			char *outnode = tmp->fanouts[i];
+			st_lookup((*net)->hash, outnode, &auxnd);
+			itrm_si = indegree_list.find(auxnd->name);
+			if(itrm_si == indegree_list.end()) {
+				exit(1);
+			} else {
+				itrm_si->second = itrm_si->second - 1;
+				if(itrm_si->second == 0)
+					sort_queue.push(auxnd->name);
+			}
+		}
+	}
+    return sort_list;
 }
 
 
 /*MFFC()*/
-void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> > &TFI_set_char, map<char*, set<char*> > &MFFC_set)
+void get_MFFC(BnetNetwork *net, vector<char *> &sort_list, map<char*, set<char*> > &TFI_set_char, map<char*, set<char*> > &MFFC_set)
 {
 	set<char*>::iterator itrs, itrs1, itrs2;
 	BnetNode *nd, *tmp, *auxnd;	
-	map<char*, set<char*> >::iterator itrm_cs, itrm_cs1;	
+	map<char*, set<char*> >::iterator itrm_cs, itrm_cs1;
 	map<char*, map<int, char*> >::iterator itrm_cm, itrm_cm1;
 	map<char*, map<int, char*> > TFI_set;
 	map<int, char*> ind_sort;
@@ -118,7 +141,7 @@ void get_MFFC(BnetNetwork *net, vector<char*> &sort_list, map<char*, set<char*> 
         	itrm_cm = TFI_set.find(tmp->name);
         	if(itrm_cm == TFI_set.end())
         	{
-        		//cout << "this innode is not in TFI_set" << endl;
+        		cout << "this innode is not in TFI_set" << endl;
         		exit(1);
         	}
         	pred_TFI = itrm_cm->second;
