@@ -5,7 +5,9 @@
 #include <cstdlib>
 #include <memory>
 
-#include "boolean_function.h"
+#include "../src/boolean_function.h"
+
+#include "gtest/gtest.h"
 
 using namespace std;
 
@@ -18,7 +20,12 @@ int main() {
     unique_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
     int part1[]={0,0,0,0,0,1};
     int part2[]={1,0,1,0,1,0};
-    cout << "right now." << endl;
+    int map1[2][8]={{0, 0, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 1, 0, 0, 0}};
+    const int hi1=2, wi1=8;
+    KMap kmap1_corr(hi1, wi1, (int**)map1);
+    kmap1_corr.display();
+
+
     unique_ptr<KMap> kmap1=std::move(bf->getKMap(part1, part2));
     for (int i = 0; i < kmap1->height; ++i) {
         for (int j = 0; j < kmap1->width; ++j) {
