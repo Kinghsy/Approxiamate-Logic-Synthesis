@@ -15,34 +15,45 @@
 class SearchNode {//: public Object {
 
 public:
-    void divide(int divideMethod);  //not finished.
-    bool divideAble(); // chech whether this node is divideable.
+    std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>>
+            divide(int divideMethod);  // return two boolean function.
+    bool divideAble(int divideMethod); // chech whether this node is divideable.
 
     SearchNode();
-    SearchNode(std::unique_ptr<BooleanFunction>);
+    SearchNode(std::unique_ptr<BooleanFunction> ptr);
+    ~SearchNode();
 
     std::unique_ptr<BooleanFunction> getBooleanFunction();
-    std::unique_ptr<BooleanFunction> combineBooleanFunction();
-
+        // create!!! notice this function create a new booleanfunction
+        // that has exactly same information as itself.
+    std::unique_ptr<BooleanFunction> combineBooleanFunction(
+                std::unique_ptr<BooleanFunction> p1,
+                std::unique_ptr<BooleanFunction> p2);
+        // combine p1 and p2 together based on the bestOper.
+        // note that this node can't be a leaf node.
+    int getDivideRange(); // return 2^(getInputNum)
     int getInputNum();
 
 private:
-    std::unique_ptr<BooleanFunction> *booleanFunction;
+    std::unique_ptr<BooleanFunction> booleanFunction;
 
     // record the best divide.
     int bestLocalErr;
     int bestOper;   // OPERATION_AND, OR, XOR, DROP
     int bestDivide;
 
-
 };
 
 
 
 
-class SearchSpace : public Object {
+class SearchSpace {//: public Object {
 
 public:
+
+    SearchSpace(BinaryTree<std::shared_ptr<SearchNode>> &oldTree);
+    SearchSpace();
+    ~SearchSpace();
 
     bool searchSpaceGrow();  // whether this search space could be divided or not
     std::unique_ptr<SearchSpace> *searchSpaceGenerate(); // return a search space that is generated from the current one.
@@ -68,6 +79,9 @@ private:
 class SearchTree {
 
 public:
+
+    SearchTree();
+    ~SearchTree();
 
     SearchSpace& getNextSearchSpace(SearchSpace& n); // asking current search space could generate a new one or nor, if could, finish current generating. Back to his parent.
     void eliminateSearchSpace(SearchSpace& n);

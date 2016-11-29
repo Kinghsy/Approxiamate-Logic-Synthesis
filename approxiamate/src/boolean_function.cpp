@@ -128,6 +128,16 @@ int BooleanFunction::getInputNum() {
     return inputNum;
 }
 
+int BooleanFunction::getPortSize() {
+    return portSize;
+}
+
+unique_ptr<BooleanFunction> BooleanFunction::copy() {
+    unique_ptr<BooleanFunction> pp (new BooleanFunction(
+            this->portName, this->portSize, this->truthTable));
+    return move(pp);
+}
+
 unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {
     // constructure a kmap
     int size1=0;

@@ -60,6 +60,8 @@ public:
     bool isAll0s();
     bool isAll1s();
     int getInputNum();
+    int getPortSize();
+    std::unique_ptr<BooleanFunction> copy();
 
     //bool operator() (int64_t input);
     bool operator== (const BooleanFunction &b);

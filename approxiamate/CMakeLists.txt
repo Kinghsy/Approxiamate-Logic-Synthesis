@@ -5,7 +5,13 @@
 
 set(SOURCE_FILES)
 
-list(APPEND SOURCE_FILES src/boolean_function.h src/boolean_function.cpp src/conts.h src/object.h src/search.h src/tree.h)
+list(APPEND SOURCE_FILES src/boolean_function.h
+                         src/boolean_function.cpp
+                         src/conts.h
+                         src/object.h
+                         src/search.h
+                         src/tree.h
+                         src/search_node.cpp)
 
 add_subdirectory(testcase)
 
