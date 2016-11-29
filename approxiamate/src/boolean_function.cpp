@@ -70,10 +70,13 @@ void KMap::display() {
     return ;
 }
 
+//================================================
+
 BooleanFunction::BooleanFunction() {
     portSize=0;
     portName=NULL;
     truthTable=NULL;
+    inputNum=0;
     return ;
 }
 
@@ -85,6 +88,7 @@ BooleanFunction::BooleanFunction(int *portname, int portsize, int *truthtable) {
         this->portName[i]=portname[i];
         sum+=portname[i];
     }
+    inputNum=sum;
     int totalSum=(1<<sum);
     this->truthTable=new int[totalSum];
     for (int j = 0; j < totalSum; ++j) {
@@ -101,12 +105,27 @@ BooleanFunction::~BooleanFunction() {
 
 bool BooleanFunction::operator== (const BooleanFunction &b) {
     if (this->portSize != b.portSize) return false;
-    int sum = 0;
     for (int i = 0; i < portSize; ++i)
         if (this->portName[i] != b.portName[i]) return false;
-    for (int i = 0; i < (1 << sum); ++i)
+    for (int i = 0; i < (1 << inputNum); ++i)
         if (this->truthTable[i] != b.truthTable[i]) return false;
     return true;
+}
+
+bool BooleanFunction::isAll0s() {
+    for (int i = 0; i < (1 << inputNum); ++i)
+        if (this->truthTable[i]==1) return false;
+    return true;
+}
+
+bool BooleanFunction::isAll1s() {
+    for (int i = 0; i < (1 << inputNum); ++i)
+        if (this->truthTable[i]==0) return false;
+    return true;
+}
+
+int BooleanFunction::getInputNum() {
+    return inputNum;
 }
 
 unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {
@@ -148,6 +167,56 @@ unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {
     delete[] table;
     return kmap;
 
+}
+
+unique_ptr<BooleanFunction> BooleanFunction::combine(BooleanFunction &b, const int oper) {
+    int sum = this -> inputNum + b.inputNum;
+    int *loca = new int[sum];
+    int *digNum = new int[sum];
+    int num=0;
+    for (int i = 0; i < this -> portSize; ++i) {
+        if (this->portName[i]==1) loca[num++]=0;
+        if (b.portName[i]==1) loca[num++]=1;
+    }
+
+    int *result = new int[ (1 << sum) ];
+    for (int i = 0; i < (1 << sum); ++i) {
+        int temp=i;
+        int res[2]={0, 0};
+        for (int j = num-1; j >= 0 ; --j) {
+            digNum[j] = temp % 2;
+            temp = temp / 2;
+        }
+        for (int j = 0; j < num ; ++j) res[loca[j]] = (res[loca[j]] << 1) + digNum[j];
+        int calRes=0;
+        switch (oper) {
+            case OPERATION_AND:
+                calRes = (this->truthTable[res[0]]) & (b.truthTable[res[1]]);
+                break;
+            case OPERATION_OR:
+                calRes = (this->truthTable[res[0]]) | (b.truthTable[res[1]]);
+                break;
+            case OPERATION_XOR:
+                calRes = (this->truthTable[res[0]] != b.truthTable[res[1]]);
+                break;
+            case OPERATION_DROP:
+                calRes = (this->truthTable[res[0]]);
+                break;
+            default:
+                break;
+        }
+        result[i] = calRes;
+    }
+    int *newPortName=new int[this->portSize];
+    for (int i = 0; i < this->portSize; ++i)
+        newPortName[i] = (this->portName[i]) | (b.portName[i]);
+    unique_ptr<BooleanFunction> pp(new BooleanFunction(newPortName, this->portSize, result));
+
+    delete[] newPortName;
+    delete[] result;
+    delete[] loca;
+
+    return (move(pp));
 }
 
 tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> BooleanFunction::divide(int *portPart1,

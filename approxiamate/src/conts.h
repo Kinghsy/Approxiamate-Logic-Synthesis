@@ -24,6 +24,7 @@
 #define OPERATION_OR 0x1235 // or operation, appears in divide into major rows and 1s.
 #define OPERATION_XOR 0x1236 // xor operation, appears in divide into major rows and complements of major rows.
 #define OPERATION_DROP 0x1237 // another operation, that is f(x1,x2)=x1, appears in divide into 0s and 1s.
+#define OPERATION_NONE 0x1238 // none opeartion, used in initalization.
 
 #define REMOVE_0S 0x1233
 #define REMOVE_1S 0x1232

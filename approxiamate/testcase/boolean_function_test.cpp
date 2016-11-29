@@ -107,3 +107,71 @@ TEST(TEST_DEVIDE, TEST_CASE_1) {
     ASSERT_EQ( (error==resultErr) && (oper==resultOper) && (*p1 == result1) && (*p2 == result2) , true);
 
 }
+
+TEST(TEST_COMBINE, TEST_CASE_1) {
+    int truthTable1[]={1,0};
+    int truthTable2[]={0,0,1,1,1,1,1,1};
+    int part1[]={0,0,0,0,0,1};
+    int part2[]={1,0,1,0,1,0};
+    BooleanFunction p1(part1, 6, truthTable1);
+    BooleanFunction p2(part2, 6, truthTable2);
+
+    unique_ptr<BooleanFunction> resAnd=move(p1.combine(p2, OPERATION_AND));
+
+    int finalPart[]={1,0,1,0,1,1};
+    int resCorrect[]={0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0};
+    BooleanFunction resBFCorrect(finalPart, 6, resCorrect);
+
+    ASSERT_EQ( (resBFCorrect == *resAnd), true );
+}
+
+TEST(TEST_COMBINE, TEST_CASE_2) {
+    int truthTable1[]={1,0};
+    int truthTable2[]={0,0,1,1,1,1,1,1};
+    int part1[]={0,0,0,0,0,1};
+    int part2[]={1,0,1,0,1,0};
+    BooleanFunction p1(part1, 6, truthTable1);
+    BooleanFunction p2(part2, 6, truthTable2);
+
+    unique_ptr<BooleanFunction> resOr=move(p1.combine(p2, OPERATION_OR));
+
+    int finalPart[]={1,0,1,0,1,1};
+    int resCorrect[]={1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1};
+    BooleanFunction resBFCorrect(finalPart, 6, resCorrect);
+
+    ASSERT_EQ( (resBFCorrect == *resOr), true );
+}
+
+TEST(TEST_COMBINE, TEST_CASE_3) {
+    int truthTable1[]={1,0};
+    int truthTable2[]={0,0,1,1,1,1,1,1};
+    int part1[]={0,0,0,0,0,1};
+    int part2[]={1,0,1,0,1,0};
+    BooleanFunction p1(part1, 6, truthTable1);
+    BooleanFunction p2(part2, 6, truthTable2);
+
+    unique_ptr<BooleanFunction> resXor=move(p1.combine(p2, OPERATION_XOR));
+
+    int finalPart[]={1,0,1,0,1,1};
+    int resCorrect[]={1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1};
+    BooleanFunction resBFCorrect(finalPart, 6, resCorrect);
+
+    ASSERT_EQ( (resBFCorrect == *resXor), true );
+}
+
+TEST(TEST_COMBINE, TEST_CASE_4) {
+    int truthTable1[]={1,0};
+    int truthTable2[]={0,0,1,1,1,1,1,1};
+    int part1[]={0,0,0,0,0,1};
+    int part2[]={1,0,1,0,1,0};
+    BooleanFunction p1(part1, 6, truthTable1);
+    BooleanFunction p2(part2, 6, truthTable2);
+
+    unique_ptr<BooleanFunction> resDrop=move(p1.combine(p2, OPERATION_DROP));
+
+    int finalPart[]={1,0,1,0,1,1};
+    int resCorrect[]={1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0};
+    BooleanFunction resBFCorrect(finalPart, 6, resCorrect);
+
+    ASSERT_EQ( (resBFCorrect == *resDrop), true );
+}

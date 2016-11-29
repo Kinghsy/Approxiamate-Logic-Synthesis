@@ -34,6 +34,7 @@ class BooleanFunction {//: public Object {
     int portSize;
     int *portName;//[PORT_SIZE];
     int *truthTable;//[TRUTH_TABLE_SIZE];
+    int inputNum; // the number of inputs for this Boolean Function.
 
     std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int> findMinError1(const KMap &kmap, int *portPart1, int *portPart2);
     std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int> findMinError2(const KMap &kmap, int *portPart1, int *portPart2);
@@ -53,6 +54,12 @@ public:
     std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int> divide(int *portPart1, int *portPart2);
     //boolean function of part1, boolean function of part2, the error, the opeartion
     std::string toString();
+
+    std::unique_ptr<BooleanFunction> combine(BooleanFunction &b, const int oper);
+
+    bool isAll0s();
+    bool isAll1s();
+    int getInputNum();
 
     //bool operator() (int64_t input);
     bool operator== (const BooleanFunction &b);
