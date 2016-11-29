@@ -21,8 +21,8 @@ using std::string;
 using std::stringstream;
 using std::cout;
 
-//======================================================================================
 
+//======================================================================================
 
 KMap::KMap() {
     height=0;
@@ -34,7 +34,13 @@ KMap::KMap() {
 KMap::KMap(const int &hei, const int &wid, int **tab) {
     height=hei;
     width=wid;
-    table=tab;
+    table= new int*[height];
+    for (int i = 0; i < height; ++i) {
+        table[i]=new int[width];
+        for (int j = 0; j < width; ++j) {
+            table[i][j]=tab[i][j];
+        }
+    }
     return ;
 }
 
@@ -136,6 +142,10 @@ unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {
     }
     delete[] temp;
     unique_ptr<KMap> kmap(new KMap(height, weight, table));
+    for (int i = 0; i < height; ++i) {
+        delete[] table[i];
+    }
+    delete[] table;
     return kmap;
 
 }

@@ -6,12 +6,13 @@
 #include <memory>
 
 #include "../src/boolean_function.h"
+#include "../src/conts.h"
 
 #include "gtest/gtest.h"
 
 using namespace std;
 
-int main() {
+/*int main() {
 
     int portName[]={1,0,1,0,1,1};
     int portSize=6;
@@ -20,19 +21,23 @@ int main() {
     unique_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
     int part1[]={0,0,0,0,0,1};
     int part2[]={1,0,1,0,1,0};
-    int map1[2][8]={{0, 0, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 1, 0, 0, 0}};
+    int **map1=new int*[2];
+    int map10[8]={0, 0, 1, 1, 1, 1, 1, 1};
+    int map11[8]={1, 0, 0, 0, 1, 0, 0, 0};
+    map1[0]=map10;
+    map1[1]=map11;
     const int hi1=2, wi1=8;
-    KMap kmap1_corr(hi1, wi1, (int**)map1);
+    KMap kmap1_corr(hi1, wi1, map1);
     kmap1_corr.display();
-
+    delete[] map1;
 
     unique_ptr<KMap> kmap1=std::move(bf->getKMap(part1, part2));
-    for (int i = 0; i < kmap1->height; ++i) {
-        for (int j = 0; j < kmap1->width; ++j) {
-            cout << kmap1->table[i][j] << " ";
-        }
-        cout << endl;
+    kmap1->display();
+
+    TEST(TEST_KMAP, TEST_CASE_1) {
+        ASSERT_EQ()
     }
+
 
     tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result = bf->divide(part1, part2);
 
@@ -49,5 +54,56 @@ int main() {
 
     cout << error << endl;
 
+
+}*/
+
+TEST(TEST_KMAP, TEST_CASE_1) {
+    int portName[]={1,0,1,0,1,1};
+    int portSize=6;
+    int truthTable[]={0,1,0,0, 1,0,1,0, 1,1,1,0, 1,0,1,0};
+
+    unique_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
+    int part1[]={0,0,0,0,0,1};
+    int part2[]={1,0,1,0,1,0};
+    int **map1=new int*[2];
+    int map10[8]={0, 0, 1, 1, 1, 1, 1, 1};
+    int map11[8]={1, 0, 0, 0, 1, 0, 0, 0};
+    map1[0]=map10;
+    map1[1]=map11;
+    const int hi1=2, wi1=8;
+    KMap kmap1_corr(hi1, wi1, map1);
+    kmap1_corr.display();
+    delete[] map1;
+
+    unique_ptr<KMap> kmap1=std::move(bf->getKMap(part1, part2));
+    kmap1->display();
+    ASSERT_EQ((kmap1_corr == (*kmap1)), true);
+
+}
+
+TEST(TEST_DEVIDE, TEST_CASE_1) {
+    int portName[]={1,0,1,0,1,1};
+    int portSize=6;
+    int truthTable[]={0,1,0,0, 1,0,1,0, 1,1,1,0, 1,0,1,0};
+
+    unique_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
+    int part1[]={0,0,0,0,0,1};
+    int part2[]={1,0,1,0,1,0};
+
+    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result= bf->divide(part1, part2);
+
+    unique_ptr<BooleanFunction> p1=move(get<0>(result));
+    unique_ptr<BooleanFunction> p2=move(get<1>(result));
+    int error=get<2>(result);
+    int oper=get<3>(result);
+
+    int resultPart2[]={0,0,1,1,1,1,1,1};
+    BooleanFunction result2(part2, 6, resultPart2);
+    int resultPart1[]={1,0};
+    BooleanFunction result1(part1, 6, resultPart1);
+    int resultErr=2;
+    int resultOper=OPERATION_AND;
+
+    ASSERT_EQ( (error==resultErr) && (oper==resultOper) && (*p1 == result1) && (*p2 == result2) , true);
 
 }

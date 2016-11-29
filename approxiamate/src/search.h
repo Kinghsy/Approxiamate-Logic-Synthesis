@@ -11,12 +11,6 @@
 #include "object.h"
 #include <memory.h>
 
-//SearchSpace& sspace;
-//MulipleTree<SearchNode>::NodeRef node;
-
-
-using std::shared_ptr;
-using std::unique_ptr;
 
 class SearchNode : public Object {
 
@@ -26,7 +20,17 @@ public:
 
 private:
     int searchArray[NODE_SIZE];
-    unique_ptr<BooleanFunction> *booleanFunction;
+    std::unique_ptr<BooleanFunction> *booleanFunction;
+
+    // record the best divide.
+    int bestLocalErr;
+    int bestOper;   // OPERATION_AND, OR, XOR, DROP
+    int bestDivide;
+
+    // current divide.
+    int currentDivie;
+
+
 
 };
 
@@ -35,14 +39,16 @@ class SearchSpace : public Object {
 
 public:
     bool searchSpaceGrow(); // return whether this search space could be divided into different search spaces
-    unique_ptr<SearchSpace> *searchSpaceGenerate(); // return a search space that is generated from the current one.
+    std::unique_ptr<SearchSpace> *searchSpaceGenerate(); // return a search space that is generated from the current one.
 
 
 private:
-    BinaryTree<shared_ptr<SearchNode>> *btree;
+    BinaryTree<std::shared_ptr<SearchNode>> *btree;
     SearchNode& divideNode;   // which node is to divide.
     int currentDivide;        // how is the current node is divided.
     //error
+
+    int totalError;
 
 };
 
@@ -56,8 +62,10 @@ public:
     SearchSpace& getRootSpace();
 
 private:
-    MulipleTree<unique_ptr<SearchSpace>> *mtree;
-    unique_ptr<SearchSpace> currentSearchSpace;
+
+
+    MulipleTree<std::unique_ptr<SearchSpace>> *mtree;
+    SearchSpace& currentSearchSpace;    // the current working on search space.
 
 };
 

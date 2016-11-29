@@ -11,6 +11,7 @@
 #include "conts.h"
 #include <iostream>
 
+
 class KMap {//: public Object {
 
 public:
