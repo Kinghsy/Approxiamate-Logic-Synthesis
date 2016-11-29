@@ -36,7 +36,8 @@ void queue::push(char *e)
 	NODE* p = new NODE;  
 	if (NULL == p)  
 	{  
-	    cout << "Failed to malloc the node." << endl;  
+	    cout << "Failed to malloc the node." << endl;
+		return;
 	}  
 	p->data = e;  		
 	p->next = NULL;  

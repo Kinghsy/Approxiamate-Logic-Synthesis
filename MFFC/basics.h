@@ -12,10 +12,11 @@
 #include <iostream>
 #include "bnet.h"
 
-using namespace std; 
+using namespace std;
 
-void topSort(BnetNetwork **net,
-             vector<char*> &sort_list);
+typedef std::string BnetNodeID;
+
+vector<char*> topSort(BnetNetwork **net);
 
 void get_MFFC(BnetNetwork *net,
               vector<char*> &sort_list,
