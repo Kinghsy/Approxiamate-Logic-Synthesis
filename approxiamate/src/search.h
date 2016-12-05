@@ -5,17 +5,18 @@
 #ifndef VE490_SEARCH_H
 #define VE490_SEARCH_H
 
-#include "tree.h"
 #include "boolean_function.h"
 #include "conts.h"
 #include "object.h"
 #include <memory.h>
 
+#include "../../common/BinaryTree.h"
+#include "../../common/MultipleTree.h"
 
 class SearchNode {//: public Object {
 
 public:
-    std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>>
+    std::tuple<std::shared_ptr<SearchNode>, std::shared_ptr<SearchNode>>
             divide(int divideMethod);  // return two boolean function.
     bool divideAble(int divideMethod); // chech whether this node is divideable.
 
@@ -34,17 +35,18 @@ public:
     int getDivideRange(); // return 2^(getInputNum)
     int getInputNum();
 
-private:
-    std::unique_ptr<BooleanFunction> booleanFunction;
+    bool isDividable();
 
+
+private:
+
+    std::unique_ptr<BooleanFunction> booleanFunction;
     // record the best divide.
-    int bestLocalErr;
-    int bestOper;   // OPERATION_AND, OR, XOR, DROP
-    int bestDivide;
+    int localErr;
+    int oper;   // OPERATION_AND, OR, XOR, DROP
+    int currentDivide;
 
 };
-
-
 
 
 class SearchSpace {//: public Object {
@@ -56,13 +58,14 @@ public:
     ~SearchSpace();
 
     bool searchSpaceGrow();  // whether this search space could be divided or not
-    std::unique_ptr<SearchSpace> *searchSpaceGenerate(); // return a search space that is generated from the current one.
+    std::unique_ptr<SearchSpace> searchSpaceGenerate(); // return a search space that is generated from the current one.
+    std::unique_ptr<SearchSpace> searchSpaceGenerate(int divideMethod);
     int getTotalError(); // return the total error.
 
 
 private:
-    BinaryTree<std::shared_ptr<SearchNode>> *btree;
-    SearchNode &divideNode;   // which node is to divide.
+    std::unique_ptr<BinaryTree<std::shared_ptr<SearchNode>>> btree;
+    std::shared_ptr<SearchNode> divideNode;   // which node is to divide.
     int currentDivide;        // how is the current node is divided.
     int currentDivideSpace;   // the range for current divide, should be a 2^n number,
                               // the range should be 1~(currentDivideSpace-2). The left tree
@@ -89,7 +92,7 @@ public:
 
 private:
 
-    MulipleTree<std::unique_ptr<SearchSpace>> *mtree;
+    MultipleTree<std::unique_ptr<SearchSpace>> *mtree;
     SearchSpace& currentSearchSpace;    // the current working on search space.
 
 };

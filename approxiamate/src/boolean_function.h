@@ -51,16 +51,18 @@ public:
 
     std::unique_ptr<KMap> getKMap(int *portPart1, int *portPart2);
     //the first part as the height and second part as width
-    std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int> divide(int *portPart1, int *portPart2);
+    std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int>
+        divide(int *portPart1, int *portPart2);
     //boolean function of part1, boolean function of part2, the error, the opeartion
     std::string toString();
-
+    int booleanCompare(BooleanFunction &b);
     std::unique_ptr<BooleanFunction> combine(BooleanFunction &b, const int oper);
 
     bool isAll0s();
     bool isAll1s();
     int getInputNum();
     int getPortSize();
+    int *getPortName();
     std::unique_ptr<BooleanFunction> copy();
 
     //bool operator() (int64_t input);
@@ -70,5 +72,7 @@ public:
     ~BooleanFunction();
 
 };
+
+BooleanFunction initBoolFunc;
 
 #endif //VE490_BOOLEAN_FUNCTION_H

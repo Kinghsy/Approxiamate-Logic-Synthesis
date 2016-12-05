@@ -132,6 +132,10 @@ int BooleanFunction::getPortSize() {
     return portSize;
 }
 
+int *BooleanFunction::getPortName() {
+    return portName;
+}
+
 unique_ptr<BooleanFunction> BooleanFunction::copy() {
     unique_ptr<BooleanFunction> pp (new BooleanFunction(
             this->portName, this->portSize, this->truthTable));
@@ -470,4 +474,13 @@ string BooleanFunction::toString() {
     ss << truthTable[(1 << num) - 1];
 
     return ss.str();
+}
+
+int BooleanFunction::booleanCompare(BooleanFunction &b) {
+    int diff = 0;
+    if (this->inputNum != b.inputNum) throw(new ERROR__BOOLEANFUNC_COMPARE);
+    for (int i = 0; i < (1 << inputNum); ++i) {
+        diff += (int)(this->truthTable[i] != b.truthTable[i]);
+    }
+    return diff;
 }

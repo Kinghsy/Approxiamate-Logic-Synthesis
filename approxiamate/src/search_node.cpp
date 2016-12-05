@@ -5,7 +5,6 @@
 #include "search.h"
 #include "conts.h"
 #include "boolean_function.h"
-#include "tree.h"
 
 #include <iostream>
 #include <sstream>
@@ -13,33 +12,24 @@
 #include <memory>
 #include <values.h>
 
-using std::unique_ptr;
-using std::shared_ptr;
-using std::tuple;
-using std::tie;
-using std::get;
-using std::make_tuple;
-using std::string;
-using std::stringstream;
-using std::cout;
-
+using namespace std;
 
 //===============Search Node============================
 
 
 SearchNode::SearchNode() {
     booleanFunction=NULL;
-    bestLocalErr=MAXINT;
-    bestOper=OPERATION_NONE;
-    bestDivide=0;
+    localErr=MAXINT;
+    oper=OPERATION_NONE;
+    currentDivide=0;
     return ;
 }
 
 SearchNode::SearchNode(std::unique_ptr<BooleanFunction> ptr) {
     booleanFunction=move(ptr);
-    bestLocalErr=MAXINT;
-    bestOper=OPERATION_NONE;
-    bestDivide=0;
+    localErr=MAXINT;
+    oper=OPERATION_NONE;
+    currentDivide=0;
     return ;
 }
 
@@ -57,7 +47,7 @@ int SearchNode::getDivideRange() {
 
 bool SearchNode::divideAble(int divideMethod) {
     return ( (1 <= divideMethod) &&
-            (divideMethod <= (1 << booleanFunction->getInputNum())) );
+            (divideMethod <= (1 << booleanFunction->getInputNum() - 2)) );
 }
 
 unique_ptr<BooleanFunction> SearchNode::getBooleanFunction() {
@@ -66,15 +56,52 @@ unique_ptr<BooleanFunction> SearchNode::getBooleanFunction() {
 
 unique_ptr<BooleanFunction> SearchNode::combineBooleanFunction(std::unique_ptr<BooleanFunction> p1,
                                                                std::unique_ptr<BooleanFunction> p2) {
-    return move(p1->combine(*p1, bestOper));
+    return move(p1->combine(*p2, this->oper));
 }
 
-std::tuple<std::unique_ptr<BooleanFunction>,
-           std::unique_ptr<BooleanFunction>>
+tuple<shared_ptr<SearchNode>,
+           shared_ptr<SearchNode>>
         SearchNode::divide(int divideMethod) {
 
     int portSize = booleanFunction->getPortSize();
+    int *portName = booleanFunction->getPortName();
+    int *part[2];
+    part[0] = new int[portSize];
+    part[1] = new int[portSize];
+    for (int i = 0; i < portSize; ++i) {
+        part[0][i]=0; part[1][i]=0;
+    }
+    int *input= new int[portSize];
+    int inputNum=0;
 
+    for (int i = 0; i < portSize; ++i)
+        if (portName[i]==1) input[inputNum++] = i;
+    int temp=divideMethod;
 
+    for (int i = 0; i < inputNum; i++) {
+        part[1-(temp%2)][input[i]] = 1;
+    }
 
+    //std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int>
+    auto result=booleanFunction->divide(part[0],part[1]);
+
+    delete[] part[0];
+    delete[] part[1];
+    delete[] input;
+
+    localErr=get<2>(result);
+    oper=get<3>(result);
+
+    shared_ptr<SearchNode> node1=new SearchNode(move(get<0>(result)));
+    shared_ptr<SearchNode> node2=new SearchNode(move(get<1>(result)));
+
+    return make_tuple(node1, node2);
+
+}
+
+bool SearchNode::isDividable() {
+    if (booleanFunction->isAll1s()) return true;
+    if (booleanFunction->isAll0s()) return true;
+    if (booleanFunction->getInputNum() == 1) return true;
+    return false;
 }

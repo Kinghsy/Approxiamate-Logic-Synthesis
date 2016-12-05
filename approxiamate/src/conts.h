@@ -34,5 +34,8 @@
 #define METHOD_2 0x122F
 #define METHOD_3 0x122E
 
+class ERROR__BOOLEANFUNC_COMPARE {
+};
+
 
 #endif //PROJECT_CONTS_H
