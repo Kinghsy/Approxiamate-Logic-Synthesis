@@ -11,14 +11,13 @@ template <class VertexID, class VertexData>
 class IGraphQuery {
 public:
 
-    virtual const VertexData& valueOf(const VertexID& id) = 0;
+    virtual VertexData& valueOf(const VertexID& id) = 0;
 
     virtual std::vector<VertexID> getEdges(const VertexID& v) = 0;
 
     virtual int inDegree(const VertexID& v) = 0;
 
     virtual int outDegree(const VertexID& v) = 0;
-
 };
 
 template <class VertexID, class VertexData>
@@ -55,7 +54,7 @@ public:
 
     virtual std::vector<VertexID> getChild(const VertexID& id) = 0;
 
-    virtual std::vector<VertexID> getParent(const VertexID& id) = 0;
+    virtual VertexID& getParent(const VertexID& id) = 0;
 
     virtual void addAsChildren(const VertexID& parent,
                                const VertexData& data) = 0;
