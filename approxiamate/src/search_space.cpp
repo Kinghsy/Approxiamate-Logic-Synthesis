@@ -65,8 +65,6 @@ SearchSpacePtr SearchSpace::searchSpaceGenerate(int divideMethod) {
 
     unique_ptr<BinaryTree<SearchNodeOpPtr> > newBTree(btree->clone());
     BinaryTree<SearchNodeOpPtr>::VertexID_t treeNodeID = findDivideNode();
-    SearchNodeOpPtr refer = btree->valueOf(treeNodeID);
-    refer = newNodeOp;
     btree->addLeft(treeNodeID, leftNodeOp);
     btree->addRight(treeNodeID, rightNodeOp);
 
@@ -75,6 +73,9 @@ SearchSpacePtr SearchSpace::searchSpaceGenerate(int divideMethod) {
     tmpBTree = move(btree);
     btree = move(newBTree);
     newBTree = move(tmpBTree);
+
+    treeNodeID = findDivideNode();
+    btree->valueOf(treeNodeID) = newNodeOp;
 
     SearchSpacePtr newSearchSpace(new SearchSpace(*tmpBTree));
     return move(newSearchSpace);
