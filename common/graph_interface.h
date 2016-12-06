@@ -59,6 +59,8 @@ public:
 
     virtual void addAsChildren(const VertexID& parent,
                                const VertexData& data) = 0;
+
+    virtual void chopSubTree(const VertexID&) = 0;
 };
 
 template <class VertexID, class VertexData>
