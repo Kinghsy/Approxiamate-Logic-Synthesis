@@ -33,6 +33,21 @@ class MapBasedBinaryTree : public BinaryTree {
     }
 
 public:
+
+    MapBasedBinaryTree(const VertexData& data) {
+        Node r = {
+                getID(),
+                nullId(),
+                nullId(),
+                nullId(),
+                data
+        };
+        nodeTable.insert(
+                std::make_pair(r.id, r)
+        );
+        this->r = r.id;
+    }
+
     VertexData &valueOf(const NodeID &id) override {
         Node& n = nodeTable.at(id);
         return n.data;
