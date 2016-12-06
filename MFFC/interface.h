@@ -9,11 +9,12 @@
 #include <string>
 #include <vector>
 
+#include <truth_table.h>
 
 std::string getMFFC(std::string infile,
                     int minInput,
                     int maxInput);
 
-std::vector<int> getTruthTableFromBlif(const std::string& blifContent);
+TruthTable getTruthTableFromBlif(const std::string& blifContent);
 
 #endif //VE490_INTERFACE_H

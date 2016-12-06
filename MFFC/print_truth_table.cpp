@@ -2,6 +2,7 @@
 #include "print_truth_table.h"
 
 #include <vector>
+#include <truth_table.h>
 
 typedef long long unsigned int ulli;
 
@@ -19,7 +20,7 @@ void getBits(ulli n, int* vec, int digit) {
     }
 }
 
-vector<int> getTruthTable(string &infile)
+TruthTable getTruthTable(string &infile)
 {
 	DdManager *ddmanager = NULL;		/* pointer to DD manager */
 	FILE *fp;
@@ -47,18 +48,23 @@ vector<int> getTruthTable(string &infile)
 
     ulli max = power2(nInputs);
     int *ivec = new int[nInputs];
-    for (ulli i; i < max ; ++i) {
+    for (ulli i = 0; i < max ; ++i) {
         getBits(i, ivec, nInputs);
         int n =
                 (Cudd_ReadOne(ddmanager) == Cudd_Eval(ddmanager, ddnode_pt, ivec));
         out.push_back(n);
     }
     delete[] ivec;
+
+    TruthTable table(nInputs, out);
+    for (int j = 0; j < nInputs; ++j) {
+        table.getName(j) = net->inputs[j];
+    }
     
 	Bnet_FreeNetwork_Bdd(net, ddmanager);
 	Cudd_Quit(ddmanager);
 
-    return out;
+    return table;
 }
 
 

@@ -7,7 +7,9 @@
 #include "../lib/cudd-2.5.0/include/cuddInt.h"
 #include "cudd_build_v2.h"
 
-vector<int> getTruthTable(string &infile);
+#include <truth_table.h>
+
+TruthTable getTruthTable(string &infile);
 
 
 #endif

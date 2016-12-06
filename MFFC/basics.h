@@ -16,21 +16,23 @@ using namespace std;
 
 typedef std::string BnetNodeID;
 
-vector<char*> topSort(BnetNetwork **net);
+vector<BnetNodeID> topSort(BnetNetwork **net);
 
 void get_MFFC(BnetNetwork *net,
-              vector<char*> &sort_list,
-              map<char*, set<char*> > &TFI_set_char,
-              map<char*, set<char*> > &MFFC_set);
+              const vector<BnetNodeID> &sort_list,
+              map<BnetNodeID, set<BnetNodeID> > &TFI_set_char,
+              map<BnetNodeID, set<BnetNodeID> > &MFFC_set);
 
-void find_insig_MFFC(BnetNetwork *net,
-                     map<char*, set<char*> > &MFFC_set,
-                     map<char*, map<char*, char*> > &insig_MFFC);
+void findMffcInputNodes(BnetNetwork *net,
+                     const map<BnetNodeID, set<BnetNodeID> > &MFFC_set,
+                     map<BnetNodeID, set<BnetNodeID> > &insig_MFFC);
 
 void write_MFFC(BnetNetwork *net,
                 ostream &fout,
-                char *cnode, set<char *> &cMFFC,
-                map<char *, char *> &in_sig);
+                BnetNodeID cnode,
+                set<BnetNodeID> &Mffc,
+                set<BnetNodeID> &inputNodes);
 
+BnetNode* getNodeFromNet(BnetNetwork **net, const BnetNodeID& nodeID);
 
 #endif

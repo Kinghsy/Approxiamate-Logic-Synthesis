@@ -6,6 +6,8 @@
 #include "searchMFFC.h"
 #include "print_truth_table.h"
 
+#include <truth_table.h>
+
 using namespace std;
 
 string getMFFC(string infile, int minInput, int maxInput) {
@@ -24,7 +26,7 @@ string getMFFC(string infile, int minInput, int maxInput) {
     return s.str();
 }
 
-vector<int> getTruthTableFromBlif(const string& blifContent) {
+TruthTable getTruthTableFromBlif(const string& blifContent) {
     string tFile = "temp.blif";
     ofstream ofile(tFile);
     if (!ofile.is_open()) {

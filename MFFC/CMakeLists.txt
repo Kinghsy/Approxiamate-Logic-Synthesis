@@ -39,6 +39,7 @@ add_library(mffc ${SOURCE_LIB}
 add_executable(mffc_test ${SOURCE_FILES})
 
 target_link_libraries(mffc_test
+        common
         mffc_static dddmp cudd mtr st util epd
         dl readline termcap pthread rt)
 #add_subdirectory(testcase)

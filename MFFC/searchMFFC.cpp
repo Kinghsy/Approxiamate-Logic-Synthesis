@@ -25,18 +25,11 @@ void searchMFFC(BnetNetwork *net,
     //variables
     struct timeb startTime, endTime; 
     BnetNode *nd;
-    
-    //iterators
-    map<char*, set<char*> >::iterator itrm_cs, itrm_candidate_MFFC;
-    map<char*, char*>::iterator itrm_cc;
-    map<char*, map<char*, char*> >:: iterator itrm_cm;    
-    set<char*>::iterator itrs;
 
-        
     //Topological sort
     //cout << "****************************" << endl;
     //cout << "step1. topSort: " << endl;
-    vector<char*> sort_list = topSort(&net);
+    vector<BnetNodeID> sort_list = topSort(&net);
     //vector<char*> raw_sort_list;
     //for (auto it = sort_list.begin(); it != sort_list.end(); it++)
     //    raw_sort_list.push_back((char*)(it->c_str()));
@@ -46,11 +39,16 @@ void searchMFFC(BnetNetwork *net,
     //Get MFFC for each node and find input signals for each MFFC
     //cout << "****************************" << endl;
     //cout << "step2. get_MFFC & find_insig_MFFC: " << endl;	
-    map<char*, set<char*> > TFI_set, MFFC_set;
+    map<BnetNodeID, set<BnetNodeID> > TFI_set, MFFC_set;
     get_MFFC(net, sort_list, TFI_set, MFFC_set);
-    map<char*, map<char*, char*> > insig_MFFC;
-    //find_insig_MFFC(net, MFFC_set, insig_MFFC);
-
+    //auto nodeMffc = MFFC_set.at("391");
+    //cout << nodeMffc.size() << endl;
+    //for (auto node : nodeMffc) cout << node << endl;
+    map<BnetNodeID, set<BnetNodeID> > insig_MFFC;
+    findMffcInputNodes(net, MFFC_set, insig_MFFC);
+    //nodeMffc = MFFC_set.at("391");
+    //cout << nodeMffc.size() << endl;
+    //for (auto node : nodeMffc) cout << node << endl;
 
  	//Get MFFC for each node and find input signals for each MFFC
     //cout << "****************************" << endl;
@@ -62,45 +60,33 @@ void searchMFFC(BnetNetwork *net,
     int LUTs_potentially_saved;
 
 	// find the candidate MFFC
-	int i = 0;
-    	for(itrm_cs = MFFC_set.begin(); itrm_cs != MFFC_set.end(); itrm_cs++)
-    	{
-		char *cnode = itrm_cs->first;
-		set<char*> this_MFFC = itrm_cs->second;
-		if(this_MFFC.size() == 1)
-			continue;
-			
-		st_lookup(net->hash, cnode, &nd);
-		itrm_cm = insig_MFFC.find(nd->name);
-		map<char*, char*> insig = itrm_cm->second;	
+    BnetNodeID      candidateID;
+    set<BnetNodeID> candidateMffc;
+    set<BnetNodeID> candidateMffcInsig;
+    for (auto node : MFFC_set) {
+        BnetNodeID searchNode = node.first;
+        set<BnetNodeID> nodeMffc = node.second;
+        if (nodeMffc.size() == 1) continue;
+        //cout << nodeMffc.size() << endl;
+        //for (auto node : nodeMffc) cout << node << endl;
+        set<BnetNodeID> nodeInput = insig_MFFC.at(searchNode);
 
-		//cout << "insig.size() = " << insig.size() << endl;
-		
-		if(insig.size() <= num_input_max && insig.size() >= num_input_min)
-		{
-			count_2input_LUTs = this_MFFC.size();
-			LUTs_potentially_saved = count_2input_LUTs - (insig.size() - 1);
-			//cout << "LUTs_potentially_saved = " << LUTs_potentially_saved << endl;
-						
-			if(LUTs_potentially_saved > LUTs_saved_number_max)
-			{				
-				LUTs_saved_number_max = LUTs_potentially_saved;
-				itrm_candidate_MFFC = itrm_cs;
-				candidate_MFFC_index = i;
-			}
-			
-		}	
-		i++;
-	}
+        if (nodeInput.size() <= num_input_max && nodeInput.size() >= num_input_min) {
+            count_2input_LUTs = nodeMffc.size();
+            LUTs_potentially_saved = count_2input_LUTs - (nodeInput.size() - 1);
+            //cout << "LUTs_potentially_saved = " << LUTs_potentially_saved << endl;
+            if (LUTs_potentially_saved > LUTs_saved_number_max) {
+                LUTs_saved_number_max = LUTs_potentially_saved;
+                candidateMffc = nodeMffc;
+                candidateMffcInsig = nodeInput;
+                candidateID = searchNode;
+            }
+        }
+    }
 
 	////cout << "debug1" << endl;
-	char *cnode = itrm_candidate_MFFC->first;
-	set<char*> this_MFFC = itrm_candidate_MFFC->second;
-	st_lookup(net->hash, cnode, &nd);
-	itrm_cm = insig_MFFC.find(nd->name);
-	map<char*, char*> insig = itrm_cm->second;
 	////cout << "debug2" << endl;
-	write_MFFC(net, ostr, cnode, this_MFFC, insig);
+	write_MFFC(net, ostr, candidateID, candidateMffc, candidateMffcInsig);
 	////cout << "debug3" << endl;
 	/*
 	
