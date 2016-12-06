@@ -7,11 +7,13 @@
 
 #include "graph_interface.h"
 
-template <class VertexID, class VertexData>
+template <class VertexData>
 class BinaryTree :
-        public virtual IGraphQuery<VertexID, VertexData>,
-        public virtual IBinaryTree<VertexID, VertexData>
+        public virtual IGraphQuery<int, VertexData>,
+        public virtual IBinaryTree<int, VertexData>
 {
+protected:
+    const IGraphQuery::VertexID_t nullId = -1;
 public:
     ~BinaryTree() {};
 };
@@ -25,11 +27,13 @@ public:
     ~WeightedGraph() {};
 };
 
-template <class VertexID, class VertexData>
+template <class VertexData>
 class Tree :
-        public virtual IGraphQuery<VertexID, VertexData>,
-        public virtual ITree<VertexID, VertexData>
+        public virtual IGraphQuery<int, VertexData>,
+        public virtual ITree<int, VertexData>
 {
+protected:
+    const IGraphQuery::VertexID_t nullId = -1;
 public:
     ~Tree() {};
 };
