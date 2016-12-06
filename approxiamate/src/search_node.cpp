@@ -25,7 +25,7 @@ SearchNode::SearchNode() {
     return ;
 }
 
-SearchNode::SearchNode(std::unique_ptr<BooleanFunction> ptr) {
+SearchNode::SearchNode(BooleanFunctionPtr ptr) {
     booleanFunction=move(ptr);
     bestLocalErr=MAXINT;
     bestOper=OPERATION_NONE;
@@ -50,39 +50,39 @@ bool SearchNode::divideAble(int divideMethod) {
             (divideMethod <= (1 << booleanFunction->getInputNum() - 2)) );
 }
 
-unique_ptr<BooleanFunction> SearchNode::getBooleanFunction() {
+shared_ptr<BooleanFunction> SearchNode::getBooleanFunction() {
     return move(booleanFunction->copy());
 }
 
-unique_ptr<BooleanFunction> SearchNode::combineBooleanFunction(std::unique_ptr<BooleanFunction> p1,
-                                                               std::unique_ptr<BooleanFunction> p2, int oper) {
+shared_ptr<BooleanFunction> SearchNode::combineBooleanFunction(BooleanFunctionPtr p1,
+                                                               BooleanFunctionPtr p2, int oper) {
     return move(p1->combine(*p2, oper));
 }
 
-unique_ptr<BooleanFunction> SearchNodeOp::combineBooleanFunction(std::unique_ptr<BooleanFunction> p1,
-                                                               std::unique_ptr<BooleanFunction> p2) {
+shared_ptr<BooleanFunction> SearchNodeOp::combineBooleanFunction(BooleanFunctionPtr p1,
+                                                               BooleanFunctionPtr p2) {
     return move(node->combineBooleanFunction(move(p1), move(p2), oper));
 }
 
-tuple<shared_ptr<SearchNodeOp>, shared_ptr<SearchNodeOp>, shared_ptr<SearchNodeOp>>
-    SearchNodeOp::divide(int method) {
+tuple<SearchNodeOpPtr, SearchNodeOpPtr, SearchNodeOpPtr>
+SearchNodeOp::divide(int method) {
 
-    shared_ptr<SearchNodeOp> newNodeOp(new SearchNodeOp(node));
-    tuple<shared_ptr<SearchNode>, shared_ptr<SearchNode>, int, int>
+    SearchNodeOpPtr newNodeOp(new SearchNodeOp(node));
+    tuple<SearchNodePtr, SearchNodePtr, int, int>
             res = node->divide(method);
 
-    shared_ptr<SearchNodeOp> nodeOp1=(new SearchNodeOp(move(get<0>(res))));
-    shared_ptr<SearchNodeOp> nodeOp2=(new SearchNodeOp(move(get<1>(res))));
+    SearchNodeOpPtr nodeOp1(new SearchNodeOp(move(get<0>(res))));
+    SearchNodeOpPtr nodeOp2(new SearchNodeOp(move(get<1>(res))));
     localErr=get<2>(res);
     oper=get<3>(res);
     currentDivide=method;
 
-    return make_tuple(nodeOp1,nodeOp2);
+    return make_tuple(newNodeOp, nodeOp1, nodeOp2);
 
 };
 
-tuple<shared_ptr<SearchNode>,
-           shared_ptr<SearchNode>, int, int>
+tuple<SearchNodePtr,
+           SearchNodePtr, int, int>
         SearchNode::divide(int divideMethod) {
 
     int portSize = booleanFunction->getPortSize();
@@ -104,7 +104,7 @@ tuple<shared_ptr<SearchNode>,
         part[1-(temp%2)][input[i]] = 1;
     }
 
-    //std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int>
+    //std::tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int>
     auto result=booleanFunction->divide(part[0],part[1]);
 
     delete[] part[0];
@@ -114,8 +114,12 @@ tuple<shared_ptr<SearchNode>,
     int localErr=get<2>(result);
     int oper=get<3>(result);
 
-    shared_ptr<SearchNode> node1=new SearchNode(move(get<0>(result)));
-    shared_ptr<SearchNode> node2=new SearchNode(move(get<1>(result)));
+    SearchNodePtr node1(
+            new SearchNode(move(get<0>(result)))
+    );
+    SearchNodePtr node2(
+            new SearchNode(move(get<1>(result)))
+    );
 
     return make_tuple(node1, node2, localErr, oper);
 
@@ -139,7 +143,7 @@ SearchNodeOp::SearchNodeOp() {
     localErr=MAXINT;
 }
 
-SearchNodeOp::SearchNodeOp(std::shared_ptr<SearchNode> nd) {
+SearchNodeOp::SearchNodeOp(SearchNodePtr nd) {
     node=nd;
     oper=OPERATION_NONE;
     currentDivide=0;

@@ -19,8 +19,8 @@ using namespace std;
 
 //==========Search Space===================
 
-SearchSpace::SearchSpace(BinaryTree<shared_ptr<SearchNodeOp> > &oldTree) {
-    btree = unique_ptr<BinaryTree<shared_ptr<SearchNodeOp> > > (oldTree.clone());
+SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
+    btree = unique_ptr<BinaryTree<SearchNodeOpPtr > > (oldTree.clone());
     // FIXME add polymorphic copy constructor
     divideNode=btree->valueOf(findDivideNode());
     currentDivide=1;
@@ -47,36 +47,36 @@ bool SearchSpace::searchSpaceGrow() {
     return true;
 }
 
-shared_ptr<SearchSpace> SearchSpace::searchSpaceGenerate() {
+SearchSpacePtr SearchSpace::searchSpaceGenerate() {
     return searchSpaceGenerate(currentDivide++);
 }
 
-shared_ptr<SearchSpace> SearchSpace::searchSpaceGenerate(int divideMethod) {
+SearchSpacePtr SearchSpace::searchSpaceGenerate(int divideMethod) {
 
     if (divideMethod > currentDivideRange-2) return NULL;
     if (divideMethod < 1) return NULL;
 
-    tuple<shared_ptr<SearchNodeOp>, shared_ptr<SearchNodeOp>, shared_ptr<SearchNodeOp>>
+    tuple<SearchNodeOpPtr, SearchNodeOpPtr, SearchNodeOpPtr>
             divideRes = divideNode->divide(divideMethod);
 
-    shared_ptr<SearchNodeOp> newNodeOp = move(get<0>(divideRes));
-    shared_ptr<SearchNodeOp> leftNodeOp = move(get<1>(divideRes));
-    shared_ptr<SearchNodeOp> rightNodeOp = move(get<2>(divideRes));
+    SearchNodeOpPtr newNodeOp = move(get<0>(divideRes));
+    SearchNodeOpPtr leftNodeOp = move(get<1>(divideRes));
+    SearchNodeOpPtr rightNodeOp = move(get<2>(divideRes));
 
-    unique_ptr<BinaryTree<shared_ptr<SearchNodeOp>>> newBTree(*btree);
-    BinaryTree<shared_ptr<SearchNodeOp>>::VertexID_t treeNodeID = findDivideNode();
-    shared_ptr &refer = btree->valueOf(treeNodeID);
+    unique_ptr<BinaryTree<SearchNodeOpPtr> > newBTree(btree->clone());
+    BinaryTree<SearchNodeOpPtr>::VertexID_t treeNodeID = findDivideNode();
+    SearchNodeOpPtr refer = btree->valueOf(treeNodeID);
     refer = newNodeOp;
     btree->addLeft(treeNodeID, leftNodeOp);
     btree->addRight(treeNodeID, rightNodeOp);
 
-    unique_ptr<BinaryTree<shared_ptr<SearchNodeOp>>> tmpBTree;
+    unique_ptr<BinaryTree<SearchNodeOpPtr>> tmpBTree;
 
     tmpBTree = move(btree);
     btree = move(newBTree);
     newBTree = move(tmpBTree);
 
-    shared_ptr<SearchSpace> newSearchSpace(new SearchSpace(*tmpBTree));
+    SearchSpacePtr newSearchSpace(new SearchSpace(*tmpBTree));
     return move(newSearchSpace);
 }
 
@@ -84,8 +84,8 @@ int SearchSpace::getTotalError() {
     return totalError;
 }
 
-BinaryTree<shared_ptr<SearchNodeOp>>::VertexID_t SearchSpace::findDivideNode() {
-    BinaryTree<shared_ptr<SearchNodeOp>>::VertexID_t node;
+BinaryTree<SearchNodeOpPtr>::VertexID_t SearchSpace::findDivideNode() {
+    BinaryTree<SearchNodeOpPtr>::VertexID_t node;
     node = btree->root();
     if (node==btree->nullId())
         growAble=false;
@@ -94,12 +94,12 @@ BinaryTree<shared_ptr<SearchNodeOp>>::VertexID_t SearchSpace::findDivideNode() {
     return findDivideNodeHelper(node);
 }
 
-BinaryTree<std::shared_ptr<SearchNodeOp>>::VertexID_t SearchSpace::findDivideNodeHelper(
-        BinaryTree<std::shared_ptr<SearchNodeOp>>::VertexID_t node) {
+BinaryTree<SearchNodeOpPtr>::VertexID_t SearchSpace::findDivideNodeHelper(
+        BinaryTree<SearchNodeOpPtr>::VertexID_t node) {
     if ((btree->hasLeft(node)) && (btree->hasRight(node))) {
-        BinaryTree<std::shared_ptr<SearchNodeOp>>::VertexID_t leftRes=findDivideNodeHelper(btree->left(node));
+        BinaryTree<SearchNodeOpPtr>::VertexID_t leftRes=findDivideNodeHelper(btree->left(node));
         if (leftRes!=btree->nullId()) return leftRes;
-        BinaryTree<std::shared_ptr<SearchNodeOp>>::VertexID_t rightRes=findDivideNodeHelper(btree->right(node));
+        BinaryTree<SearchNodeOpPtr>::VertexID_t rightRes=findDivideNodeHelper(btree->right(node));
         if (rightRes!=btree->nullId()) return rightRes;
         return btree->nullId();
     }
@@ -109,19 +109,19 @@ BinaryTree<std::shared_ptr<SearchNodeOp>>::VertexID_t SearchSpace::findDivideNod
 
 int SearchSpace::calculTotalError(BooleanFunction &initBoolFunc) {
 
-    unique_ptr<BooleanFunction> result = move(calculTotalErrorHelper(btree->root()));
+    shared_ptr<BooleanFunction> result = calculTotalErrorHelper(btree->root());
     int sum = initBoolFunc.booleanCompare(*result);
     return sum;
 
 }
 
-unique_ptr<BooleanFunction> SearchSpace::calculTotalErrorHelper(
-        BinaryTree<shared_ptr<SearchNodeOp>>::VertexID_t node) {
+shared_ptr<BooleanFunction> SearchSpace::calculTotalErrorHelper(
+        BinaryTree<SearchNodeOpPtr>::VertexID_t node) {
 
     if ((btree->hasLeft(node)) && (btree->hasRight(node))) {
-        unique_ptr<BooleanFunction> r1 = calculTotalErrorHelper(btree->left(node));
-        unique_ptr<BooleanFunction> r2 = calculTotalErrorHelper(btree->right(node));
-        unique_ptr<BooleanFunction> res = r1->combine(*r2, btree->valueOf(node)->oper);
+        shared_ptr<BooleanFunction> r1 = calculTotalErrorHelper(btree->left(node));
+        shared_ptr<BooleanFunction> r2 = calculTotalErrorHelper(btree->right(node));
+        shared_ptr<BooleanFunction> res = r1->combine(*r2, btree->valueOf(node)->oper);
     }
 
     return move(btree->valueOf(node)->node->getBooleanFunction());

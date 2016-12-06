@@ -22,7 +22,7 @@ set(SOURCE_FILES
 add_executable(main ${SOURCE_FILES})
 
 target_link_libraries(main
-        mffc common
+        mffc approx common
         dddmp cudd mtr st util epd
         dl readline termcap pthread rt
         readline termcap pthread)

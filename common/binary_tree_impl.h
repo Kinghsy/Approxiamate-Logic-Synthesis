@@ -12,8 +12,8 @@
 #include <cassert>
 
 template <class VertexData>
-class MapBasedBinaryTree : public BinaryTree {
-    typedef BinaryTree::VertexID_t NodeID;
+class MapBasedBinaryTree : public BinaryTree<VertexData> {
+    typedef typename BinaryTree<VertexData>::VertexID_t NodeID;
 
     struct Node {
         NodeID id;
@@ -162,6 +162,10 @@ public:
 
     int nullId() override {
         return -1;
+    }
+
+    BinaryTree<VertexData> *clone() override {
+        return new MapBasedBinaryTree(*this);
     }
 };
 

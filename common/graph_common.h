@@ -13,9 +13,7 @@ class BinaryTree :
         public virtual IBinaryTree<int, VertexData>
 {
 public:
-    BinaryTree* clone() {
-        return new BinaryTree(*this);
-    }
+    virtual BinaryTree* clone() = 0;
     ~BinaryTree() {};
     // FIXME Add copy constructor
 };
@@ -36,9 +34,7 @@ class Tree :
         public virtual ITree<int, VertexData>
 {
 public:
-    Tree* clone() {
-        return new Tree(*this);
-    }
+    virtual Tree* clone() = 0;
     ~Tree() {};
     // FIXME Add copy constructor
 

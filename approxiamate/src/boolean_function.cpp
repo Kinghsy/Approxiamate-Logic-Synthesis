@@ -11,7 +11,6 @@
 #include <cstring>
 #include <sstream>
 
-using std::unique_ptr;
 using std::shared_ptr;
 using std::tuple;
 using std::tie;
@@ -153,13 +152,13 @@ int *BooleanFunction::getPortName() {
     return portName;
 }
 
-unique_ptr<BooleanFunction> BooleanFunction::copy() {
-    unique_ptr<BooleanFunction> pp (new BooleanFunction(
+BooleanFunctionPtr BooleanFunction::copy() {
+    BooleanFunctionPtr pp (new BooleanFunction(
             this->portName, this->portSize, this->truthTable));
     return move(pp);
 }
 
-unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {
+KMapPtr BooleanFunction::getKMap(int *portPart1, int *portPart2) {
     // constructure a kmap
     int size1=0;
     int size2=0;
@@ -191,7 +190,7 @@ unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {
         }
     }
     delete[] temp;
-    unique_ptr<KMap> kmap(new KMap(height, weight, table));
+    KMapPtr kmap(new KMap(height, weight, table));
     for (int i = 0; i < height; ++i) {
         delete[] table[i];
     }
@@ -200,7 +199,7 @@ unique_ptr<KMap> BooleanFunction::getKMap(int *portPart1, int *portPart2) {
 
 }
 
-unique_ptr<BooleanFunction> BooleanFunction::combine(BooleanFunction &b, const int oper) {
+BooleanFunctionPtr BooleanFunction::combine(BooleanFunction &b, const int oper) {
     int sum = this -> inputNum + b.inputNum;
     int *loca = new int[sum];
     int *digNum = new int[sum];
@@ -241,7 +240,7 @@ unique_ptr<BooleanFunction> BooleanFunction::combine(BooleanFunction &b, const i
     int *newPortName=new int[this->portSize];
     for (int i = 0; i < this->portSize; ++i)
         newPortName[i] = (this->portName[i]) | (b.portName[i]);
-    unique_ptr<BooleanFunction> pp(new BooleanFunction(newPortName, this->portSize, result));
+    BooleanFunctionPtr pp(new BooleanFunction(newPortName, this->portSize, result));
 
     delete[] newPortName;
     delete[] result;
@@ -250,15 +249,15 @@ unique_ptr<BooleanFunction> BooleanFunction::combine(BooleanFunction &b, const i
     return (move(pp));
 }
 
-tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> BooleanFunction::divide(int *portPart1,
+tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::divide(int *portPart1,
                                                                                         int *portPart2) {
 
-    unique_ptr<KMap> kmap=std::move( this->getKMap(portPart1, portPart2) );
+    KMapPtr kmap=std::move( this->getKMap(portPart1, portPart2) );
 
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> method1=findMinError1(*kmap, portPart1, portPart2); // major rows and all 0s
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> method2=findMinError2(*kmap, portPart1, portPart2); // major rows and all 1s
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> method3=findMinError3(*kmap, portPart1, portPart2); // major rows and complements of major rows
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> method4=findMinError4(*kmap, portPart1, portPart2); // 0s and 1s
+    tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> method1=findMinError1(*kmap, portPart1, portPart2); // major rows and all 0s
+    tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> method2=findMinError2(*kmap, portPart1, portPart2); // major rows and all 1s
+    tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> method3=findMinError3(*kmap, portPart1, portPart2); // major rows and complements of major rows
+    tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> method4=findMinError4(*kmap, portPart1, portPart2); // 0s and 1s
 
     // maybe some errors would come this way but now sure. it mainly concerned about the usage of unique_ptr.
 
@@ -278,7 +277,7 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
 
 }
 
-tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> BooleanFunction::findMinError1(const KMap &kmap, int *portPart1, int *portPart2) {
+tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::findMinError1(const KMap &kmap, int *portPart1, int *portPart2) {
     // major rows and 0s
 
     int *majorRow=new int[kmap.width];
@@ -287,7 +286,7 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
     int notSureNum;
 
     findMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, REMOVE_0S);
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result=findBestMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, METHOD_1, portPart1, portPart2);
+    tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> result=findBestMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, METHOD_1, portPart1, portPart2);
 
     delete[] majorRow;
     delete[] notSure;
@@ -295,7 +294,7 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
     return result;
 };
 
-tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> BooleanFunction::findMinError2(const KMap &kmap, int *portPart1, int *portPart2) {
+tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::findMinError2(const KMap &kmap, int *portPart1, int *portPart2) {
     // major rows and 1s
 
     int *majorRow=new int[kmap.width];
@@ -304,7 +303,7 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
     int notSureNum;
 
     findMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, REMOVE_1S);
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result=findBestMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, METHOD_2, portPart1, portPart2);
+    tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> result=findBestMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, METHOD_2, portPart1, portPart2);
 
     delete[] majorRow;
     delete[] notSure;
@@ -312,7 +311,7 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
     return result;
 };
 
-tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> BooleanFunction::findMinError3(const KMap &kmap, int *portPart1, int *portPart2) {
+tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::findMinError3(const KMap &kmap, int *portPart1, int *portPart2) {
     // major rows and complement of major rows
 
     int *majorRow=new int[kmap.width];
@@ -321,7 +320,7 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
     int notSureNum;
 
     findMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, NO_ACTION);
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result=findBestMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, METHOD_3, portPart1, portPart2);
+    tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> result=findBestMajorRow(kmap, majorRow, notSure, deterNum, notSureNum, METHOD_3, portPart1, portPart2);
 
     delete[] majorRow;
     delete[] notSure;
@@ -330,7 +329,7 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
 
 };
 
-tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> BooleanFunction::findMinError4(const KMap &kmap, int *portPart1, int *portPart2) {
+tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::findMinError4(const KMap &kmap, int *portPart1, int *portPart2) {
     // 0s and 1s
     int *tempRes1=new int[kmap.height];
     int *tempRes2=new int[kmap.width];
@@ -342,8 +341,8 @@ tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> Boolea
         error+=get<0>(rowRes);
         tempRes1[i]=get<1>(rowRes);
     }
-    unique_ptr<BooleanFunction> p1(new BooleanFunction(portPart1, portSize, tempRes1));
-    unique_ptr<BooleanFunction> p2(new BooleanFunction(portPart2, portSize, tempRes2));
+    BooleanFunctionPtr p1(new BooleanFunction(portPart1, portSize, tempRes1));
+    BooleanFunctionPtr p2(new BooleanFunction(portPart2, portSize, tempRes2));
 
     delete[] tempRes1;
     delete[] tempRes2;
@@ -414,7 +413,7 @@ void BooleanFunction::findMajorRow(const KMap &kmap,
 
 }
 
-std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, int, int>
+std::tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int>
     BooleanFunction::findBestMajorRow(const KMap &kmap, int *majorRow, int *notSure, const int &deterNum, const int &notSureNum, const int &mode, int *portPart1, int *portPart2) {
 
     int *all0s=new int[kmap.width];
@@ -463,8 +462,8 @@ std::tuple<std::unique_ptr<BooleanFunction>, std::unique_ptr<BooleanFunction>, i
         }
     }
 
-    unique_ptr<BooleanFunction> p1(new BooleanFunction(portPart1, portSize, resColumn));
-    unique_ptr<BooleanFunction> p2(new BooleanFunction(portPart2, portSize, resRow));
+    BooleanFunctionPtr p1(new BooleanFunction(portPart1, portSize, resColumn));
+    BooleanFunctionPtr p2(new BooleanFunction(portPart2, portSize, resRow));
 
     delete[] all0s;
     delete[] all1s;

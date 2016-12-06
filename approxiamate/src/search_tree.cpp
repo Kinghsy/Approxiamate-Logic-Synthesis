@@ -8,6 +8,8 @@
 
 #include <graph_common.h>
 #include <binary_tree_impl.h>
+#include <tree_impl.h>
+
 
 #include <iostream>
 #include <sstream>
@@ -25,61 +27,60 @@ SearchTree::SearchTree() {
 
 SearchTree::SearchTree(BooleanFunction &initBoolFunc) {
     unique_ptr<BooleanFunction> boolFunc(new BooleanFunction(initBoolFunc));
-    shared_ptr<SearchNode> initSearchNode(new SearchNode(boolFunc));
-    shared_ptr<SearchNodeOp> initSearchNodeOp(new SearchNodeOp(initSearchNode));
-    BinaryTree<shared_ptr<SearchNodeOp> > *bTree=new MapBasedBinaryTree(initSearchNodeOp);
-    shared_ptr<SearchSpace> initSearchSpace(bTree);
-    mtree = new MapBasedTree(initSearchSpace);
-    // TODO finish the left part of MapBasedTree
-    currentVertexID = mtree -> root();
-    delete bTree;
+    SearchNodePtr initSearchNode(new SearchNode(std::move(boolFunc)));
+    SearchNodeOpPtr initSearchNodeOp(new SearchNodeOp(initSearchNode));
 
+   /* SearchSpacePtr initSearchSpace(
+            new MapBasedBinaryTree<SearchNodeOpPtr>(initSearchNodeOp)
+    );*/
+    //mtree = new MapBasedTree<SearchSpacePtr >(initSearchSpace);
+    // TODO finish the left part of MapBasedTree
+    //currentVertexID = mtree -> root();
 }
 
 SearchTree::~SearchTree() {
     return ;
 }
 
-shared_ptr<SearchSpace> SearchTree::getRootSpace() {
+SearchSpacePtr SearchTree::getRootSpace() {
     return (mtree->valueOf(mtree->root()));
 }
 
-shared_ptr<SearchSpace> SearchTree::getNextSearchSpace() {
+SearchSpacePtr SearchTree::getNextSearchSpace() {
     SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
-    shared_ptr<SearchSpace> newSpace = currentSearchSpace.searchSpaceGenerate();
+    SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate();
     if (newSpace!=NULL) mtree->addAsChildren(currentVertexID, newSpace);
     return newSpace;
 }
 
-shared_ptr<SearchSpace> SearchTree::getNextSearchSpace(int method) {
+SearchSpacePtr SearchTree::getNextSearchSpace(int method) {
     SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
-    shared_ptr<SearchSpace> newSpace = currentSearchSpace.searchSpaceGenerate(method);
+    SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate(method);
     if (newSpace!=NULL) mtree->addAsChildren(currentVertexID, newSpace);
     return newSpace;
 }
 
-shared_ptr<SearchSpace> SearchTree::getCurrentSearchSpace() {
+SearchSpacePtr SearchTree::getCurrentSearchSpace() {
     return (mtree->valueOf(currentVertexID));
 }
 
 SearchSpace& SearchTree::getMinTotalError() {
 
-    shared_ptr<SearchSpace> res = getMinTotalErrorHelper(mtree->root());
+    SearchSpacePtr res = getMinTotalErrorHelper(mtree->root());
     return *res;
 
 }
 
-shared_ptr<SearchSpace> SearchTree::getMinTotalErrorHelper(
-        Tree<shared_ptr<SearchSpace> >::VertexID_t node) {
-
-    vector<Tree<shared_ptr<SearchSpace> >::VertexID_t >
+SearchSpacePtr
+SearchTree::getMinTotalErrorHelper(Tree<SearchSpacePtr >::VertexID_t node) {
+    vector<Tree<SearchSpacePtr>::VertexID_t >
             res = mtree->getChild(node);
-    if (res.empty) return mtree->valueOf(node);
+    if (res.empty()) return mtree->valueOf(node);
 
-    shared_ptr<SearchSpace> record=NULL;
+    SearchSpacePtr record= nullptr;
     for (auto iter : res) {
-        shared_ptr<SearchSpace> tmp=getMinTotalErrorHelper(iter);
-        if ((record == NULL) || (tmp->getTotalError() < record->getTotalError()))
+        SearchSpacePtr tmp=getMinTotalErrorHelper(iter);
+        if ((record == nullptr) || (tmp->getTotalError() < record->getTotalError()))
             record = tmp;
     }
     return record;

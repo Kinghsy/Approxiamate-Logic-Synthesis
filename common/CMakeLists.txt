@@ -6,6 +6,9 @@ add_library(common
         )
 
 add_executable(template_pseudo
-        graph_interface.h graph_common.h)
+        dummy.cpp
+        graph_interface.h graph_common.h
+        binary_tree_impl.h
+        tree_impl.h)
 
 target_link_libraries(test_common gtest gtest_main)
