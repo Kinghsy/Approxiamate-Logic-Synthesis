@@ -13,8 +13,13 @@ class BinaryTree :
         public virtual IBinaryTree<int, VertexData>
 {
 public:
+    BinaryTree* clone() {
+        return new BinaryTree(*this);
+    }
     ~BinaryTree() {};
+    // FIXME Add copy constructor
 };
+
 
 template <class VertexID, class VertexData, class Weight>
 class WeightedGraph :
@@ -31,7 +36,12 @@ class Tree :
         public virtual ITree<int, VertexData>
 {
 public:
+    Tree* clone() {
+        return new Tree(*this);
+    }
     ~Tree() {};
+    // FIXME Add copy constructor
+
 };
 
 
