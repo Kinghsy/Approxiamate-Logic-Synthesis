@@ -69,6 +69,7 @@ public:
     bool operator== (const BooleanFunction &b);
     BooleanFunction();
     BooleanFunction(int *portname, int portsize, int *truthtable);
+    BooleanFunction(BooleanFunction &init);
     ~BooleanFunction();
 
 };

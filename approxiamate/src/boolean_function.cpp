@@ -97,6 +97,23 @@ BooleanFunction::BooleanFunction(int *portname, int portsize, int *truthtable) {
     return ;
 }
 
+BooleanFunction::BooleanFunction(BooleanFunction &init) {
+    this->portSize = init.portSize;
+    this->portName=new int[portSize];
+    int sum=0;
+    for (int i=0; i<portSize; i++) {
+        this->portName[i]=init.portName[i];
+        sum+=init.portName[i];
+    }
+    inputNum=sum;
+    int totalSum=(1<<sum);
+    this->truthTable=new int[totalSum];
+    for (int j = 0; j < totalSum; ++j) {
+        this->truthTable[j]=truthTable[j];
+    }
+    return ;
+}
+
 BooleanFunction::~BooleanFunction() {
     delete[] portName;
     delete[] truthTable;
