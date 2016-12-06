@@ -12,6 +12,8 @@ class IGraphQuery {
 public:
     typedef VertexID VertexID_t;
 
+    virtual VertexID nullId() = 0;
+
     virtual VertexData& valueOf(const VertexID& id) = 0;
 
     virtual std::vector<VertexID> getEdges(const VertexID& v) = 0;
@@ -19,6 +21,7 @@ public:
     virtual int inDegree(const VertexID& v) = 0;
 
     virtual int outDegree(const VertexID& v) = 0;
+
 };
 
 template <class VertexID, class VertexData>

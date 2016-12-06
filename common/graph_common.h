@@ -12,8 +12,6 @@ class BinaryTree :
         public virtual IGraphQuery<int, VertexData>,
         public virtual IBinaryTree<int, VertexData>
 {
-protected:
-    const IGraphQuery::VertexID_t nullId = -1;
 public:
     ~BinaryTree() {};
 };
@@ -32,8 +30,6 @@ class Tree :
         public virtual IGraphQuery<int, VertexData>,
         public virtual ITree<int, VertexData>
 {
-protected:
-    const IGraphQuery::VertexID_t nullId = -1;
 public:
     ~Tree() {};
 };

@@ -14,7 +14,6 @@
 template <class VertexData>
 class MapBasedBinaryTree : public BinaryTree {
     typedef BinaryTree::VertexID_t NodeID;
-    using BinaryTree::nullId;
 
     struct Node {
         NodeID id;
@@ -42,12 +41,12 @@ public:
     std::vector<NodeID> getEdges(const NodeID &v) override {
         Node& n = nodeTable.at(v);
         std::vector<NodeID> vec;
-        if (n.parent != nullId)
+        if (n.parent != nullId())
             vec.push_back(n.parent);
         else
             if(!isRoot(v)) assert(0);
-        if (n.left != nullId)  vec.push_back(n.left);
-        if (n.right != nullId) vec.push_back(n.right);
+        if (n.left != nullId())  vec.push_back(n.left);
+        if (n.right != nullId()) vec.push_back(n.right);
         return vec;
     }
 
@@ -72,11 +71,11 @@ public:
     }
 
     std::vector<NodeID> getChild(const NodeID &id) override {
-        if (id == nullId) assert(0);
+        if (id == nullId()) assert(0);
         Node& n = nodeTable.at(id);
         std::vector<NodeID> vec;
-        if (n.left != nullId)  vec.push_back(n.left);
-        if (n.right != nullId) vec.push_back(n.right);
+        if (n.left != nullId())  vec.push_back(n.left);
+        if (n.right != nullId()) vec.push_back(n.right);
         return vec;
     }
 
@@ -119,8 +118,8 @@ public:
         int id = getID();
         Node newNode = {
                 id,     // ID
-                nullId, // LEFT
-                nullId, // RIGHT
+                nullId(), // LEFT
+                nullId(), // RIGHT
                 p,      // PARENT
                 d       // Data
         };
@@ -135,8 +134,8 @@ public:
         Node& pNode = nodeTable.at(p);
         Node newNode = {
                 getID(),     // ID
-                nullId, // LEFT
-                nullId, // RIGHT
+                nullId(), // LEFT
+                nullId(), // RIGHT
                 p,      // PARENT
                 d       // Data
         };
@@ -144,6 +143,10 @@ public:
                 std::make_pair(newNode.id, newNode)
         );
         pNode.right = newNode.id; // Update parent
+    }
+
+    int nullId() override {
+        return -1;
     }
 };
 
