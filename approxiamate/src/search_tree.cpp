@@ -26,16 +26,24 @@ SearchTree::SearchTree() {
 }
 
 SearchTree::SearchTree(BooleanFunction &initBoolFunc) {
-    unique_ptr<BooleanFunction> boolFunc(new BooleanFunction(initBoolFunc));
-    SearchNodePtr initSearchNode(new SearchNode(std::move(boolFunc)));
+    BooleanFunctionPtr boolFunc(new BooleanFunction(initBoolFunc));
+    SearchNodePtr initSearchNode(new SearchNode(move(boolFunc)));
     SearchNodeOpPtr initSearchNodeOp(new SearchNodeOp(initSearchNode));
-
-   /* SearchSpacePtr initSearchSpace(
+    unique_ptr<BinaryTree<SearchNodeOpPtr> > Btree(
             new MapBasedBinaryTree<SearchNodeOpPtr>(initSearchNodeOp)
-    );*/
+    );
+    SearchSpacePtr initSearchSpace = SearchSpacePtr(
+            new SearchSpace(move(Btree))
+    );
+
+    /*SearchSpacePtr initSearchSpace = shared_ptr<SearchNodeOpPtr>( new SearchNodeOp (
+            unique_ptr<BinaryTree<SearchNodeOpPtr> >(new MapBasedBinaryTree<SearchNodeOpPtr>(initSearchNodeOp) )
+    ));*/
     //mtree = new MapBasedTree<SearchSpacePtr >(initSearchSpace);
     // TODO finish the left part of MapBasedTree
     //currentVertexID = mtree -> root();
+
+    //delete bTree;
 }
 
 SearchTree::~SearchTree() {
@@ -49,7 +57,13 @@ SearchSpacePtr SearchTree::getRootSpace() {
 SearchSpacePtr SearchTree::getNextSearchSpace() {
     SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
     SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate();
-    if (newSpace!=NULL) mtree->addAsChildren(currentVertexID, newSpace);
+    if (newSpace!=NULL)
+        mtree->addAsChildren(currentVertexID, newSpace);
+    else {
+        if (mtree->isRoot(currentVertexID)) return NULL;
+        currentVertexID=mtree->getParent(currentVertexID);
+        return getNextSearchSpace();
+    }
     return newSpace;
 }
 

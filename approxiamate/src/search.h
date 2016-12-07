@@ -86,6 +86,7 @@ class SearchSpace {//: public Object {
 public:
 
     SearchSpace(BinaryTree<SearchNodeOpPtr> &oldTree);
+    SearchSpace(std::unique_ptr<BinaryTree<SearchNodeOpPtr> > oldTreePtr);
     SearchSpace();
     ~SearchSpace();
 

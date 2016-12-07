@@ -28,6 +28,14 @@ SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
     totalError=calculTotalError(initBoolFunc);
 }
 
+SearchSpace::SearchSpace(std::unique_ptr<BinaryTree<SearchNodeOpPtr> > oldTreePtr) {
+    btree = move(oldTreePtr);
+    divideNode=btree->valueOf(findDivideNode());
+    currentDivide=1;
+    if (growAble) currentDivideRange=divideNode->node->getDivideRange();
+    totalError=calculTotalError(initBoolFunc);
+}
+
 SearchSpace::SearchSpace() {
     btree=NULL;
     divideNode=NULL;
