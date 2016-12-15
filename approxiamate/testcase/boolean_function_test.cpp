@@ -18,7 +18,7 @@ using namespace std;
     int portSize=6;
     int truthTable[]={0,1,0,0, 1,0,1,0, 1,1,1,0, 1,0,1,0};
 
-    unique_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
+    shared_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
     int part1[]={0,0,0,0,0,1};
     int part2[]={1,0,1,0,1,0};
     int **map1=new int*[2];
@@ -31,7 +31,7 @@ using namespace std;
     kmap1_corr.display();
     delete[] map1;
 
-    unique_ptr<KMap> kmap1=std::move(bf->getKMap(part1, part2));
+    shared_ptr<KMap> kmap1=std::move(bf->getKMap(part1, part2));
     kmap1->display();
 
     TEST(TEST_KMAP, TEST_CASE_1) {
@@ -39,10 +39,10 @@ using namespace std;
     }
 
 
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result = bf->divide(part1, part2);
+    tuple<shared_ptr<BooleanFunction>, shared_ptr<BooleanFunction>, int, int> result = bf->divide(part1, part2);
 
-    unique_ptr<BooleanFunction> p1=move(get<0>(result));
-    unique_ptr<BooleanFunction> p2=move(get<1>(result));
+    shared_ptr<BooleanFunction> p1=move(get<0>(result));
+    shared_ptr<BooleanFunction> p2=move(get<1>(result));
     int error=get<2>(result);
     int oper=get<3>(result);
 
@@ -62,7 +62,7 @@ TEST(TEST_KMAP, TEST_CASE_1) {
     int portSize=6;
     int truthTable[]={0,1,0,0, 1,0,1,0, 1,1,1,0, 1,0,1,0};
 
-    unique_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
+    shared_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
     int part1[]={0,0,0,0,0,1};
     int part2[]={1,0,1,0,1,0};
     int **map1=new int*[2];
@@ -75,7 +75,7 @@ TEST(TEST_KMAP, TEST_CASE_1) {
     kmap1_corr.display();
     delete[] map1;
 
-    unique_ptr<KMap> kmap1=std::move(bf->getKMap(part1, part2));
+    shared_ptr<KMap> kmap1=std::move(bf->getKMap(part1, part2));
     kmap1->display();
     ASSERT_EQ((kmap1_corr == (*kmap1)), true);
 
@@ -86,14 +86,14 @@ TEST(TEST_DEVIDE, TEST_CASE_1) {
     int portSize=6;
     int truthTable[]={0,1,0,0, 1,0,1,0, 1,1,1,0, 1,0,1,0};
 
-    unique_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
+    shared_ptr<BooleanFunction> bf(new BooleanFunction(portName, portSize, truthTable));
     int part1[]={0,0,0,0,0,1};
     int part2[]={1,0,1,0,1,0};
 
-    tuple<unique_ptr<BooleanFunction>, unique_ptr<BooleanFunction>, int, int> result= bf->divide(part1, part2);
+    tuple<shared_ptr<BooleanFunction>, shared_ptr<BooleanFunction>, int, int> result= bf->divide(part1, part2);
 
-    unique_ptr<BooleanFunction> p1=move(get<0>(result));
-    unique_ptr<BooleanFunction> p2=move(get<1>(result));
+    shared_ptr<BooleanFunction> p1=move(get<0>(result));
+    shared_ptr<BooleanFunction> p2=move(get<1>(result));
     int error=get<2>(result);
     int oper=get<3>(result);
 
@@ -116,7 +116,7 @@ TEST(TEST_COMBINE, TEST_CASE_1) {
     BooleanFunction p1(part1, 6, truthTable1);
     BooleanFunction p2(part2, 6, truthTable2);
 
-    unique_ptr<BooleanFunction> resAnd=move(p1.combine(p2, OPERATION_AND));
+    shared_ptr<BooleanFunction> resAnd=move(p1.combine(p2, OPERATION_AND));
 
     int finalPart[]={1,0,1,0,1,1};
     int resCorrect[]={0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0};
@@ -133,7 +133,7 @@ TEST(TEST_COMBINE, TEST_CASE_2) {
     BooleanFunction p1(part1, 6, truthTable1);
     BooleanFunction p2(part2, 6, truthTable2);
 
-    unique_ptr<BooleanFunction> resOr=move(p1.combine(p2, OPERATION_OR));
+    shared_ptr<BooleanFunction> resOr=move(p1.combine(p2, OPERATION_OR));
 
     int finalPart[]={1,0,1,0,1,1};
     int resCorrect[]={1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1};
@@ -150,7 +150,7 @@ TEST(TEST_COMBINE, TEST_CASE_3) {
     BooleanFunction p1(part1, 6, truthTable1);
     BooleanFunction p2(part2, 6, truthTable2);
 
-    unique_ptr<BooleanFunction> resXor=move(p1.combine(p2, OPERATION_XOR));
+    shared_ptr<BooleanFunction> resXor=move(p1.combine(p2, OPERATION_XOR));
 
     int finalPart[]={1,0,1,0,1,1};
     int resCorrect[]={1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1};
@@ -167,7 +167,7 @@ TEST(TEST_COMBINE, TEST_CASE_4) {
     BooleanFunction p1(part1, 6, truthTable1);
     BooleanFunction p2(part2, 6, truthTable2);
 
-    unique_ptr<BooleanFunction> resDrop=move(p1.combine(p2, OPERATION_DROP));
+    shared_ptr<BooleanFunction> resDrop=move(p1.combine(p2, OPERATION_DROP));
 
     int finalPart[]={1,0,1,0,1,1};
     int resCorrect[]={1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0};

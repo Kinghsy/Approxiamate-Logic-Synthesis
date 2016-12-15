@@ -108,7 +108,7 @@ BooleanFunction::BooleanFunction(BooleanFunction &init) {
     int totalSum=(1<<sum);
     this->truthTable=new int[totalSum];
     for (int j = 0; j < totalSum; ++j) {
-        this->truthTable[j]=truthTable[j];
+        this->truthTable[j]=init.truthTable[j];
     }
     return ;
 }

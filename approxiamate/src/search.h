@@ -97,6 +97,7 @@ public:
     SearchSpacePtr searchSpaceGenerate(); // return a search space that is generated from the current one.
     SearchSpacePtr searchSpaceGenerate(int divideMethod);
     int getTotalError(); // return the total error.
+    void printSearchSpace();
 
 
 private:
@@ -107,11 +108,12 @@ private:
                               // the range should be 1~(currentDivideRange-2). The left tree
                               // or right tree can't be null.
     bool growAble;
-    int calculTotalError(BooleanFunction &initBoolFunc);
+    int calculTotalError();
     BinaryTree<SearchNodeOpPtr>::VertexID_t
         findDivideNodeHelper(BinaryTree<SearchNodeOpPtr>::VertexID_t node);
     BooleanFunctionPtr
         calculTotalErrorHelper(BinaryTree<SearchNodeOpPtr>::VertexID_t node);
+    void printSearchSpaceHelper(BinaryTree<SearchNodeOpPtr>::VertexID_t node);
 
     //error
     int totalError; // the total error for this search space
@@ -133,11 +135,13 @@ public:
     SearchSpacePtr getNextSearchSpace(int method);
     SearchSpacePtr getCurrentSearchSpace(); //
     SearchSpacePtr getRootSpace();
+    SearchSpacePtr getBestSpace();
     SearchSpace &getMinTotalError();
 
 private:
 
     SearchSpacePtr getMinTotalErrorHelper(Tree<SearchSpacePtr >::VertexID_t node);
+    SearchSpacePtr getBestSpaceHelper(Tree<SearchSpacePtr>::VertexID_t node);
 
     std::unique_ptr<Tree<SearchSpacePtr>> mtree;
     //SearchSpacePtr currentSearchSpace;    // the current working on search space.
