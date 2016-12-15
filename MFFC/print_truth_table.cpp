@@ -6,25 +6,16 @@
 
 typedef long long unsigned int ulli;
 
-ulli power2(int power) {
-    return ((ulli)1) << power;
-}
 
-void getBits(ulli n, int* vec, int digit) {
-    for (int i = 0; i < digit; ++i) {
-
-        if ((n & power2(i)) > 0)
-            vec[i] = 1;
-        else
-            vec[i] = 0;
-    }
-}
+ulli power2(int power);
+void getBits(ulli n, int* vec, int digit);
 
 TruthTable getTruthTable(string &infile)
 {
 	DdManager *ddmanager = NULL;		/* pointer to DD manager */
 	FILE *fp;
 	fp = fopen(infile.c_str(), "r");
+    if (fp == NULL) assert(0);
 	BnetNetwork *net = Bnet_ReadNetwork(fp);
 
 	/* Initialize manager. We start with 0 variables, because

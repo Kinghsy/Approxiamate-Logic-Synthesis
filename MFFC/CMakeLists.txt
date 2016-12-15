@@ -32,7 +32,8 @@ set(SOURCE_LIB
 add_library(mffc_static ${SOURCE_LIB})
 
 add_library(mffc ${SOURCE_LIB}
-        interface.cpp
+        interface.cpp interface.h
+        err_asses.cpp err_asses.h
         searchMFFC.cpp searchMFFC.h
         print_truth_table.cpp print_truth_table.h)
 

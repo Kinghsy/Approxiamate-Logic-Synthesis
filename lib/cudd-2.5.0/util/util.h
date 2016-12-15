@@ -152,14 +152,14 @@ extern int memcmp(), strcmp();
 #endif
 #endif
 
-
-#define fail(why) {\
+/*
+#define fail(why) do {\
     (void) fprintf(stderr, "Fatal error: file %s, line %d\n%s\n",\
 	__FILE__, __LINE__, why);\
     (void) fflush(stdout);\
     abort();\
-}
-
+} while(0)
+*/
 
 #ifdef lint
 #undef putc			/* correct lint '_flsbuf' bug */
