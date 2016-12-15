@@ -39,9 +39,11 @@ SearchTree::SearchTree(BooleanFunction &initBoolFunc) {
     /*SearchSpacePtr initSearchSpace = shared_ptr<SearchNodeOpPtr>( new SearchNodeOp (
             unique_ptr<BinaryTree<SearchNodeOpPtr> >(new MapBasedBinaryTree<SearchNodeOpPtr>(initSearchNodeOp) )
     ));*/
-    //mtree = new MapBasedTree<SearchSpacePtr >(initSearchSpace);
+    mtree = unique_ptr<Tree<SearchSpacePtr>>(
+            new MapBasedTree<SearchSpacePtr>(initSearchSpace)
+    );
     // TODO finish the left part of MapBasedTree
-    //currentVertexID = mtree -> root();
+    currentVertexID = mtree -> root();
 
     //delete bTree;
 }

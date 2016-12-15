@@ -13,6 +13,7 @@
 
 #include <graph_common.h>
 #include <binary_tree_impl.h>
+#include <tree_impl.h>
 
 
 class SearchNode;

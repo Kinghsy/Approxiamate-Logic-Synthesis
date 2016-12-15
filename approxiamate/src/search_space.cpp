@@ -7,6 +7,7 @@
 #include "boolean_function.h"
 
 #include <binary_tree_impl.h>
+#include <tree_impl.h>
 #include <graph_common.h>
 
 #include <iostream>

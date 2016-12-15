@@ -65,15 +65,15 @@ public:
         return vec;
     }
 
-    NodeID inDegree(const NodeID &v) override {
+    int inDegree(const NodeID &v) override {
         Node& n = nodeTable.at(v);
-        int count = 1; // Parent
+        int count = (n.parent != nullId())? 1:0; // Parent
         if (hasLeft(v)) count++;
         if (hasRight(v)) count++;
         return 0;
     }
 
-    NodeID outDegree(const NodeID &v) override {
+    int outDegree(const NodeID &v) override {
         return inDegree(v);
     }
 
@@ -110,11 +110,11 @@ public:
     }
 
     bool hasLeft(const NodeID &p) override {
-        return nodeTable.at(p).left == nullId;
+        return (nodeTable.at(p).left != nullId());
     }
 
     bool hasRight(const NodeID &p) override {
-        return nodeTable.at(p).right == nullId;
+        return (nodeTable.at(p).right != nullId());
     }
 
     NodeID left(const NodeID &p) override {
