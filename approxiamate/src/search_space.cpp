@@ -197,7 +197,8 @@ void SearchSpace::printSearchSpaceHelper(
 void SearchSpace::printSearchSpace() {
     BinaryTree<SearchNodeOpPtr>::VertexID_t vertexId = btree->root();
     printSearchSpaceHelper(vertexId);
-    cout << "\n";
+    cout << "              totoal error rate: " << getTotalError() <<  " \n";
+
 }
 
 
