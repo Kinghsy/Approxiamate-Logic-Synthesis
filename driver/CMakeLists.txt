@@ -23,6 +23,7 @@ add_executable(main ${SOURCE_FILES})
 
 target_link_libraries(main
         mffc approx blif_replace common
+        ${Boost_LIBRARIES}
         dddmp cudd mtr st util epd
         dl readline termcap pthread rt
         readline termcap pthread)
