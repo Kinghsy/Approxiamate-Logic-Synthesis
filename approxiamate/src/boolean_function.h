@@ -69,6 +69,7 @@ public:
     int getInputNum();
     int getPortSize();
     int *getPortName();
+    int *getTruthTable();
     BooleanFunctionPtr copy();
 
     //bool operator() (int64_t input);

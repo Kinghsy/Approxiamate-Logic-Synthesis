@@ -7,7 +7,9 @@ set(SOURCE_FILES src/boolean_function.cpp
         src/search.h
         src/search_node.cpp
         src/search_space.cpp
-        src/search_tree.cpp)
+        src/search_tree.cpp
+        src/search_method_core.h
+        src/search_method_core.cpp)
 
 
 #list(APPEND SOURCE_FILES src/boolean_function.h

@@ -152,6 +152,10 @@ int *BooleanFunction::getPortName() {
     return portName;
 }
 
+int *BooleanFunction::getTruthTable() {
+    return truthTable;
+}
+
 BooleanFunctionPtr BooleanFunction::copy() {
     BooleanFunctionPtr pp (new BooleanFunction(
             this->portName, this->portSize, this->truthTable));

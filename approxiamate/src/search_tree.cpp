@@ -113,8 +113,8 @@ SearchSpacePtr SearchTree::getBestSpace() {
 }
 
 SearchSpacePtr SearchTree::getBestSpaceHelper(Tree<SearchSpacePtr>::VertexID_t node) {
-    if (mtree->getChild(node).empty()) return mtree->valueOf(node);
-    vector<Tree<SearchSpacePtr>::VertexID_t > vec;
+    vector<Tree<SearchSpacePtr>::VertexID_t > vec = mtree->getChild(node);
+    if (vec.empty()) return mtree->valueOf(node);
     SearchSpacePtr tmpSpace = nullptr;
     for (auto iter=vec.begin(); iter!=vec.end(); iter++) {
         SearchSpacePtr tmpRes = getBestSpaceHelper(*iter);

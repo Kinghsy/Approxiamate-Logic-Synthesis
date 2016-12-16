@@ -131,20 +131,20 @@ BinaryTree<SearchNodeOpPtr>::VertexID_t SearchSpace::findDivideNodeHelper(
 
 int SearchSpace::calculTotalError() {//BooleanFunction &initBoolFunc) {
 
-    shared_ptr<BooleanFunction> result = calculTotalErrorHelper(btree->root());
+    BooleanFunctionPtr result = calculTotalErrorHelper(btree->root());
     int sum = btree->valueOf(btree->root())->node->getBooleanFunction()->booleanCompare(*result);
     // int sum = initBoolFunc.booleanCompare(*result);
     return sum;
 
 }
 
-shared_ptr<BooleanFunction> SearchSpace::calculTotalErrorHelper(
+BooleanFunctionPtr SearchSpace::calculTotalErrorHelper(
         BinaryTree<SearchNodeOpPtr>::VertexID_t node) {
 
     if ((btree->hasLeft(node)) && (btree->hasRight(node))) {
-        shared_ptr<BooleanFunction> r1 = calculTotalErrorHelper(btree->left(node));
-        shared_ptr<BooleanFunction> r2 = calculTotalErrorHelper(btree->right(node));
-        shared_ptr<BooleanFunction> res = r1->combine(*r2, btree->valueOf(node)->oper);
+        BooleanFunctionPtr r1 = calculTotalErrorHelper(btree->left(node));
+        BooleanFunctionPtr r2 = calculTotalErrorHelper(btree->right(node));
+        BooleanFunctionPtr res = r1->combine(*r2, btree->valueOf(node)->oper);
         return res;
     }
 
@@ -200,7 +200,13 @@ void SearchSpace::printSearchSpace() {
     BinaryTree<SearchNodeOpPtr>::VertexID_t vertexId = btree->root();
     printSearchSpaceHelper(vertexId);
     cout << "              totoal error rate: " << getTotalError() <<  " \n";
+    cout << "                    total boolean function:";
+    BooleanFunctionPtr bfPtr=getFinalBooleanFuntion();
+    cout << bfPtr->toString() << "\n";
 
 }
 
+BooleanFunctionPtr SearchSpace::getFinalBooleanFuntion() {
+    return calculTotalErrorHelper(btree->root());
+}
 

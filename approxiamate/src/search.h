@@ -98,6 +98,7 @@ public:
     SearchSpacePtr searchSpaceGenerate(int divideMethod);
     int getTotalError(); // return the total error.
     void printSearchSpace();
+    BooleanFunctionPtr getFinalBooleanFuntion();
 
 
 private:
