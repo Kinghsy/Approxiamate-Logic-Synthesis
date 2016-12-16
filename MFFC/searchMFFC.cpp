@@ -33,8 +33,8 @@ void searchMFFC(BnetNetwork *net,
     //vector<char*> raw_sort_list;
     //for (auto it = sort_list.begin(); it != sort_list.end(); it++)
     //    raw_sort_list.push_back((char*)(it->c_str()));
-    for (auto str : sort_list) cout << str << " ";
-    cout <<endl;
+    //for (auto str : sort_list) cout << str << " ";
+    //cout <<endl;
     
     //Get MFFC for each node and find input signals for each MFFC
     //cout << "****************************" << endl;

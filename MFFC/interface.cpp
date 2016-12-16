@@ -31,19 +31,6 @@ string getMFFC(string infile, int minInput, int maxInput) {
     return s.str();
 }
 
-TruthTable getTruthTableFromBlif(const string& blifContent) {
-    string tFile = "temp.blif";
-    ofstream ofile(tFile);
-    if (!ofile.is_open()) {
-        cerr << "Cannot open temp file." << endl;
-        exit(1);
-    }
-    ofile << blifContent;
-    ofile.close();
-
-    return getTruthTable(tFile);
-}
-
 BlifBooleanNet::BlifBooleanNet(const std::string &file) {
     filename = file;
 
@@ -108,6 +95,39 @@ int BlifBooleanNet::evalAt(const std::vector<int> &v) const {
 
 const std::string &BlifBooleanNet::name() const {
     return filename;
+}
+
+int BlifBooleanNet::nodeCount() const {
+    static int count = -1;
+    if (count >= 0) return count;
+    count = 0;
+    BnetNode *n = net->nodes;
+    while (n != NULL) {
+        count++;
+        n = n->next;
+    }
+    return count;
+}
+
+int BlifBooleanNet::gateCount() const {
+    int c = nodeCount();
+    int n = c - net->npis - net->npos;
+    return n >= 0 ? n : 0;
+}
+
+const std::string BlifBooleanNet::netName() const {
+    return net->name;
+}
+
+BlifBooleanNet BlifBooleanNet::getMFFC(int minInput,
+                                       int maxInput) const {
+    assert(minInput >= 0);
+    assert(maxInput >= minInput);
+    std::string fname = std::string("mffc.blif");
+    ofstream fs(fname);
+    searchMFFC(net, fs, minInput, maxInput);
+    fs.close();
+    return BlifBooleanNet(fname);
 }
 
 ulli power2(int power) {

@@ -17,12 +17,13 @@ using std::vector;
 using std::cout;
 
 int main(int argc, char* agrv[]) {
-//    string s = getMFFC("c880_new.blif", 4, 6);
-//    ofstream ofile("file.txt");
-//    ofile << s;
-//    ofile.close();
-    BlifBooleanNet net1("bignode.blif");
-    BlifBooleanNet net2("bignode_org.blif");
-    BlifCompareResult r = sampleCompareBlifs(net1, net2, 60);
+    BlifBooleanNet net0("file.txt");
+    cout << net0.gateCount() << "/" << net0.nodeCount() << endl;
+    BlifBooleanNet netx("c880.blif");
+    BlifBooleanNet mffc = netx.getMFFC(4, 6);
+    mffc.truthTable().print();
+    BlifBooleanNet net1("c880.blif");
+    BlifBooleanNet net2("c880_new.blif");
+    BlifCompareResult r = sampleCompareBlifs(net1, net2);
     cout << r.errorCount << "/" << r.nSamples;
 }

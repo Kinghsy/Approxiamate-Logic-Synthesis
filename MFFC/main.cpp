@@ -28,7 +28,8 @@ int main(int argc, char **argv)
     int num_input_max = atoi(argv[4]);
 
 
-    struct timeb startTime, endTime;                         //Record the computing time.
+    struct timeb startTime, endTime;
+    //Record the computing time.
     ftime(&startTime);
 
     //*************************************//

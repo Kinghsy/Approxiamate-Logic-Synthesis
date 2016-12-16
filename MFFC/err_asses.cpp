@@ -31,7 +31,6 @@ BlifCompareResult compareBlifFiles(const std::string& model,
 
 BlifCompareResult compareBlifs(const BlifBooleanNet &model,
                                const BlifBooleanNet &compared) {
-
 }
 
 BlifCompareResult fullCompareBlifs(const BlifBooleanNet &model,

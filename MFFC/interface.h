@@ -13,13 +13,6 @@
 
 #include <truth_table.h>
 
-std::string getMFFC(std::string infile,
-                    int minInput,
-                    int maxInput);
-
-TruthTable getTruthTableFromBlif(const std::string& blifContent);
-
-
 class BlifBooleanNet {
     DdManager *ddmanager;
     BnetNetwork *net;
@@ -29,13 +22,19 @@ public:
     BlifBooleanNet(const std::string& file);
 
     const std::string& name() const;
+    const std::string  netName() const;
 
     int nInputs() const;
 
+    int nodeCount() const;
+    int gateCount() const;
+
     TruthTable truthTable() const;
 
+    BlifBooleanNet getMFFC(int minInput,
+                           int maxInput) const;
+
     int evalAt(const std::vector<int>& v) const;
-    int evalAt(int v);
 
     ~BlifBooleanNet();
 };
