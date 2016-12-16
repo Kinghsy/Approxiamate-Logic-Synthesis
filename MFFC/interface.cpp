@@ -78,6 +78,7 @@ TruthTable BlifBooleanNet::truthTable() const {
     for (int j = 0; j < nInputs; ++j) {
         table.getName(j) = net->inputs[j];
     }
+    table.outName = auxnd->name;
 
     return table;
 }
@@ -128,6 +129,36 @@ BlifBooleanNet BlifBooleanNet::getMFFC(int minInput,
     searchMFFC(net, fs, minInput, maxInput);
     fs.close();
     return BlifBooleanNet(fname);
+}
+
+int BlifBooleanNet::nOutputs() const {
+    return net->noutputs;
+}
+
+std::set<std::string> BlifBooleanNet::inputNodeSet() const {
+    std::set<std::string> s;
+    for (int i = 0; i < net->ninputs; ++i) {
+        s.insert(net->inputs[i]);
+    }
+    return s;
+}
+
+std::set<std::string> BlifBooleanNet::outputNodeSet() const {
+    std::set<std::string> s;
+    for (int i = 0; i < net->noutputs; ++i) {
+        s.insert(net->outputs[i]);
+    }
+    return s;
+}
+
+std::set<std::string> BlifBooleanNet::totalNodeSet() const {
+    std::set<std::string> s;
+    BnetNode *node = net->nodes;
+    while (node != NULL) {
+        s.insert(node->name);
+        node = node->next;
+    }
+    return s;
 }
 
 ulli power2(int power) {

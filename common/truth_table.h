@@ -80,8 +80,10 @@ public:
     std::string& getName(int i);
     void print();
 
+    std::string outName;
 private:
     int inputSize;
+
     std::vector<std::string> name;
     std::vector<BoolVariable> data;
 

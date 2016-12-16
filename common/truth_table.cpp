@@ -70,4 +70,5 @@ void TruthTable::print() {
     cout << endl << "Table: " << endl;
     for (auto& i : this->data)
         cout << (int)i << " ";
+    cout << endl;
 }

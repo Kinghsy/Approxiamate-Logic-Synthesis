@@ -12,6 +12,7 @@
 #include <vector>
 
 #include <truth_table.h>
+#include <set>
 
 class BlifBooleanNet {
     DdManager *ddmanager;
@@ -25,6 +26,11 @@ public:
     const std::string  netName() const;
 
     int nInputs() const;
+    int nOutputs() const;
+
+    std::set<std::string> inputNodeSet() const;
+    std::set<std::string> outputNodeSet() const;
+    std::set<std::string> totalNodeSet() const;
 
     int nodeCount() const;
     int gateCount() const;
