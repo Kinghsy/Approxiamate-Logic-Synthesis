@@ -24,6 +24,7 @@ SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
     btree = unique_ptr<BinaryTree<SearchNodeOpPtr > > (oldTree.clone());
     // FIXME add polymorphic copy constructor
     BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
+    currentDivideRange=0;
     if (tmp!=btree->nullId())
         divideNode=btree->valueOf(findDivideNode());
     currentDivide=1;
@@ -34,6 +35,7 @@ SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
 SearchSpace::SearchSpace(unique_ptr<BinaryTree<SearchNodeOpPtr> > oldTreePtr) {
     btree = move(oldTreePtr);
     BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
+    currentDivideRange=0;
     if (tmp!=btree->nullId())
         divideNode=btree->valueOf(tmp);
     currentDivide=1;

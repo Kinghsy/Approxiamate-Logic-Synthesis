@@ -67,7 +67,8 @@ shared_ptr<BooleanFunction> SearchNodeOp::combineBooleanFunction(BooleanFunction
 tuple<SearchNodeOpPtr, SearchNodeOpPtr, SearchNodeOpPtr>
 SearchNodeOp::divide(int method) {
 
-    SearchNodeOpPtr newNodeOp(new SearchNodeOp(node));
+    SearchNodeOp *newPtr=new SearchNodeOp(node);
+    SearchNodeOpPtr newNodeOp(newPtr);
     tuple<SearchNodePtr, SearchNodePtr, int, int>
             res = node->divide(method);
 
