@@ -102,6 +102,7 @@ tuple<SearchNodePtr,
 
     for (int i = 0; i < inputNum; i++) {
         part[1-(temp%2)][input[i]] = 1;
+        temp = temp / 2;
     }
 
     //std::tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int>
@@ -126,10 +127,10 @@ tuple<SearchNodePtr,
 }
 
 bool SearchNode::isDividable() {
-    if (booleanFunction->isAll1s()) return true;
-    if (booleanFunction->isAll0s()) return true;
-    if (booleanFunction->getInputNum() == 1) return true;
-    return false;
+    if (booleanFunction->isAll1s()) return false;
+    if (booleanFunction->isAll0s()) return false;
+    if (booleanFunction->getInputNum() == 1) return false;
+    return true;
 }
 
 bool SearchNodeOp::isDiviable() {

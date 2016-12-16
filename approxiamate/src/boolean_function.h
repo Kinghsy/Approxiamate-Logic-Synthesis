@@ -80,6 +80,6 @@ public:
 
 };
 
-BooleanFunction initBoolFunc;
+//BooleanFunction initialBoolFunction;
 
 #endif //VE490_BOOLEAN_FUNCTION_H

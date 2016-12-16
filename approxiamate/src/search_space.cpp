@@ -23,18 +23,22 @@ using namespace std;
 SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
     btree = unique_ptr<BinaryTree<SearchNodeOpPtr > > (oldTree.clone());
     // FIXME add polymorphic copy constructor
-    divideNode=btree->valueOf(findDivideNode());
+    BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
+    if (tmp!=btree->nullId())
+        divideNode=btree->valueOf(findDivideNode());
     currentDivide=1;
     if (growAble) currentDivideRange=divideNode->node->getDivideRange();
-    totalError=calculTotalError(initBoolFunc);
+    totalError=calculTotalError();
 }
 
-SearchSpace::SearchSpace(std::unique_ptr<BinaryTree<SearchNodeOpPtr> > oldTreePtr) {
+SearchSpace::SearchSpace(unique_ptr<BinaryTree<SearchNodeOpPtr> > oldTreePtr) {
     btree = move(oldTreePtr);
-    divideNode=btree->valueOf(findDivideNode());
+    BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
+    if (tmp!=btree->nullId())
+        divideNode=btree->valueOf(tmp);
     currentDivide=1;
     if (growAble) currentDivideRange=divideNode->node->getDivideRange();
-    totalError=calculTotalError(initBoolFunc);
+    totalError=calculTotalError();
 }
 
 SearchSpace::SearchSpace() {
@@ -85,8 +89,9 @@ SearchSpacePtr SearchSpace::searchSpaceGenerate(int divideMethod) {
 
     treeNodeID = findDivideNode();
     btree->valueOf(treeNodeID) = newNodeOp;
+    divideNode=newNodeOp;
 
-    SearchSpacePtr newSearchSpace(new SearchSpace(*tmpBTree));
+    SearchSpacePtr newSearchSpace(new SearchSpace(*newBTree));
     return move(newSearchSpace);
 }
 
@@ -101,7 +106,12 @@ BinaryTree<SearchNodeOpPtr>::VertexID_t SearchSpace::findDivideNode() {
         growAble=false;
     else
         growAble=true;
-    return findDivideNodeHelper(node);
+    BinaryTree<SearchNodeOpPtr >::VertexID_t tmp=findDivideNodeHelper(node);
+    if (tmp == btree->nullId())
+        growAble=false;
+    else
+        growAble=true;
+    return tmp;
 }
 
 BinaryTree<SearchNodeOpPtr>::VertexID_t SearchSpace::findDivideNodeHelper(
@@ -117,10 +127,11 @@ BinaryTree<SearchNodeOpPtr>::VertexID_t SearchSpace::findDivideNodeHelper(
     return btree->nullId();
 }
 
-int SearchSpace::calculTotalError(BooleanFunction &initBoolFunc) {
+int SearchSpace::calculTotalError() {//BooleanFunction &initBoolFunc) {
 
     shared_ptr<BooleanFunction> result = calculTotalErrorHelper(btree->root());
-    int sum = initBoolFunc.booleanCompare(*result);
+    int sum = btree->valueOf(btree->root())->node->getBooleanFunction()->booleanCompare(*result);
+    // int sum = initBoolFunc.booleanCompare(*result);
     return sum;
 
 }
@@ -132,7 +143,62 @@ shared_ptr<BooleanFunction> SearchSpace::calculTotalErrorHelper(
         shared_ptr<BooleanFunction> r1 = calculTotalErrorHelper(btree->left(node));
         shared_ptr<BooleanFunction> r2 = calculTotalErrorHelper(btree->right(node));
         shared_ptr<BooleanFunction> res = r1->combine(*r2, btree->valueOf(node)->oper);
+        return res;
     }
 
     return move(btree->valueOf(node)->node->getBooleanFunction());
 }
+
+void SearchSpace::printSearchSpaceHelper(
+        BinaryTree<SearchNodeOpPtr>::VertexID_t node) {
+    SearchNodeOpPtr &nodeOpPtr = btree->valueOf(node);
+    if (btree->hasLeft(node)) {
+        cout << " ( " ;
+        printSearchSpaceHelper(btree->left(node));
+        cout << " ) " ;
+    }
+    if ((!btree->hasLeft(node)) && (!btree->hasRight(node))) {
+        BooleanFunctionPtr bfPtr = btree->valueOf(node)->node->getBooleanFunction();
+        int *portName=bfPtr->getPortName();
+        int size=bfPtr->getPortSize();
+        for (int i = 0; i < size; ++i)
+            if (portName[i] == 1) cout << "P" << i;
+        cout << " [ ";
+        cout << bfPtr->toString();
+        cout << " ] ";
+    } else {
+        switch (btree->valueOf(node)->oper) {
+            case OPERATION_XOR:
+                cout << "xor";
+                break;
+            case OPERATION_OR:
+                cout << "or";
+                break;
+            case OPERATION_AND:
+                cout << "and";
+                break;
+            case OPERATION_DROP:
+                cout << "drop";
+                break;
+            default:
+                cout << "this shou never be run";
+                assert(-1);
+                break;
+        }
+    }
+    if (btree->hasRight(node)) {
+        cout << " ( ";
+        printSearchSpaceHelper(btree->right(node));
+        cout << " ) ";
+    }
+    return ;
+}
+
+void SearchSpace::printSearchSpace() {
+    BinaryTree<SearchNodeOpPtr>::VertexID_t vertexId = btree->root();
+    printSearchSpaceHelper(vertexId);
+    cout << "              totoal error rate: " << getTotalError() <<  " \n";
+
+}
+
+
