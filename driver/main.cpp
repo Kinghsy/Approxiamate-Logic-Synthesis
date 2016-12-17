@@ -48,23 +48,25 @@ public:
 
 int main(int argc, char* agrv[]) {
 
-    string initFileName = "9symml.blif";
+    string base="rfile9";
+    string exten="blif";
+    string initFileName = base+"."+exten;
     BlifBooleanNet rawData(initFileName);
-    string withFileName = "9symml_with.blif";
-    FilenameGenerator fnGen("9symml__",".blif");
+    string withFileName = base +"_with." +exten;
+    FilenameGenerator fnGen(base+"__","."+exten);
 
     while (fnGen.genState() < 100) {
 
         cout << "round " << fnGen.genState() << endl;
         string outFileName = fnGen.generate();
         BlifBooleanNet initNet(initFileName);
-        BlifBooleanNet mffc = initNet.getMFFC(4, 6);
+        BlifBooleanNet mffc = initNet.getMFFC(4, 7);
         string replaceFileName = "mffc.blif";
         TruthTable initMffcTruthTable = mffc.truthTable();
         TruthTable finalMffcTruthTable = writeApproxBlifFileByTruthTable(initMffcTruthTable, withFileName);
         replacePartialBlif(initFileName, replaceFileName, withFileName, outFileName);
         BlifBooleanNet modifiedNet(outFileName);
-        BlifCompareResult r = sampleCompareBlifs(rawData, modifiedNet);
+        BlifCompareResult r = sampleCompareBlifs(rawData, modifiedNet, (1 << 20));
         cout << "    " << rawData.gateCount() << "/" << modifiedNet.gateCount() << endl;
         cout << "    " << r.errorCount << "/" << r.nSamples << endl;
         initFileName=outFileName;
