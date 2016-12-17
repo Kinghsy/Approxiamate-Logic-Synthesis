@@ -13,25 +13,62 @@
 #include "../MFFC/err_asses.h"
 #include "../approxiamate/src/search_method_core.h"
 #include "../blif_replace/blif_replace.h"
+#include "../common/generator.h"
 
 using std::string;
 using std::vector;
 using std::cout;
 
+class FilenameGenerator : public Generator<string> {
+    string base;
+    string exten;
+    int count;
+public:
+    FilenameGenerator(string baseName, string extention) {
+        base = baseName;
+        exten = extention;
+        count = 0;
+    }
+    int genState() {
+        return count;
+    }
+    string generate() override {
+        return (base+std::to_string(count++)+exten);
+    }
+    bool hasEnded() const override {
+        return false;
+    }
+    Generator<string> *clone() const override {
+        assert(0);
+        return nullptr;
+    }
+};
+
+//=======================================================
+
 int main(int argc, char* agrv[]) {
 
     string initFileName = "9symml.blif";
+    BlifBooleanNet rawData(initFileName);
     string withFileName = "9symml_with.blif";
-    string outFileName = "9symml_final.blif";
+    FilenameGenerator fnGen("9symml__",".blif");
 
-    BlifBooleanNet initNet(initFileName);
-    BlifBooleanNet mffc = initNet.getMFFC(4, 6);
-    string replaceFileName = "mffc.blif";
-    TruthTable initMffcTruthTable = mffc.truthTable();
-    TruthTable finalMffcTruthTable = writeApproxBlifFileByTruthTable(initMffcTruthTable, withFileName);
-    replacePartialBlif(initFileName, replaceFileName, withFileName, outFileName);
-    BlifBooleanNet modifiedNet(outFileName);
-    BlifCompareResult r = sampleCompareBlifs(initNet, modifiedNet);
-    cout << initNet.gateCount() << "/" << modifiedNet.gateCount() << endl;
-    cout << r.errorCount << "/" << r.nSamples;
+    while (fnGen.genState() < 100) {
+
+        cout << "round " << fnGen.genState() << endl;
+        string outFileName = fnGen.generate();
+        BlifBooleanNet initNet(initFileName);
+        BlifBooleanNet mffc = initNet.getMFFC(4, 6);
+        string replaceFileName = "mffc.blif";
+        TruthTable initMffcTruthTable = mffc.truthTable();
+        TruthTable finalMffcTruthTable = writeApproxBlifFileByTruthTable(initMffcTruthTable, withFileName);
+        replacePartialBlif(initFileName, replaceFileName, withFileName, outFileName);
+        BlifBooleanNet modifiedNet(outFileName);
+        BlifCompareResult r = sampleCompareBlifs(rawData, modifiedNet);
+        cout << "    " << rawData.gateCount() << "/" << modifiedNet.gateCount() << endl;
+        cout << "    " << r.errorCount << "/" << r.nSamples << endl;
+        initFileName=outFileName;
+
+    }
 }
+
