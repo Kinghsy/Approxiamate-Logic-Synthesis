@@ -11,6 +11,8 @@
 
 #include "../../common/truth_table.h"
 
+#include "../../MFFC/interface.h"
+
 #include <gtest/gtest.h>
 
 TEST(SEARCH_METHOD_CORE_TEST, TC_1) {
@@ -248,4 +250,21 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_6) {
     //std::cin >> ch;
     ASSERT_EQ('y', 'y');
 
+}
+
+TEST(SEARCH_METHOD_CORE_TEST, TC_7) {
+    BlifBooleanNet mffc("mffc.blif");
+    TruthTable truthTable = mffc.truthTable();
+    TruthTable final = calculApproxTruthTable(truthTable);
+    std::cout << "\n";
+    std::cout << "--------initTruthTable---------------\n";
+    truthTable.print();
+    std::cout << "\n";
+    std::cout << "-------------------------------------\n";
+    std::cout << "\n";
+    std::cout << "--------finalTruthTable--------------\n";
+    final.print();
+    std::cout << "\n";
+    std::cout << "-------------------------------------\n";
+    std::cout << "\n";
 }
