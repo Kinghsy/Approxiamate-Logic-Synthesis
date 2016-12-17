@@ -63,7 +63,7 @@ TruthTable writeApproxBlifFileByTruthTable(TruthTable &truthTab, string BlifFile
     }
     ssPtr=wholeSearch.getBestSpace();
     ssPtr->generateBlifFile(BlifFileName, truthTab);
-    ssPtr->printSearchSpace();
+    //ssPtr->printSearchSpace();
     BooleanFunction finalBF(*(ssPtr->getFinalBooleanFuntion()));
     truthTable=finalBF.getTruthTable();
 

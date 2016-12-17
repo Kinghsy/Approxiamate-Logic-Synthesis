@@ -99,9 +99,7 @@ const std::string &BlifBooleanNet::name() const {
 }
 
 int BlifBooleanNet::nodeCount() const {
-    static int count = -1;
-    if (count >= 0) return count;
-    count = 0;
+    int count = 0;
     BnetNode *n = net->nodes;
     while (n != NULL) {
         count++;

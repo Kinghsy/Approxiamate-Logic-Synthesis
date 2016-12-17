@@ -13,11 +13,11 @@
 
 using std::string;
 
-const string statementModel(".model");
-const string statementInputs(".inputs");
-const string statementOutputs(".outputs");
-const string statementNames(".names");
-const string statementEnd(".end");
+const string statementModel("model");
+const string statementInputs("inputs");
+const string statementOutputs("outputs");
+const string statementNames("names");
+const string statementEnd("end");
 const std::regex comment("^#.*");
 
 struct BlifMetaData {
@@ -51,7 +51,7 @@ void replacePartialBlif(const string& source,
     std::set<string> replacedOut = replacedNet.outputNodeSet();
     std::set<string> withIn = withNet.inputNodeSet();
     std::set<string> withOut = withNet.outputNodeSet();
-    if (withOut.size() != withIn.size()) assert(0);
+    if (replacedIn.size() != withIn.size()) assert(0);
     if (!std::is_permutation(
             replacedIn.begin(),
             replacedIn.end(),
@@ -64,6 +64,8 @@ void replacePartialBlif(const string& source,
     // The input nodes must not be removed
     // Output nodes can be removed though
     removeCommon(fsource, fofile, removedNode);
+
+
 
     // Merge the new version:
     std::ifstream fwith(withFile);
@@ -78,7 +80,7 @@ void dumpNodes(std::ifstream &fromFile,
                std::ofstream &toFile) {
     string line;
     bool preserveCurrentline = false;
-    while (!fromFile) {
+    while (fromFile) {
         std::getline(fromFile, line);
         if (!fromFile) return;
         if (line != "") {
@@ -100,14 +102,14 @@ void removeCommon(std::ifstream &ifile,
                   const std::set<string>& nodeList) {
     string line;
     bool preserveCurrentline = true;
-    while (!ifile) {
+    while (ifile) {
         std::getline(ifile, line);
         if (!ifile) return;
         if (line != "") {
             std::vector<string> tokenList = tokenizeLine(line);
             if (tokenList[0] == statementNames) {
                 string& last = tokenList[tokenList.size() - 1];
-                if (nodeList.count(last)) { // if outnode is not deleted
+                if (nodeList.count(last)) { // if outnode is deleted
                     preserveCurrentline = false;
                 } else {
                     preserveCurrentline = true;
