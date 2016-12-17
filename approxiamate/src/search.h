@@ -7,7 +7,7 @@
 
 #include "boolean_function.h"
 #include "conts.h"
-#include "object.h"
+#include "../../common/truth_table.h"
 #include <memory.h>
 
 
@@ -99,6 +99,7 @@ public:
     int getTotalError(); // return the total error.
     void printSearchSpace();
     BooleanFunctionPtr getFinalBooleanFuntion();
+    void generateBlifFile(std::string BlifFileName, TruthTable &TruthTab);
 
 
 private:
@@ -115,6 +116,9 @@ private:
     BooleanFunctionPtr
         calculTotalErrorHelper(BinaryTree<SearchNodeOpPtr>::VertexID_t node);
     void printSearchSpaceHelper(BinaryTree<SearchNodeOpPtr>::VertexID_t node);
+    std::tuple<std::string, BooleanFunctionPtr, int > generateBlifFileHelper(
+            BinaryTree<SearchNodeOpPtr >::VertexID_t node, std::ofstream &BlifFile, TruthTable &TruthTab
+    );
 
     //error
     int totalError; // the total error for this search space

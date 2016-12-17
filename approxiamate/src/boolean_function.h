@@ -5,7 +5,6 @@
 #ifndef VE490_BOOLEAN_FUNCTION_H
 #define VE490_BOOLEAN_FUNCTION_H
 
-#include "object.h"
 #include <memory>
 #include <stdint.h>
 #include "conts.h"

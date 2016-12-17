@@ -12,7 +12,7 @@
 #include "../../common/truth_table.h"
 
 TruthTable calculApproxTruthTable(TruthTable &truthTab);
-void writeBlifFileByGivenTruthTable(const TruthTable &truthTab);
+TruthTable writeApproxBlifFileByTruthTable(TruthTable &truthTab, std::string BlifFileName);
 
 
 #endif //VE490_SEARCH_METHOD_CORE_H

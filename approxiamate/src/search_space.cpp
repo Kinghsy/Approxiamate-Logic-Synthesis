@@ -5,6 +5,8 @@
 #include "search.h"
 #include "conts.h"
 #include "boolean_function.h"
+#include "../../common/truth_table.h"
+
 
 #include <binary_tree_impl.h>
 #include <tree_impl.h>
@@ -15,8 +17,13 @@
 #include <tuple>
 #include <memory>
 #include <stack>
+#include <fstream>
+#include <ctime>
+#include <string>
 
 using namespace std;
+
+string randString();
 
 //==========Search Space===================
 
@@ -210,3 +217,162 @@ BooleanFunctionPtr SearchSpace::getFinalBooleanFuntion() {
     return calculTotalErrorHelper(btree->root());
 }
 
+void SearchSpace::generateBlifFile(string BlifFileName, TruthTable &TruthTab) {
+    ofstream BlifFile;
+    BlifFile.open(BlifFileName, ios_base::out | ios_base::trunc);
+
+    // the first line
+    BlifFile << "# This is an Blif file that record "
+            << "an approximate logical circuit. Generate time: ";
+    char timeString[100];
+    time_t tt=time(NULL);
+    tm *t=localtime(&tt);
+    sprintf(timeString, "%d-%02d-%02d %02d:%02d:%02d\n",
+           t->tm_year + 1900, t->tm_mon + 1, t->tm_mday,
+           t->tm_hour, t->tm_min, t->tm_sec);
+    BlifFile << timeString;
+
+    // the second line
+    BlifFile << ".model Approximate_Circuit\n";
+
+    // inputs, outputs
+    BlifFile << ".inputs";
+    for (int i = 0; i < TruthTab.numInput(); ++i) BlifFile << " " << TruthTab.getName(i);
+    BlifFile << "\n";
+    BlifFile << ".outputs ";
+    BlifFile << TruthTab.outName << "\n";
+
+    // main context
+    generateBlifFileHelper(btree->root(), BlifFile, TruthTab);
+
+    // ends
+    BlifFile << ".end\n";
+    BlifFile.close();
+    return ;
+}
+
+tuple<string, BooleanFunctionPtr, int > SearchSpace::
+    generateBlifFileHelper(BinaryTree<SearchNodeOpPtr>::VertexID_t node,
+                            ofstream &BlifFile, TruthTable &TruthTab) {
+
+    SearchNodeOpPtr &snOpPtr = btree->valueOf(node);
+    string outName;
+
+    if (!(snOpPtr->isDiviable())) {
+        // reach the lowest level in logical, here is a translate layer,
+        // for example, [0.1]--->[1,1] or [0,1]--->[1,0]
+        // could be more than one inputs, e.g. [00,01,10,11]-->[0,0,0,0]
+        /*if (btree->isRoot(node)) {
+            BlifFile << ".names " << TruthTab.outName << "\n";
+            return make_tuple("", nullptr, 1);
+        }*/
+        BooleanFunctionPtr bfPtr = snOpPtr->node->getBooleanFunction();
+        int portSize=bfPtr->getPortSize();
+        int *portName=bfPtr->getPortName();
+        if ( !(bfPtr->getInputNum()==1) ) {
+            // (all 0s or all 1s) and (inputNum>1)
+            int flag=(bfPtr->isAll1s())? 1:0;
+            int *port=new int[portSize];
+            int num=0;
+            for (int i = 0; i < portSize; ++i)
+                if (portName[i]==1) port[num++]=i;
+
+            string inName1; string inName2;
+            inName1 = TruthTab.getName(port[0]);
+            inName2 = TruthTab.getName(port[1]);
+            for (int i = 2; i < num; ++i) {
+                outName=randString();
+                BlifFile << ".names " << inName1 << " " << inName2 << " " << outName << "\n";
+                if (flag==1) BlifFile << "-- 1" << "\n";
+                inName1=outName;
+                inName2=TruthTab.getName(port[i]);
+            }
+            if (btree->isRoot(node))
+                outName=TruthTab.outName;
+            else
+                outName=randString();
+            BlifFile << ".names " << inName1 << " " << inName2 << " " << outName << "\n";
+            if (flag==1) BlifFile << "-- 1" << "\n";
+            delete[] port;
+        } else {
+            //inputNum == 1
+            for (int i = 0; i < portSize; ++i)
+                if (portName[i]==1) outName=TruthTab.getName(i);
+        }
+        return make_tuple(outName, bfPtr,1);
+    }
+
+
+
+    tuple<string, BooleanFunctionPtr, int > leftNodeInfo =
+            generateBlifFileHelper( btree->left(node), BlifFile, TruthTab);
+    tuple<string, BooleanFunctionPtr, int > rightNodeInfo =
+            generateBlifFileHelper( btree->right(node), BlifFile, TruthTab);
+
+    string leftName;
+    BooleanFunctionPtr leftBFPtr;
+    int leftFlag;
+    tie(leftName, leftBFPtr, leftFlag) = leftNodeInfo;
+    string rightName;
+    BooleanFunctionPtr rightBFPtr;
+    int rightFlag;
+    tie(rightName, rightBFPtr, rightFlag) = rightNodeInfo;
+    if (btree->isRoot(node))
+        outName = TruthTab.outName;
+    else
+        outName = randString();
+    BlifFile << ".names " << leftName << " " << rightName << " " << outName << "\n";
+
+    for (int cases = 0; cases < 4 ; ++cases) {
+        int actualLeftNum = cases / 2;
+        int mappedLeftNum = actualLeftNum;
+        int actualRightNum = cases % 2;
+        int mappedRightNum = actualRightNum;
+        int result;
+        if ( leftFlag == 1 ) {
+            int *truthTable = leftBFPtr->getTruthTable();
+            mappedLeftNum = truthTable[actualLeftNum];
+        }
+        if ( rightFlag == 1 ) {
+            int *truthTable = rightBFPtr->getTruthTable();
+            mappedRightNum = truthTable[actualRightNum];
+        }
+        switch (btree->valueOf(node)->oper) {
+            case OPERATION_AND:
+                result = mappedLeftNum & mappedRightNum;
+                break;
+            case OPERATION_OR:
+                result = mappedLeftNum | mappedRightNum;
+                break;
+            case OPERATION_XOR:
+                result = (mappedLeftNum != mappedRightNum)? 1:0;
+                break;
+            case OPERATION_DROP:
+                result = mappedLeftNum;
+                break;
+            case OPERATION_NONE:
+                assert(0);
+                break;
+            default:
+                break;
+        }
+        if (result == 1)
+            BlifFile << actualLeftNum << actualRightNum << " " << result << "\n";
+    }
+
+    return make_tuple(
+            outName, leftBFPtr->combine(*(rightBFPtr), btree->valueOf(node)->oper ), 0
+    );
+
+}
+
+
+
+//========================================================================
+string randString() {
+    ostringstream sstr;
+    static int number=0;
+    sstr <<  "tmpNode" << number;
+    number++;
+    return sstr.str();
+}
