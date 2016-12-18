@@ -69,6 +69,12 @@ bool SearchSpace::searchSpaceGrow() {
     return true;
 }
 
+bool SearchSpace::isAtLowestLevel() {
+    if (findDivideNode()==btree->nullId())
+        return true;
+    return false;
+}
+
 SearchSpacePtr SearchSpace::searchSpaceGenerate() {
     return searchSpaceGenerate(currentDivide++);
 }
@@ -101,7 +107,7 @@ SearchSpacePtr SearchSpace::searchSpaceGenerate(int divideMethod) {
     divideNode=newNodeOp;
 
     SearchSpacePtr newSearchSpace(new SearchSpace(*newBTree));
-    return move(newSearchSpace);
+    return newSearchSpace;
 }
 
 int SearchSpace::getTotalError() {
@@ -155,7 +161,7 @@ BooleanFunctionPtr SearchSpace::calculTotalErrorHelper(
         return res;
     }
 
-    return move(btree->valueOf(node)->node->getBooleanFunction());
+    return btree->valueOf(node)->node->getBooleanFunction();
 }
 
 void SearchSpace::printSearchSpaceHelper(

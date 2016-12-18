@@ -48,19 +48,19 @@ public:
 
 int main(int argc, char* agrv[]) {
 
-    string base="rfile9";
+    string base="9symml";
     string exten="blif";
     string initFileName = base+"."+exten;
     BlifBooleanNet rawData(initFileName);
     string withFileName = base +"_with." +exten;
     FilenameGenerator fnGen(base+"__","."+exten);
 
-    while (fnGen.genState() < 100) {
+    while (fnGen.genState() < 1) {
 
         cout << "round " << fnGen.genState() << endl;
         string outFileName = fnGen.generate();
         BlifBooleanNet initNet(initFileName);
-        BlifBooleanNet mffc = initNet.getMFFC(4, 7);
+        BlifBooleanNet mffc = initNet.getMFFC(4, 6);
         string replaceFileName = "mffc.blif";
         TruthTable initMffcTruthTable = mffc.truthTable();
         TruthTable finalMffcTruthTable = writeApproxBlifFileByTruthTable(initMffcTruthTable, withFileName);

@@ -100,6 +100,7 @@ public:
     void printSearchSpace();
     BooleanFunctionPtr getFinalBooleanFuntion();
     void generateBlifFile(std::string BlifFileName, TruthTable &TruthTab);
+    bool isAtLowestLevel();
 
 
 private:
@@ -151,6 +152,7 @@ private:
     std::unique_ptr<Tree<SearchSpacePtr>> mtree;
     //SearchSpacePtr currentSearchSpace;    // the current working on search space.
     Tree<SearchSpacePtr>::VertexID_t currentVertexID;
+    SearchSpacePtr recordBestSearchSpacePtr;
 
 };
 

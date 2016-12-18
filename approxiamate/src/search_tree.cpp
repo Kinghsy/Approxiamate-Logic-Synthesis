@@ -21,13 +21,14 @@ using namespace std;
 //=======search tree=========================
 
 SearchTree::SearchTree() {
+    recordBestSearchSpacePtr= nullptr;
     mtree = nullptr;
     currentVertexID = 0;
 }
 
 SearchTree::SearchTree(BooleanFunction &initBoolFunc) {
     BooleanFunctionPtr boolFunc(new BooleanFunction(initBoolFunc));
-    SearchNodePtr initSearchNode(new SearchNode(move(boolFunc)));
+    SearchNodePtr initSearchNode(new SearchNode(boolFunc));
     SearchNode &referInitSearchNode=*initSearchNode;
     SearchNodeOpPtr initSearchNodeOp(new SearchNodeOp(initSearchNode));
     SearchNodeOp &referInitSearchNodeOp=*initSearchNodeOp;
@@ -46,9 +47,9 @@ SearchTree::SearchTree(BooleanFunction &initBoolFunc) {
     mtree = unique_ptr<Tree<SearchSpacePtr>>(
             new MapBasedTree<SearchSpacePtr>(initSearchSpace)
     );
-    // TODO finish the left part of MapBasedTree
-    currentVertexID = mtree -> root();
 
+    currentVertexID = mtree -> root();
+    recordBestSearchSpacePtr= mtree->valueOf(mtree->root());
     //delete bTree;
 }
 
@@ -63,13 +64,24 @@ SearchSpacePtr SearchTree::getRootSpace() {
 SearchSpacePtr SearchTree::getNextSearchSpace() {
     SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
     SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate();
+
     if (newSpace!=nullptr) {
+        if (newSpace->isAtLowestLevel()) {
+            if ((recordBestSearchSpacePtr== nullptr)
+                || (recordBestSearchSpacePtr == mtree->valueOf(mtree->root()))
+                || (newSpace->getTotalError() < recordBestSearchSpacePtr->getTotalError()))
+                recordBestSearchSpacePtr = newSpace;
+        }
         mtree->addAsChildren(currentVertexID, newSpace);
         vector<Tree<SearchSpacePtr>::VertexID_t > vec=mtree->getChild(currentVertexID);
         currentVertexID = *(vec.end()-1);
     } else {
         if (mtree->isRoot(currentVertexID)) return nullptr;
-        currentVertexID=mtree->getParent(currentVertexID);
+        Tree<SearchSpace>::VertexID_t tmpID;
+        tmpID=mtree->getParent(currentVertexID);
+        mtree->valueOf(currentVertexID)= nullptr;
+        mtree->chopSubTree(currentVertexID);
+        currentVertexID=tmpID;
         return getNextSearchSpace();
     }
     return newSpace;
@@ -88,8 +100,9 @@ SearchSpacePtr SearchTree::getCurrentSearchSpace() {
 
 SearchSpace& SearchTree::getMinTotalError() {
 
-    SearchSpacePtr res = getMinTotalErrorHelper(mtree->root());
-    return *res;
+    //SearchSpacePtr res = getMinTotalErrorHelper(mtree->root());
+    //return *res;
+    return (*recordBestSearchSpacePtr);
 
 }
 
@@ -109,7 +122,8 @@ SearchTree::getMinTotalErrorHelper(Tree<SearchSpacePtr >::VertexID_t node) {
 }
 
 SearchSpacePtr SearchTree::getBestSpace() {
-    return getBestSpaceHelper(mtree->root());
+    return recordBestSearchSpacePtr;
+    //return getBestSpaceHelper(mtree->root());
 }
 
 SearchSpacePtr SearchTree::getBestSpaceHelper(Tree<SearchSpacePtr>::VertexID_t node) {
