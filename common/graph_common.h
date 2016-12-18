@@ -14,7 +14,7 @@ class BinaryTree :
 {
 public:
     virtual BinaryTree* clone() = 0;
-    ~BinaryTree() {};
+    virtual ~BinaryTree() {};
     // FIXME Add copy constructor
 };
 
@@ -35,7 +35,7 @@ class Tree :
 {
 public:
     virtual Tree* clone() = 0;
-    ~Tree() {};
+    virtual ~Tree() {};
     // FIXME Add copy constructor
 
 };

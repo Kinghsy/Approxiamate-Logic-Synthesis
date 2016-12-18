@@ -41,6 +41,10 @@ public:
         this->r = r.id;
     }
 
+    ~MapBasedTree() {
+        chopSubTree(root());
+    }
+
     VertexData &valueOf(const NodeID &id) override {
         Node& n = nodeTable.at(id);
         return n.data;
