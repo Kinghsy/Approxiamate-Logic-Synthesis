@@ -34,6 +34,7 @@ SearchNode::SearchNode(BooleanFunctionPtr ptr) {
 }
 
 SearchNode::~SearchNode() {
+    booleanFunction.reset();
     return ;
 }
 
@@ -153,5 +154,6 @@ SearchNodeOp::SearchNodeOp(SearchNodePtr nd) {
 }
 
 SearchNodeOp::~SearchNodeOp() {
+    node.reset();
     return ;
 }

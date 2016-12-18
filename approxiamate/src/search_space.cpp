@@ -60,7 +60,18 @@ SearchSpace::SearchSpace() {
 }
 
 SearchSpace::~SearchSpace() {
+    clearData(btree->root());
+    btree.reset();
+    divideNode.reset();
     return ;
+}
+
+void SearchSpace::clearData(BinaryTree<SearchNodeOpPtr>::VertexID_t node) {
+    if (btree->hasLeft(node))
+        clearData(btree->left(node));
+    if (btree->hasRight(node))
+        clearData(btree->right(node));
+    btree->valueOf(node).reset();
 }
 
 bool SearchSpace::searchSpaceGrow() {

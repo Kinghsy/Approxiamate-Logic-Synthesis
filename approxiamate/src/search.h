@@ -104,6 +104,9 @@ public:
 
 
 private:
+
+    void clearData(BinaryTree<SearchNodeOpPtr>::VertexID_t node);
+
     std::unique_ptr<BinaryTree<SearchNodeOpPtr > > btree;
     SearchNodeOpPtr divideNode;   // which node is to divide.
     int currentDivide;        // how is the current node is divided.
@@ -145,6 +148,8 @@ public:
     SearchSpace &getMinTotalError();
 
 private:
+
+    void clearData(Tree<SearchSpacePtr>::VertexID_t node);
 
     SearchSpacePtr getMinTotalErrorHelper(Tree<SearchSpacePtr >::VertexID_t node);
     SearchSpacePtr getBestSpaceHelper(Tree<SearchSpacePtr>::VertexID_t node);

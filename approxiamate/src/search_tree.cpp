@@ -54,6 +54,19 @@ SearchTree::SearchTree(BooleanFunction &initBoolFunc) {
 }
 
 SearchTree::~SearchTree() {
+    clearData(mtree->root());
+    mtree.reset();
+    recordBestSearchSpacePtr.reset();
+    return ;
+}
+
+void SearchTree::clearData(Tree<SearchSpacePtr>::VertexID_t node) {
+    vector<Tree<SearchSpacePtr>::VertexID_t > vec;
+    vec = mtree->getChild(node);
+    if (!vec.empty())
+        for (auto iter = vec.begin(); iter != vec.end() ; ++iter)
+            clearData(node);
+    mtree->valueOf(node).reset();
     return ;
 }
 
@@ -79,7 +92,7 @@ SearchSpacePtr SearchTree::getNextSearchSpace() {
         if (mtree->isRoot(currentVertexID)) return nullptr;
         Tree<SearchSpace>::VertexID_t tmpID;
         tmpID=mtree->getParent(currentVertexID);
-        mtree->valueOf(currentVertexID)= nullptr;
+        mtree->valueOf(currentVertexID).reset();
         mtree->chopSubTree(currentVertexID);
         currentVertexID=tmpID;
         return getNextSearchSpace();

@@ -246,6 +246,7 @@ BooleanFunctionPtr BooleanFunction::combine(BooleanFunction &b, const int oper) 
         newPortName[i] = (this->portName[i]) | (b.portName[i]);
     BooleanFunctionPtr pp(new BooleanFunction(newPortName, this->portSize, result));
 
+    delete[] digNum;
     delete[] newPortName;
     delete[] result;
     delete[] loca;
