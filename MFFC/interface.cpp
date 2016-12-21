@@ -83,7 +83,8 @@ TruthTable BlifBooleanNet::truthTable() const {
     return table;
 }
 
-int BlifBooleanNet::evalAt(const std::vector<int> &v) const {
+int BlifBooleanNet::evalAt(const std::vector<int> &v,
+                           const std::string& name) const {
     if (v.size() != net->ninputs)
         assert(0);
     BnetNode *auxnd;
@@ -157,6 +158,21 @@ std::set<std::string> BlifBooleanNet::totalNodeSet() const {
         node = node->next;
     }
     return s;
+}
+
+std::vector<int> BlifBooleanNet::evalAllOutputAt(const std::vector<int> &v) const {
+    if (v.size() != net->ninputs)
+        assert(0);
+    std::vector<int> out;
+    for (int i = 0; i < net->noutputs; ++i) {
+        BnetNode *auxnd;
+        st_lookup(net->hash, net->outputs[i], &auxnd);
+        DdNode *ddnode_pt = auxnd->dd;
+        int n = (Cudd_ReadOne(ddmanager)
+                 == Cudd_Eval(ddmanager, ddnode_pt, (int *) (v.data())));
+        out.push_back(n);
+    }
+    return out;
 }
 
 ulli power2(int power) {

@@ -48,10 +48,11 @@ public:
 
 int main(int argc, char* agrv[]) {
 
-    string base="rfile9";
+    string base="c880";
     string exten="blif";
     string initFileName = base+"."+exten;
     BlifBooleanNet rawData(initFileName);
+    cout << rawData.name() << " " << rawData.nInputs() << " " << rawData.nOutputs() << endl;
     string withFileName = base +"_with." +exten;
     FilenameGenerator fnGen(base+"__","."+exten);
 
@@ -60,14 +61,18 @@ int main(int argc, char* agrv[]) {
         cout << "round " << fnGen.genState() << endl;
         string outFileName = fnGen.generate();
         BlifBooleanNet initNet(initFileName);
-        BlifBooleanNet mffc = initNet.getMFFC(4, 7);
+        BlifBooleanNet mffc = initNet.getMFFC(4, 6);
+        cout << "MFFC inputs: " << mffc.nInputs() << endl;
         string replaceFileName = "mffc.blif";
         TruthTable initMffcTruthTable = mffc.truthTable();
         TruthTable finalMffcTruthTable = writeApproxBlifFileByTruthTable(initMffcTruthTable, withFileName);
-        replacePartialBlif(initFileName, replaceFileName, withFileName, outFileName);
+        replacePartialBlif(initFileName,
+                           replaceFileName,
+                           withFileName,
+                           outFileName);
         BlifBooleanNet modifiedNet(outFileName);
         BlifCompareResult r = sampleCompareBlifs(rawData, modifiedNet, (1 << 20));
-        cout << "    " << rawData.gateCount() << "/" << modifiedNet.gateCount() << endl;
+        cout << "    " << modifiedNet.gateCount()  << "/" << rawData.gateCount() << endl;
         cout << "    " << r.errorCount << "/" << r.nSamples << endl;
         initFileName=outFileName;
 

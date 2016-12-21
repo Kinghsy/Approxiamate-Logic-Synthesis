@@ -75,9 +75,16 @@ BlifCompareResult sampleCompareBlifs(const BlifBooleanNet &model,
         for (int j = 0; j < v.size(); ++j) {
             v.at(j) = std::rand() & 1;
         }
-        int o1 = model.evalAt(v);
-        int o2 = compared.evalAt(v);
-        if (o1 != o2) r.errorCount++;
+        int n = model.nOutputs();
+        if (n <= 1) {
+            int o1 = model.evalAt(v);
+            int o2 = compared.evalAt(v);
+            if (o1 != o2) r.errorCount++;
+        } else {
+            vector<int> v1 = model.evalAllOutputAt(v);
+            vector<int> v2 = compared.evalAllOutputAt(v);
+            if (v1 != v2) r.errorCount++;
+        }
     }
     return r;
 }

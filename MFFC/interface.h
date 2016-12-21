@@ -40,7 +40,10 @@ public:
     BlifBooleanNet getMFFC(int minInput,
                            int maxInput) const;
 
-    int evalAt(const std::vector<int>& v) const;
+    int evalAt(const std::vector<int>& v,
+               const std::string& node = "") const;
+
+    std::vector<int> evalAllOutputAt(const std::vector<int>& v) const;
 
     ~BlifBooleanNet();
 };
