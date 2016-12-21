@@ -27,7 +27,9 @@ TruthTable calculApproxTruthTable(TruthTable &truthTab) {
     delete[] truthTable;
 
     SearchSpacePtr ssPtr;
+    wholeSearch.getRootSpace()->printSearchSpace(); //===================
     while ((ssPtr=wholeSearch.getNextSearchSpace())!= nullptr) {
+        ssPtr->printSearchSpace(); //=========================
     }
     ssPtr=wholeSearch.getBestSpace();
     BooleanFunction finalBF(*(ssPtr->getFinalBooleanFuntion()));
