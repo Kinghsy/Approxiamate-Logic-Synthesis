@@ -10,7 +10,6 @@
 #include <cassert>
 #include <ctime>
 #include <sys/timeb.h>
-#include "queue.h"
 #include "basics.h"
 #include "bnet.h"
 

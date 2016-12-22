@@ -23,7 +23,6 @@ set(SOURCE_FILES
 
 set(SOURCE_LIB
         basics.cpp basics.h
-        queue.cpp queue.h
         bnet.cpp bnet.h
         ntr.cpp ntr.h
         cudd_build_v2.cpp cudd_build_v2.h
