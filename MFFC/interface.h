@@ -17,6 +17,10 @@
 
 
 class BlifBooleanNet {
+public:
+    typedef std::string BnetNodeID;
+
+private:
     DdManager *ddmanager;
     BnetNetwork *net;
     std::string filename;
@@ -26,10 +30,12 @@ class BlifBooleanNet {
     mutable Memorized<std::set<string> > inputNodes;
     mutable Memorized<std::set<string> > outputNodes;
     mutable Memorized<std::set<string> > totalNodes;
+    mutable Memorized<std::vector<string> > topSortedNodes;
 
     BnetNode* getNodeByName(const std::string& name);
 
 public:
+
     BlifBooleanNet(const std::string& file);
 
     const std::string& name() const;
@@ -46,6 +52,8 @@ public:
     int gateCount() const;
 
     TruthTable truthTable() const;
+
+    const std::vector<string>& topologicalSort();
 
     BlifBooleanNet getMFFC(int minInput,
                            int maxInput) const;

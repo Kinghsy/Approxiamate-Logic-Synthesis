@@ -18,7 +18,6 @@ link_directories("../lib/cudd-2.5.0/mtr")
 
 set(SOURCE_FILES
         main.cpp
-        searchMFFC.cpp searchMFFC.h
         )
 
 set(SOURCE_LIB
@@ -32,14 +31,16 @@ add_library(mffc_static ${SOURCE_LIB})
 
 add_library(mffc ${SOURCE_LIB}
         interface.cpp interface.h
+        net_algorithms.cpp
         err_asses.cpp err_asses.h
         searchMFFC.cpp searchMFFC.h
         )
 
-add_executable(mffc_test ${SOURCE_FILES})
+add_executable(mffc_test
+        ${SOURCE_FILES})
 
 target_link_libraries(mffc_test
-        common
-        mffc_static dddmp cudd mtr st util epd
+        mffc common
+        dddmp cudd mtr st util epd
         dl readline termcap pthread rt)
 #add_subdirectory(testcase)
