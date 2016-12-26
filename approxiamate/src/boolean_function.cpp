@@ -159,7 +159,7 @@ int *BooleanFunction::getTruthTable() {
 BooleanFunctionPtr BooleanFunction::copy() {
     BooleanFunctionPtr pp (new BooleanFunction(
             this->portName, this->portSize, this->truthTable));
-    return move(pp);
+    return pp;
 }
 
 KMapPtr BooleanFunction::getKMap(int *portPart1, int *portPart2) {
@@ -246,17 +246,18 @@ BooleanFunctionPtr BooleanFunction::combine(BooleanFunction &b, const int oper) 
         newPortName[i] = (this->portName[i]) | (b.portName[i]);
     BooleanFunctionPtr pp(new BooleanFunction(newPortName, this->portSize, result));
 
+    delete[] digNum;
     delete[] newPortName;
     delete[] result;
     delete[] loca;
 
-    return (move(pp));
+    return (pp);
 }
 
 tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::divide(int *portPart1,
                                                                                         int *portPart2) {
 
-    KMapPtr kmap=std::move( this->getKMap(portPart1, portPart2) );
+    KMapPtr kmap= this->getKMap(portPart1, portPart2) ;
 
     tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> method1=findMinError1(*kmap, portPart1, portPart2); // major rows and all 0s
     tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> method2=findMinError2(*kmap, portPart1, portPart2); // major rows and all 1s
@@ -352,7 +353,7 @@ tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::findMin
     delete[] tempRes2;
     delete[] comTempRes2;
 
-    return make_tuple(move(p1), move(p2), error, OPERATION_DROP);
+    return make_tuple(p1, p2, error, OPERATION_DROP);
 
 };
 
@@ -477,11 +478,11 @@ std::tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int>
     delete[] tempColumn;
 
     if (mode==METHOD_1)
-        return make_tuple(move(p1), move(p2), minErr, OPERATION_AND);
+        return make_tuple(p1, p2, minErr, OPERATION_AND);
     else if (mode==METHOD_2)
-        return make_tuple(move(p1), move(p2), minErr, OPERATION_OR);
+        return make_tuple(p1, p2, minErr, OPERATION_OR);
     else // METHOD_3
-        return make_tuple(move(p1), move(p2), minErr, OPERATION_XOR);
+        return make_tuple(p1, p2, minErr, OPERATION_XOR);
 
 }
 

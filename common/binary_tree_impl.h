@@ -48,6 +48,10 @@ public:
         this->r = r.id;
     }
 
+    ~MapBasedBinaryTree() {
+        //chopSubTree(r);
+    }
+
     VertexData &valueOf(const NodeID &id) override {
         Node& n = nodeTable.at(id);
         return n.data;
@@ -105,7 +109,26 @@ public:
     }
 
     void chopSubTree(const NodeID &id) override {
-        assert(0);
+        if (id==nullId()) assert(0);
+        Node &n= nodeTable.at(id);
+        if (hasLeft(id)) chopSubTree(left(id));
+        if (hasRight(id)) chopSubTree(right(id));
+
+        if (isRoot(id)) {
+            r = nullId();
+        } else {
+            if ( (hasLeft(getParent(id))) && (left(getParent(id))==id)) {
+                Node &par = nodeTable.at( getParent(id) );
+                par.left=nullId();
+            }
+            if ( (hasRight(getParent(id))) && (right(getParent(id))==id)) {
+                Node &par = nodeTable.at( getParent(id) );
+                par.right=nullId();
+            }
+        }
+        auto iter = nodeTable.find(id);
+        nodeTable.erase(iter);
+        return ;
         // FIXME: Unused for now
     }
 

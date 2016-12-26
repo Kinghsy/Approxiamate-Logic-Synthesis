@@ -48,7 +48,7 @@ public:
 
 int main(int argc, char* agrv[]) {
 
-    string base="c880";
+    string base="9symml";
     string exten="blif";
     string initFileName = base+"."+exten;
     BlifBooleanNet rawData(initFileName);
@@ -58,7 +58,7 @@ int main(int argc, char* agrv[]) {
     rawData.exportGraphViz(base + ".viz");
 
 
-    while (fnGen.genState() < 100) {
+    while (fnGen.genState() < 1) {
 
         cout << "round " << fnGen.genState() << endl;
         string outFileName = fnGen.generate();

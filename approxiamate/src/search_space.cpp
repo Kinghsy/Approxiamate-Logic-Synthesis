@@ -29,7 +29,6 @@ string randString();
 
 SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
     btree = unique_ptr<BinaryTree<SearchNodeOpPtr > > (oldTree.clone());
-    // FIXME add polymorphic copy constructor
     BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
     currentDivideRange=0;
     if (tmp!=btree->nullId())
@@ -60,13 +59,30 @@ SearchSpace::SearchSpace() {
 }
 
 SearchSpace::~SearchSpace() {
+    clearData(btree->root());
+    btree.reset();
+    divideNode.reset();
     return ;
+}
+
+void SearchSpace::clearData(BinaryTree<SearchNodeOpPtr>::VertexID_t node) {
+    if (btree->hasLeft(node))
+        clearData(btree->left(node));
+    if (btree->hasRight(node))
+        clearData(btree->right(node));
+    btree->valueOf(node).reset();
 }
 
 bool SearchSpace::searchSpaceGrow() {
     if (!growAble) return growAble;
     if (currentDivide > currentDivideRange - 2) return false;
     return true;
+}
+
+bool SearchSpace::isAtLowestLevel() {
+    if (findDivideNode()==btree->nullId())
+        return true;
+    return false;
 }
 
 SearchSpacePtr SearchSpace::searchSpaceGenerate() {
@@ -101,7 +117,7 @@ SearchSpacePtr SearchSpace::searchSpaceGenerate(int divideMethod) {
     divideNode=newNodeOp;
 
     SearchSpacePtr newSearchSpace(new SearchSpace(*newBTree));
-    return move(newSearchSpace);
+    return newSearchSpace;
 }
 
 int SearchSpace::getTotalError() {
@@ -155,7 +171,7 @@ BooleanFunctionPtr SearchSpace::calculTotalErrorHelper(
         return res;
     }
 
-    return move(btree->valueOf(node)->node->getBooleanFunction());
+    return btree->valueOf(node)->node->getBooleanFunction();
 }
 
 void SearchSpace::printSearchSpaceHelper(
@@ -372,7 +388,7 @@ tuple<string, BooleanFunctionPtr, int > SearchSpace::
 string randString() {
     ostringstream sstr;
     static int number=0;
-    sstr <<  "tmpNode" << number;
+    sstr <<  "@_@??tmpNode" << number;
     number++;
     return sstr.str();
 }

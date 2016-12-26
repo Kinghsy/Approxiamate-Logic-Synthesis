@@ -26,7 +26,7 @@ SearchNode::SearchNode() {
 }
 
 SearchNode::SearchNode(BooleanFunctionPtr ptr) {
-    booleanFunction=move(ptr);
+    booleanFunction=ptr;
     bestLocalErr=MAXINT;
     bestOper=OPERATION_NONE;
     bestDivide=0;
@@ -34,6 +34,7 @@ SearchNode::SearchNode(BooleanFunctionPtr ptr) {
 }
 
 SearchNode::~SearchNode() {
+    booleanFunction.reset();
     return ;
 }
 
@@ -50,18 +51,18 @@ bool SearchNode::divideAble(int divideMethod) {
             (divideMethod <= (1 << booleanFunction->getInputNum() - 2)) );
 }
 
-shared_ptr<BooleanFunction> SearchNode::getBooleanFunction() {
-    return move(booleanFunction->copy());
+BooleanFunctionPtr SearchNode::getBooleanFunction() {
+    return booleanFunction->copy();
 }
 
-shared_ptr<BooleanFunction> SearchNode::combineBooleanFunction(BooleanFunctionPtr p1,
+BooleanFunctionPtr SearchNode::combineBooleanFunction(BooleanFunctionPtr p1,
                                                                BooleanFunctionPtr p2, int oper) {
-    return move(p1->combine(*p2, oper));
+    return p1->combine(*p2, oper);
 }
 
-shared_ptr<BooleanFunction> SearchNodeOp::combineBooleanFunction(BooleanFunctionPtr p1,
+BooleanFunctionPtr SearchNodeOp::combineBooleanFunction(BooleanFunctionPtr p1,
                                                                BooleanFunctionPtr p2) {
-    return move(node->combineBooleanFunction(move(p1), move(p2), oper));
+    return node->combineBooleanFunction(p1, p2, oper);
 }
 
 tuple<SearchNodeOpPtr, SearchNodeOpPtr, SearchNodeOpPtr>
@@ -153,5 +154,6 @@ SearchNodeOp::SearchNodeOp(SearchNodePtr nd) {
 }
 
 SearchNodeOp::~SearchNodeOp() {
+    node.reset();
     return ;
 }
