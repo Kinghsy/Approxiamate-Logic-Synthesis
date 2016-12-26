@@ -261,7 +261,9 @@ void BlifBooleanNet::exportGraphViz(const std::string &fname) const {
 }
 
 BnetNode *BlifBooleanNet::getNodeByName(const std::string &name) {
-    assert(0);
+    BnetNode* n = nullptr;
+    st_lookup(net->hash, (void*)name.c_str(), &n);
+    return n;
 }
 
 ulli power2(int power) {
