@@ -12,7 +12,6 @@
 #include <cassert>
 #include <ctime>
 #include <sys/timeb.h>
-#include "queue.h"
 #include "bnet.h"
 #include "basics.h"
 
