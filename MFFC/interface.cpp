@@ -44,6 +44,11 @@ BlifBooleanNet::BlifBooleanNet(const std::string &file) {
     if (ddmanager == NULL) exit(-2);
     cudd_build_v2(net, &ddmanager, file.c_str(), BNET_GLOBAL_DD);
 
+    assert(net->noutputs == net->npos);
+    assert(net->ninputs == net->npis);
+
+    prepareDepths();
+
     fclose(fp);
 }
 
@@ -260,11 +265,54 @@ void BlifBooleanNet::exportGraphViz(const std::string &fname) const {
     ofile << "}" << endl;
 }
 
-BnetNode *BlifBooleanNet::getNodeByName(const std::string &name) {
+BnetNode *BlifBooleanNet::getNodeByName(const std::string &name) const{
     BnetNode* n = nullptr;
     st_lookup(net->hash, (void*)name.c_str(), &n);
     return n;
 }
+
+void BlifBooleanNet::exportFfcToBlifFile(const BlifBooleanNet::FFC &ffc,
+                                         const std::string &filename) const {
+    ofstream fout(filename);
+    if (!fout) assert(0);
+
+    const std::string& cnode = ffc.name;
+    const std::set<BnetNodeID>& ffcNode = ffc.nodeSet;
+
+    const BnetNode *nd = getNodeByName(cnode);
+
+    fout << "# ffc of " << ffc.name << "@" << net->name << endl;
+    fout << "# inputDepth = " << ffc.depth2Input << endl;
+    fout << "# outputDepth = " << ffc.depth2Output << endl;
+    fout << "# number of inputs = " << ffc.inputNode.size() << endl;
+    fout << "# total number of nodes = " << ffc.nodeSet.size() << endl;
+    fout << endl;
+    fout << ".model bigNode" << endl;
+    fout << ".inputs ";
+    for(auto nodeId : ffc.inputNode) fout << nodeId  << " ";
+    fout << endl;
+    fout << ".outputs " << cnode << endl;
+
+    for(auto itrs = ffcNode.begin(); itrs != ffcNode.end(); itrs++) {
+        BnetNodeID node = *itrs;
+        BnetNode *tmp = getNodeByName(node);
+        if(tmp->type == BNET_INPUT_NODE) continue;
+        fout << ".names ";
+        for(int i = 0 ; i < tmp->ninp; i++)
+            fout << tmp->inputs[i] << " ";
+        fout << node << endl;
+        BnetTabline *t = tmp->f;
+        while(t != NULL) {
+            if(t->values != NULL)
+                fout << t->values << " " << 1 - tmp->polarity << endl;
+            else
+                fout << 1 - tmp->polarity << endl;
+            t = t->next;
+        }
+    }
+    fout << ".end" << endl;
+}
+
 
 ulli power2(int power) {
     return ((ulli)1) << power;
@@ -272,7 +320,6 @@ ulli power2(int power) {
 
 void getBits(ulli n, int* vec, int digit) {
     for (int i = 0; i < digit; ++i) {
-
         if ((n & power2(i)) > 0)
             vec[i] = 1;
         else
