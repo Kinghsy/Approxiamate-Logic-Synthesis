@@ -29,7 +29,6 @@ string randString();
 
 SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
     btree = unique_ptr<BinaryTree<SearchNodeOpPtr > > (oldTree.clone());
-    // FIXME add polymorphic copy constructor
     BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
     currentDivideRange=0;
     if (tmp!=btree->nullId())
@@ -389,7 +388,7 @@ tuple<string, BooleanFunctionPtr, int > SearchSpace::
 string randString() {
     ostringstream sstr;
     static int number=0;
-    sstr <<  "tmpNode" << number;
+    sstr <<  "@_@??tmpNode" << number;
     number++;
     return sstr.str();
 }

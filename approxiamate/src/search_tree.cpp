@@ -41,16 +41,12 @@ SearchTree::SearchTree(BooleanFunction &initBoolFunc) {
     );
     SearchSpace &referInitSearchSpace = *initSearchSpace;
 
-    /*SearchSpacePtr initSearchSpace = shared_ptr<SearchNodeOpPtr>( new SearchNodeOp (
-            unique_ptr<BinaryTree<SearchNodeOpPtr> >(new MapBasedBinaryTree<SearchNodeOpPtr>(initSearchNodeOp) )
-    ));*/
     mtree = unique_ptr<Tree<SearchSpacePtr>>(
             new MapBasedTree<SearchSpacePtr>(initSearchSpace)
     );
 
     currentVertexID = mtree -> root();
-    recordBestSearchSpacePtr= mtree->valueOf(mtree->root());
-    //delete bTree;
+    recordBestSearchSpacePtr = mtree->valueOf(mtree->root());
 }
 
 SearchTree::~SearchTree() {
@@ -85,9 +81,16 @@ SearchSpacePtr SearchTree::getNextSearchSpace() {
                 || (newSpace->getTotalError() < recordBestSearchSpacePtr->getTotalError()))
                 recordBestSearchSpacePtr = newSpace;
         }
-        mtree->addAsChildren(currentVertexID, newSpace);
-        vector<Tree<SearchSpacePtr>::VertexID_t > vec=mtree->getChild(currentVertexID);
-        currentVertexID = *(vec.end()-1);
+        if ((recordBestSearchSpacePtr == nullptr) || (recordBestSearchSpacePtr == mtree->valueOf(mtree->root()))
+            || ((recordBestSearchSpacePtr != nullptr)
+                && (recordBestSearchSpacePtr->getTotalError() >= newSpace->getTotalError()))
+            || ((recordBestSearchSpacePtr != mtree->valueOf(mtree->root()))
+                && (recordBestSearchSpacePtr->getTotalError() >= newSpace->getTotalError())))
+         {
+                mtree->addAsChildren(currentVertexID, newSpace);
+                vector<Tree<SearchSpacePtr>::VertexID_t > vec=mtree->getChild(currentVertexID);
+                currentVertexID = *(vec.end()-1);
+        }
     } else {
         if (mtree->isRoot(currentVertexID)) return nullptr;
         Tree<SearchSpace>::VertexID_t tmpID;
