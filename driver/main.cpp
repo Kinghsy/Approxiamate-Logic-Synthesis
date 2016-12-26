@@ -52,9 +52,11 @@ int main(int argc, char* agrv[]) {
     string exten="blif";
     string initFileName = base+"."+exten;
     BlifBooleanNet rawData(initFileName);
-    cout << rawData.name() << " " << rawData.nInputs() << " " << rawData.nOutputs() << endl;
+    cout << rawData.name() << " " << rawData.gateCount() << " " << rawData.nInputs() << " " << rawData.nOutputs() << endl;
     string withFileName = base +"_with." +exten;
     FilenameGenerator fnGen(base+"__","."+exten);
+    rawData.exportGraphViz(base + ".viz");
+
 
     while (fnGen.genState() < 100) {
 
@@ -77,5 +79,6 @@ int main(int argc, char* agrv[]) {
         initFileName=outFileName;
 
     }
+
 }
 

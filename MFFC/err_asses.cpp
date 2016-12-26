@@ -4,29 +4,10 @@
 
 #include "err_asses.h"
 #include "interface.h"
-#include "print_truth_table.h"
 #include <string>
 
 BlifCompareResult compareBlifFiles(const std::string& model,
                                    const std::string& compared) {
-    string m = model;
-    string c = compared;
-    TruthTable modelTruthTable = getTruthTable(m);
-    TruthTable comparedTruthTable = getTruthTable(c);
-    BlifCompareResult r;
-    if (modelTruthTable.size() != comparedTruthTable.size()) {
-        r.valid = false;
-        r.msg = "Inconsistent size of comparison.";
-        return r;
-    }
-    r.nInputs = modelTruthTable.numInput();
-    r.nSamples = modelTruthTable.size();
-    for (int i = 0; i < r.nSamples ; ++i) {
-        if ((int)(modelTruthTable[i]) != (int)(comparedTruthTable[i]) ) {
-            r.errorCount++;
-        }
-    }
-    return r;
 }
 
 BlifCompareResult compareBlifs(const BlifBooleanNet &model,

@@ -19,7 +19,7 @@ link_directories("../lib/cudd-2.5.0/mtr")
 set(SOURCE_FILES
         main.cpp
         searchMFFC.cpp searchMFFC.h
-        print_truth_table.cpp print_truth_table.h)
+        )
 
 set(SOURCE_LIB
         basics.cpp basics.h
@@ -34,7 +34,7 @@ add_library(mffc ${SOURCE_LIB}
         interface.cpp interface.h
         err_asses.cpp err_asses.h
         searchMFFC.cpp searchMFFC.h
-        print_truth_table.cpp print_truth_table.h)
+        )
 
 add_executable(mffc_test ${SOURCE_FILES})
 

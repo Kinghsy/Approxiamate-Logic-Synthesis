@@ -7,6 +7,7 @@ add_library(common
 
 add_executable(template_pseudo
         dummy.cpp
+        memorize.h
         graph_interface.h graph_common.h
         binary_tree_impl.h
         tree_impl.h)

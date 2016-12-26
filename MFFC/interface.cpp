@@ -4,10 +4,10 @@
 #include <vector>
 #include "bnet.h"
 #include "searchMFFC.h"
-#include "print_truth_table.h"
 
 #include <truth_table.h>
 #include "interface.h"
+#include "cudd_build_v2.h"
 
 using namespace std;
 
@@ -100,19 +100,25 @@ const std::string &BlifBooleanNet::name() const {
 }
 
 int BlifBooleanNet::nodeCount() const {
+    if (nNode.isValid())
+        return nNode.get();
     int count = 0;
     BnetNode *n = net->nodes;
     while (n != NULL) {
         count++;
         n = n->next;
     }
+    nNode.setData(count);
     return count;
 }
 
 int BlifBooleanNet::gateCount() const {
+    if (nGates.isValid())
+        return nGates.get();
     int c = nodeCount();
     int n = c - net->npis - net->npos;
-    return n >= 0 ? n : 0;
+    nGates.setData(n >= 0 ? n : 0);
+    return nGates.get();
 }
 
 const std::string BlifBooleanNet::netName() const {
@@ -135,28 +141,37 @@ int BlifBooleanNet::nOutputs() const {
 }
 
 std::set<std::string> BlifBooleanNet::inputNodeSet() const {
+    if (inputNodes.isValid())
+        return inputNodes.get();
     std::set<std::string> s;
     for (int i = 0; i < net->ninputs; ++i) {
         s.insert(net->inputs[i]);
     }
+    inputNodes.setData(s);
     return s;
 }
 
 std::set<std::string> BlifBooleanNet::outputNodeSet() const {
+    if (outputNodes.isValid())
+        return outputNodes.get();
     std::set<std::string> s;
     for (int i = 0; i < net->noutputs; ++i) {
         s.insert(net->outputs[i]);
     }
+    outputNodes.setData(s);
     return s;
 }
 
 std::set<std::string> BlifBooleanNet::totalNodeSet() const {
+    if (totalNodes.isValid())
+        return totalNodes.get();
     std::set<std::string> s;
     BnetNode *node = net->nodes;
     while (node != NULL) {
         s.insert(node->name);
         node = node->next;
     }
+    totalNodes.setData(s);
     return s;
 }
 
@@ -173,6 +188,80 @@ std::vector<int> BlifBooleanNet::evalAllOutputAt(const std::vector<int> &v) cons
         out.push_back(n);
     }
     return out;
+}
+
+void BlifBooleanNet::exportBlifToFile(const std::string &fname) const {
+    FILE* fp = fopen(fname.c_str(), "w+");
+    BnetNode *nd;
+    BnetTabline *tl;
+    int i;
+
+    if (net == NULL) return;
+
+    (void) fprintf(fp,".model %s\n", net->name);
+    (void) fprintf(fp,".inputs ");
+    for(i = 0; i < net->npis; i++)
+        fprintf(fp, "%s ", net->inputs[i]);
+    fprintf(fp, "\n");
+
+    (void) fprintf(fp,".outputs ");
+    for(i = 0; i < net->npos; i++)
+        fprintf(fp, "%s ", net->outputs[i]);
+    fprintf(fp, "\n");
+    nd = net->nodes;
+    while (nd != NULL) {
+        if (nd->type != BNET_INPUT_NODE && nd->type != BNET_PRESENT_STATE_NODE) {
+            (void) fprintf(fp,".names");
+            for (i = 0; i < nd->ninp; i++) {
+                (void) fprintf(fp," %s",nd->inputs[i]);
+            }
+            (void) fprintf(fp," %s\n",nd->name);
+            tl = nd->f;
+            while (tl != NULL) {
+                if (tl->values != NULL) {
+                    (void) fprintf(fp,"%s %d\n",tl->values,
+                                   1 - nd->polarity);
+                } else {
+                    (void) fprintf(fp,"%d\n", 1 - nd->polarity);
+                }
+                tl = tl->next;
+            }
+        }
+        nd = nd->next;
+    }
+    (void) fprintf(fp,".end\n");
+
+    fclose(fp);
+}
+
+void BlifBooleanNet::exportGraphViz(const std::string &fname) const {
+    ofstream ofile(fname);
+    ofile << "digraph " << net->name << "{" << "\n";
+    //ofile << "size =\"4,4\"" << "\n";
+    ofile << "{" << "\n";
+    ofile << "rank = source;" << "\n";
+    for (int i = 0; i < net->ninputs; ++i) {
+        ofile << net->inputs[i] << "  [shape=box,style=filled,color=\".7 .3 1.0\"];" << "\n";
+    }
+    ofile << "}" << "\n";
+    ofile << "{" << "\n";
+    ofile << "rank = sink;" << "\n";
+    for (int i = 0; i < net->noutputs; ++i) {
+        ofile << net->outputs[i] << "  [shape=invtriangle,style=filled,color=\".7 .3 1.0\"];" << "\n";
+    }
+    ofile << "}" << "\n";
+    BnetNode *node = net->nodes;
+    while (node != NULL) {
+        for (int i = 0; i < node->ninp; ++i) {
+            ofile << node->inputs[i] << " -> " << node->name << ";" << "\n";
+        }
+        node = node->next;
+    }
+    ofile << "}" << endl;
+}
+
+BnetNode *BlifBooleanNet::getNodeByName(const std::string &name) {
+    assert(0);
 }
 
 ulli power2(int power) {

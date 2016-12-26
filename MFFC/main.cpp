@@ -11,7 +11,6 @@
 #include <vector>
 #include "bnet.h"
 #include "searchMFFC.h"
-#include "print_truth_table.h"
 
 using namespace std;
 
