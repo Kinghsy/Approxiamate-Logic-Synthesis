@@ -140,7 +140,7 @@ int BlifBooleanNet::nOutputs() const {
     return net->noutputs;
 }
 
-std::set<std::string> BlifBooleanNet::inputNodeSet() const {
+const set<string> & BlifBooleanNet::inputNodeSet() const {
     if (inputNodes.isValid())
         return inputNodes.get();
     std::set<std::string> s;
@@ -148,10 +148,10 @@ std::set<std::string> BlifBooleanNet::inputNodeSet() const {
         s.insert(net->inputs[i]);
     }
     inputNodes.setData(s);
-    return s;
+    return inputNodes.get();
 }
 
-std::set<std::string> BlifBooleanNet::outputNodeSet() const {
+const set<string> & BlifBooleanNet::outputNodeSet() const {
     if (outputNodes.isValid())
         return outputNodes.get();
     std::set<std::string> s;
@@ -159,10 +159,10 @@ std::set<std::string> BlifBooleanNet::outputNodeSet() const {
         s.insert(net->outputs[i]);
     }
     outputNodes.setData(s);
-    return s;
+    return outputNodes.get();
 }
 
-std::set<std::string> BlifBooleanNet::totalNodeSet() const {
+const set<string> & BlifBooleanNet::totalNodeSet() const {
     if (totalNodes.isValid())
         return totalNodes.get();
     std::set<std::string> s;
@@ -172,7 +172,7 @@ std::set<std::string> BlifBooleanNet::totalNodeSet() const {
         node = node->next;
     }
     totalNodes.setData(s);
-    return s;
+    return totalNodes.get();
 }
 
 std::vector<int> BlifBooleanNet::evalAllOutputAt(const std::vector<int> &v) const {

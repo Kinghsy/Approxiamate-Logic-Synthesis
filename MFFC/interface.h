@@ -38,9 +38,9 @@ public:
     int nInputs() const;
     int nOutputs() const;
 
-    std::set<std::string> inputNodeSet() const;
-    std::set<std::string> outputNodeSet() const;
-    std::set<std::string> totalNodeSet() const;
+    const std::set<string> & inputNodeSet() const;
+    const std::set<string> & outputNodeSet() const;
+    const std::set<string> & totalNodeSet() const;
 
     int nodeCount() const;
     int gateCount() const;
