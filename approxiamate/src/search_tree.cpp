@@ -75,18 +75,21 @@ SearchSpacePtr SearchTree::getNextSearchSpace() {
     SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate();
 
     if (newSpace!=nullptr) {
+        bool flag=false;
         if (newSpace->isAtLowestLevel()) {
             if ((recordBestSearchSpacePtr== nullptr)
                 || (recordBestSearchSpacePtr == mtree->valueOf(mtree->root()))
-                || (newSpace->getTotalError() < recordBestSearchSpacePtr->getTotalError()))
-                recordBestSearchSpacePtr = newSpace;
+                || (newSpace->getTotalError() < recordBestSearchSpacePtr->getTotalError())) {
+                    recordBestSearchSpacePtr = newSpace;
+                    flag = true;
+                }
         }
-        if ((recordBestSearchSpacePtr == nullptr) || (recordBestSearchSpacePtr == mtree->valueOf(mtree->root()))
+        if ( flag || (recordBestSearchSpacePtr == nullptr)
+             || (recordBestSearchSpacePtr == mtree->valueOf(mtree->root()))
             || ((recordBestSearchSpacePtr != nullptr)
-                && (recordBestSearchSpacePtr->getTotalError() >= newSpace->getTotalError()))
+                && (recordBestSearchSpacePtr->getTotalError() > newSpace->getTotalError()))
             || ((recordBestSearchSpacePtr != mtree->valueOf(mtree->root()))
-                && (recordBestSearchSpacePtr->getTotalError() >= newSpace->getTotalError())))
-         {
+                && (recordBestSearchSpacePtr->getTotalError() > newSpace->getTotalError()))) {
                 mtree->addAsChildren(currentVertexID, newSpace);
                 vector<Tree<SearchSpacePtr>::VertexID_t > vec=mtree->getChild(currentVertexID);
                 currentVertexID = *(vec.end()-1);

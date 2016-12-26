@@ -18,6 +18,7 @@
 using std::string;
 using std::vector;
 using std::cout;
+using std::set;
 
 class FilenameGenerator : public Generator<string> {
     string base;
@@ -48,23 +49,35 @@ public:
 
 int main(int argc, char* agrv[]) {
 
-    string base="9symml";
+    string base="c880";
     string exten="blif";
+    string vizExten="viz";
+    string pngExten="png";
     string initFileName = base+"."+exten;
     BlifBooleanNet rawData(initFileName);
     cout << rawData.name() << " " << rawData.gateCount() << " " << rawData.nInputs() << " " << rawData.nOutputs() << endl;
     string withFileName = base +"_with." +exten;
     FilenameGenerator fnGen(base+"__","."+exten);
-    rawData.exportGraphViz(base + ".viz");
+    FilenameGenerator gener1(base+"_","_unmodied."+vizExten);
+    FilenameGenerator gener2(base+"_","_modied."+vizExten);
+    FilenameGenerator gener1_(base+"_","_unmodied."+pngExten);
+    FilenameGenerator gener2_(base+"_","_modied."+pngExten);
+    rawData.exportGraphViz(base + "."+vizExten);
+    //system("dot -Tpng -o "+base+"."+pngExten+" < "+base+"."+vizExten);
+    string tmp="dot -Tpng -o "+base+"."+pngExten+" < "+base+"."+vizExten;
+    system(tmp.c_str());
 
-
-    while (fnGen.genState() < 1) {
+    while (fnGen.genState() < 10) {
 
         cout << "round " << fnGen.genState() << endl;
         string outFileName = fnGen.generate();
         BlifBooleanNet initNet(initFileName);
-        BlifBooleanNet mffc = initNet.getMFFC(4, 6);
+        BlifBooleanNet mffc = initNet.getMFFC(4, 9);
         cout << "MFFC inputs: " << mffc.nInputs() << endl;
+        string name1=gener1.generate();
+        initNet.exportGraphVizwithHighlight(name1, mffc.totalNodeSet(), "red");
+        string tmp1="dot -Tpng -o "+gener1_.generate()+" < "+name1;
+        system(tmp1.c_str());
         string replaceFileName = "mffc.blif";
         TruthTable initMffcTruthTable = mffc.truthTable();
         TruthTable finalMffcTruthTable = writeApproxBlifFileByTruthTable(initMffcTruthTable, withFileName);
@@ -72,8 +85,13 @@ int main(int argc, char* agrv[]) {
                            replaceFileName,
                            withFileName,
                            outFileName);
+        BlifBooleanNet withNet(withFileName);
         BlifBooleanNet modifiedNet(outFileName);
         BlifCompareResult r = sampleCompareBlifs(rawData, modifiedNet, (1 << 20));
+        string name2 = gener2.generate();
+        modifiedNet.exportGraphVizwithHighlight(name2, withNet.totalNodeSet(), "cyan");
+        string tmp2="dot -Tpng -o "+gener2_.generate()+" < "+name2;
+        system(tmp2.c_str());
         cout << "    " << modifiedNet.gateCount()  << "/" << rawData.gateCount() << endl;
         cout << "    " << r.errorCount << "/" << r.nSamples << endl;
         initFileName=outFileName;

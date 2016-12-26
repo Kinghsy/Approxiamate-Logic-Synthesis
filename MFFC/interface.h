@@ -65,6 +65,8 @@ public:
     void exportBlifToFile(const std::string& fname) const;
 
     void exportGraphViz(const std::string& fname) const;
+    void exportGraphVizwithHighlight(const std::string& fname, const std::set<std::string >& HLNodes, const std::string color) const;
+
 
     ~BlifBooleanNet();
 };

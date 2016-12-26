@@ -116,7 +116,7 @@ int BlifBooleanNet::gateCount() const {
     if (nGates.isValid())
         return nGates.get();
     int c = nodeCount();
-    int n = c - net->npis - net->npos;
+    int n = c - net->npis ;
     nGates.setData(n >= 0 ? n : 0);
     return nGates.get();
 }
@@ -254,6 +254,45 @@ void BlifBooleanNet::exportGraphViz(const std::string &fname) const {
     while (node != NULL) {
         for (int i = 0; i < node->ninp; ++i) {
             ofile << node->inputs[i] << " -> " << node->name << ";" << "\n";
+        }
+        node = node->next;
+    }
+    ofile << "}" << endl;
+}
+
+void BlifBooleanNet::exportGraphVizwithHighlight(
+        const string& fname, const set<string >& HLNodes, const string color) const {
+    ofstream ofile(fname);
+    ofile << "digraph " << net->name << "{" << "\n";
+    //source nodes
+    ofile << "{" << "\n";
+    ofile << "rank = source;" << "\n";
+    for (int i = 0; i < net->ninputs; ++i) {
+        ofile << net->inputs[i] << "  [shape=box,style=filled,color=green];" << "\n";
+    }
+    ofile << "}" << "\n";
+    //sink nodes
+    ofile << "{" << "\n";
+    ofile << "rank = sink;" << "\n";
+    for (int i = 0; i < net->noutputs; ++i) {
+        ofile << net->outputs[i] << "  [shape=invtriangle,style=filled,color=purple];" << "\n";
+    }
+    ofile << "}" << "\n";
+    //median nodes
+    ofile << "{" << "\n";
+    for (const auto &item : HLNodes) {
+        ofile << item << "  [style=filled,color="<< color <<"];" << "\n";
+    }
+    ofile << "}" << "\n";
+
+    BnetNode *node = net->nodes;
+    while (node != NULL) {
+        for (int i = 0; i < node->ninp; ++i) {
+            ofile << node->inputs[i] << " -> " << node->name << " ";
+            if ((HLNodes.find(node->name) != HLNodes.end())
+                && (HLNodes.find(node->inputs[i]) != HLNodes.end()))
+                ofile << "[color="<< color <<"]";
+            ofile << ";" << "\n";
         }
         node = node->next;
     }
