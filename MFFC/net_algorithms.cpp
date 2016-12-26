@@ -109,7 +109,7 @@ BlifBooleanNet::getFaninSet() const{
         fanin.insert(nodeName);
         BnetNode *node = getNodeByName(nodeName);
         for (int i = 0; i < node->ninp; ++i) {
-            char* name = node->name;
+            char* name = node->inputs[i];
             const set<BnetNodeID>& predFanin = faninNetwork.at(name);
             fanin.insert(predFanin.begin(), predFanin.end());
         }
@@ -134,13 +134,13 @@ BlifBooleanNet::getMffcSet() const{
             if (toBeErased.count(nodeID)) continue;
             // This node is already deleted.
 
-            BnetNode* node = getNodeByName(nodeID);
+            BnetNode* node = getNodeByName(*it);
             for (int i = 0; i < node->nfo; ++i) {
-                std::string pred = node->inputs[i];
-                if (!faninNet.count(pred))
+                std::string fout = node->fanouts[i];
+                if (!faninNet.count(fout))
                     toBeErased.insert(
-                            faninNetwork[pred].begin(),
-                            faninNetwork[pred].end()
+                            faninNetwork[*it].begin(),
+                            faninNetwork[*it].end()
                     );
             }
         }
@@ -161,6 +161,10 @@ BlifBooleanNet::getInputFromSet(const std::set<BnetNodeID> &set) const{
     std::set<BnetNodeID> inputSet;
     for (const auto& nodeId : set) {
         BnetNode* node = getNodeByName(nodeId);
+        if (node->ninp == 0) {
+            inputSet.insert(nodeId);
+            continue;
+        }
         for (int i = 0; i < node->ninp; ++i) {
             char* pred = node->inputs[i];
             if (!set.count(pred)) {
