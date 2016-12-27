@@ -24,7 +24,7 @@ selectFFC(const NodeFfcMap &ffcCollection,
           const FfcSelectPolicy &policy) {
     FfcCollection c = filterCollection(ffcCollection, policy);
     if (c.size() == 0) {
-        cerr << "No candidate MFFC" << endl;
+        cerr << "No more candidate MFFC" << endl;
         assert(0);
     }
     const Ffc *optimumFfc = nullptr;
@@ -48,7 +48,7 @@ FfcCollection filterCollection(const NodeFfcMap &collection,
         // 1 output node, n input nodes, n - 2 intermedian nodes.
         // FFC with less than that number of nodes
         // is not possible for further reduction
-        if (ffc.nodeSet.size() <= 2 * ffc.inputNode.size() - 1) continue;
+        if (ffc.nodeSet.size() <= ffc.inputNode.size() - 1) continue;
 
         c.push_back(ffc_pair.second);
     }

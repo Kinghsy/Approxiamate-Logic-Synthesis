@@ -27,6 +27,7 @@ public:
         int depth2Output;
         std::set<BnetNodeID> inputNode;
         std::set<BnetNodeID> nodeSet;
+        std::set<BnetNodeID> totalSet;
     };
 
 private:
