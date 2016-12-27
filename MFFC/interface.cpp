@@ -325,6 +325,9 @@ void BlifBooleanNet::exportFfcToBlifFile(const BlifBooleanNet::FFC &ffc,
     fout << "# outputDepth = " << ffc.depth2Output << endl;
     fout << "# number of inputs = " << ffc.inputNode.size() << endl;
     fout << "# total number of nodes = " << ffc.nodeSet.size() << endl;
+    fout << "# all nodes: ";
+    for(auto nodeId : ffc.totalSet) fout << nodeId << " ";
+    fout << endl;
     fout << endl;
     fout << ".model bigNode" << endl;
     fout << ".inputs ";
