@@ -14,10 +14,19 @@ endif()
 include_directories(lib/GTest/googletest/include)
 include_directories(common)
 
+set(CUDD_LIB
+        dddmp cudd mtr st util epd
+        dl readline termcap pthread rt)
+
 add_subdirectory(lib/GTest)
+
 add_subdirectory(common)
 add_subdirectory(approxiamate)
 add_subdirectory(MFFC)
 add_subdirectory(blif_replace)
+
+add_subdirectory(policy)
+
 add_subdirectory(driver)
+
 
