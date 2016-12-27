@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <list>
 #include <map>
+#include <algorithm>
 
 #include "interface.h"
 
@@ -100,6 +101,8 @@ map<BnetNodeID, BlifBooleanNet::FFC> BlifBooleanNet::getFFC() const {
                 ffc.inputNode.begin(),
                 ffc.inputNode.end()
         );
+        ffc.minDepth2Input = getMinDepths2Input(ffc.totalSet);
+        ffc.minDepth2Output = getMinDepths2Output(ffc.totalSet);
         allFfc.insert(std::make_pair(ffc.name, ffc));
     }
     return allFfc;
@@ -182,4 +185,26 @@ BlifBooleanNet::getInputFromSet(const std::set<BnetNodeID> &set) const{
         }
     }
     return inputSet;
+}
+
+int BlifBooleanNet::getMinDepths2Input(const std::set<BnetNodeID> &s) const {
+    std::vector<int> v;
+    v.resize(s.size());
+    std::transform(s.begin(), s.end(), v.begin(),
+                   [this] (const BnetNodeID& nodeID) -> int  {
+                       return attribute.depth2input.at(nodeID);
+                   }
+    );
+    return *min_element(v.begin(), v.end());
+}
+
+int BlifBooleanNet::getMinDepths2Output(const std::set<BnetNodeID> &s) const {
+    std::vector<int> v;
+    v.resize(s.size());
+    std::transform(s.begin(), s.end(), v.begin(),
+                   [this] (const BnetNodeID& nodeID) -> int {
+                       return attribute.depth2output.at(nodeID);
+                   }
+    );
+    return *min_element(v.begin(), v.end());
 }

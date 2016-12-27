@@ -353,6 +353,7 @@ void BlifBooleanNet::exportFfcToBlifFile(const BlifBooleanNet::FFC &ffc,
 }
 
 
+
 ulli power2(int power) {
     return ((ulli)1) << power;
 }

@@ -21,6 +21,8 @@ int main(int argc, char **argv)
             cout << endl;
             cout << "id " << n.second.depth2Input << endl;
             cout << "od " << n.second.depth2Output << endl;
+            cout << "mid " << n.second.minDepth2Input << endl;
+            cout << "mod " << n.second.minDepth2Output << endl;
             for (auto& str : n.second.inputNode)
                 cout << str << " ";
             cout << endl;
