@@ -176,7 +176,6 @@ BlifBooleanNet::getInputFromSet(const std::set<BnetNodeID> &set) const{
                 inputSet.insert(pred);
             } else if (!set.count(pred)) {
                 inputSet.insert(pred);
-                break;
             }
 
         }
