@@ -14,6 +14,7 @@
 #include "../approxiamate/src/search_method_core.h"
 #include "../blif_replace/blif_replace.h"
 #include "../common/generator.h"
+#include "../policy/policy.h"
 
 using std::string;
 using std::vector;
@@ -72,15 +73,20 @@ int main(int argc, char* agrv[]) {
         cout << "round " << fnGen.genState() << endl;
         string outFileName = fnGen.generate();
         BlifBooleanNet initNet(initFileName);
-        BlifBooleanNet mffc = initNet.getMFFC(4, 9);
-        cout << "MFFC inputs: " << mffc.nInputs() << endl;
+        //BlifBooleanNet mffc = initNet.getMFFC(4, 9);
+        FfcSelectPolicy policy;
+        BlifBooleanNet::FFC chosenFfc = selectFFC(initNet.getFFC(), policy);
+        string replaceFileName = "ffc.blif";
+        initNet.exportFfcToBlifFile(chosenFfc, replaceFileName);
+        BlifBooleanNet ffc(replaceFileName);
+        cout << "FFC inputs: " << ffc.nInputs() << endl;
         string name1=gener1.generate();
-        initNet.exportGraphVizwithHighlight(name1, mffc.totalNodeSet(), "red");
+        initNet.exportGraphVizwithHighlight(name1, ffc.totalNodeSet(), "red");
         string tmp1="dot -Tpng -o "+gener1_.generate()+" < "+name1;
         system(tmp1.c_str());
-        string replaceFileName = "mffc.blif";
-        TruthTable initMffcTruthTable = mffc.truthTable();
-        TruthTable finalMffcTruthTable = writeApproxBlifFileByTruthTable(initMffcTruthTable, withFileName);
+
+        TruthTable initFfcTruthTable = ffc.truthTable();
+        TruthTable finalFfcTruthTable = writeApproxBlifFileByTruthTable(initFfcTruthTable, withFileName);
         replacePartialBlif(initFileName,
                            replaceFileName,
                            withFileName,
