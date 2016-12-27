@@ -12,13 +12,20 @@ int main(int argc, char **argv)
     BlifBooleanNet rawData(initFileName);
     cout << rawData.name() << " " << rawData.gateCount() << " " << rawData.nInputs() << " " << rawData.nOutputs() << endl;
 
-    rawData.getMFFC(4, 5);
-    cout << endl;
-    std::vector<string> toplist = rawData.topologicalSort();
+    const auto& s = rawData.getFFC();
 
-    for (auto& s : toplist) cout << s << " ";
-    cout << endl;
-    std::vector<string> top2 = rawData.topologicalSort();
-    for (auto& s : top2) cout << s << " ";
-    cout << endl;
+    for (auto& n : s) {
+        if (n.first == "n139") {
+            for (auto& str : n.second.nodeSet)
+                cout << str << " ";
+            cout << endl;
+            cout << "id " << n.second.depth2Input << endl;
+            cout << "od " << n.second.depth2Output << endl;
+            for (auto& str : n.second.inputNode)
+                cout << str << " ";
+            cout << endl;
+        }
+    }
+
+    return 0;
 }
