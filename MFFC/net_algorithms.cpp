@@ -127,10 +127,13 @@ BlifBooleanNet::getFaninSet() const{
 std::map<BnetNodeID, std::set<BnetNodeID> >
 BlifBooleanNet::getMffcSet() const{
     // Acquires the fanin network for each node
-    const vector<BnetNodeID> sortedList = topologicalSort();
+    vector<BnetNodeID> reverseSortedList(
+            topologicalSort().rbegin(),
+            topologicalSort().rend()
+    );
     std::map<BnetNodeID, std::set<BnetNodeID> > faninNetwork = getFaninSet();
 
-    for (const auto& nodeID : sortedList) {
+    for (const auto& nodeID : reverseSortedList) {
         set<BnetNodeID>& faninNet = faninNetwork.at(nodeID);
         set<BnetNodeID> toBeErased;
         for (auto it = faninNet.rbegin(); it != faninNet.rend(); ++it) {
