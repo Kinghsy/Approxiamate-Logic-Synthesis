@@ -92,13 +92,14 @@ map<BnetNodeID, BlifBooleanNet::FFC> BlifBooleanNet::getFFC() const {
         BlifBooleanNet::FFC ffc;
         ffc.nodeSet = mffc_pair.second;
         ffc.inputNode = getInputFromSet(mffc_pair.second);
-        ffc.nodeSet.insert(
-                ffc.inputNode.begin(),
-                ffc.inputNode.end()
-        );
         ffc.name = mffc_pair.first;
         ffc.depth2Input = attribute.depth2input.at(ffc.name);
         ffc.depth2Output = attribute.depth2output.at(ffc.name);
+        ffc.totalSet = ffc.nodeSet;
+        ffc.totalSet.insert(
+                ffc.inputNode.begin(),
+                ffc.inputNode.end()
+        );
         allFfc.insert(std::make_pair(ffc.name, ffc));
     }
     return allFfc;
@@ -170,7 +171,7 @@ BlifBooleanNet::getInputFromSet(const std::set<BnetNodeID> &set) const{
             continue;
         }
         for (int i = 0; i < node->ninp; ++i) {
-            char *pred = node->inputs[i];
+            BnetNodeID pred = node->inputs[i];
             BnetNode *predNode = getNodeByName(pred);
             if (predNode->type == BNET_INPUT_NODE) {
                 inputSet.insert(pred);
