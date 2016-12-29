@@ -2,6 +2,7 @@
 // Created by tripack on 16-12-16.
 //
 #include <string>
+#include <iostream>
 #include <fstream>
 #include <cassert>
 #include <set>
@@ -12,6 +13,9 @@
 #include "../MFFC/interface.h"
 
 using std::string;
+using std::endl;
+using std::cerr;
+using std::cout;
 
 const string statementModel("model");
 const string statementInputs("inputs");

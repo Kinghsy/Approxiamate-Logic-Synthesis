@@ -5,6 +5,9 @@
 #include "err_asses.h"
 #include "interface.h"
 #include <string>
+#include <vector>
+
+using std::vector;
 
 BlifCompareResult compareBlifFiles(const std::string& model,
                                    const std::string& compared) {

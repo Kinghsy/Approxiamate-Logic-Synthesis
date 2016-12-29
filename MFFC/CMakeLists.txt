@@ -8,39 +8,23 @@
 #include_directories("../lib/cudd-2.5.0/nanotrav")
 #include_directories("../lib/cudd-2.5.0")
 #
-link_directories("../lib/cudd-2.5.0/obj")
-link_directories("../lib/cudd-2.5.0/cudd")
-link_directories("../lib/cudd-2.5.0/util")
-link_directories("../lib/cudd-2.5.0/st")
-link_directories("../lib/cudd-2.5.0/epd")
-link_directories("../lib/cudd-2.5.0/dddmp")
-link_directories("../lib/cudd-2.5.0/mtr")
+link_directories(${CUDD_LINK_DIR})
 
-set(SOURCE_FILES
+set(SOURCE_DRIVER
         main.cpp
         )
 
 set(SOURCE_LIB
-        basics.cpp basics.h
-        bnet.cpp bnet.h
-        ntr.cpp ntr.h
-        cudd_build_v2.cpp cudd_build_v2.h
-        )
-
-add_library(mffc_static ${SOURCE_LIB})
-
-add_library(mffc ${SOURCE_LIB}
         interface.cpp interface.h
-        net_algorithms.cpp
         err_asses.cpp err_asses.h
-        searchMFFC.cpp searchMFFC.h
+        net_algorithms.cpp
         )
 
-add_executable(mffc_test
-        ${SOURCE_FILES})
+add_library(mffc ${SOURCE_LIB}        )
+
+add_executable(mffc_test ${SOURCE_DRIVER})
 
 target_link_libraries(mffc_test
-        mffc common
-        dddmp cudd mtr st util epd
-        dl readline termcap pthread rt)
+        mffc blif common
+        ${CUDD_LINK_LIB})
 #add_subdirectory(testcase)

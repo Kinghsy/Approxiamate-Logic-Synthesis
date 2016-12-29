@@ -7,14 +7,15 @@
 
 #include "exception.h"
 #include "../lib/cudd-2.5.0/cudd/cudd.h"
-#include "bnet.h"
+#include "../lib/libblif/bnet.h"
 #include "memorize.h"
-#include "basics.h"
 
 #include <string>
 #include <vector>
 #include <truth_table.h>
 #include <set>
+#include <map>
+#include <unordered_map>
 
 
 class BlifBooleanNet {
@@ -44,10 +45,10 @@ private:
 
     mutable Memorized<int> nNode;
     mutable Memorized<int> nGates;
-    mutable Memorized<std::set<string> > inputNodes;
-    mutable Memorized<std::set<string> > outputNodes;
-    mutable Memorized<std::set<string> > totalNodes;
-    mutable Memorized<std::vector<string> > topSortedNodes;
+    mutable Memorized<std::set<BnetNodeID> > inputNodes;
+    mutable Memorized<std::set<BnetNodeID> > outputNodes;
+    mutable Memorized<std::set<BnetNodeID> > totalNodes;
+    mutable Memorized<std::vector<BnetNodeID> > topSortedNodes;
 
     BnetNode* getNodeByName(const std::string& name) const;
 
@@ -71,19 +72,18 @@ public:
     int nodeCount() const;
     int gateCount() const;
 
-    const std::set<string> & inputNodeSet() const;
-    const std::set<string> & outputNodeSet() const;
-    const std::set<string> & totalNodeSet() const;
+    const std::set<BnetNodeID> & inputNodeSet() const;
+    const std::set<BnetNodeID> & outputNodeSet() const;
+    const std::set<BnetNodeID> & totalNodeSet() const;
 
     int getMinDepths2Input(const std::set<BnetNodeID>& s) const;
     int getMinDepths2Output(const std::set<BnetNodeID>& s) const;
 
     TruthTable truthTable() const;
 
-    const std::vector<string>& topologicalSort() const;
+    const std::vector<BnetNodeID>& topologicalSort() const;
 
-    BlifBooleanNet getMFFC(int minInput,
-                           int maxInput) const;
+    //BlifBooleanNet getMFFC(int minInput, int maxInput) const;
 
     std::map<BnetNodeID, FFC> getFFC() const;
 

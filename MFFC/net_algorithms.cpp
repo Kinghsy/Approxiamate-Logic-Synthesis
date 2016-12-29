@@ -3,9 +3,17 @@
 #include <cstdlib>
 #include <list>
 #include <map>
+#include <vector>
+#include <set>
 #include <algorithm>
 
 #include "interface.h"
+
+using std::string;
+using std::vector;
+using std::list;
+using std::map;
+using std::set;
 
 const std::vector<string> &BlifBooleanNet::topologicalSort() const {
     if (topSortedNodes.isValid())
@@ -86,7 +94,8 @@ void BlifBooleanNet::prepareDepths() {
     }
 }
 
-map<BnetNodeID, BlifBooleanNet::FFC> BlifBooleanNet::getFFC() const {
+std::map<BlifBooleanNet::BnetNodeID, BlifBooleanNet::FFC>
+BlifBooleanNet::getFFC() const {
     std::map<BnetNodeID, std::set<BnetNodeID> > mffc = getMffcSet();
     std::map<BnetNodeID, BlifBooleanNet::FFC> allFfc;
     for (auto& mffc_pair : mffc) {
@@ -108,7 +117,7 @@ map<BnetNodeID, BlifBooleanNet::FFC> BlifBooleanNet::getFFC() const {
     return allFfc;
 }
 
-std::map<BnetNodeID, std::set<BnetNodeID> >
+std::map<BlifBooleanNet::BnetNodeID, std::set<BlifBooleanNet::BnetNodeID> >
 BlifBooleanNet::getFaninSet() const{
     const vector<BnetNodeID> sortedList = topologicalSort();
     map<BnetNodeID, set<BnetNodeID> > faninNetwork;
@@ -127,7 +136,7 @@ BlifBooleanNet::getFaninSet() const{
     return faninNetwork;
 }
 
-std::map<BnetNodeID, std::set<BnetNodeID> >
+std::map<BlifBooleanNet::BnetNodeID, std::set<BlifBooleanNet::BnetNodeID> >
 BlifBooleanNet::getMffcSet() const{
     // Acquires the fanin network for each node
     vector<BnetNodeID> reverseSortedList(
@@ -167,8 +176,9 @@ BlifBooleanNet::getMffcSet() const{
     return faninNetwork;
 }
 
-std::set<BnetNodeID>
-BlifBooleanNet::getInputFromSet(const std::set<BnetNodeID> &set) const{
+std::set<BlifBooleanNet::BnetNodeID>
+BlifBooleanNet::getInputFromSet(
+        const std::set<BlifBooleanNet::BnetNodeID> &set) const{
     std::set<BnetNodeID> inputSet;
     for (const auto& nodeId : set) {
         BnetNode* node = getNodeByName(nodeId);

@@ -19,6 +19,8 @@
 using std::string;
 using std::vector;
 using std::cout;
+using std::cerr;
+using std::endl;
 using std::set;
 
 class FilenameGenerator : public Generator<string> {

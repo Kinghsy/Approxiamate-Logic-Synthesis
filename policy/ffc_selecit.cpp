@@ -4,7 +4,12 @@
 
 #include <cstdio>
 #include <unordered_set>
+#include <iostream>
 #include "policy.h"
+
+using std::cout;
+using std::cerr;
+using std::endl;
 
 typedef BlifBooleanNet::BnetNodeID ID;
 typedef BlifBooleanNet::FFC Ffc;
