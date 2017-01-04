@@ -18,6 +18,7 @@ set(SOURCE_LIB
         interface.cpp interface.h
         err_asses.cpp err_asses.h
         net_algorithms.cpp
+        pattern_gen.cpp pattern_gen.h
         )
 
 add_library(mffc ${SOURCE_LIB}        )
@@ -27,4 +28,5 @@ add_executable(mffc_test ${SOURCE_DRIVER})
 target_link_libraries(mffc_test
         mffc blif common
         ${CUDD_LINK_LIB})
-#add_subdirectory(testcase)
+
+add_subdirectory(testcases)
