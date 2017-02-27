@@ -26,6 +26,7 @@ add_subdirectory(common)
 add_subdirectory(approxiamate)
 add_subdirectory(MFFC)
 add_subdirectory(blif_replace)
+add_subdirectory(circuit_profile)
 
 add_subdirectory(policy)
 
