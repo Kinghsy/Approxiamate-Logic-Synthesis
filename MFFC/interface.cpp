@@ -2,12 +2,11 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "bnet.h"
-#include "searchMFFC.h"
+#include "../lib/libblif/bnet.h"
 
 #include <truth_table.h>
 #include "interface.h"
-#include "cudd_build_v2.h"
+#include "../lib/libblif/cudd_build_v2.h"
 
 using namespace std;
 
@@ -15,6 +14,7 @@ typedef long long unsigned int ulli;
 ulli power2(int power);
 void getBits(ulli n, int* vec, int digit);
 
+/*
 string getMFFC(string infile, int minInput, int maxInput) {
     FILE *fp;
     fp = fopen(infile.c_str(), "r");
@@ -30,6 +30,7 @@ string getMFFC(string infile, int minInput, int maxInput) {
     Bnet_FreeNetwork(net);
     return s.str();
 }
+*/
 
 BlifBooleanNet::BlifBooleanNet(const std::string &file) {
     filename = file;
@@ -130,6 +131,7 @@ const std::string BlifBooleanNet::netName() const {
     return net->name;
 }
 
+/*
 BlifBooleanNet BlifBooleanNet::getMFFC(int minInput,
                                        int maxInput) const {
     assert(minInput >= 0);
@@ -140,6 +142,7 @@ BlifBooleanNet BlifBooleanNet::getMFFC(int minInput,
     fs.close();
     return BlifBooleanNet(fname);
 }
+*/
 
 int BlifBooleanNet::nOutputs() const {
     return net->noutputs;
@@ -355,6 +358,7 @@ void BlifBooleanNet::exportFfcToBlifFile(const BlifBooleanNet::FFC &ffc,
     }
     fout << ".end" << endl;
 }
+
 
 
 ulli power2(int power) {

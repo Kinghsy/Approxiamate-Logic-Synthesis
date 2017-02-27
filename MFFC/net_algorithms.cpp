@@ -3,8 +3,17 @@
 #include <cstdlib>
 #include <list>
 #include <map>
+#include <vector>
+#include <set>
+#include <algorithm>
 
 #include "interface.h"
+
+using std::string;
+using std::vector;
+using std::list;
+using std::map;
+using std::set;
 
 const std::vector<string> &BlifBooleanNet::topologicalSort() const {
     if (topSortedNodes.isValid())
@@ -85,7 +94,8 @@ void BlifBooleanNet::prepareDepths() {
     }
 }
 
-map<BnetNodeID, BlifBooleanNet::FFC> BlifBooleanNet::getFFC() const {
+std::map<BlifBooleanNet::BnetNodeID, BlifBooleanNet::FFC>
+BlifBooleanNet::getFFC() const {
     std::map<BnetNodeID, std::set<BnetNodeID> > mffc = getMffcSet();
     std::map<BnetNodeID, BlifBooleanNet::FFC> allFfc;
     for (auto& mffc_pair : mffc) {
@@ -100,12 +110,14 @@ map<BnetNodeID, BlifBooleanNet::FFC> BlifBooleanNet::getFFC() const {
                 ffc.inputNode.begin(),
                 ffc.inputNode.end()
         );
+        ffc.minDepth2Input = getMinDepths2Input(ffc.totalSet);
+        ffc.minDepth2Output = getMinDepths2Output(ffc.totalSet);
         allFfc.insert(std::make_pair(ffc.name, ffc));
     }
     return allFfc;
 }
 
-std::map<BnetNodeID, std::set<BnetNodeID> >
+std::map<BlifBooleanNet::BnetNodeID, std::set<BlifBooleanNet::BnetNodeID> >
 BlifBooleanNet::getFaninSet() const{
     const vector<BnetNodeID> sortedList = topologicalSort();
     map<BnetNodeID, set<BnetNodeID> > faninNetwork;
@@ -124,7 +136,7 @@ BlifBooleanNet::getFaninSet() const{
     return faninNetwork;
 }
 
-std::map<BnetNodeID, std::set<BnetNodeID> >
+std::map<BlifBooleanNet::BnetNodeID, std::set<BlifBooleanNet::BnetNodeID> >
 BlifBooleanNet::getMffcSet() const{
     // Acquires the fanin network for each node
     vector<BnetNodeID> reverseSortedList(
@@ -164,8 +176,9 @@ BlifBooleanNet::getMffcSet() const{
     return faninNetwork;
 }
 
-std::set<BnetNodeID>
-BlifBooleanNet::getInputFromSet(const std::set<BnetNodeID> &set) const{
+std::set<BlifBooleanNet::BnetNodeID>
+BlifBooleanNet::getInputFromSet(
+        const std::set<BlifBooleanNet::BnetNodeID> &set) const{
     std::set<BnetNodeID> inputSet;
     for (const auto& nodeId : set) {
         BnetNode* node = getNodeByName(nodeId);
@@ -185,4 +198,26 @@ BlifBooleanNet::getInputFromSet(const std::set<BnetNodeID> &set) const{
         }
     }
     return inputSet;
+}
+
+int BlifBooleanNet::getMinDepths2Input(const std::set<BnetNodeID> &s) const {
+    std::vector<int> v;
+    v.resize(s.size());
+    std::transform(s.begin(), s.end(), v.begin(),
+                   [this] (const BnetNodeID& nodeID) -> int  {
+                       return attribute.depth2input.at(nodeID);
+                   }
+    );
+    return *min_element(v.begin(), v.end());
+}
+
+int BlifBooleanNet::getMinDepths2Output(const std::set<BnetNodeID> &s) const {
+    std::vector<int> v;
+    v.resize(s.size());
+    std::transform(s.begin(), s.end(), v.begin(),
+                   [this] (const BnetNodeID& nodeID) -> int {
+                       return attribute.depth2output.at(nodeID);
+                   }
+    );
+    return *min_element(v.begin(), v.end());
 }

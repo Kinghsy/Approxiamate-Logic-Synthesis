@@ -29,9 +29,6 @@
 #include "../lib/cudd-2.5.0/util/util.h"
 #include "../lib/cudd-2.5.0/st/st.h"
 #include "../lib/cudd-2.5.0/cudd/cudd.h"
-#include <vector>
-
-using namespace std;
 
 #ifdef __cplusplus
 extern "C" {

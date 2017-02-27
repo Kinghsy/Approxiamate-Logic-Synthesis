@@ -14,19 +14,24 @@ endif()
 include_directories(lib/GTest/googletest/include)
 include_directories(common)
 
-set(CUDD_LIB
-        dddmp cudd mtr st util epd
-        dl readline termcap pthread rt)
-
 add_subdirectory(lib/GTest)
+add_subdirectory(lib/libblif)
+add_subdirectory(lib/cudd-2.5.0)
+
+message(STATUS "CUDD library info")
+message(STATUS "CUDD link libs : ${CUDD_LINK_DIR}" )
+message(STATUS "CUDD libs : ${CUDD_LINK_LIB}" )
 
 add_subdirectory(common)
 add_subdirectory(approxiamate)
 add_subdirectory(MFFC)
 add_subdirectory(blif_replace)
+add_subdirectory(circuit_profile)
 
 add_subdirectory(policy)
 
 add_subdirectory(driver)
+
+add_subdirectory(util/subDecCal)
 
 

@@ -15,7 +15,7 @@ struct FfcSelectPolicy {
 };
 
 BlifBooleanNet::FFC
-selectFFC(const map<BlifBooleanNet::BnetNodeID, BlifBooleanNet::FFC> &ffcCollection,
+selectFFC(const std::map<BlifBooleanNet::BnetNodeID, BlifBooleanNet::FFC> &ffcCollection,
           const FfcSelectPolicy &policy = FfcSelectPolicy());
 
 #endif //VE490_POLICY_H
