@@ -38,7 +38,7 @@ target_link_libraries(SearchMethodCoreTest
         gtest gtest_main)
 target_link_libraries(SearchMethodCoreTest
         mffc approx blif_replace common
-        ${Boost_LIBRARIES}
+        ${Boost_LIBRARIES} blif
         dddmp cudd mtr st util epd
         dl readline termcap pthread rt
         readline termcap pthread)
