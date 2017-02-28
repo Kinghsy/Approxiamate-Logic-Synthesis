@@ -388,7 +388,7 @@ tuple<string, BooleanFunctionPtr, int > SearchSpace::
 string randString() {
     ostringstream sstr;
     static int number=0;
-    sstr <<  "tmpNodeLoneLyDoG" << number;
+    sstr <<  "tmpNodeLoneLyDoGxxx" << number;
     number++;
     return sstr.str();
 }

@@ -273,6 +273,7 @@ void BlifBooleanNet::exportGraphVizwithHighlight(
         const string& fname, const set<string >& HLNodes, const string color) const {
     ofstream ofile(fname);
     ofile << "digraph " << net->name << "{" << "\n";
+    ofile << "ratio = .5;" << "\n";
     //source nodes
     ofile << "{" << "\n";
     ofile << "rank = source;" << "\n";
