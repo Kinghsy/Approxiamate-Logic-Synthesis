@@ -95,12 +95,15 @@ public:
     // return the vertexID of divide node
     bool searchSpaceGrow();  // whether this search space could be divided or not
     SearchSpacePtr searchSpaceGenerate(); // return a search space that is generated from the current one.
+    std::vector<SearchSpacePtr > searchSpaceSeriesGenerate(int leftNum); // return a vector contains several seachspaceptrs
+                                                                         // with least totalerrors
     SearchSpacePtr searchSpaceGenerate(int divideMethod);
     int getTotalError(); // return the total error.
     void printSearchSpace();
     BooleanFunctionPtr getFinalBooleanFuntion();
     void generateBlifFile(std::string BlifFileName, TruthTable &TruthTab);
     bool isAtLowestLevel();
+    bool isCalculatedInAdvanced();
 
 
 private:
@@ -127,6 +130,40 @@ private:
     //error
     int totalError; // the total error for this search space
                     // should be calculated after this SearchSpace is created.
+    bool isPreviouslyCalculated = false; // in BFS, if this point if this searchspace is fully previously decomposed,
+                                         // new field added, used in algorithm like A*.
+
+};
+
+class SearchSpaceComparator {
+public:
+    SearchSpacePtr ssPtr = nullptr;
+
+    SearchSpaceComparator() {
+        ssPtr = nullptr;
+    }
+    SearchSpaceComparator(const SearchSpacePtr& samplePtr) {
+        ssPtr = samplePtr;
+    }
+    SearchSpaceComparator(const SearchSpaceComparator& a) {
+        this->ssPtr = a.ssPtr;
+    }
+    ~SearchSpaceComparator() {
+        ssPtr.reset();
+    }
+    friend bool operator< (const SearchSpaceComparator& a, const SearchSpaceComparator& b) {
+        return (a.ssPtr->getTotalError() < b.ssPtr->getTotalError());
+    }
+    friend bool operator> (const SearchSpaceComparator& a, const SearchSpaceComparator& b) {
+        return (a.ssPtr->getTotalError() > b.ssPtr->getTotalError());
+    }
+    /*friend SearchSpacePtr& operator* (const SearchSpaceComparator& a) {
+        return a.ssPtr;
+    }*/
+    SearchSpaceComparator& operator= (SearchSpaceComparator& b) {
+        ssPtr = b.ssPtr;
+        return *this;
+    }
 
 };
 
@@ -141,6 +178,7 @@ public:
 
     SearchSpacePtr getNextSearchSpace(); // asking current search space could generate a new one or nor,
                                         // if could, finish current generating. Back to his parent.
+    SearchSpacePtr getNextSearchSpace_BFS();
     SearchSpacePtr getNextSearchSpace(int method);
     SearchSpacePtr getCurrentSearchSpace(); //
     SearchSpacePtr getRootSpace();

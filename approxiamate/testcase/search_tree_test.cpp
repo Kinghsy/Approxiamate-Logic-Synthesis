@@ -23,7 +23,7 @@ TEST(TEST_SEARCH_TREE, TC_1) {
     cout << "---------------------------------\n";
     whole.getRootSpace()->printSearchSpace();
     SearchSpacePtr ssPtr;
-    while ((ssPtr=whole.getNextSearchSpace())!= nullptr) {
+    while ((ssPtr=whole.getNextSearchSpace_BFS())!= nullptr) {
         ssPtr->printSearchSpace();
     }
     cout << "---------------------------------\n";
@@ -50,7 +50,7 @@ TEST(TEST_SEARCH_TREE, TC_2) {
     SearchSpacePtr ssPtr;
     cout << "---------------------------------\n";
     whole.getRootSpace()->printSearchSpace();
-    while ((ssPtr=whole.getNextSearchSpace())!= nullptr) {
+    while ((ssPtr=whole.getNextSearchSpace_BFS())!= nullptr) {
         ssPtr->printSearchSpace();
     }
     cout << "---------------------------------\n";
@@ -75,7 +75,7 @@ TEST(TEST_SEARCH_TREE, TC_3) {
     SearchSpacePtr ssPtr;
     cout << "---------------------------------\n";
     whole.getRootSpace()->printSearchSpace();
-    while ((ssPtr=whole.getNextSearchSpace())!= nullptr) {
+    while ((ssPtr=whole.getNextSearchSpace_BFS())!= nullptr) {
         ssPtr->printSearchSpace();
     }
     cout << "---------------------------------\n";
@@ -100,7 +100,7 @@ TEST(TEST_SEARCH_TREE, TC_4) {
     SearchSpacePtr ssPtr;
     cout << "---------------------------------\n";
     whole.getRootSpace()->printSearchSpace();
-    while ((ssPtr=whole.getNextSearchSpace())!= nullptr) {
+    while ((ssPtr=whole.getNextSearchSpace_BFS())!= nullptr) {
         ssPtr->printSearchSpace();
     }
     cout << "---------------------------------\n";
@@ -126,7 +126,7 @@ TEST(TEST_SEARCH_TREE, TC_5) {
     SearchSpacePtr ssPtr;
     cout << "---------------------------------\n";
     whole.getRootSpace()->printSearchSpace();
-    while ((ssPtr=whole.getNextSearchSpace())!= nullptr) {
+    while ((ssPtr=whole.getNextSearchSpace_BFS())!= nullptr) {
         ssPtr->printSearchSpace();
     }
     cout << "---------------------------------\n";
@@ -154,7 +154,7 @@ TEST(TEST_SEARCH_TREE, TC_6) {
     SearchSpacePtr ssPtr;
     cout << "---------------------------------\n";
     whole.getRootSpace()->printSearchSpace();
-    while ((ssPtr=whole.getNextSearchSpace())!= nullptr) {
+    while ((ssPtr=whole.getNextSearchSpace_BFS())!= nullptr) {
         ssPtr->printSearchSpace();
     }
     cout << "---------------------------------\n";

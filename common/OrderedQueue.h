@@ -18,13 +18,16 @@ private:
 
 public:
     OrderedQueue() {
+        clearAll();
     }
     OrderedQueue(const T& tempT) {
+        clearAll();
         push(tempT);
     }
 
     OrderedQueue& operator= (const OrderedQueue) = delete;
     OrderedQueue(OrderedQueue&& tempQueue) {
+        clearAll();
         this -> oq = tempQueue.oq;
     }
 
