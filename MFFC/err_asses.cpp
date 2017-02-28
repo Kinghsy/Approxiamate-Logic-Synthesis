@@ -72,3 +72,4 @@ BlifCompareResult sampleCompareBlifs(const BlifBooleanNet &model,
     }
     return r;
 }
+
