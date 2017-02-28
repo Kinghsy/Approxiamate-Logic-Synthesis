@@ -16,7 +16,7 @@ set(SOURCE_FILES
 add_executable(main ${SOURCE_FILES})
 
 target_link_libraries(main
-        policy mffc blif
+        policy mffc blif profile
         approx blif_replace common
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})

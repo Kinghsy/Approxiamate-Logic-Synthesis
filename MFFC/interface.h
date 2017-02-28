@@ -9,6 +9,7 @@
 #include "../lib/cudd-2.5.0/cudd/cudd.h"
 #include "../lib/libblif/bnet.h"
 #include "memorize.h"
+#include "../circuit_profile/profile.h"
 
 #include <string>
 #include <vector>
@@ -90,6 +91,8 @@ public:
     int evalAt(const std::vector<int>& v,
                const std::string& node = "") const;
     std::vector<int> evalAllOutputAt(const std::vector<int>& v) const;
+
+    CircuitProfile profile(int samples);
 
     void exportBlifToFile(const std::string& fname) const;
     void exportFfcToBlifFile(const FFC& ffc,const std::string& filename) const;

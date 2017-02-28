@@ -26,7 +26,7 @@ add_library(mffc ${SOURCE_LIB}        )
 add_executable(mffc_test ${SOURCE_DRIVER})
 
 target_link_libraries(mffc_test
-        mffc blif common
+        mffc blif common profile
         ${CUDD_LINK_LIB})
 
 add_subdirectory(testcases)

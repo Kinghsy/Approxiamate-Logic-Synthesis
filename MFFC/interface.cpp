@@ -7,6 +7,7 @@
 #include <truth_table.h>
 #include "interface.h"
 #include "../lib/libblif/cudd_build_v2.h"
+#include "pattern_gen.h"
 
 using namespace std;
 
@@ -372,4 +373,21 @@ void getBits(ulli n, int* vec, int digit) {
         else
             vec[i] = 0;
     }
+}
+
+CircuitProfile BlifBooleanNet::profile(int samples) {
+    assert(samples >= 0);
+    InfiniteRandomPatternGenerator g(this->nInputs());
+    CircuitProfile p(this->name());
+    const auto& nodes = this->totalNodeSet();
+    for (int i = 0; i < samples; ++i) {
+        for (const auto& node : nodes) {
+            int ret = this->evalAt(g.generate(), node);
+            if (ret)
+                p.incTrue(node);
+            else
+                p.incFalse(node);
+        }
+    }
+    return p;
 }
