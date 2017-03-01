@@ -17,6 +17,7 @@ include_directories(common)
 add_subdirectory(lib/GTest)
 add_subdirectory(lib/libblif)
 add_subdirectory(lib/cudd-2.5.0)
+add_subdirectory(lib/abc)
 
 message(STATUS "CUDD library info")
 message(STATUS "CUDD link libs : ${CUDD_LINK_DIR}" )
