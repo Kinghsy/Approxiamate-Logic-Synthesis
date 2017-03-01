@@ -135,6 +135,7 @@ std::vector<SearchSpacePtr > SearchSpace::searchSpaceSeriesGenerate(int leftNum)
         SearchSpacePtr ssPtr= searchSpaceGenerate(divMethod);
         SearchSpaceComparator ssComp(ssPtr);
         oq.push(ssComp);
+        if (oq.size() > leftNum) oq.pop_back();
     }
     int left = min(leftNum , oq.size());
     std::vector<SearchSpacePtr > vec;

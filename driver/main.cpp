@@ -52,7 +52,7 @@ public:
 
 int main(int argc, char* agrv[]) {
 
-    string base="c880";
+    string base="c432";
     string exten="blif";
     string vizExten="viz";
     string pngExten="png";
@@ -66,7 +66,8 @@ int main(int argc, char* agrv[]) {
     FilenameGenerator gener1_(base+"_","_unmodied."+pngExten);
     FilenameGenerator gener2_(base+"_","_modied."+pngExten);
     rawData.exportGraphViz(base + "."+vizExten);
-    //system("dot -Tpng -o "+base+"."+pngExten+" < "+base+"."+vizExten);
+    string command1 = "dot -Tpng -o "+base+"."+pngExten+" < "+base+"."+vizExten;
+    system(command1.c_str());
     string tmp="dot -Tpng -o "+base+"."+pngExten+" < "+base+"."+vizExten;
     system(tmp.c_str());
 
@@ -88,7 +89,10 @@ int main(int argc, char* agrv[]) {
         system(tmp1.c_str());
 
         TruthTable initFfcTruthTable = ffc.truthTable();
-        TruthTable finalFfcTruthTable = writeApproxBlifFileByTruthTable(initFfcTruthTable, withFileName);
+        clock_t timeStart = clock();
+        TruthTable finalFfcTruthTable = writeApproxBlifFileByTruthTable_BFS(initFfcTruthTable, withFileName);
+        clock_t timeEnd = clock();
+        cout << "    time:" <<  ((double)(timeEnd - timeStart)) / CLOCKS_PER_SEC << " s\n";
         replacePartialBlif(initFileName,
                            replaceFileName,
                            withFileName,
