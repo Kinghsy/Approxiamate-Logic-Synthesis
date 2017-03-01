@@ -26,7 +26,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_1) {
     TruthTable initTruthTable(inputSize, v);
 
     TruthTable finalTruthTable(
-            calculApproxTruthTable(initTruthTable)
+            calculApproxTruthTable_BFS(initTruthTable)
     );
     std::cout << "\n";
     std::cout << "\n";
@@ -60,7 +60,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_2) {
     TruthTable initTruthTable(inputSize, v);
 
     TruthTable finalTruthTable(
-            calculApproxTruthTable(initTruthTable)
+            calculApproxTruthTable_BFS(initTruthTable)
     );
     std::cout << "\n";
     std::cout << "\n";
@@ -96,7 +96,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_3) {
     TruthTable initTruthTable(inputSize, v);
 
     TruthTable finalTruthTable(
-            calculApproxTruthTable(initTruthTable)
+            calculApproxTruthTable_BFS(initTruthTable)
     );
     std::cout << "\n";
     std::cout << "\n";
@@ -139,7 +139,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_4) {
     std::cout << initTruthTable.outName << std::endl;
 
     TruthTable finalTruthTable(
-            writeApproxBlifFileByTruthTable(initTruthTable, "testing1.blif")
+            writeApproxBlifFileByTruthTable_BFS(initTruthTable, "testing1.blif")
     );
     std::cout << "\n";
     std::cout << "\n";
@@ -187,7 +187,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_5) {
     std::cout << initTruthTable.outName << std::endl;
 
     TruthTable finalTruthTable(
-            writeApproxBlifFileByTruthTable(initTruthTable, "testing2.blif")
+            writeApproxBlifFileByTruthTable_BFS(initTruthTable, "testing2.blif")
     );
     std::cout << "\n";
     std::cout << "\n";
@@ -230,7 +230,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_6) {
     std::cout << initTruthTable.outName << std::endl;
 
     TruthTable finalTruthTable(
-            writeApproxBlifFileByTruthTable(initTruthTable, "testing3.blif")
+            writeApproxBlifFileByTruthTable_BFS(initTruthTable, "testing3.blif")
     );
     std::cout << "\n";
     std::cout << "\n";
@@ -255,7 +255,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_6) {
 TEST(SEARCH_METHOD_CORE_TEST, TC_7) {
     BlifBooleanNet mffc("mffc.blif");
     TruthTable truthTable = mffc.truthTable();
-    TruthTable final = calculApproxTruthTable(truthTable);
+    TruthTable final = calculApproxTruthTable_BFS(truthTable);
     std::cout << "\n";
     std::cout << "--------initTruthTable---------------\n";
     truthTable.print();

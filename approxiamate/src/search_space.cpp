@@ -6,6 +6,7 @@
 #include "conts.h"
 #include "boolean_function.h"
 #include "../../common/truth_table.h"
+#include "../../common/OrderedQueue.h"
 
 
 #include <binary_tree_impl.h>
@@ -29,6 +30,7 @@ string randString();
 
 SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
     btree = unique_ptr<BinaryTree<SearchNodeOpPtr > > (oldTree.clone());
+    isPreviouslyCalculated = false;
     BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
     currentDivideRange=0;
     if (tmp!=btree->nullId())
@@ -40,6 +42,7 @@ SearchSpace::SearchSpace(BinaryTree<SearchNodeOpPtr > &oldTree) {
 
 SearchSpace::SearchSpace(unique_ptr<BinaryTree<SearchNodeOpPtr> > oldTreePtr) {
     btree = move(oldTreePtr);
+    isPreviouslyCalculated = false;
     BinaryTree<SearchNodeOpPtr>::VertexID_t tmp=findDivideNode();
     currentDivideRange=0;
     if (tmp!=btree->nullId())
@@ -56,6 +59,7 @@ SearchSpace::SearchSpace() {
     currentDivideRange=0;
     totalError=0;
     growAble=false;
+    isPreviouslyCalculated = false;
 }
 
 SearchSpace::~SearchSpace() {
@@ -83,6 +87,10 @@ bool SearchSpace::isAtLowestLevel() {
     if (findDivideNode()==btree->nullId())
         return true;
     return false;
+}
+
+bool SearchSpace::isCalculatedInAdvanced() {
+    return isPreviouslyCalculated;
 }
 
 SearchSpacePtr SearchSpace::searchSpaceGenerate() {
@@ -118,6 +126,25 @@ SearchSpacePtr SearchSpace::searchSpaceGenerate(int divideMethod) {
 
     SearchSpacePtr newSearchSpace(new SearchSpace(*newBTree));
     return newSearchSpace;
+}
+
+std::vector<SearchSpacePtr > SearchSpace::searchSpaceSeriesGenerate(int leftNum) {
+    isPreviouslyCalculated = true;
+    OrderedQueue<SearchSpaceComparator > oq;
+    for (int divMethod = 1; divMethod < currentDivideRange - 1; ++divMethod) {
+        SearchSpacePtr ssPtr= searchSpaceGenerate(divMethod);
+        SearchSpaceComparator ssComp(ssPtr);
+        oq.push(ssComp);
+        if (oq.size() > leftNum) oq.pop_back();
+    }
+    int left = min(leftNum , oq.size());
+    std::vector<SearchSpacePtr > vec;
+    for (int i = 0; i < left; ++i) {
+        vec.push_back(oq.val_front().ssPtr);
+        oq.pop_front();
+    }
+    oq.clearAll();
+    return vec;
 }
 
 int SearchSpace::getTotalError() {
@@ -206,7 +233,7 @@ void SearchSpace::printSearchSpaceHelper(
                 cout << "drop";
                 break;
             default:
-                cout << "this shou never be run";
+                cout << "this should never be reached";
                 assert(-1);
                 break;
         }

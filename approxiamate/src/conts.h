@@ -12,6 +12,8 @@
 //--------search.h
 #define NODE_SIZE 10
 
+#define WIDTH_PRE_LEVEL 3
+
 
 //--------boolean_function.h
 #define PORT_SIZE 10

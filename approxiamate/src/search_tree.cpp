@@ -70,10 +70,43 @@ SearchSpacePtr SearchTree::getRootSpace() {
     return (mtree->valueOf(mtree->root()));
 }
 
+SearchSpacePtr SearchTree::getNextSearchSpace_BFS() {
+    SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
+    if ( !currentSearchSpace.isCalculatedInAdvanced() ) {
+        std::vector<SearchSpacePtr > vec = currentSearchSpace.searchSpaceSeriesGenerate(WIDTH_PRE_LEVEL);
+        for (auto iter : vec ) {
+            mtree->addAsChildren(currentVertexID, vec.back());
+            vec.pop_back();
+        }
+    }
+    if ( ! mtree->getChild(currentVertexID).empty() ) {
+        std::vector<Tree<SearchSpace>::VertexID_t > vec = mtree->getChild(currentVertexID);
+        currentVertexID = vec.back();
+        SearchSpacePtr ssPtr;
+        ssPtr = mtree->valueOf(currentVertexID);
+        return ssPtr;
+    } else {
+        if (currentSearchSpace.isAtLowestLevel())
+            if ((recordBestSearchSpacePtr== nullptr)
+                || (recordBestSearchSpacePtr == mtree->valueOf(mtree->root()))
+                || (currentSearchSpace.getTotalError() < recordBestSearchSpacePtr->getTotalError())) {
+                recordBestSearchSpacePtr = mtree->valueOf(currentVertexID);
+            }
+        if (mtree->isRoot(currentVertexID)) return nullptr;
+        Tree<SearchSpace >::VertexID_t tmpID;
+        tmpID = mtree->getParent(currentVertexID);
+        mtree->valueOf(currentVertexID).reset();
+        mtree->chopSubTree(currentVertexID);
+        currentVertexID = tmpID;
+        return getNextSearchSpace_BFS();
+    }
+}
+
 SearchSpacePtr SearchTree::getNextSearchSpace() {
     SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
     SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate();
 
+    // FIXME 17.02.28 bad logic, a more clear expression is needed
     if (newSpace!=nullptr) {
         bool flag=false;
         if (newSpace->isAtLowestLevel()) {

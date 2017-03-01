@@ -76,3 +76,69 @@ TruthTable writeApproxBlifFileByTruthTable(TruthTable &truthTab, string BlifFile
 
     return finalTruthTab;
 }
+
+TruthTable calculApproxTruthTable_BFS(TruthTable &truthTab) {
+
+    int portSize=truthTab.numInput();
+    int *portName=new int[portSize];
+    for (int i = 0; i < portSize; ++i) portName[i]=1;
+    int truthTableSize = (1 << portSize);
+    int *truthTable=new int[truthTableSize];
+    for (int i = 0; i < truthTableSize; ++i) truthTable[i]=(int)truthTab[i];
+
+    BooleanFunction initBF(portName, portSize, truthTable);
+    SearchTree wholeSearch(initBF);
+
+    delete[] portName;
+    delete[] truthTable;
+
+    SearchSpacePtr ssPtr;
+    wholeSearch.getRootSpace()->printSearchSpace(); //===================
+    while ((ssPtr=wholeSearch.getNextSearchSpace_BFS())!= nullptr) {
+        ssPtr->printSearchSpace(); //=========================
+    }
+    ssPtr=wholeSearch.getBestSpace();
+    BooleanFunction finalBF(*(ssPtr->getFinalBooleanFuntion()));
+    truthTable=finalBF.getTruthTable();
+
+    TruthTable finalTruthTab(truthTab);
+
+    for (int i = 0; i < truthTableSize; ++i)
+        finalTruthTab[i]=truthTable[i];
+
+    return finalTruthTab;
+
+}
+
+
+TruthTable writeApproxBlifFileByTruthTable_BFS(TruthTable &truthTab, string BlifFileName) {
+
+    int portSize=truthTab.numInput();
+    int *portName=new int[portSize];
+    for (int i = 0; i < portSize; ++i) portName[i]=1;
+    int truthTableSize = (1 << portSize);
+    int *truthTable=new int[truthTableSize];
+    for (int i = 0; i < truthTableSize; ++i) truthTable[i]=(int)truthTab[i];
+
+    BooleanFunction initBF(portName, portSize, truthTable);
+    SearchTree wholeSearch(initBF);
+
+    delete[] portName;
+    delete[] truthTable;
+
+    SearchSpacePtr ssPtr;
+    while ((ssPtr=wholeSearch.getNextSearchSpace_BFS())!= nullptr) {
+    }
+    ssPtr=wholeSearch.getBestSpace();
+    ssPtr->generateBlifFile(BlifFileName, truthTab);
+    //ssPtr->printSearchSpace();
+    BooleanFunction finalBF(*(ssPtr->getFinalBooleanFuntion()));
+    truthTable=finalBF.getTruthTable();
+
+    TruthTable finalTruthTab(truthTab);
+
+    for (int i = 0; i < truthTableSize; ++i)
+        finalTruthTab[i]=truthTable[i];
+
+    return finalTruthTab;
+}

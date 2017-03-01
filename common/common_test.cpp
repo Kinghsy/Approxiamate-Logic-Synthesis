@@ -6,6 +6,7 @@
 
 #include "generator.h"
 #include "dataset.h"
+#include "OrderedQueue.h"
 
 #include <iostream>
 
@@ -67,4 +68,50 @@ TEST(SORTABLEDATASET, SORT) {
     }
     cout << endl;
 #undef data_
+}
+
+TEST(OrderedQueue, TestCase1) {
+    int data[]={1,6,2,4,5,3,9,7,8};
+    int size = 9;
+    OrderedQueue<int > q;
+    for (int i = 0; i < size; ++i) {
+        q.push(data[i]);
+    }
+    for (int i = 0; i < size; ++i) {
+        ASSERT_EQ(i+1, q.val_front());
+        q.pop_front();
+    }
+}
+
+typedef int* intPtr;
+class IntPtrWhole {
+public:
+    intPtr ip;
+    friend bool operator>(const IntPtrWhole &a, const IntPtrWhole &b) {
+        return (*(a.ip) < *(b.ip));
+    }
+    friend bool operator<(const IntPtrWhole &a, const IntPtrWhole &b) {
+        return (*(a.ip) > *(b.ip));
+    }
+    void operator=(const IntPtrWhole &a) {
+        ip = a.ip;
+    }
+    IntPtrWhole() {}
+    IntPtrWhole(const intPtr& intPointer) {
+        ip = intPointer;
+    }
+    int val() { return *ip; }
+};
+
+TEST(OrderedQueue, TestCase2) {
+    int data[]={1,6,2,4,5,3,9,7,8};
+    int size = 9;
+    OrderedQueue<IntPtrWhole > q;
+    for (int i = 0; i < size; ++i) {
+        q.push(IntPtrWhole(&(data[i])));
+    }
+    for (int i = size; i > 0; i--) {
+        ASSERT_EQ(i, q.val_front().val());
+        q.pop_front();
+    }
 }
