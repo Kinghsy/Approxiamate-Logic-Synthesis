@@ -12,6 +12,7 @@ if(Boost_FOUND)
 endif()
 
 include_directories(lib/GTest/googletest/include)
+include_directories(lib/abc/include)
 include_directories(common)
 
 add_subdirectory(lib/GTest)
