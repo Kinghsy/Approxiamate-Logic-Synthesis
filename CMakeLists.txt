@@ -36,4 +36,6 @@ add_subdirectory(driver)
 
 add_subdirectory(util/subDecCal)
 
+add_subdirectory(util/abc_demo)
+
 
