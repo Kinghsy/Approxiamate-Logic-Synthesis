@@ -21,7 +21,7 @@ set(SOURCE_LIB
         pattern_gen.cpp pattern_gen.h
         )
 
-add_library(mffc ${SOURCE_LIB}        )
+add_library(mffc ${SOURCE_LIB})
 
 add_executable(mffc_test ${SOURCE_DRIVER})
 

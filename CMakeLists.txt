@@ -3,6 +3,8 @@ project(VE490)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -std=c++11")
 
+MESSAGE( STATUS "CMAKE_SOURCE_DIR: " ${CMAKE_SOURCE_DIR} )
+
 find_package(Boost COMPONENTS system filesystem REQUIRED)
 if(Boost_FOUND)
     message(STATUS "Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
@@ -35,7 +37,7 @@ add_subdirectory(policy)
 add_subdirectory(driver)
 
 add_subdirectory(util/subDecCal)
-
 add_subdirectory(util/abc_demo)
+add_subdirectory(util/blif_info)
 
 
