@@ -179,6 +179,7 @@ public:
     SearchSpacePtr getNextSearchSpace(); // asking current search space could generate a new one or nor,
                                         // if could, finish current generating. Back to his parent.
     SearchSpacePtr getNextSearchSpace_BFS();
+    SearchSpacePtr getNextSearchSpace_Full();
     SearchSpacePtr getNextSearchSpace(int method);
     SearchSpacePtr getCurrentSearchSpace(); //
     SearchSpacePtr getRootSpace();

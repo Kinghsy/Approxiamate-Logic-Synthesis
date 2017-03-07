@@ -139,6 +139,36 @@ SearchSpacePtr SearchTree::getNextSearchSpace() {
     return newSpace;
 }
 
+SearchSpacePtr SearchTree::getNextSearchSpace_Full() {
+    SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
+    SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate();
+
+    // FIXME 17.02.28 bad logic, a more clear expression is needed
+    if (newSpace!=nullptr) {
+        bool flag=false;
+        if (newSpace->isAtLowestLevel()) {
+            if ((recordBestSearchSpacePtr== nullptr)
+                || (recordBestSearchSpacePtr == mtree->valueOf(mtree->root()))
+                || (newSpace->getTotalError() < recordBestSearchSpacePtr->getTotalError())) {
+                recordBestSearchSpacePtr = newSpace;
+                flag = true;
+            }
+        }
+        mtree->addAsChildren(currentVertexID, newSpace);
+        vector<Tree<SearchSpacePtr>::VertexID_t > vec=mtree->getChild(currentVertexID);
+        currentVertexID = *(vec.end()-1);
+    } else {
+        if (mtree->isRoot(currentVertexID)) return nullptr;
+        Tree<SearchSpace>::VertexID_t tmpID;
+        tmpID=mtree->getParent(currentVertexID);
+        mtree->valueOf(currentVertexID).reset();
+        mtree->chopSubTree(currentVertexID);
+        currentVertexID=tmpID;
+        return getNextSearchSpace();
+    }
+    return newSpace;
+}
+
 SearchSpacePtr SearchTree::getNextSearchSpace(int method) {
     SearchSpace& currentSearchSpace = *(mtree->valueOf(currentVertexID));
     SearchSpacePtr newSpace = currentSearchSpace.searchSpaceGenerate(method);
