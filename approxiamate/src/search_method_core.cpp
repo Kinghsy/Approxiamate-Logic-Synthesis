@@ -142,3 +142,35 @@ TruthTable writeApproxBlifFileByTruthTable_BFS(TruthTable &truthTab, string Blif
 
     return finalTruthTab;
 }
+
+TruthTable writeApproxBlifFileByTruthTable_Full(TruthTable &truthTab, string BlifFileName) {
+
+    int portSize=truthTab.numInput();
+    int *portName=new int[portSize];
+    for (int i = 0; i < portSize; ++i) portName[i]=1;
+    int truthTableSize = (1 << portSize);
+    int *truthTable=new int[truthTableSize];
+    for (int i = 0; i < truthTableSize; ++i) truthTable[i]=(int)truthTab[i];
+
+    BooleanFunction initBF(portName, portSize, truthTable);
+    SearchTree wholeSearch(initBF);
+
+    delete[] portName;
+    delete[] truthTable;
+
+    SearchSpacePtr ssPtr;
+    while ((ssPtr=wholeSearch.getNextSearchSpace_Full())!= nullptr) {
+    }
+    ssPtr=wholeSearch.getBestSpace();
+    ssPtr->generateBlifFile(BlifFileName, truthTab);
+    //ssPtr->printSearchSpace();
+    BooleanFunction finalBF(*(ssPtr->getFinalBooleanFuntion()));
+    truthTable=finalBF.getTruthTable();
+
+    TruthTable finalTruthTab(truthTab);
+
+    for (int i = 0; i < truthTableSize; ++i)
+        finalTruthTab[i]=truthTable[i];
+
+    return finalTruthTab;
+}
