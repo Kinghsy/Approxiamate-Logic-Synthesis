@@ -1,0 +1,17 @@
+//
+// Created by tripack on 17-3-9.
+//
+
+#ifndef VE490_LUT3_H
+#define VE490_LUT3_H
+
+#include <cinttypes>
+
+constexpr uint8_t maskX1_0 = bin2int({1, 1, 1, 1, 0, 0, 0, 0});
+constexpr uint8_t maskX1_1 = ~maskX1_0;
+constexpr uint8_t maskX2_0 = bin2int({1, 1, 0, 0, 1, 1, 0, 0});
+constexpr uint8_t maskX2_1 = ~maskX2_0;
+constexpr uint8_t maskX3_0 = bin2int({1, 0, 1, 0, 1, 0, 1, 0});
+constexpr uint8_t maskX3_1 = ~maskX3_0;
+
+#endif //VE490_LUT3_H
