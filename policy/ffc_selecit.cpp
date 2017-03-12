@@ -17,7 +17,9 @@ typedef std::map<ID, Ffc> NodeFfcMap;
 typedef std::vector<Ffc> FfcCollection;
 
 FfcSelectPolicy::FfcSelectPolicy()
-        : minInput(4), maxInput(12) {}
+        : minInput(4), maxInput(8), numChoose(0) {}
+
+void FfcSelectPolicy::numAdd() { numChoose++; return; }
 
 FfcCollection filterCollection(const NodeFfcMap &collection,
                                const FfcSelectPolicy &policy);
@@ -26,20 +28,26 @@ FfcCollection filterCollection(const NodeFfcMap &collection,
 
 BlifBooleanNet::FFC
 selectFFC(const NodeFfcMap &ffcCollection,
-          const FfcSelectPolicy &policy) {
+          FfcSelectPolicy &policy) {
     FfcCollection c = filterCollection(ffcCollection, policy);
-    if (c.size() == 0) {
-        cerr << "No more candidate MFFC" << endl;
-        assert(0);
+    FfcCollection::iterator optimumFfcIte;
+    //const Ffc *optimumFfc;
+    for (int i = 0; i <= policy.numChoose; ++i) {
+        if (c.size() == 0) {
+            cerr << "No enough candidate" << endl;
+            assert(0);
+        }
+        optimumFfcIte = c.begin();
+        for(FfcCollection::iterator it = c.begin(); it != c.end(); it++ ) {
+            //if (optimumFfcIte == nullptr) optimumFfc = &ffc;
+            if ((*optimumFfcIte).nodeSet.size() < (*it).nodeSet.size())
+                optimumFfcIte = it;
+        }
+        if ( i!= policy.numChoose) c.erase(optimumFfcIte);
     }
-    const Ffc *optimumFfc = nullptr;
-    for(const auto& ffc : c) {
-        if (optimumFfc == nullptr) optimumFfc = &ffc;
-        if (optimumFfc->nodeSet.size() < ffc.nodeSet.size())
-            optimumFfc = &ffc;
-    }
-    assert(optimumFfc != nullptr);
-    return *optimumFfc;
+    policy.numAdd();
+    //assert(optimumFfc != nullptr);
+    return *optimumFfcIte;
 }
 
 FfcCollection filterCollection(const NodeFfcMap &collection,

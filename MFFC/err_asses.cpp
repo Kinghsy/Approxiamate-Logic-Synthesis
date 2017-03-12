@@ -51,9 +51,9 @@ BlifCompareResult sampleCompareBlifs(const BlifBooleanNet &model,
     }
     r.nInputs = model.nInputs();
     r.nSamples = sampleSize;
-    /*if (r.nInputs < sizeof(int) * 8 - 2)
+    if (r.nInputs < sizeof(int) * 8 - 2)
         if (sampleSize >= 1 << r.nInputs)
-            return fullCompareBlifs(model, compared);*/
+            return fullCompareBlifs(model, compared);
     vector<int> v(r.nInputs, 0);
     for (int i = 0; i < sampleSize; ++i) {
         for (int j = 0; j < v.size(); ++j) {

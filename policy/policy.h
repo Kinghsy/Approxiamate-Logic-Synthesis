@@ -10,12 +10,14 @@
 struct FfcSelectPolicy {
     int minInput;
     int maxInput;
+    int numChoose;
 
     FfcSelectPolicy();
+    void numAdd();
 };
 
 BlifBooleanNet::FFC
 selectFFC(const std::map<BlifBooleanNet::BnetNodeID, BlifBooleanNet::FFC> &ffcCollection,
-          const FfcSelectPolicy &policy = FfcSelectPolicy());
+          FfcSelectPolicy &policy);
 
 #endif //VE490_POLICY_H
