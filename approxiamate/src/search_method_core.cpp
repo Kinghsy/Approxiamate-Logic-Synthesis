@@ -9,6 +9,8 @@
 
 #include "../../common/truth_table.h"
 
+int ActivedModeApplied;
+
 using namespace std;
 
 TruthTable calculApproxTruthTable(TruthTable &truthTab) {
@@ -45,7 +47,9 @@ TruthTable calculApproxTruthTable(TruthTable &truthTab) {
 }
 
 
-TruthTable writeApproxBlifFileByTruthTable(TruthTable &truthTab, string BlifFileName) {
+TruthTable writeApproxBlifFileByTruthTable_BranchAndBound(TruthTable &truthTab, string BlifFileName) {
+
+    cout << "Branch And Bound Search Called." << endl;
 
     int portSize=truthTab.numInput();
     int *portName=new int[portSize];
@@ -113,6 +117,8 @@ TruthTable calculApproxTruthTable_BFS(TruthTable &truthTab) {
 
 TruthTable writeApproxBlifFileByTruthTable_BFS(TruthTable &truthTab, string BlifFileName) {
 
+    cout << "BFS Search Called." << endl;
+
     int portSize=truthTab.numInput();
     int *portName=new int[portSize];
     for (int i = 0; i < portSize; ++i) portName[i]=1;
@@ -145,6 +151,8 @@ TruthTable writeApproxBlifFileByTruthTable_BFS(TruthTable &truthTab, string Blif
 
 TruthTable writeApproxBlifFileByTruthTable_Full(TruthTable &truthTab, string BlifFileName) {
 
+    cout << " Full Search Called." << endl;
+
     int portSize=truthTab.numInput();
     int *portName=new int[portSize];
     for (int i = 0; i < portSize; ++i) portName[i]=1;
@@ -173,4 +181,19 @@ TruthTable writeApproxBlifFileByTruthTable_Full(TruthTable &truthTab, string Bli
         finalTruthTab[i]=truthTable[i];
 
     return finalTruthTab;
+}
+
+TruthTable writeApproxBlifFileByTruthTable(TruthTable &truthTable, std::string BlifFileName, int ActivedMode) {
+    ActivedModeApplied = ActivedMode;
+    if (ActivedMode & FULL_SEARCH) {
+        return writeApproxBlifFileByTruthTable_Full(truthTable, BlifFileName);
+    } else
+    if (ActivedMode & BRANCH_AND_BOUND) {
+        return writeApproxBlifFileByTruthTable_BranchAndBound(truthTable, BlifFileName);
+    } else
+    if (ActivedMode & BFS_SEARCH) {
+        return writeApproxBlifFileByTruthTable_BFS(truthTable, BlifFileName);
+    } else {
+        assert(0);
+    }
 }

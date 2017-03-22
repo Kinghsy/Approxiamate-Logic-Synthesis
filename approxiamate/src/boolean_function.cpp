@@ -3,6 +3,7 @@
 //
 
 #include "boolean_function.h"
+#include "search_method_core.h"
 #include <memory>
 #include <cstring>
 #include "conts.h"
@@ -266,18 +267,33 @@ tuple<BooleanFunctionPtr, BooleanFunctionPtr, int, int> BooleanFunction::divide(
 
     // maybe some errors would come this way but now sure. it mainly concerned about the usage of unique_ptr.
 
-    if ( ((get<2>(method4)<=get<2>(method1)) && (get<2>(method4)<=get<2>(method2))) && (get<2>(method4)<=get<2>(method3)) ) {
-        // method 4 is choosen.
-        return method4;
-    } else if ((get<2>(method1)<=get<2>(method2)) && (get<2>(method1)<=get<2>(method3))) {
-        // method 1 is choosen.
-        return method1;
-    } else if (get<2>(method2)<=get<2>(method3)) {
-        // method 2 is choosen.
-        return method2;
+    if (ActivedModeApplied & XOR_IGNORE) {
+        // ignore xor operation
+        if (((get<2>(method4) <= get<2>(method1)) && (get<2>(method4) <= get<2>(method2)))) {
+            // method 4 is choosen.
+            return method4;
+        } else if ((get<2>(method1) <= get<2>(method2))) {
+            // method 1 is choosen.
+            return method1;
+        } else {
+            // method 2 is choosen.
+            return method2;
+        }
     } else {
-        // method 3 is choosen.
-        return method3;
+        if (((get<2>(method4) <= get<2>(method1)) && (get<2>(method4) <= get<2>(method2))) &&
+            (get<2>(method4) <= get<2>(method3))) {
+            // method 4 is choosen.
+            return method4;
+        } else if ((get<2>(method1) <= get<2>(method2)) && (get<2>(method1) <= get<2>(method3))) {
+            // method 1 is choosen.
+            return method1;
+        } else if (get<2>(method2) <= get<2>(method3)) {
+            // method 2 is choosen.
+            return method2;
+        } else {
+            // method 3 is choosen.
+            return method3;
+        }
     }
 
 }

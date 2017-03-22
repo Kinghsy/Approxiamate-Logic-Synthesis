@@ -39,5 +39,13 @@
 class ERROR__BOOLEANFUNC_COMPARE {
 };
 
+//----------actived mode
+#define FULL_SEARCH 0x0001
+#define BRANCH_AND_BOUND 0x0002
+#define GREEDY 0x0002
+#define BFS_SEARCH 0x0004
+#define XOR_IGNORE 0x0008
+
+
 
 #endif //PROJECT_CONTS_H
