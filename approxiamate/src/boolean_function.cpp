@@ -22,6 +22,8 @@ using std::stringstream;
 using std::cout;
 
 
+int ActivedModeApplied;
+
 //======================================================================================
 
 KMap::KMap() {

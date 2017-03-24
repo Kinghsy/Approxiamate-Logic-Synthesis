@@ -48,4 +48,6 @@ class ERROR__BOOLEANFUNC_COMPARE {
 
 
 
+extern int ActivedModeApplied;
+
 #endif //PROJECT_CONTS_H

@@ -265,9 +265,10 @@ TEST(TEST_SEARCH_TREE, TC_5_BFS) {
     char ch;
     cin >> ch;
     ASSERT_EQ(ch,'y');
-}
-
+}*/
+/*
 TEST(TEST_SEARCH_TREE, TC_6) {
+    ActivedModeApplied = FULL_SEARCH;
     int portName[]={1,1,1,1,1};
     int portSize=5;
     int truthTable[]={0, 0, 0, 1, 1, 0, 1, 0,
@@ -293,8 +294,9 @@ TEST(TEST_SEARCH_TREE, TC_6) {
     char ch;
     cin >> ch;
     ASSERT_EQ(ch,'y');
-}
+}*/
 
+/*
 TEST(TEST_SEARCH_TREE, TC_6_BFS) {
     int portName[]={1,1,1,1,1};
     int portSize=5;
@@ -323,6 +325,7 @@ TEST(TEST_SEARCH_TREE, TC_6_BFS) {
     ASSERT_EQ(ch,'y');
 }
 */
+/*
 TEST(TEST_SEARCH_TREE, TC_7_random_cases_for_5_inputs) {
     int portName[5]={1,1,1,1,1};
     int portSize=5;
@@ -352,4 +355,35 @@ TEST(TEST_SEARCH_TREE, TC_7_random_cases_for_5_inputs) {
     char ch;
     cin >> ch;
     ASSERT_EQ(ch,'y');
+}*/
+
+TEST(TEST_SEARCH_TREE, TC_1_XOR_IGNORE) {
+    ActivedModeApplied = FULL_SEARCH | XOR_IGNORE ;
+    int portName[]={1,1,1,1,1};
+    int portSize=5;
+    int truthTable[]={0, 0, 0, 1, 1, 0, 1, 0,
+                      1, 0, 1, 0, 0, 0, 0, 0,
+                      1, 0, 0, 0, 0, 1, 0, 1,
+                      0, 0, 1, 0, 0, 1, 0, 0};
+    BooleanFunction initBF(portName, portSize, truthTable);
+    //delete portName;
+    //delete truthTable;
+    SearchTree whole(initBF);
+    SearchSpacePtr ssPtr;
+    cout << "---------------------------------\n";
+    whole.getRootSpace()->printSearchSpace();
+    while ((ssPtr=whole.getNextSearchSpace_Full())!= nullptr) {
+        ssPtr->printSearchSpace();
+    }
+    cout << "---------------------------------\n";
+    ssPtr=whole.getBestSpace();
+    ssPtr->printSearchSpace();
+    cout << "---------------------------------\n";
+
+    cout << "above is result, please check. (y/n)" << endl;
+    char ch;
+    cin >> ch;
+    ASSERT_EQ(ch,'y');
 }
+
+

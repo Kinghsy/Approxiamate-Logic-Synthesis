@@ -164,7 +164,7 @@ SearchSpacePtr SearchTree::getNextSearchSpace_Full() {
         mtree->valueOf(currentVertexID).reset();
         mtree->chopSubTree(currentVertexID);
         currentVertexID=tmpID;
-        return getNextSearchSpace();
+        return getNextSearchSpace_Full();
     }
     return newSpace;
 }
