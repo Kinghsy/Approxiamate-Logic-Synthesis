@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <sstream>
 
 #include "../src/search.h"
 #include "../src/conts.h"
@@ -14,6 +15,23 @@
 #include "../../MFFC/interface.h"
 
 #include <gtest/gtest.h>
+
+class StringGenerator{
+private:
+    std::string base;
+    int count;
+public:
+    StringGenerator(std::string headLine) { base = headLine; count = 0; }
+    StringGenerator() { base = "Hello"; count = 0; }
+    StringGenerator(int i) { base = "Hello"; count = i; }
+    StringGenerator(std::string headLine, int i) { base = headLine; count = i; }
+    std::string gener() {
+        std::string str;
+        str += base;
+        str += std::to_string(count);
+        return str;
+    }
+};
 
 TEST(SEARCH_METHOD_CORE_TEST, TC_1) {
 
@@ -251,7 +269,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_6) {
     ASSERT_EQ('y', 'y');
 
 }
-
+/*
 TEST(SEARCH_METHOD_CORE_TEST, TC_7) {
     BlifBooleanNet mffc("mffc.blif");
     TruthTable truthTable = mffc.truthTable();
@@ -267,4 +285,44 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_7) {
     std::cout << "\n";
     std::cout << "-------------------------------------\n";
     std::cout << "\n";
+    ASSERT_EQ('y', 'y');
+}*/
+
+TEST(SEARCH_METHOD_CORE_TEST, TC_RANDOM_CASE_1) {
+
+    srand(unsigned(time(NULL)));
+    int inputSize=int(rand()) % 7;
+    int truTabSize=(1<<inputSize);
+    int *truTab=new int[truTabSize];
+    for (int i = 0; i < truTabSize; ++i) {
+        truTab[i] = int(rand()) % 2;
+    }
+
+    std::vector<int> v;
+    for (int i = 0; i < truTabSize; ++i)
+        v.push_back(truTab[i]);
+    TruthTable initTruthTable(inputSize, v);
+
+    TruthTable finalTruthTable(
+            calculApproxTruthTable_BFS(initTruthTable)
+    );
+    std::cout << "\n";
+    std::cout << "\n";
+    std::cout << "--------initTruthTable---------------\n";
+    initTruthTable.print();
+    std::cout << "\n";
+    std::cout << "-------------------------------------\n";
+    std::cout << "\n";
+    std::cout << "--------finalTruthTable--------------\n";
+    finalTruthTable.print();
+    std::cout << "\n";
+    std::cout << "-------------------------------------\n";
+    std::cout << "\n";
+
+    std::cout << "above is result, please check. (y/n)" << std::endl;
+    char ch;
+    //std::cin >> ch;
+    delete[] truTab;
+    ASSERT_EQ('y', 'y');
+
 }
