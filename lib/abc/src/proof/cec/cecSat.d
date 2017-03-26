@@ -14,4 +14,4 @@ src/proof/cec/cecSat.d src/proof/cec/cecSat.o: src/proof/cec/cecSat.c src/aig/gi
  src/sat/satoko/utils/heap.h src/sat/satoko/utils/../types.h \
  src/sat/satoko/utils/vec/vec_sdbl.h src/sat/satoko/utils/vec/vec_int.h \
  src/sat/satoko/utils/vec/vec_uint.h src/sat/satoko/utils/vec/vec_char.h \
- src/sat/satoko/utils/vec/vec_uint.h
+ src/sat/satoko/utils/vec/vec_uint.h src/proof/cec/cec.h

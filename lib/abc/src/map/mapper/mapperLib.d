@@ -7,6 +7,6 @@ src/map/mapper/mapperLib.d src/map/mapper/mapperLib.o: src/map/mapper/mapperLib.
  src/misc/vec/vecWec.h src/aig/hop/hop.h src/aig/gia/gia.h \
  src/misc/vec/vecWec.h src/misc/util/utilCex.h src/misc/st/st.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/misc/extra/extra.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
- src/misc/util/utilNam.h src/map/mio/mio.h src/map/mapper/mapper.h \
- src/map/super/super.h src/map/mapper/mapperInt.h
+ src/misc/extra/extra.h src/base/main/abcapis.h src/base/cmd/cmd.h \
+ src/base/io/ioAbc.h src/misc/util/utilNam.h src/map/mio/mio.h \
+ src/map/mapper/mapper.h src/map/super/super.h src/map/mapper/mapperInt.h

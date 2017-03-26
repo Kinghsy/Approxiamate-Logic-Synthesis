@@ -786,6 +786,7 @@ extern ABC_DLL void               Abc_NtkFixNonDrivenNets( Abc_Ntk_t * pNtk );
 extern ABC_DLL void               Abc_NtkMakeComb( Abc_Ntk_t * pNtk, int fRemoveLatches );
 extern ABC_DLL void               Abc_NtkPermute( Abc_Ntk_t * pNtk, int fInputs, int fOutputs, int fFlops, char * pFlopPermFile );
 extern ABC_DLL void               Abc_NtkUnpermute( Abc_Ntk_t * pNtk );
+extern ABC_DLL Abc_Ntk_t *        Abc_NtkCreateFromSops( char * pName, Vec_Ptr_t * vSops );
 /*=== abcObj.c ==========================================================*/
 extern ABC_DLL Abc_Obj_t *        Abc_ObjAlloc( Abc_Ntk_t * pNtk, Abc_ObjType_t Type );
 extern ABC_DLL void               Abc_ObjRecycle( Abc_Obj_t * pObj );
@@ -825,6 +826,7 @@ extern ABC_DLL void               Abc_NtkDontCareFree( Odc_Man_t * p );
 extern ABC_DLL int                Abc_NtkDontCareCompute( Odc_Man_t * p, Abc_Obj_t * pNode, Vec_Ptr_t * vLeaves, unsigned * puTruth );
 /*=== abcPrint.c ==========================================================*/
 extern ABC_DLL float              Abc_NtkMfsTotalSwitching( Abc_Ntk_t * pNtk );
+extern ABC_DLL float              Abc_NtkMfsTotalGlitching( Abc_Ntk_t * pNtk, int nPats, int Prob, int fVerbose );
 extern ABC_DLL void               Abc_NtkPrintStats( Abc_Ntk_t * pNtk, int fFactored, int fSaveBest, int fDumpResult, int fUseLutLib, int fPrintMuxes, int fPower, int fGlitch, int fSkipBuf, int fSkipSmall, int fPrintMem );
 extern ABC_DLL void               Abc_NtkPrintIo( FILE * pFile, Abc_Ntk_t * pNtk, int fPrintFlops );
 extern ABC_DLL void               Abc_NtkPrintLatch( FILE * pFile, Abc_Ntk_t * pNtk );

@@ -8,4 +8,4 @@ src/base/bac/bacWriteVer.d src/base/bac/bacWriteVer.o: src/base/bac/bacWriteVer.
  src/misc/st/st.h src/misc/util/utilNam.h src/base/bac/bacPrs.h \
  src/map/mio/mio.h src/base/main/main.h src/base/abc/abc.h \
  src/aig/hop/hop.h src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h

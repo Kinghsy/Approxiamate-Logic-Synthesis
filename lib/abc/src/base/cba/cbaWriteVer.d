@@ -9,4 +9,4 @@ src/base/cba/cbaWriteVer.d src/base/cba/cbaWriteVer.o: src/base/cba/cbaWriteVer.
  src/base/cba/cbaTypes.h src/base/cba/cbaPrs.h src/map/mio/mio.h \
  src/base/main/main.h src/base/abc/abc.h src/aig/hop/hop.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h

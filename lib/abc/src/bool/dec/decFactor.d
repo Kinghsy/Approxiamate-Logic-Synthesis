@@ -7,7 +7,7 @@ src/bool/dec/decFactor.d src/bool/dec/decFactor.o: src/bool/dec/decFactor.c src/
  src/aig/hop/hop.h src/aig/gia/gia.h src/misc/vec/vecWec.h \
  src/misc/util/utilCex.h src/misc/st/st.h src/misc/st/stmm.h \
  src/misc/nm/nm.h src/misc/mem/mem.h src/misc/extra/extra.h \
- src/base/main/main.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
- src/misc/util/utilNam.h src/misc/mvc/mvc.h src/bool/dec/dec.h \
- src/bdd/extrab/extraBdd.h src/bdd/cudd/cuddInt.h src/bdd/cudd/cudd.h \
- src/bdd/mtr/mtr.h src/bdd/epd/epd.h
+ src/base/main/main.h src/base/main/abcapis.h src/base/cmd/cmd.h \
+ src/base/io/ioAbc.h src/misc/util/utilNam.h src/misc/mvc/mvc.h \
+ src/bool/dec/dec.h src/bdd/extrab/extraBdd.h src/bdd/cudd/cuddInt.h \
+ src/bdd/cudd/cudd.h src/bdd/mtr/mtr.h src/bdd/epd/epd.h

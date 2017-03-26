@@ -60,6 +60,7 @@ SRC +=	src/aig/gia/giaAig.c \
 	src/aig/gia/giaSatLut.c \
 	src/aig/gia/giaSatMap.c \
 	src/aig/gia/giaSatoko.c \
+	src/aig/gia/giaSat3.c \
 	src/aig/gia/giaScl.c \
 	src/aig/gia/giaScript.c \
 	src/aig/gia/giaShow.c \
@@ -81,4 +82,5 @@ SRC +=	src/aig/gia/giaAig.c \
 	src/aig/gia/giaTis.c \
 	src/aig/gia/giaTruth.c \
 	src/aig/gia/giaTsim.c \
+	src/aig/gia/giaUnate.c \
 	src/aig/gia/giaUtil.c

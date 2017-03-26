@@ -51,6 +51,7 @@ extern int         sat_solver_solve(sat_solver* s, lit* begin, lit* end, ABC_INT
 extern int         sat_solver_solve_internal(sat_solver* s);
 extern int         sat_solver_solve_lexsat(sat_solver* s, int * pLits, int nLits);
 extern int         sat_solver_minimize_assumptions( sat_solver* s, int * pLits, int nLits, int nConfLimit );
+extern int         sat_solver_minimize_assumptions2( sat_solver* s, int * pLits, int nLits, int nConfLimit );
 extern int         sat_solver_push(sat_solver* s, int p);
 extern void        sat_solver_pop(sat_solver* s);
 extern void        sat_solver_set_resource_limits(sat_solver* s, ABC_INT64_T nConfLimit, ABC_INT64_T nInsLimit, ABC_INT64_T nConfLimitGlobal, ABC_INT64_T nInsLimitGlobal);
@@ -195,6 +196,10 @@ struct sat_solver_t
     // CNF loading
     void *      pCnfMan;           // external CNF manager
     int(*pCnfFunc)(void * p, int); // external callback
+
+    // termination callback
+    int         RunId;          // SAT id in this run
+    int(*pFuncStop)(int);       // callback to terminate
 };
 
 static inline clause * clause_read( sat_solver * s, cla h )          

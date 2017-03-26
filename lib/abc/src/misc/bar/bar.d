@@ -6,5 +6,5 @@ src/misc/bar/bar.d src/misc/bar/bar.o: src/misc/bar/bar.c src/misc/util/abc_glob
  src/misc/vec/vecMem.h src/misc/vec/vecWec.h src/aig/hop/hop.h \
  src/aig/gia/gia.h src/misc/vec/vecWec.h src/misc/util/utilCex.h \
  src/misc/st/st.h src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/misc/extra/extra.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
- src/misc/util/utilNam.h src/misc/bar/bar.h
+ src/misc/extra/extra.h src/base/main/abcapis.h src/base/cmd/cmd.h \
+ src/base/io/ioAbc.h src/misc/util/utilNam.h src/misc/bar/bar.h

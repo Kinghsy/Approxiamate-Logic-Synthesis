@@ -12,5 +12,5 @@ src/opt/lpk/lpkCore.d src/opt/lpk/lpkCore.o: src/opt/lpk/lpkCore.c src/opt/lpk/l
  src/bdd/epd/epd.h src/map/if/if.h src/misc/tim/tim.h \
  src/misc/util/utilNam.h src/misc/vec/vecMem.h src/misc/util/utilTruth.h \
  src/opt/dau/dau.h src/misc/vec/vecHash.h src/opt/lpk/lpk.h \
- src/bool/kit/cloud.h src/base/main/main.h src/base/cmd/cmd.h \
- src/base/io/ioAbc.h
+ src/bool/kit/cloud.h src/base/main/main.h src/base/main/abcapis.h \
+ src/base/cmd/cmd.h src/base/io/ioAbc.h

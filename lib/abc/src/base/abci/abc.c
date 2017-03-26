@@ -122,6 +122,7 @@ static int Abc_CommandMfs                    ( Abc_Frame_t * pAbc, int argc, cha
 static int Abc_CommandMfs2                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandMfs3                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandTrace                  ( Abc_Frame_t * pAbc, int argc, char ** argv );
+static int Abc_CommandGlitch                 ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandSpeedup                ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandPowerdown              ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAddBuffs               ( Abc_Frame_t * pAbc, int argc, char ** argv );
@@ -129,6 +130,7 @@ static int Abc_CommandMerge                  ( Abc_Frame_t * pAbc, int argc, cha
 static int Abc_CommandTestDec                ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandTestNpn                ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandTestRPO                ( Abc_Frame_t * pAbc, int argc, char ** argv );
+static int Abc_CommandTestRun                ( Abc_Frame_t * pAbc, int argc, char ** argv );
 
 static int Abc_CommandRewrite                ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandRefactor               ( Abc_Frame_t * pAbc, int argc, char ** argv );
@@ -312,10 +314,12 @@ static int Abc_CommandDSat                   ( Abc_Frame_t * pAbc, int argc, cha
 static int Abc_CommandXSat                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandSatoko                 ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9Satoko             ( Abc_Frame_t * pAbc, int argc, char ** argv );
+static int Abc_CommandAbc9Sat3               ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandPSat                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandProve                  ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandIProve                 ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandDebug                  ( Abc_Frame_t * pAbc, int argc, char ** argv );
+static int Abc_CommandEco                    ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandBmc                    ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandBmc2                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandBmc3                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
@@ -366,6 +370,7 @@ static int Abc_CommandAbc9PFan               ( Abc_Frame_t * pAbc, int argc, cha
 static int Abc_CommandAbc9PSig               ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9Status             ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9MuxProfile         ( Abc_Frame_t * pAbc, int argc, char ** argv );
+static int Abc_CommandAbc9Unate              ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9Rex2Gia            ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9RexWalk            ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9Show               ( Abc_Frame_t * pAbc, int argc, char ** argv );
@@ -454,6 +459,7 @@ static int Abc_CommandAbc9ReachN             ( Abc_Frame_t * pAbc, int argc, cha
 static int Abc_CommandAbc9ReachY             ( Abc_Frame_t * pAbc, int argc, char ** argv );
 #endif
 static int Abc_CommandAbc9Undo               ( Abc_Frame_t * pAbc, int argc, char ** argv );
+static int Abc_CommandAbc9Mesh               ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9Iso                ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9IsoNpn             ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandAbc9IsoSt              ( Abc_Frame_t * pAbc, int argc, char ** argv );
@@ -772,6 +778,7 @@ void Abc_Init( Abc_Frame_t * pAbc )
     Cmd_CommandAdd( pAbc, "Synthesis",    "mfs2",          Abc_CommandMfs2,             1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "mfs3",          Abc_CommandMfs3,             1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "trace",         Abc_CommandTrace,            0 );
+    Cmd_CommandAdd( pAbc, "Synthesis",    "glitch",        Abc_CommandGlitch,           0 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "speedup",       Abc_CommandSpeedup,          1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "powerdown",     Abc_CommandPowerdown,        1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "addbuffs",      Abc_CommandAddBuffs,         1 );
@@ -779,6 +786,7 @@ void Abc_Init( Abc_Frame_t * pAbc )
     Cmd_CommandAdd( pAbc, "Synthesis",    "testdec",       Abc_CommandTestDec,          0 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "testnpn",       Abc_CommandTestNpn,          0 );
     Cmd_CommandAdd( pAbc, "LogiCS",       "testrpo",       Abc_CommandTestRPO,          0 );
+    Cmd_CommandAdd( pAbc, "Synthesis",    "testrun",       Abc_CommandTestRun,          0 );
 
     Cmd_CommandAdd( pAbc, "Synthesis",    "rewrite",       Abc_CommandRewrite,          1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "refactor",      Abc_CommandRefactor,         1 );
@@ -962,10 +970,12 @@ void Abc_Init( Abc_Frame_t * pAbc )
     Cmd_CommandAdd( pAbc, "Verification", "xsat",          Abc_CommandXSat,             0 );
     Cmd_CommandAdd( pAbc, "Verification", "satoko",        Abc_CommandSatoko,           0 );
     Cmd_CommandAdd( pAbc, "Verification", "&satoko",       Abc_CommandAbc9Satoko,       0 );
+    Cmd_CommandAdd( pAbc, "Verification", "&sat3",         Abc_CommandAbc9Sat3,         0 );
     Cmd_CommandAdd( pAbc, "Verification", "psat",          Abc_CommandPSat,             0 );
     Cmd_CommandAdd( pAbc, "Verification", "prove",         Abc_CommandProve,            1 );
     Cmd_CommandAdd( pAbc, "Verification", "iprove",        Abc_CommandIProve,           1 );
     Cmd_CommandAdd( pAbc, "Verification", "debug",         Abc_CommandDebug,            0 );
+    Cmd_CommandAdd( pAbc, "Verification", "eco",           Abc_CommandEco,              0 );
     Cmd_CommandAdd( pAbc, "Verification", "bmc",           Abc_CommandBmc,              0 );
     Cmd_CommandAdd( pAbc, "Verification", "bmc2",          Abc_CommandBmc2,             0 );
     Cmd_CommandAdd( pAbc, "Verification", "bmc3",          Abc_CommandBmc3,             1 );
@@ -1015,6 +1025,7 @@ void Abc_Init( Abc_Frame_t * pAbc )
     Cmd_CommandAdd( pAbc, "ABC9",         "&psig",         Abc_CommandAbc9PSig,         0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&status",       Abc_CommandAbc9Status,       0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&profile",      Abc_CommandAbc9MuxProfile,   0 );
+    Cmd_CommandAdd( pAbc, "ABC9",         "&unate",        Abc_CommandAbc9Unate,        0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&rex2gia",      Abc_CommandAbc9Rex2Gia,      0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&rexwalk",      Abc_CommandAbc9RexWalk,      0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&show",         Abc_CommandAbc9Show,         0 );
@@ -1103,6 +1114,7 @@ void Abc_Init( Abc_Frame_t * pAbc )
     Cmd_CommandAdd( pAbc, "ABC9",         "&reachy",       Abc_CommandAbc9ReachY,       0 );
 #endif
     Cmd_CommandAdd( pAbc, "ABC9",         "&undo",         Abc_CommandAbc9Undo,         0 );
+    Cmd_CommandAdd( pAbc, "ABC9",         "&mesh",         Abc_CommandAbc9Mesh,         0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&iso",          Abc_CommandAbc9Iso,          0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&isonpn",       Abc_CommandAbc9IsoNpn,       0 );
     Cmd_CommandAdd( pAbc, "ABC9",         "&isost",        Abc_CommandAbc9IsoSt,        0 );
@@ -5718,6 +5730,88 @@ usage:
   SeeAlso     []
 
 ***********************************************************************/
+int Abc_CommandGlitch( Abc_Frame_t * pAbc, int argc, char ** argv )
+{
+    Abc_Ntk_t * pNtk = Abc_FrameReadNtk(pAbc);
+    int nPats    = 4000;
+    int Prob     =    8;
+    int fVerbose =    1;
+    int c;
+
+    // set defaults
+    Extra_UtilGetoptReset();
+    while ( ( c = Extra_UtilGetopt( argc, argv, "NPvh" ) ) != EOF )
+    {
+        switch ( c )
+        {
+        case 'N':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-N\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            nPats = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( nPats < 1 )
+                goto usage;
+            break;
+        case 'P':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-P\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            Prob = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( Prob < 1 )
+                goto usage;
+            break;
+        case 'v':
+            fVerbose ^= 1;
+            break;
+        case 'h':
+            goto usage;
+        default:
+            goto usage;
+        }
+    }
+    if ( pNtk == NULL )
+    {
+        Abc_Print( -1, "Empty network.\n" );
+        return 1;
+    }
+    if ( !Abc_NtkIsLogic(pNtk) )
+    {
+        Abc_Print( -1, "This command can only be applied to a mapped logic network.\n" );
+        return 1;
+    }
+    if ( Abc_NtkIsMappedLogic(pNtk) || Abc_NtkGetFaninMax(pNtk) <= 6 )
+        Abc_Print( 1, "Glitching adds %7.2f %% of signal transitions, compared to switching.\n", Abc_NtkMfsTotalGlitching(pNtk, nPats, Prob, fVerbose) );
+    else
+        printf( "Currently computes glitching only for K-LUT networks with K <= 6.\n" );
+    return 0;
+
+usage:
+    Abc_Print( -2, "usage: glitch [-NP <num>] [-vh]\n" );
+    Abc_Print( -2, "\t           comparing glitching activity to switching activity\n" );
+    Abc_Print( -2, "\t-N <num> : the number of random patterns to use (0 < num < 1000000) [default = %d]\n", nPats );
+    Abc_Print( -2, "\t-P <num> : once in how many cycles an input changes its value [default = %d]\n", Prob );
+    Abc_Print( -2, "\t-v       : toggle printing optimization summary [default = %s]\n", fVerbose? "yes": "no" );
+    Abc_Print( -2, "\t-h       : print the command usage\n");
+    return 1;
+}
+
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
 int Abc_CommandSpeedup( Abc_Frame_t * pAbc, int argc, char ** argv )
 {
     Abc_Ntk_t * pNtk, * pNtkRes;
@@ -6418,6 +6512,53 @@ usage:
     Abc_Print(-2, "\t<file>   : a text file with truth tables in hexadecimal, listed one per line,\n");
     Abc_Print(-2, "\t           or a binary file with an array of truth tables (in this case,\n");
     Abc_Print(-2, "\t           -N <num> is required to determine how many functions are stored)\n");
+    return 1;
+}
+
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
+int Abc_CommandTestRun( Abc_Frame_t * pAbc, int argc, char ** argv )
+{
+    extern void Acb_NtkTestRun( char * pFileNames[3], int fVerbose );
+    int c, fVerbose = 0;
+    Extra_UtilGetoptReset();
+    while ( ( c = Extra_UtilGetopt( argc, argv, "vh" ) ) != EOF )
+    {
+        switch ( c )
+        {
+        case 'v':
+            fVerbose ^= 1;
+            break;
+        case 'h':
+            goto usage;
+        default:
+            goto usage;
+        }
+    }
+//    pArgvNew = argv + globalUtilOptind;
+//    nArgcNew = argc - globalUtilOptind;
+    if ( argc - globalUtilOptind != 3 )
+    {
+        Abc_Print( 1, "Expecting three file names on the command line.\n" );
+        goto usage;
+    }
+    Acb_NtkTestRun( argv + globalUtilOptind, fVerbose );
+    return 0;
+
+usage:
+    Abc_Print( -2, "usage: testrun [-vh]\n" );
+    Abc_Print( -2, "\t         performs testing by running internal procedures\n" );
+    Abc_Print( -2, "\t-v     : toggle printing verbose information [default = %s]\n", fVerbose? "yes": "no" );
+    Abc_Print( -2, "\t-h     : print the command usage\n");
     return 1;
 }
 
@@ -23479,6 +23620,74 @@ usage:
   SeeAlso     []
 
 ***********************************************************************/
+int Abc_CommandAbc9Sat3( Abc_Frame_t * pAbc, int argc, char ** argv )
+{
+    extern void Gia_ManSat3Call( Gia_Man_t * p, int fSplit );
+    int c, fSplit = 0, fIncrem = 0;
+
+    satoko_opts_t opts;
+    satoko_default_opts(&opts);
+    Extra_UtilGetoptReset();
+    while ( ( c = Extra_UtilGetopt( argc, argv, "Csivh" ) ) != EOF )
+    {
+        switch ( c )
+        {
+        case 'C':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-C\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            opts.conf_limit = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( opts.conf_limit < 0 )
+                goto usage;
+            break;
+        case 's':
+            fSplit ^= 1;
+            break;
+        case 'i':
+            fIncrem ^= 1;
+            break;
+        case 'v':
+            opts.verbose ^= 1;
+            break;
+        case 'h':
+            goto usage;
+
+        default:
+            goto usage;
+        }
+    }
+    if ( pAbc->pGia == NULL )
+    {
+        Abc_Print( -1, "Abc_CommandAbc9Sat3(): There is no AIG.\n" );
+        return 1;
+    }
+    Gia_ManSat3Call( pAbc->pGia, fSplit );
+    return 0;
+
+usage:
+    Abc_Print( -2, "usage: &sat3 [-C num] [-sivh]\n" );
+    Abc_Print( -2, "\t-C num : limit on the number of conflicts [default = %d]\n", opts.conf_limit );
+    Abc_Print( -2, "\t-s     : split multi-output miter into individual outputs [default = %s]\n", fSplit? "yes": "no" );
+    Abc_Print( -2, "\t-i     : split multi-output miter and solve incrementally [default = %s]\n", fIncrem? "yes": "no" );
+    Abc_Print( -2, "\t-v     : prints verbose information [default = %s]\n", opts.verbose? "yes": "no" );
+    Abc_Print( -2, "\t-h     : print the command usage\n");
+    return 1;
+}
+
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
 int Abc_CommandPSat( Abc_Frame_t * pAbc, int argc, char ** argv )
 {
     Abc_Ntk_t * pNtk = Abc_FrameReadNtk(pAbc);
@@ -23850,6 +24059,50 @@ int Abc_CommandDebug( Abc_Frame_t * pAbc, int argc, char ** argv )
 usage:
     Abc_Print( -2, "usage: debug [-h]\n" );
     Abc_Print( -2, "\t        performs automated debugging of the given procedure\n" );
+    Abc_Print( -2, "\t-h    : print the command usage\n");
+    return 1;
+}
+
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
+int Abc_CommandEco( Abc_Frame_t * pAbc, int argc, char ** argv )
+{
+    extern void Abc_NtkEco( char * pFileNames[3] );
+    char * pFileNames[3] = {NULL};  int c;
+    // set defaults
+    Extra_UtilGetoptReset();
+    while ( ( c = Extra_UtilGetopt( argc, argv, "h" ) ) != EOF )
+    {
+        switch ( c )
+        {
+        case 'h':
+            goto usage;
+        default:
+            goto usage;
+        }
+    }
+    if ( globalUtilOptind + 3 != argc )
+    {
+        Abc_Print( -1, "Expecting three file names on the command line.\n" );
+        return 1;
+    }
+    for ( c = 0; c < 3; c++ )
+        pFileNames[c] = argv[globalUtilOptind+c];
+    Abc_NtkEco( pFileNames );
+    return 0;
+
+usage:
+    Abc_Print( -2, "usage: eco [-h]\n" );
+    Abc_Print( -2, "\t        performs experimental ECO computation\n" );
     Abc_Print( -2, "\t-h    : print the command usage\n");
     return 1;
 }
@@ -28676,6 +28929,55 @@ usage:
   SeeAlso     []
 
 ***********************************************************************/
+int Abc_CommandAbc9Unate( Abc_Frame_t * pAbc, int argc, char ** argv )
+{
+    extern void Gia_ManCheckUnateTest( Gia_Man_t * p, int fComputeAll, int fVerbose );
+    int c, fComputeAll = 0, fVerbose = 0;
+    Extra_UtilGetoptReset();
+    while ( ( c = Extra_UtilGetopt( argc, argv, "avh" ) ) != EOF )
+    {
+        switch ( c )
+        {
+        case 'a':
+            fComputeAll ^= 1;
+            break;
+        case 'v':
+            fVerbose ^= 1;
+            break;
+        case 'h':
+            goto usage;
+        default:
+            goto usage;
+        }
+    }
+    if ( pAbc->pGia == NULL )
+    {
+        Abc_Print( -1, "Abc_CommandAbc9Unate(): There is no AIG.\n" );
+        return 1;
+    }
+    Gia_ManCheckUnateTest( pAbc->pGia, fComputeAll, fVerbose );
+    return 0;
+
+usage:
+    Abc_Print( -2, "usage: &unate [-avh]\n" );
+    Abc_Print( -2, "\t         prints info about unatements of CO funcs in terms of CI vars\n" );
+    Abc_Print( -2, "\t-a     : toggle using efficient computation for all pairs [default = %s]\n", fComputeAll? "yes": "no" );
+    Abc_Print( -2, "\t-v     : toggle verbose output [default = %s]\n", fVerbose? "yes": "no" );
+    Abc_Print( -2, "\t-h     : print the command usage\n");
+    return 1;
+}
+
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
 int Abc_CommandAbc9Rex2Gia( Abc_Frame_t * pAbc, int argc, char ** argv )
 {
     extern Gia_Man_t * Gia_ManRex2Gia( char * pStr, int fOrder, int fVerbose );
@@ -32464,13 +32766,14 @@ usage:
 ***********************************************************************/
 int Abc_CommandAbc9Fraig( Abc_Frame_t * pAbc, int argc, char ** argv )
 {
+    extern Gia_Man_t * Cec2_ManSimulateTest( Gia_Man_t * p, Cec_ParFra_t * pPars );
     Cec_ParFra_t ParsFra, * pPars = &ParsFra;
     Gia_Man_t * pTemp;
-    int c;
+    int c, fUseAlgo = 0;
     Cec_ManFraSetDefaultParams( pPars );
     pPars->fSatSweeping = 1;
     Extra_UtilGetoptReset();
-    while ( ( c = Extra_UtilGetopt( argc, argv, "WRILDCrmdcwvh" ) ) != EOF )
+    while ( ( c = Extra_UtilGetopt( argc, argv, "WRILDCrmdcnwvh" ) ) != EOF )
     {
         switch ( c )
         {
@@ -32552,6 +32855,9 @@ int Abc_CommandAbc9Fraig( Abc_Frame_t * pAbc, int argc, char ** argv )
         case 'c':
             pPars->fRunCSat ^= 1;
             break;
+        case 'n':
+            fUseAlgo ^= 1;
+            break;
         case 'w':
             pPars->fVeryVerbose ^= 1;
             break;
@@ -32567,12 +32873,15 @@ int Abc_CommandAbc9Fraig( Abc_Frame_t * pAbc, int argc, char ** argv )
         Abc_Print( -1, "Abc_CommandAbc9Fraig(): There is no AIG.\n" );
         return 1;
     }
-    pTemp = Cec_ManSatSweeping( pAbc->pGia, pPars, 0 );
+    if ( fUseAlgo )
+        pTemp = Cec2_ManSimulateTest( pAbc->pGia, pPars );
+    else
+        pTemp = Cec_ManSatSweeping( pAbc->pGia, pPars, 0 );
     Abc_FrameUpdateGia( pAbc, pTemp );
     return 0;
 
 usage:
-    Abc_Print( -2, "usage: &fraig [-WRILDC <num>] [-rmdcwvh]\n" );
+    Abc_Print( -2, "usage: &fraig [-WRILDC <num>] [-rmdcnwvh]\n" );
     Abc_Print( -2, "\t         performs combinational SAT sweeping\n" );
     Abc_Print( -2, "\t-W num : the number of simulation words [default = %d]\n", pPars->nWords );
     Abc_Print( -2, "\t-R num : the number of simulation rounds [default = %d]\n", pPars->nRounds );
@@ -32584,6 +32893,7 @@ usage:
     Abc_Print( -2, "\t-m     : toggle miter vs. any circuit [default = %s]\n", pPars->fCheckMiter? "miter": "circuit" );
     Abc_Print( -2, "\t-d     : toggle using double output miters [default = %s]\n", pPars->fDualOut? "yes": "no" );
     Abc_Print( -2, "\t-c     : toggle using circuit-based solver [default = %s]\n", pPars->fRunCSat? "yes": "no" );
+    Abc_Print( -2, "\t-n     : toggle using new implementation [default = %s]\n", fUseAlgo? "yes": "no" );
     Abc_Print( -2, "\t-w     : toggle printing even more verbose information [default = %s]\n", pPars->fVeryVerbose? "yes": "no" );
     Abc_Print( -2, "\t-v     : toggle printing verbose information [default = %s]\n", pPars->fVerbose? "yes": "no" );
     Abc_Print( -2, "\t-h     : print the command usage\n");
@@ -37809,6 +38119,115 @@ usage:
     Abc_Print( -2, "usage: &undo [-h]\n" );
     Abc_Print( -2, "\t        reverses the previous AIG transformation\n" );
     Abc_Print( -2, "\t-h    : print the command usage\n");
+    return 1;
+}
+
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
+int Abc_CommandAbc9Mesh( Abc_Frame_t * pAbc, int argc, char ** argv )
+{
+    extern void Bmc_MeshTest( Gia_Man_t * p, int X, int Y, int T, int fVerbose );
+    extern void Bmc_MeshTest2( Gia_Man_t * p, int X, int Y, int T, int fVerbose );
+    int X =  4;
+    int Y =  4;
+    int T =  3;
+    int fUseSatoko = 1;
+    int c, fVerbose = 1;
+    // set defaults
+    Extra_UtilGetoptReset();
+    while ( ( c = Extra_UtilGetopt( argc, argv, "XYTsh" ) ) != EOF )
+    {
+        switch ( c )
+        {
+        case 'X':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-X\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            X = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( X < 3 )
+                goto usage;
+            break;
+        case 'Y':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-Y\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            Y = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( Y < 3 )
+                goto usage;
+            break;
+        case 'T':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-T\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            T = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( T < 2 )
+                goto usage;
+            break;
+        case 's':
+            fUseSatoko ^= 1;
+            break;
+        case 'v':
+            fVerbose ^= 1;
+            break;
+        case 'h':
+            goto usage;
+        default:
+            goto usage;
+        }
+    }
+    if ( pAbc->pGia == NULL )
+    {
+        Abc_Print( -1, "Abc_CommandAbc9Mesh(): There is no design.\n" );
+        return 1;
+    }
+    if ( Gia_ManCoNum(pAbc->pGia) != 1 )
+    {
+        Abc_Print( -1, "Currently this command expects AIG with one output.\n" );
+        return 1;
+    }
+    if ( Gia_ManCiNum(pAbc->pGia) > 20 )
+    {
+        Abc_Print( -1, "Currently this command expects AIG with no more than 20 nodes.\n" );
+        return 1;
+    }
+    if ( Gia_ManLevelNum(pAbc->pGia) > T )
+    {
+        Abc_Print( -1, "The depth of the AIG (%d) cannot be larger than the latency (%d).\n", Gia_ManLevelNum(pAbc->pGia), T );
+        return 1;
+    }
+    if ( fUseSatoko )
+        Bmc_MeshTest( pAbc->pGia, X, Y, T, fVerbose );
+    else
+        Bmc_MeshTest2( pAbc->pGia, X, Y, T, fVerbose );
+    return 0;
+
+usage:
+    Abc_Print( -2, "usage: &mesh [-XYT num] [-sh]\n" );
+    Abc_Print( -2, "\t         creates a mesh architecture for the given AIG\n" );
+    Abc_Print( -2, "\t-X num : horizontal size of the mesh (X >= 3) [default = %d]\n", X );
+    Abc_Print( -2, "\t-Y num : vertical size of the mesh (Y >= 3) [default = %d]\n", Y );
+    Abc_Print( -2, "\t-T num : the latency of the mesh (T >= 2) [default = %d]\n", T );
+    Abc_Print( -2, "\t-s     : toggle using new SAT solver Satoko [default = %s]\n", fUseSatoko? "yes": "no" );
+    Abc_Print( -2, "\t-v     : toggle printing verbose information [default = %s]\n", fVerbose? "yes": "no" );
+    Abc_Print( -2, "\t-h     : print the command usage\n");
     return 1;
 }
 

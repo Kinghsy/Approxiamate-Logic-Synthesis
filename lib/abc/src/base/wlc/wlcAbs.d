@@ -8,11 +8,11 @@ src/base/wlc/wlcAbs.d src/base/wlc/wlcAbs.o: src/base/wlc/wlcAbs.c src/base/wlc/
  src/misc/st/st.h src/misc/util/utilNam.h src/misc/mem/mem.h \
  src/misc/util/utilTruth.h src/base/main/mainInt.h src/base/main/main.h \
  src/base/abc/abc.h src/aig/hop/hop.h src/misc/st/stmm.h src/misc/nm/nm.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/tim/tim.h \
- src/map/if/if.h src/misc/vec/vecMem.h src/opt/dau/dau.h \
- src/misc/vec/vecHash.h src/aig/aig/aig.h src/proof/ssw/ssw.h \
- src/proof/fra/fra.h src/opt/dar/dar.h src/sat/bsat/satSolver.h \
- src/sat/bsat/satVec.h src/sat/bsat/satClause.h \
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
+ src/misc/tim/tim.h src/map/if/if.h src/misc/vec/vecMem.h \
+ src/opt/dau/dau.h src/misc/vec/vecHash.h src/aig/aig/aig.h \
+ src/proof/ssw/ssw.h src/proof/fra/fra.h src/opt/dar/dar.h \
+ src/sat/bsat/satSolver.h src/sat/bsat/satVec.h src/sat/bsat/satClause.h \
  src/misc/util/utilDouble.h src/aig/ioa/ioa.h src/bdd/extrab/extraBdd.h \
  src/bdd/cudd/cuddInt.h src/bdd/cudd/cudd.h src/bdd/mtr/mtr.h \
  src/bdd/epd/epd.h src/proof/pdr/pdr.h src/proof/pdr/pdrInt.h \

@@ -11,4 +11,4 @@ src/opt/sfm/sfmDec.d src/opt/sfm/sfmDec.o: src/opt/sfm/sfmDec.c src/opt/sfm/sfmI
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
  src/misc/extra/extra.h src/opt/sfm/sfm.h src/misc/util/utilTruth.h \
  src/opt/dau/dau.h src/map/mio/exp.h src/base/main/main.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h
