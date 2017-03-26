@@ -12,6 +12,7 @@
 #include "../MFFC/interface.h"
 #include "../MFFC/err_asses.h"
 #include "../approxiamate/src/search_method_core.h"
+#include "../approxiamate/src/conts.h"
 #include "../blif_replace/blif_replace.h"
 #include "../common/generator.h"
 #include "../policy/policy.h"
@@ -94,7 +95,7 @@ int main(int argc, char* agrv[]) {
 
             TruthTable initFfcTruthTable = ffc.truthTable();
             clock_t timeStart = clock();
-            TruthTable finalFfcTruthTable = writeApproxBlifFileByTruthTable_BFS(initFfcTruthTable, withFileName);
+            TruthTable finalFfcTruthTable = writeApproxBlifFileByTruthTable(initFfcTruthTable, withFileName, FULL_SEARCH | XOR_IGNORE);
             clock_t timeEnd = clock();
             cout << "    time:" << ((double) (timeEnd - timeStart)) / CLOCKS_PER_SEC << " s\n";
             replacePartialBlif(initFileName,
