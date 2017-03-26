@@ -3,6 +3,7 @@ add_executable(test_common
 
 add_library(common
         truth_table.cpp truth_table.h
+        resource.cpp resource.h
         )
 
 add_executable(template_pseudo
