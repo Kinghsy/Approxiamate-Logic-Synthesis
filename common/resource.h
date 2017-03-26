@@ -32,10 +32,13 @@ public:
     Path(const std::string& p);
     std::string toString() const;
     std::string operator/(const std::string& f) const;
+    Path sub(const std::string& f) const;
 };
 
+extern Path ProjectBase;
 extern Path McncPath;
 extern Path McncAigPath;
 extern FileClass fBlif;
+
 
 #endif //VE490_RESOURCE_H

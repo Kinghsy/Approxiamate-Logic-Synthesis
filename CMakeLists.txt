@@ -13,6 +13,9 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
+add_definitions(
+        -DPROJECT_BASE="${PROJECT_SOURCE_DIR}")
+
 include_directories(lib/GTest/googletest/include)
 include_directories(lib/abc/include)
 include_directories(common)

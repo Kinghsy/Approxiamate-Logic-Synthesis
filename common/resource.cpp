@@ -40,11 +40,9 @@ std::string FileClass::toString() const {
 
 Path::Path(const std::string &p)
         : path(p) {
-    if (path == "") {
-        path = "/";
-        return;
+    while (!path.empty() && path.back() == '/' ) {
+        path.pop_back();
     }
-    if (path.back() == '/') return;
     path += "/";
 }
 
@@ -56,6 +54,16 @@ std::string Path::operator/(const std::string &f) const {
     return path + f;
 }
 
-Path McncPath("");
-Path McncAigPath("");
+Path Path::sub(const std::string &f) const {
+    std::string s = f;
+    while (!s.empty() && s.front() == '/') {
+        s.erase(s.begin());
+    }
+    if (s.empty()) return *this;
+    return Path(this->path + s );
+}
+
+Path ProjectBase(PROJECT_BASE);
+Path McncPath = ProjectBase.sub("bin/run");
+Path McncAigPath = ProjectBase.sub("bin/run");
 FileClass fBlif("blif");
