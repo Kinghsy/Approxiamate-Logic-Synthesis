@@ -35,3 +35,7 @@
 bin/
 deprecated/
 run/
+
+# Archives
+*.rar
+*.zip

@@ -38,6 +38,9 @@ public:
 extern Path ProjectBase;
 extern Path McncPath;
 extern Path McncAigPath;
+extern Path McncFraigPath;
+extern Path Temp;
+
 extern FileClass fBlif;
 
 

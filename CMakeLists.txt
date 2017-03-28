@@ -44,5 +44,6 @@ add_subdirectory(util/subDecCal)
 add_subdirectory(util/abc_demo)
 add_subdirectory(util/blif_info)
 add_subdirectory(util/precomp)
+add_subdirectory(util/gen_benchmarks)
 
 

@@ -64,6 +64,9 @@ Path Path::sub(const std::string &f) const {
 }
 
 Path ProjectBase(PROJECT_BASE);
-Path McncPath = ProjectBase.sub("bin/run");
-Path McncAigPath = ProjectBase.sub("bin/run");
+Path McncPath = ProjectBase.sub("circuit/mcnc_original");
+Path McncAigPath = ProjectBase.sub("circuit/mcnc_aig");
+Path McncFraigPath = ProjectBase.sub("circuit/mcnc_fraig");
+Path Temp = ProjectBase.sub("bin/temp");
+gigig
 FileClass fBlif("blif");
