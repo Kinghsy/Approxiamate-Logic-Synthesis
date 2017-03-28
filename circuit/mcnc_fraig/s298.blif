@@ -1,0 +1,233 @@
+# Benchmark "s298.bench" written by ABC on Mon Mar 27 20:58:22 2017
+.model s298.bench
+.inputs G0 G1 G2
+.outputs G117 G132 G66 G118 G133 G67
+
+.latch        n20        G10  0
+.latch        n25        G11  0
+.latch        n30        G12  0
+.latch        n35        G13  0
+.latch        n40        G14  0
+.latch        n45        G15  0
+.latch        n50        G16  0
+.latch        n55        G17  0
+.latch        n60        G18  0
+.latch        n65        G19  0
+.latch        n70        G20  0
+.latch        n75        G21  0
+.latch        n80        G22  0
+.latch        n85        G23  0
+
+.names G0 G10 n20
+00 1
+.names G10 G11 n53
+00 1
+.names G10 G12 n54
+10 1
+.names G13 n54 n55_1
+11 1
+.names G10 G11 n56
+11 1
+.names n55_1 n56 n57
+00 1
+.names n53 n57 n58
+01 1
+.names G0 n58 n25
+01 1
+.names G11 G12 n60_1
+00 1
+.names G12 n56 n61
+11 1
+.names G10 G12 n62
+00 1
+.names n61 n62 n63
+00 1
+.names n60_1 n63 n64
+01 1
+.names G0 n64 n30
+01 1
+.names G13 n61 n66
+00 1
+.names G12 G13 n67
+11 1
+.names n56 n67 n68
+11 1
+.names G10 G11 n69
+10 1
+.names G12 n69 n70_1
+01 1
+.names n68 n70_1 n71
+00 1
+.names G0 n71 n72
+01 1
+.names n66 n72 n35
+01 1
+.names G0 G14 n74
+00 1
+.names G0 G23 n75_1
+00 1
+.names n74 n75_1 n76
+00 1
+.names G13 G14 n77
+11 1
+.names n70_1 n77 n78
+11 1
+.names G12 G13 n79
+01 1
+.names n69 n79 n80_1
+11 1
+.names G14 G23 n81
+00 1
+.names n80_1 n81 n82
+01 1
+.names n78 n82 n83
+00 1
+.names n76 n83 n40
+01 1
+.names G13 G14 n85_1
+10 1
+.names G11 G12 n86
+10 1
+.names G22 n86 n87
+01 1
+.names n85_1 n87 n88
+11 1
+.names G22 n85_1 n89
+11 1
+.names n60_1 n89 n90
+11 1
+.names G15 n90 n91
+00 1
+.names n88 n91 n92
+00 1
+.names G0 n92 n45
+01 1
+.names G12 G13 n94
+00 1
+.names G14 G16 n95
+10 1
+.names G13 G14 n96
+00 1
+.names n95 n96 n97
+00 1
+.names n94 n97 n98
+01 1
+.names n92 n98 n50
+01 1
+.names G13 G14 n100
+01 1
+.names n60_1 n100 n101
+11 1
+.names G11 G12 n102
+11 1
+.names G14 n102 n103
+01 1
+.names n101 n103 n104
+00 1
+.names G12 G14 n105
+11 1
+.names G17 n105 n106
+01 1
+.names n92 n106 n107
+00 1
+.names n104 n107 n108
+11 1
+.names G13 G17 n109
+10 1
+.names n85_1 n109 n110
+00 1
+.names n108 n110 n55
+11 1
+.names G14 G18 n112
+10 1
+.names G12 n112 n113
+11 1
+.names G13 G18 n114
+10 1
+.names n101 n114 n115
+00 1
+.names n85_1 n92 n116
+00 1
+.names n115 n116 n117
+11 1
+.names n113 n117 n60
+01 1
+.names G19 n105 n119
+11 1
+.names G14 n60_1 n120
+11 1
+.names n119 n120 n121
+00 1
+.names G13 n92 n122
+00 1
+.names n121 n122 n123
+11 1
+.names G13 n92 n124
+10 1
+.names G14 G19 n125
+10 1
+.names n124 n125 n126
+11 1
+.names G10 n92 n127
+11 1
+.names n126 n127 n128
+00 1
+.names n123 n128 n65
+01 1
+.names G13 n86 n130
+01 1
+.names G12 G20 n131
+10 1
+.names n130 n131 n132
+00 1
+.names G13 G20 n133
+10 1
+.names G14 n133 n134
+10 1
+.names n132 n134 n135
+11 1
+.names n92 n135 n136
+00 1
+.names n127 n136 n70
+00 1
+.names G14 G21 n138
+10 1
+.names G11 G14 n139
+00 1
+.names n85_1 n139 n140
+00 1
+.names n92 n94 n141
+00 1
+.names n140 n141 n142
+11 1
+.names n138 n142 n75
+01 1
+.names G2 G22 n144
+00 1
+.names G2 G22 n145
+11 1
+.names n144 n145 n146
+00 1
+.names G0 n146 n80
+01 1
+.names G1 G23 n148
+00 1
+.names G1 G23 n149
+11 1
+.names n148 n149 n150
+00 1
+.names G0 n150 n85
+01 1
+.names G18 G117
+1 1
+.names G20 G132
+1 1
+.names G16 G66
+1 1
+.names G19 G118
+1 1
+.names G21 G133
+1 1
+.names G17 G67
+1 1
+.end

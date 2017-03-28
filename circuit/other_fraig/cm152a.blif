@@ -1,0 +1,67 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:50 2017
+.model top
+.inputs pa pb pc pd pe pf pg ph pi pj pk
+.outputs pl
+.names pf pj n13
+10 1
+.names pi n13 n14
+11 1
+.names pk n14 n15
+11 1
+.names pg pj n16
+11 1
+.names pi n16 n17
+01 1
+.names pk n17 n18
+11 1
+.names n15 n18 n19
+00 1
+.names pi pj n20
+10 1
+.names pb n20 n21
+11 1
+.names pk n21 n22
+01 1
+.names ph pj n23
+11 1
+.names pi n23 n24
+11 1
+.names pk n24 n25
+11 1
+.names n22 n25 n26
+00 1
+.names n19 n26 n27
+11 1
+.names pi pj n28
+00 1
+.names pa n28 n29
+11 1
+.names pk n29 n30
+01 1
+.names pc pj n31
+11 1
+.names pi n31 n32
+01 1
+.names pk n32 n33
+01 1
+.names n30 n33 n34
+00 1
+.names pd pj n35
+11 1
+.names pi n35 n36
+11 1
+.names pk n36 n37
+01 1
+.names pe pj n38
+10 1
+.names pi n38 n39
+01 1
+.names pk n39 n40
+11 1
+.names n37 n40 n41
+00 1
+.names n34 n41 n42
+11 1
+.names n27 n42 pl
+11 0
+.end

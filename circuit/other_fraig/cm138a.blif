@@ -1,0 +1,37 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs pa pb pc pd pe pf
+.outputs pg ph pi pj pk pl pm pn
+.names pa pc n15
+00 1
+.names pd pe n16
+10 1
+.names pf n16 n17
+01 1
+.names pb n17 n18
+01 1
+.names n15 n18 pg
+11 0
+.names pa pc n20
+10 1
+.names n18 n20 ph
+11 0
+.names pb n17 n22
+11 1
+.names n15 n22 pi
+11 0
+.names n20 n22 pj
+11 0
+.names pa pc n25
+01 1
+.names n18 n25 pk
+11 0
+.names pa pc n27
+11 1
+.names n18 n27 pl
+11 0
+.names n22 n25 pm
+11 0
+.names n22 n27 pn
+11 0
+.end

@@ -1,0 +1,17 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs p_1gat_0_ p_6gat_3_ p_7gat_4_ p_2gat_1_ p_3gat_2_
+.outputs p_22gat_10_ p_23gat_9_
+.names p_6gat_3_ p_3gat_2_ n8
+11 1
+.names p_2gat_1_ n8 n9
+10 1
+.names p_1gat_0_ p_3gat_2_ n10
+11 1
+.names n9 n10 p_22gat_10_
+00 0
+.names p_7gat_4_ n8 n12
+10 1
+.names n9 n12 p_23gat_9_
+00 0
+.end
