@@ -7,6 +7,6 @@ src/aig/gia/giaScript.d src/aig/gia/giaScript.o: src/aig/gia/giaScript.c src/aig
  src/misc/util/utilCex.h src/aig/gia/gia.h src/misc/vec/vecWec.h \
  src/base/main/main.h src/base/abc/abc.h src/aig/hop/hop.h \
  src/aig/gia/gia.h src/misc/st/st.h src/misc/st/stmm.h src/misc/nm/nm.h \
- src/misc/mem/mem.h src/misc/extra/extra.h src/base/cmd/cmd.h \
- src/base/io/ioAbc.h src/misc/util/utilNam.h src/proof/dch/dch.h \
- src/opt/dau/dau.h
+ src/misc/mem/mem.h src/misc/extra/extra.h src/base/main/abcapis.h \
+ src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h \
+ src/proof/dch/dch.h src/opt/dau/dau.h

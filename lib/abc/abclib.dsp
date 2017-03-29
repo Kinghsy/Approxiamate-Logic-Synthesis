@@ -271,6 +271,10 @@ SOURCE=.\src\base\abci\abcDsd.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\base\abci\abcEco.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\base\abci\abcExact.c
 # End Source File
 # Begin Source File
@@ -695,6 +699,10 @@ SOURCE=.\src\base\io\ioWriteVerilog.c
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\src\base\main\abcapis.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\base\main\libSupport.c
 # End Source File
 # Begin Source File
@@ -791,11 +799,19 @@ SOURCE=.\src\base\wlc\wlcCom.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\base\wlc\wlcGraft.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\base\wlc\wlcJson.c
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\base\wlc\wlcNtk.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\wlc\wlcPth.c
 # End Source File
 # Begin Source File
 
@@ -1028,6 +1044,42 @@ SOURCE=.\src\base\exor\exorList.c
 # Begin Source File
 
 SOURCE=.\src\base\exor\exorUtil.c
+# End Source File
+# End Group
+# Begin Group "acb"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\src\base\acb\acb.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acb.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acbAbc.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acbAig.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acbCom.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acbFunc.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acbMfs.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acbUtil.c
 # End Source File
 # End Group
 # End Group
@@ -1735,6 +1787,14 @@ SOURCE=.\src\sat\bsat\satSolver2i.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\sat\bsat\satSolver3.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\sat\bsat\satSolver3.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\sat\bsat\satStore.c
 # End Source File
 # Begin Source File
@@ -1940,6 +2000,14 @@ SOURCE=.\src\sat\bmc\bmcLoad.c
 # Begin Source File
 
 SOURCE=.\src\sat\bmc\bmcMaxi.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\sat\bmc\bmcMesh.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\sat\bmc\bmcMesh2.c
 # End Source File
 # Begin Source File
 
@@ -4643,6 +4711,10 @@ SOURCE=.\src\aig\gia\giaRex.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\aig\gia\giaSat3.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\aig\gia\giaSatEdge.c
 # End Source File
 # Begin Source File
@@ -4747,6 +4819,10 @@ SOURCE=.\src\aig\gia\giaTsim.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\aig\gia\giaUnate.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\aig\gia\giaUtil.c
 # End Source File
 # End Group
@@ -4755,11 +4831,19 @@ SOURCE=.\src\aig\gia\giaUtil.c
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\src\aig\miniaig\abcOper.h
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\aig\miniaig\miniaig.h
 # End Source File
 # Begin Source File
 
 SOURCE=.\src\aig\miniaig\minilut.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\aig\miniaig\ndr.h
 # End Source File
 # End Group
 # End Group
@@ -5383,6 +5467,10 @@ SOURCE=.\src\proof\pdr\pdrTsim2.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\proof\pdr\pdrTsim3.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\proof\pdr\pdrUtil.c
 # End Source File
 # End Group
@@ -5604,6 +5692,10 @@ SOURCE=.\src\proof\ssc\sscUtil.c
 # Begin Source File
 
 SOURCE=.\src\proof\acec\acec.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\proof\acec\acec2Mult.c
 # End Source File
 # Begin Source File
 

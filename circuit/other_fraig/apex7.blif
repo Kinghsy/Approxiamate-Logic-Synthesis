@@ -1,0 +1,487 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs pdel1 pratr pbull1 pbull0 pwatch povacc pverr_n porwd_n pvlenesr \
+ pmmerr paccrpy pvacc pcat4 pvst1 pcapsd pcat3 pcat2 pcat1 plsd pvst0 pcat0 \
+ pibt2 pkbg_n pmarssr pend pvsumesr pbull5 ppluto4 pstar2 pbull4 ppluto5 \
+ ppy pstar3 pbull3 pcomppar pibt1 pstar0 pbull2 pibt0 pstar1 ppluto0 pfbi \
+ powl_n ppluto1 piclr ppluto2 pbull6 pcat5 ppluto3
+.outputs pbull2_p pend_p pbull3_p porwd_f pbull4_p ppluto3_p pwatch_p \
+ pbull5_p pbull6_p ppluto5_p ppy_p ppluto4_p plsd_p pvlenesr_p pfbi_p \
+ pstar1_p pvsumesr_p paccrpy_p pkbg_f pmarssr_p pstar0_p pstar3_p pdel1_p \
+ pstar2_p pvst0_p pcomppar_p powl_f psdo pvst1_p ppluto1_p pratr_p \
+ ppluto0_p povacc_p ppluto2_p pbull0_p pverr_f pbull1_p
+.names pwatch powl_n n87
+11 1
+.names pbull2 n87 n88
+01 1
+.names pbull0 n88 n89
+11 1
+.names pbull1 n89 n90
+11 1
+.names pbull0 powl_n n91
+01 1
+.names pbull1 powl_n n92
+01 1
+.names pwatch powl_n n93
+01 1
+.names n92 n93 n94
+00 1
+.names n91 n94 n95
+01 1
+.names pbull2 n95 n96
+10 1
+.names n90 n96 pbull2_p
+00 0
+.names pfbi powl_n n98
+11 1
+.names pstar0 pstar1 n99
+11 1
+.names pstar2 n99 n100
+01 1
+.names n98 n100 n101
+10 1
+.names pibt2 pibt1 n102
+01 1
+.names pcat0 n102 n103
+01 1
+.names pibt0 n103 n104
+01 1
+.names pibt2 pibt0 n105
+10 1
+.names pibt1 n105 n106
+11 1
+.names pcat4 n106 n107
+01 1
+.names pibt2 pibt0 n108
+11 1
+.names pibt1 n108 n109
+01 1
+.names pcat3 n109 n110
+01 1
+.names n107 n110 n111
+00 1
+.names n104 n111 n112
+01 1
+.names pibt1 n105 n113
+01 1
+.names pcat2 n113 n114
+01 1
+.names pibt1 n108 n115
+11 1
+.names pcat5 n115 n116
+01 1
+.names pibt0 n102 n117
+11 1
+.names pcat1 n117 n118
+01 1
+.names n116 n118 n119
+00 1
+.names n114 n119 n120
+01 1
+.names n112 n120 n121
+11 1
+.names pwatch n121 porwd_f
+10 0
+.names n98 porwd_f n123
+10 1
+.names n101 n123 n124
+00 1
+.names n98 n124 n125
+11 1
+.names pend powl_n n126
+11 1
+.names n125 n126 pend_p
+00 0
+.names pbull0 pbull2 n128
+11 1
+.names pbull1 pwatch n129
+11 1
+.names n128 n129 n130
+11 1
+.names pbull3 n130 n131
+01 1
+.names powl_n n131 n132
+11 1
+.names pbull3 n130 n133
+10 1
+.names powl_n n133 n134
+11 1
+.names n132 n134 pbull3_p
+00 0
+.names pbull3 n130 n136
+11 1
+.names powl_n n136 n137
+11 1
+.names pbull4 n137 n138
+01 1
+.names pbull3 powl_n n139
+01 1
+.names pbull4 n139 n140
+11 1
+.names powl_n n130 n141
+10 1
+.names pbull4 n141 n142
+11 1
+.names n140 n142 n143
+00 1
+.names n138 n143 pbull4_p
+01 0
+.names pbull5 pbull6 n145
+01 1
+.names pbull3 n145 n146
+01 1
+.names pbull4 n146 n147
+11 1
+.names pbull0 n147 n148
+01 1
+.names pbull1 n148 n149
+11 1
+.names pbull2 n149 n150
+01 1
+.names n87 n150 n151
+11 1
+.names pvst1 n126 n152
+11 1
+.names pkbg_n powl_n n153
+01 1
+.names n152 n153 n154
+00 1
+.names n151 n154 n155
+01 1
+.names pcomppar n126 n156
+01 1
+.names pvst0 n126 n157
+01 1
+.names pmmerr n157 n158
+01 1
+.names n156 n158 n159
+00 1
+.names n155 n159 n160
+11 1
+.names pibt0 n160 n161
+10 1
+.names pibt2 n161 n162
+11 1
+.names pibt1 n162 n163
+01 1
+.names powl_n ppluto3 n164
+11 1
+.names n163 n164 ppluto3_p
+00 0
+.names povacc powl_n n166
+11 1
+.names pvacc n166 n167
+01 1
+.names n87 n167 pwatch_p
+00 0
+.names pbull5 n141 n169
+11 1
+.names pbull4 n137 n170
+11 1
+.names pbull5 n170 n171
+01 1
+.names n169 n171 n172
+00 1
+.names pbull5 n139 n173
+11 1
+.names pbull5 pbull4_p n174
+11 1
+.names n173 n174 n175
+00 1
+.names n172 n175 pbull5_p
+11 0
+.names powl_n pbull6 n177
+11 1
+.names pbull4 n177 n178
+01 1
+.names pbull5 n177 n179
+01 1
+.names n178 n179 n180
+00 1
+.names pbull2 n177 n181
+01 1
+.names pbull3 n177 n182
+01 1
+.names n181 n182 n183
+00 1
+.names n180 n183 n184
+11 1
+.names pbull6 n95 n185
+10 1
+.names pbull5 n137 n186
+11 1
+.names pbull6 n186 n187
+01 1
+.names pbull4 n187 n188
+11 1
+.names n185 n188 n189
+00 1
+.names n184 n189 pbull6_p
+11 0
+.names pibt1 n162 n191
+11 1
+.names ppluto5 powl_n n192
+11 1
+.names n191 n192 ppluto5_p
+00 0
+.names pfbi piclr n194
+10 1
+.names pdel1 n194 n195
+11 1
+.names pfbi piclr n196
+00 1
+.names ppy n196 n197
+11 1
+.names n195 n197 ppy_p
+00 0
+.names pibt0 n160 n199
+00 1
+.names pibt2 n199 n200
+11 1
+.names pibt1 n200 n201
+11 1
+.names ppluto4 powl_n n202
+11 1
+.names n201 n202 ppluto4_p
+00 0
+.names n87 n121 n204
+10 1
+.names pstar3 n204 n205
+01 1
+.names n100 n205 n206
+11 1
+.names pfbi n206 n207
+11 1
+.names plsd powl_n n208
+11 1
+.names pstar3 n208 n209
+01 1
+.names n207 n209 n210
+00 1
+.names n100 n208 n211
+01 1
+.names pfbi n208 n212
+01 1
+.names n211 n212 n213
+00 1
+.names n210 n213 plsd_p
+11 0
+.names pvlenesr powl_n n215
+11 1
+.names n153 n215 pvlenesr_p
+00 0
+.names porwd_n n204 n217
+01 1
+.names n98 n217 n218
+00 1
+.names n204 n218 n219
+10 1
+.names n99 n219 n220
+01 1
+.names n217 n220 n221
+00 1
+.names n101 n221 n222
+01 1
+.names n99 n101 n223
+01 1
+.names powl_n n99 n224
+10 1
+.names pstar2 n224 n225
+11 1
+.names n217 n225 n226
+11 1
+.names n123 n226 n227
+00 1
+.names n223 n227 n228
+01 1
+.names n222 n228 pfbi_p
+11 0
+.names pstar0 n223 n230
+11 1
+.names pstar1 n217 n231
+01 1
+.names pstar0 n231 n232
+11 1
+.names n230 n232 n233
+00 1
+.names pstar1 n224 n234
+11 1
+.names porwd_n porwd_f n235
+00 1
+.names pfbi n235 n236
+00 1
+.names powl_n n236 n237
+11 1
+.names pstar1 n237 n238
+11 1
+.names n234 n238 n239
+00 1
+.names n233 n239 pstar1_p
+11 0
+.names pvsumesr powl_n n241
+11 1
+.names n152 n241 pvsumesr_p
+00 0
+.names paccrpy powl_n n243
+11 1
+.names n125 n243 paccrpy_p
+00 0
+.names pkbg_n n124 n245
+11 1
+.names n100 porwd_f n246
+00 1
+.names pstar3 porwd_f n247
+00 1
+.names n246 n247 n248
+00 1
+.names pkbg_n n248 n249
+10 1
+.names powl_n n249 n250
+10 1
+.names n245 n250 pkbg_f
+01 0
+.names pmarssr powl_n n252
+11 1
+.names n151 n252 pmarssr_p
+00 0
+.names pstar0 n237 n254
+11 1
+.names pstar0 n218 n255
+00 1
+.names n254 n255 pstar0_p
+00 0
+.names pstar3 n99 n257
+01 1
+.names n218 n257 n258
+01 1
+.names pstar2 n258 n259
+11 1
+.names pstar3 n224 n260
+11 1
+.names n259 n260 n261
+00 1
+.names pstar2 pstar3 n262
+01 1
+.names powl_n n262 n263
+11 1
+.names pstar3 n237 n264
+11 1
+.names n263 n264 n265
+00 1
+.names n261 n265 pstar3_p
+11 0
+.names pcapsd piclr pdel1_p
+10 1
+.names n98 n99 n268
+11 1
+.names pstar2 n268 n269
+01 1
+.names n100 n217 n270
+11 1
+.names n269 n270 n271
+00 1
+.names pstar2 n237 n272
+11 1
+.names n225 n272 n273
+00 1
+.names n271 n273 pstar2_p
+11 0
+.names pvst1 n194 n275
+11 1
+.names pvst0 n196 n276
+11 1
+.names n275 n276 pvst0_p
+00 0
+.names pcomppar n98 n278
+01 1
+.names pdel1 n278 n279
+11 1
+.names pcomppar powl_n n280
+11 1
+.names pfbi n280 n281
+01 1
+.names pdel1 n280 n282
+01 1
+.names n281 n282 n283
+00 1
+.names n279 n283 pcomppar_p
+01 0
+.names pkbg_n piclr n285
+10 1
+.names pend n285 n286
+01 1
+.names n150 n286 n287
+01 1
+.names pwatch n286 n288
+01 1
+.names n287 n288 powl_f
+00 0
+.names ppy n194 n290
+11 1
+.names pvst1 n196 n291
+11 1
+.names n290 n291 pvst1_p
+00 0
+.names n102 n160 n293
+10 1
+.names pibt0 n293 n294
+11 1
+.names powl_n ppluto1 n295
+11 1
+.names n294 n295 ppluto1_p
+00 0
+.names pratr powl_n n297
+11 1
+.names n156 n297 n298
+00 1
+.names n158 n298 pratr_p
+01 0
+.names pibt0 n293 n300
+01 1
+.names ppluto0 powl_n n301
+11 1
+.names n300 n301 ppluto0_p
+00 0
+.names pvacc piclr povacc_p
+10 1
+.names pibt1 n200 n304
+01 1
+.names powl_n ppluto2 n305
+11 1
+.names n304 n305 ppluto2_p
+00 0
+.names pbull0 n93 n307
+11 1
+.names pbull0 n87 n308
+01 1
+.names n307 n308 pbull0_p
+00 0
+.names n150 n248 n310
+00 1
+.names pverr_n n310 n311
+11 1
+.names pwatch n124 n312
+01 1
+.names pverr_n n312 n313
+11 1
+.names n311 n313 n314
+00 1
+.names n124 n150 n315
+10 1
+.names pverr_n n315 n316
+11 1
+.names powl_n n316 n317
+10 1
+.names n314 n317 pverr_f
+11 0
+.names pbull0 n87 n319
+11 1
+.names pbull1 n319 n320
+01 1
+.names pbull1 n95 n321
+10 1
+.names n320 n321 pbull1_p
+00 0
+.names pvst0 psdo
+1 1
+.end

@@ -437,7 +437,7 @@ static inline void solver_reduce_cdb(solver_t *s)
 
 	limit = (unsigned)(n_learnts * s->opts.learnt_ratio);
 
-	satoko_sort((void *)learnts_cls, n_learnts,
+	satoko_sort((void **)learnts_cls, n_learnts,
 		    (int (*)(const void *, const void *)) clause_compare);
 
 	if (learnts_cls[n_learnts / 2]->lbd <= 3)
@@ -518,9 +518,9 @@ void solver_cancel_until(solver_t *s, unsigned level)
 	for (i = (int) vec_uint_size(s->trail) - 1; i >= (int) vec_uint_at(s->trail_lim, level); i--) {
 		unsigned var = lit2var(vec_uint_at(s->trail, (unsigned) i));
 
+		vec_char_assign(s->polarity, var, vec_char_at(s->assigns, var));
 		vec_char_assign(s->assigns, var, VAR_UNASSING);
 		vec_uint_assign(s->reasons, var, UNDEF);
-		vec_char_assign(s->polarity, var, lit_polarity(vec_uint_at(s->trail, (unsigned) i)));
 		if (!heap_in_heap(s->var_order, var))
 			heap_insert(s->var_order, var);
 	}

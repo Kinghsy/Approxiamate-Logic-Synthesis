@@ -1,0 +1,363 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs _1gat_0_ _11gat_3_ _17gat_5_ _95gat_29_ _112gat_34_ _4gat_1_ \
+ _30gat_9_ _27gat_8_ _8gat_2_ _40gat_12_ _47gat_14_ _69gat_21_ _73gat_22_ \
+ _89gat_27_ _53gat_16_ _115gat_35_ _37gat_11_ _63gat_19_ _99gat_30_ \
+ _79gat_24_ _14gat_4_ _102gat_31_ _24gat_7_ _82gat_25_ _66gat_20_ \
+ _43gat_13_ _92gat_28_ _76gat_23_ _86gat_26_ _50gat_15_ _108gat_33_ \
+ _21gat_6_ _60gat_18_ _56gat_17_ _105gat_32_ _34gat_10_
+.outputs _421gat_188_ _329gat_133_ _223gat_84_ _370gat_163_ _431gat_194_ \
+ _432gat_195_ _430gat_193_
+.names _82gat_25_ _76gat_23_ n44
+10 1
+.names _69gat_21_ _63gat_19_ n45
+10 1
+.names _102gat_31_ _108gat_33_ n46
+01 1
+.names _95gat_29_ _89gat_27_ n47
+10 1
+.names _1gat_0_ _4gat_1_ n48
+01 1
+.names _30gat_9_ _24gat_7_ n49
+10 1
+.names _11gat_3_ _17gat_5_ n50
+01 1
+.names _37gat_11_ _43gat_13_ n51
+01 1
+.names _50gat_15_ _56gat_17_ n52
+01 1
+.names n51 n52 n53
+00 1
+.names n50 n53 n54
+01 1
+.names n49 n54 n55
+01 1
+.names n48 n55 n56
+01 1
+.names n47 n56 n57
+01 1
+.names n46 n57 n58
+01 1
+.names n45 n58 n59
+01 1
+.names n44 n59 _223gat_84_
+01 0
+.names _89gat_27_ _223gat_84_ n61
+11 1
+.names n44 _223gat_84_ n62
+01 1
+.names _82gat_25_ _92gat_28_ n63
+10 1
+.names n62 n63 n64
+01 1
+.names _82gat_25_ _86gat_26_ n65
+10 1
+.names n62 n65 n66
+01 1
+.names _69gat_21_ _73gat_22_ n67
+10 1
+.names n45 _223gat_84_ n68
+01 1
+.names n67 n68 n69
+10 1
+.names _112gat_34_ _108gat_33_ n70
+01 1
+.names n46 _223gat_84_ n71
+01 1
+.names n70 n71 n72
+10 1
+.names _95gat_29_ _99gat_30_ n73
+10 1
+.names n47 _223gat_84_ n74
+01 1
+.names n73 n74 n75
+10 1
+.names _4gat_1_ _8gat_2_ n76
+10 1
+.names n48 _223gat_84_ n77
+01 1
+.names n76 n77 n78
+10 1
+.names _30gat_9_ _34gat_10_ n79
+10 1
+.names n49 _223gat_84_ n80
+01 1
+.names n79 n80 n81
+10 1
+.names _17gat_5_ _21gat_6_ n82
+10 1
+.names n50 _223gat_84_ n83
+01 1
+.names n82 n83 n84
+10 1
+.names _47gat_14_ _43gat_13_ n85
+01 1
+.names n51 _223gat_84_ n86
+01 1
+.names n85 n86 n87
+10 1
+.names _60gat_18_ _56gat_17_ n88
+01 1
+.names n52 _223gat_84_ n89
+01 1
+.names n88 n89 n90
+10 1
+.names n87 n90 n91
+00 1
+.names n84 n91 n92
+01 1
+.names n81 n92 n93
+01 1
+.names n78 n93 n94
+01 1
+.names n75 n94 n95
+01 1
+.names n72 n95 n96
+01 1
+.names n69 n96 n97
+01 1
+.names n66 n97 _329gat_133_
+01 0
+.names n66 _329gat_133_ n99
+01 1
+.names n64 n99 n100
+10 1
+.names _69gat_21_ _79gat_24_ n101
+10 1
+.names n68 n101 n102
+01 1
+.names n69 _329gat_133_ n103
+01 1
+.names n102 n103 n104
+10 1
+.names _115gat_35_ _108gat_33_ n105
+01 1
+.names n71 n105 n106
+01 1
+.names n72 _329gat_133_ n107
+01 1
+.names n106 n107 n108
+10 1
+.names _95gat_29_ _105gat_32_ n109
+10 1
+.names n74 n109 n110
+01 1
+.names n75 _329gat_133_ n111
+01 1
+.names n110 n111 n112
+10 1
+.names _4gat_1_ _14gat_4_ n113
+10 1
+.names n77 n113 n114
+01 1
+.names n78 _329gat_133_ n115
+01 1
+.names n114 n115 n116
+10 1
+.names _30gat_9_ _40gat_12_ n117
+10 1
+.names n80 n117 n118
+01 1
+.names n81 _329gat_133_ n119
+01 1
+.names n118 n119 n120
+10 1
+.names _17gat_5_ _27gat_8_ n121
+10 1
+.names n83 n121 n122
+01 1
+.names n84 _329gat_133_ n123
+01 1
+.names n122 n123 n124
+10 1
+.names _53gat_16_ _43gat_13_ n125
+01 1
+.names n86 n125 n126
+01 1
+.names n87 _329gat_133_ n127
+01 1
+.names n126 n127 n128
+10 1
+.names _66gat_20_ _56gat_17_ n129
+01 1
+.names n89 n129 n130
+01 1
+.names n90 _329gat_133_ n131
+01 1
+.names n130 n131 n132
+10 1
+.names n128 n132 n133
+00 1
+.names n124 n133 n134
+01 1
+.names n120 n134 n135
+01 1
+.names n116 n135 n136
+01 1
+.names n112 n136 n137
+01 1
+.names n108 n137 n138
+01 1
+.names n104 n138 n139
+01 1
+.names n100 n139 _370gat_163_
+01 0
+.names _105gat_32_ _370gat_163_ n141
+11 1
+.names _99gat_30_ _329gat_133_ n142
+11 1
+.names _95gat_29_ n142 n143
+10 1
+.names n141 n143 n144
+01 1
+.names n61 n144 n145
+01 1
+.names _76gat_23_ _223gat_84_ n146
+11 1
+.names _92gat_28_ _370gat_163_ n147
+11 1
+.names _86gat_26_ _329gat_133_ n148
+11 1
+.names _82gat_25_ n148 n149
+10 1
+.names n147 n149 n150
+01 1
+.names n146 n150 n151
+01 1
+.names _102gat_31_ _223gat_84_ n152
+11 1
+.names _115gat_35_ _370gat_163_ n153
+11 1
+.names _112gat_34_ _329gat_133_ n154
+11 1
+.names _108gat_33_ n154 n155
+10 1
+.names n153 n155 n156
+01 1
+.names n152 n156 n157
+01 1
+.names _11gat_3_ _223gat_84_ n158
+11 1
+.names _27gat_8_ _370gat_163_ n159
+11 1
+.names _21gat_6_ _329gat_133_ n160
+11 1
+.names _17gat_5_ n160 n161
+10 1
+.names n159 n161 n162
+01 1
+.names n158 n162 n163
+01 1
+.names _37gat_11_ _223gat_84_ n164
+11 1
+.names _53gat_16_ _370gat_163_ n165
+11 1
+.names _47gat_14_ _329gat_133_ n166
+11 1
+.names _43gat_13_ n166 n167
+10 1
+.names n165 n167 n168
+01 1
+.names n164 n168 n169
+01 1
+.names _24gat_7_ _223gat_84_ n170
+11 1
+.names _40gat_12_ _370gat_163_ n171
+11 1
+.names _34gat_10_ _329gat_133_ n172
+11 1
+.names _30gat_9_ n172 n173
+10 1
+.names n171 n173 n174
+01 1
+.names n170 n174 n175
+01 1
+.names _50gat_15_ _223gat_84_ n176
+11 1
+.names _66gat_20_ _370gat_163_ n177
+11 1
+.names _60gat_18_ _329gat_133_ n178
+11 1
+.names _56gat_17_ n178 n179
+10 1
+.names n177 n179 n180
+01 1
+.names n176 n180 n181
+01 1
+.names _63gat_19_ _223gat_84_ n182
+11 1
+.names _79gat_24_ _370gat_163_ n183
+11 1
+.names _73gat_22_ _329gat_133_ n184
+11 1
+.names _69gat_21_ n184 n185
+10 1
+.names n183 n185 n186
+01 1
+.names n182 n186 n187
+01 1
+.names n181 n187 n188
+00 1
+.names n175 n188 n189
+01 1
+.names n169 n189 n190
+01 1
+.names n163 n190 n191
+01 1
+.names n157 n191 n192
+01 1
+.names n151 n192 n193
+01 1
+.names n145 n193 n194
+01 1
+.names _8gat_2_ _329gat_133_ n195
+11 1
+.names _14gat_4_ _370gat_163_ n196
+11 1
+.names _1gat_0_ _223gat_84_ n197
+11 1
+.names n196 n197 n198
+00 1
+.names n195 n198 n199
+01 1
+.names _4gat_1_ n199 n200
+11 1
+.names n194 n200 _421gat_188_
+00 1
+.names n169 n181 n202
+00 1
+.names n187 n202 n203
+11 1
+.names n175 n203 n204
+01 1
+.names n151 n169 n205
+10 1
+.names n181 n205 n206
+01 1
+.names n175 n206 n207
+00 1
+.names n204 n207 n208
+01 1
+.names n163 n208 _431gat_194_
+01 0
+.names n145 n169 n210
+10 1
+.names n151 n210 n211
+01 1
+.names n175 n211 n212
+01 1
+.names n169 n175 n213
+10 1
+.names n212 n213 n214
+00 1
+.names n204 n214 n215
+01 1
+.names n163 n215 _432gat_195_
+01 0
+.names n175 n181 n217
+00 1
+.names n213 n217 n218
+01 1
+.names n163 n218 _430gat_193_
+01 0
+.end

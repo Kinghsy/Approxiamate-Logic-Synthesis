@@ -7,9 +7,9 @@ src/base/abci/abcPrint.d src/base/abci/abcPrint.o: src/base/abci/abcPrint.c src/
  src/aig/hop/hop.h src/aig/gia/gia.h src/misc/vec/vecWec.h \
  src/misc/util/utilCex.h src/misc/st/st.h src/misc/st/stmm.h \
  src/misc/nm/nm.h src/misc/mem/mem.h src/misc/extra/extra.h \
- src/bool/dec/dec.h src/base/main/main.h src/base/cmd/cmd.h \
- src/base/io/ioAbc.h src/misc/util/utilNam.h src/map/mio/mio.h \
- src/aig/aig/aig.h src/map/if/if.h src/misc/tim/tim.h \
+ src/bool/dec/dec.h src/base/main/main.h src/base/main/abcapis.h \
+ src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h \
+ src/map/mio/mio.h src/aig/aig/aig.h src/map/if/if.h src/misc/tim/tim.h \
  src/misc/vec/vecMem.h src/misc/util/utilTruth.h src/opt/dau/dau.h \
  src/misc/vec/vecHash.h src/bdd/extrab/extraBdd.h src/bdd/cudd/cuddInt.h \
  src/bdd/cudd/cudd.h src/bdd/mtr/mtr.h src/bdd/epd/epd.h

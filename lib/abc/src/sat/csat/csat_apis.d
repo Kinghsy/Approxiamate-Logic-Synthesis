@@ -8,4 +8,5 @@ src/sat/csat/csat_apis.d src/sat/csat/csat_apis.o: src/sat/csat/csat_apis.c src/
  src/misc/util/utilCex.h src/misc/st/st.h src/misc/st/stmm.h \
  src/misc/nm/nm.h src/misc/mem/mem.h src/misc/extra/extra.h \
  src/proof/fraig/fraig.h src/sat/csat/csat_apis.h src/base/main/main.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
+ src/misc/util/utilNam.h

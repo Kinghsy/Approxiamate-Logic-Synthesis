@@ -9,4 +9,4 @@ src/map/if/ifCom.d src/map/if/ifCom.o: src/map/if/ifCom.c src/map/if/if.h src/mi
  src/base/main/main.h src/base/abc/abc.h src/aig/hop/hop.h \
  src/aig/gia/gia.h src/misc/util/utilCex.h src/misc/st/st.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/extra/extra.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h

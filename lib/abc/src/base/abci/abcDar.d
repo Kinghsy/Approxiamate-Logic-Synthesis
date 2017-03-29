@@ -6,11 +6,12 @@ src/base/abci/abcDar.d src/base/abci/abcDar.o: src/base/abci/abcDar.c src/base/a
  src/misc/vec/vecWec.h src/aig/hop/hop.h src/aig/gia/gia.h \
  src/misc/vec/vecWec.h src/misc/util/utilCex.h src/misc/st/st.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/misc/extra/extra.h src/base/main/main.h src/base/cmd/cmd.h \
- src/base/io/ioAbc.h src/misc/util/utilNam.h src/aig/gia/giaAig.h \
- src/aig/aig/aig.h src/aig/gia/gia.h src/opt/dar/dar.h src/sat/cnf/cnf.h \
- src/opt/dar/darInt.h src/opt/dar/dar.h src/proof/fra/fra.h \
- src/sat/bsat/satSolver.h src/sat/bsat/satVec.h src/sat/bsat/satClause.h \
+ src/misc/extra/extra.h src/base/main/main.h src/base/main/abcapis.h \
+ src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h \
+ src/aig/gia/giaAig.h src/aig/aig/aig.h src/aig/gia/gia.h \
+ src/opt/dar/dar.h src/sat/cnf/cnf.h src/opt/dar/darInt.h \
+ src/opt/dar/dar.h src/proof/fra/fra.h src/sat/bsat/satSolver.h \
+ src/sat/bsat/satVec.h src/sat/bsat/satClause.h \
  src/misc/util/utilDouble.h src/aig/ioa/ioa.h src/proof/fraig/fraig.h \
  src/proof/int/int.h src/proof/dch/dch.h src/proof/ssw/ssw.h \
  src/opt/cgt/cgt.h src/bdd/bbr/bbr.h src/aig/saig/saig.h \

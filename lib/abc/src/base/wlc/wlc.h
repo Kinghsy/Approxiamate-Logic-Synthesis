@@ -177,8 +177,35 @@ struct Wlc_Par_t_
     int                    fPdra;              // Use pdr -nct
     int                    fProofRefine;       // Use proof-based refinement
     int                    fHybrid;            // Use a hybrid of CBR and PBR
+    int                    fCheckCombUnsat;    // Check if ABS becomes comb. unsat
+    int                    fAbs2;              // Use UFAR style createAbs
+    int                    fProofUsePPI;       // Use PPI values in PBR
+    int                    fUseBmc3;           // Run BMC3 in parallel 
     int                    fVerbose;           // verbose output
     int                    fPdrVerbose;        // verbose output
+};
+
+typedef struct Wla_Man_t_ Wla_Man_t;
+struct Wla_Man_t_
+{
+    Wlc_Ntk_t * p;
+    Wlc_Par_t * pPars;
+    Vec_Vec_t * vClauses;
+    Vec_Int_t * vBlacks;
+    Abc_Cex_t * pCex;
+    Gia_Man_t * pGia;
+    Vec_Bit_t * vUnmark;
+    void      * pPdrPars;
+    void      * pThread;
+
+    int nIters;
+    int nTotalCla;
+    int nDisj;
+    int nNDisj;
+
+    abctime tPdr;
+    abctime tCbr;
+    abctime tPbr;
 };
 
 static inline int          Wlc_NtkObjNum( Wlc_Ntk_t * p )                           { return p->iObj - 1;                                                      }
@@ -203,6 +230,7 @@ static inline int          Wlc_ObjIsCo( Wlc_Obj_t * p )                         
 
 static inline int          Wlc_ObjId( Wlc_Ntk_t * p, Wlc_Obj_t * pObj )             { return pObj - p->pObjs;                                                  }
 static inline int          Wlc_ObjCiId( Wlc_Obj_t * p )                             { assert( Wlc_ObjIsCi(p) ); return p->Fanins[1];                           }
+static inline int          Wlc_ObjType( Wlc_Obj_t * pObj )                          { return pObj->Type;                                                       }
 static inline int          Wlc_ObjFaninNum( Wlc_Obj_t * p )                         { return p->nFanins;                                                       }
 static inline int          Wlc_ObjHasArray( Wlc_Obj_t * p )                         { return p->nFanins > 2 || p->Type == WLC_OBJ_CONST || p->Type == WLC_OBJ_BIT_SELECT; }
 static inline int *        Wlc_ObjFanins( Wlc_Obj_t * p )                           { return Wlc_ObjHasArray(p) ? p->pFanins[0] : p->Fanins;                   }
@@ -288,7 +316,7 @@ extern int            Wlc_NtkPdrAbs( Wlc_Ntk_t * p, Wlc_Par_t * pPars );
 /*=== wlcAbs2.c ========================================================*/
 extern int            Wlc_NtkAbsCore2( Wlc_Ntk_t * p, Wlc_Par_t * pPars );
 /*=== wlcBlast.c ========================================================*/
-extern Gia_Man_t *    Wlc_NtkBitBlast( Wlc_Ntk_t * p, Vec_Int_t * vBoxIds, int iOutput, int nRange, int fGiaSimple, int fAddOutputs, int fBooth );
+extern Gia_Man_t *    Wlc_NtkBitBlast( Wlc_Ntk_t * p, Vec_Int_t * vBoxIds, int iOutput, int nRange, int fGiaSimple, int fAddOutputs, int fBooth, int fNoCleanup );
 /*=== wlcCom.c ========================================================*/
 extern void           Wlc_SetNtk( Abc_Frame_t * pAbc, Wlc_Ntk_t * pNtk );
 /*=== wlcNtk.c ========================================================*/

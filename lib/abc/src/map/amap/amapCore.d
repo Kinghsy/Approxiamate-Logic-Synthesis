@@ -7,5 +7,5 @@ src/map/amap/amapCore.d src/map/amap/amapCore.o: src/map/amap/amapCore.c src/map
  src/misc/vec/vecWec.h src/misc/util/utilCex.h src/map/amap/amap.h \
  src/base/main/main.h src/base/abc/abc.h src/aig/hop/hop.h \
  src/aig/gia/gia.h src/misc/vec/vecWec.h src/misc/st/stmm.h \
- src/misc/nm/nm.h src/misc/mem/mem.h src/base/cmd/cmd.h \
- src/base/io/ioAbc.h src/misc/util/utilNam.h
+ src/misc/nm/nm.h src/misc/mem/mem.h src/base/main/abcapis.h \
+ src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h

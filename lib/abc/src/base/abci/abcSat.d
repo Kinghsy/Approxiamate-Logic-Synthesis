@@ -6,9 +6,9 @@ src/base/abci/abcSat.d src/base/abci/abcSat.o: src/base/abci/abcSat.c src/base/a
  src/misc/vec/vecWec.h src/aig/hop/hop.h src/aig/gia/gia.h \
  src/misc/vec/vecWec.h src/misc/util/utilCex.h src/misc/st/st.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/misc/extra/extra.h src/base/main/main.h src/base/cmd/cmd.h \
- src/base/io/ioAbc.h src/misc/util/utilNam.h src/sat/bsat/satSolver.h \
- src/sat/bsat/satVec.h src/sat/bsat/satClause.h \
+ src/misc/extra/extra.h src/base/main/main.h src/base/main/abcapis.h \
+ src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h \
+ src/sat/bsat/satSolver.h src/sat/bsat/satVec.h src/sat/bsat/satClause.h \
  src/misc/util/utilDouble.h src/bdd/extrab/extraBdd.h \
  src/bdd/cudd/cuddInt.h src/bdd/cudd/cudd.h src/bdd/mtr/mtr.h \
  src/bdd/epd/epd.h

@@ -10,6 +10,7 @@ src/proof/abs/absGlaOld.d src/proof/abs/absGlaOld.o: src/proof/abs/absGlaOld.c s
  src/base/main/main.h src/base/abc/abc.h src/aig/hop/hop.h \
  src/aig/gia/gia.h src/misc/vec/vecWec.h src/misc/st/st.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/misc/extra/extra.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
- src/misc/util/utilNam.h src/proof/abs/abs.h src/aig/gia/giaAig.h \
- src/aig/gia/gia.h src/aig/saig/saig.h src/proof/abs/absRef.h
+ src/misc/extra/extra.h src/base/main/abcapis.h src/base/cmd/cmd.h \
+ src/base/io/ioAbc.h src/misc/util/utilNam.h src/proof/abs/abs.h \
+ src/aig/gia/giaAig.h src/aig/gia/gia.h src/aig/saig/saig.h \
+ src/proof/abs/absRef.h

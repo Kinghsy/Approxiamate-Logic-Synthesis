@@ -1,0 +1,119 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs rmwb yskip page xskip dmpst0 dmpst1 dmpst2 dmpst3
+.outputs adctlp0b adctlp1b adctlp2b dmnst0b dmnst1b dmnst2b dmnst3b
+.names dmpst0 dmpst2 n16
+11 1
+.names dmpst3 n16 n17
+01 1
+.names dmpst1 dmpst2 n18
+00 1
+.names dmpst3 n18 n19
+11 1
+.names dmpst0 n19 n20
+11 1
+.names n17 n20 n21
+00 1
+.names dmpst0 dmpst1 n22
+01 1
+.names dmpst2 n22 n23
+01 1
+.names yskip n23 n24
+01 1
+.names dmpst1 dmpst2 n25
+01 1
+.names dmpst3 n25 n26
+01 1
+.names xskip n26 n27
+01 1
+.names dmpst1 dmpst2 n28
+10 1
+.names dmpst3 n28 n29
+11 1
+.names dmpst0 n29 n30
+01 1
+.names n27 n30 n31
+00 1
+.names n24 n31 n32
+01 1
+.names n21 n32 adctlp0b
+11 0
+.names dmpst0 dmpst1 n34
+11 1
+.names dmpst3 n34 n35
+01 1
+.names n26 n35 n36
+00 1
+.names n20 n36 n37
+01 1
+.names dmpst0 dmpst1 n38
+00 1
+.names dmpst3 n38 n39
+01 1
+.names page n39 n40
+11 1
+.names dmpst3 n28 n41
+01 1
+.names yskip n41 n42
+11 1
+.names n30 n42 n43
+00 1
+.names n40 n43 n44
+01 1
+.names n37 n44 adctlp1b
+11 0
+.names n23 n39 n46
+00 1
+.names n20 n46 n47
+01 1
+.names n36 n47 adctlp2b
+11 0
+.names xskip dmpst0 n49
+00 1
+.names n26 n49 n50
+11 1
+.names rmwb n26 n51
+01 1
+.names n24 n51 n52
+00 1
+.names n50 n52 n53
+01 1
+.names n30 n53 dmnst0b
+01 0
+.names page dmpst0 n55
+00 1
+.names dmpst3 n18 n56
+01 1
+.names n55 n56 n57
+11 1
+.names yskip dmpst0 n58
+00 1
+.names n41 n58 n59
+11 1
+.names xskip n26 n60
+11 1
+.names n59 n60 n61
+00 1
+.names n57 n61 n62
+01 1
+.names n21 n62 dmnst1b
+11 0
+.names dmpst0 n41 n64
+11 1
+.names n26 n64 n65
+00 1
+.names n20 n42 n66
+00 1
+.names n40 n66 n67
+01 1
+.names n65 n67 dmnst2b
+11 0
+.names dmpst1 dmpst2 n69
+11 1
+.names dmpst3 n69 n70
+01 1
+.names dmpst0 n70 n71
+11 1
+.names n30 n71 dmnst3b
+00 0
+.end

@@ -7,6 +7,7 @@ src/base/abc/abcFunc.d src/base/abc/abcFunc.o: src/base/abc/abcFunc.c src/base/a
  src/misc/vec/vecWec.h src/misc/util/utilCex.h src/misc/st/st.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
  src/misc/extra/extra.h src/base/main/main.h src/base/abc/abc.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h \
- src/map/mio/mio.h src/bdd/extrab/extraBdd.h src/bdd/cudd/cuddInt.h \
- src/bdd/cudd/cudd.h src/bdd/mtr/mtr.h src/bdd/epd/epd.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
+ src/misc/util/utilNam.h src/map/mio/mio.h src/bdd/extrab/extraBdd.h \
+ src/bdd/cudd/cuddInt.h src/bdd/cudd/cudd.h src/bdd/mtr/mtr.h \
+ src/bdd/epd/epd.h

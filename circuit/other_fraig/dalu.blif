@@ -1,0 +1,3142 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs pina0 pinb1 pinc2 pind3 pina1 pinb0 pinc3 pind2 pmusel1 pinc4 pind5 \
+ pmusel2 pinc5 pind4 pmusel3 pina4 pinb5 pina5 pinb4 pina2 pinb3 pinc0 \
+ pind1 pina3 pinb2 pinc1 pind0 pind15 pinc15 pind14 pinb15 pinc14 pind13 \
+ popsel3 popsel1 popsel2 pina11 pinb10 pina10 popsel0 pina15 pinb14 pinc13 \
+ pind12 pina14 pinb13 pinc12 pind11 pina13 pinb12 pinc11 pind10 pina12 \
+ pinb11 pinc10 pina8 pinb9 pina9 pinb8 pina6 pinb7 pina7 pinb6 psh0 pinc6 \
+ pind7 pmusel4 psh1 pinc7 pind6 psh2 pinc8 pind9 pinc9 pind8
+.outputs po12 po11 po14 po13 po15 po9 po8 po7 po6 po5 po4 po3 po2 po1 po0 \
+ po10
+.names pmusel3 pmusel4 n92
+01 1
+.names pmusel2 pinc15 n93
+11 1
+.names pmusel1 n93 n94
+01 1
+.names pmusel2 pina15 n95
+01 1
+.names pmusel1 n95 n96
+11 1
+.names n94 n96 n97
+00 1
+.names n92 n97 n98
+10 1
+.names pinc4 pmusel2 n99
+11 1
+.names pmusel1 n99 n100
+01 1
+.names pmusel2 pina4 n101
+01 1
+.names pmusel1 n101 n102
+11 1
+.names n100 n102 n103
+00 1
+.names n92 n103 n104
+10 1
+.names n98 n104 n105
+01 1
+.names n98 n104 n106
+10 1
+.names n105 n106 n107
+00 1
+.names pmusel2 pinc6 n108
+11 1
+.names pmusel1 n108 n109
+01 1
+.names pmusel2 pina6 n110
+01 1
+.names pmusel1 n110 n111
+11 1
+.names n109 n111 n112
+00 1
+.names n92 n112 n113
+10 1
+.names n98 n113 n114
+01 1
+.names n98 n113 n115
+10 1
+.names n114 n115 n116
+00 1
+.names n107 n116 n117
+00 1
+.names pmusel2 pinc5 n118
+11 1
+.names pmusel1 n118 n119
+01 1
+.names pmusel2 pina5 n120
+01 1
+.names pmusel1 n120 n121
+11 1
+.names n119 n121 n122
+00 1
+.names n92 n122 n123
+10 1
+.names n98 n123 n124
+01 1
+.names n98 n123 n125
+10 1
+.names n124 n125 n126
+00 1
+.names pmusel2 pinc7 n127
+11 1
+.names pmusel1 n127 n128
+01 1
+.names pmusel2 pina7 n129
+01 1
+.names pmusel1 n129 n130
+11 1
+.names n128 n130 n131
+00 1
+.names n92 n131 n132
+10 1
+.names n98 n132 n133
+01 1
+.names n98 n132 n134
+10 1
+.names n133 n134 n135
+00 1
+.names n126 n135 n136
+00 1
+.names n117 n136 n137
+11 1
+.names pmusel2 pinc0 n138
+11 1
+.names pmusel1 n138 n139
+01 1
+.names pina0 pmusel2 n140
+10 1
+.names pmusel1 n140 n141
+11 1
+.names n139 n141 n142
+00 1
+.names n92 n142 n143
+10 1
+.names n98 n143 n144
+01 1
+.names n98 n143 n145
+10 1
+.names n144 n145 n146
+00 1
+.names pinc2 pmusel2 n147
+11 1
+.names pmusel1 n147 n148
+01 1
+.names pmusel2 pina2 n149
+01 1
+.names pmusel1 n149 n150
+11 1
+.names n148 n150 n151
+00 1
+.names n92 n151 n152
+10 1
+.names n98 n152 n153
+01 1
+.names n98 n152 n154
+10 1
+.names n153 n154 n155
+00 1
+.names n146 n155 n156
+00 1
+.names pmusel2 pinc1 n157
+11 1
+.names pmusel1 n157 n158
+01 1
+.names pina1 pmusel2 n159
+10 1
+.names pmusel1 n159 n160
+11 1
+.names n158 n160 n161
+00 1
+.names n92 n161 n162
+10 1
+.names n98 n162 n163
+01 1
+.names n98 n162 n164
+10 1
+.names n163 n164 n165
+00 1
+.names pinc3 pmusel2 n166
+11 1
+.names pmusel1 n166 n167
+01 1
+.names pmusel2 pina3 n168
+01 1
+.names pmusel1 n168 n169
+11 1
+.names n167 n169 n170
+00 1
+.names n92 n170 n171
+10 1
+.names n98 n171 n172
+01 1
+.names n98 n171 n173
+10 1
+.names n172 n173 n174
+00 1
+.names n165 n174 n175
+00 1
+.names n156 n175 n176
+11 1
+.names pmusel2 pinc8 n177
+11 1
+.names pmusel1 n177 n178
+01 1
+.names pmusel2 pina8 n179
+01 1
+.names pmusel1 n179 n180
+11 1
+.names n178 n180 n181
+00 1
+.names n92 n181 n182
+10 1
+.names n98 n182 n183
+01 1
+.names n98 n182 n184
+10 1
+.names n183 n184 n185
+00 1
+.names pmusel2 pinc10 n186
+11 1
+.names pmusel1 n186 n187
+01 1
+.names pmusel2 pina10 n188
+01 1
+.names pmusel1 n188 n189
+11 1
+.names n187 n189 n190
+00 1
+.names n92 n190 n191
+10 1
+.names n98 n191 n192
+01 1
+.names n98 n191 n193
+10 1
+.names n192 n193 n194
+00 1
+.names n185 n194 n195
+00 1
+.names pmusel2 pinc9 n196
+11 1
+.names pmusel1 n196 n197
+01 1
+.names pmusel2 pina9 n198
+01 1
+.names pmusel1 n198 n199
+11 1
+.names n197 n199 n200
+00 1
+.names n92 n200 n201
+10 1
+.names n98 n201 n202
+01 1
+.names n98 n201 n203
+10 1
+.names n202 n203 n204
+00 1
+.names pmusel2 pinc11 n205
+11 1
+.names pmusel1 n205 n206
+01 1
+.names pmusel2 pina11 n207
+01 1
+.names pmusel1 n207 n208
+11 1
+.names n206 n208 n209
+00 1
+.names n92 n209 n210
+10 1
+.names n98 n210 n211
+01 1
+.names n98 n210 n212
+10 1
+.names n211 n212 n213
+00 1
+.names n204 n213 n214
+00 1
+.names n195 n214 n215
+11 1
+.names n176 n215 n216
+11 1
+.names n98 n216 n217
+11 1
+.names n137 n217 n218
+11 1
+.names pmusel2 pinc12 n219
+11 1
+.names pmusel1 n219 n220
+01 1
+.names pmusel2 pina12 n221
+01 1
+.names pmusel1 n221 n222
+11 1
+.names n220 n222 n223
+00 1
+.names n92 n223 n224
+10 1
+.names n98 n224 n225
+01 1
+.names n98 n224 n226
+10 1
+.names n225 n226 n227
+00 1
+.names n218 n227 n228
+11 1
+.names n218 n227 n229
+00 1
+.names n228 n229 n230
+00 1
+.names popsel2 n230 n231
+10 1
+.names popsel1 popsel0 n232
+00 1
+.names n231 n232 n233
+11 1
+.names popsel2 n230 n234
+01 1
+.names psh0 psh1 n235
+11 1
+.names pmusel3 pmusel4 n236
+10 1
+.names pmusel2 pind15 n237
+11 1
+.names pinb15 n237 n238
+00 1
+.names pmusel1 pmusel2 n239
+10 1
+.names pmusel1 pmusel2 n240
+01 1
+.names n239 n240 n241
+00 1
+.names n237 n241 n242
+01 1
+.names n238 n242 n243
+00 1
+.names pmusel1 pinb15 n244
+00 1
+.names pmusel1 n241 n245
+01 1
+.names n244 n245 n246
+00 1
+.names n243 n246 n247
+11 1
+.names n236 n247 n248
+11 1
+.names pind15 n245 n249
+11 1
+.names n92 n249 n250
+11 1
+.names n248 n250 n251
+00 1
+.names n235 n251 n252
+10 1
+.names psh0 psh1 n253
+10 1
+.names pmusel2 pind13 n254
+11 1
+.names pinb13 n254 n255
+00 1
+.names n241 n254 n256
+10 1
+.names n255 n256 n257
+00 1
+.names pmusel1 pinb13 n258
+00 1
+.names n245 n258 n259
+00 1
+.names n257 n259 n260
+11 1
+.names n236 n260 n261
+11 1
+.names pmusel3 pind13 n262
+01 1
+.names pmusel4 n245 n263
+11 1
+.names n262 n263 n264
+11 1
+.names n261 n264 n265
+00 1
+.names n253 n265 n266
+10 1
+.names n252 n266 n267
+00 1
+.names pmusel2 pind14 n268
+11 1
+.names pinb14 n268 n269
+00 1
+.names n241 n268 n270
+10 1
+.names n269 n270 n271
+00 1
+.names pmusel1 pinb14 n272
+00 1
+.names n245 n272 n273
+00 1
+.names n271 n273 n274
+11 1
+.names n236 n274 n275
+11 1
+.names pmusel3 pind14 n276
+01 1
+.names n263 n276 n277
+11 1
+.names n275 n277 n278
+00 1
+.names psh1 n278 n279
+10 1
+.names pmusel2 pind12 n280
+11 1
+.names pinb12 n280 n281
+00 1
+.names n241 n280 n282
+10 1
+.names n281 n282 n283
+00 1
+.names pmusel1 pinb12 n284
+00 1
+.names n245 n284 n285
+00 1
+.names n283 n285 n286
+11 1
+.names n236 n286 n287
+11 1
+.names pmusel3 pind12 n288
+01 1
+.names n263 n288 n289
+11 1
+.names n287 n289 n290
+00 1
+.names psh1 n290 n291
+00 1
+.names n279 n291 n292
+00 1
+.names n267 n292 n293
+11 1
+.names psh0 n267 n294
+11 1
+.names n293 n294 n295
+00 1
+.names psh2 n295 n296
+01 1
+.names n235 n251 n297
+01 1
+.names n235 n290 n298
+11 1
+.names n251 n290 n299
+11 1
+.names n298 n299 n300
+00 1
+.names n297 n300 n301
+01 1
+.names psh2 n301 n302
+11 1
+.names n296 n302 n303
+00 1
+.names n230 n303 n304
+11 1
+.names popsel2 n303 n305
+11 1
+.names n304 n305 n306
+00 1
+.names n234 n306 n307
+01 1
+.names n233 n307 n308
+00 1
+.names n232 n233 n309
+10 1
+.names n308 n309 n310
+00 1
+.names popsel3 n310 n311
+01 1
+.names popsel3 popsel2 n312
+10 1
+.names popsel1 popsel0 n313
+01 1
+.names popsel1 popsel0 n314
+10 1
+.names n313 n314 n315
+00 1
+.names n232 n315 n316
+01 1
+.names popsel1 popsel2 n317
+10 1
+.names popsel3 popsel1 n318
+00 1
+.names n317 n318 n319
+00 1
+.names popsel3 popsel2 n320
+11 1
+.names popsel0 n320 n321
+00 1
+.names n319 n321 n322
+11 1
+.names pina4 n99 n323
+00 1
+.names n99 n241 n324
+01 1
+.names n323 n324 n325
+00 1
+.names pmusel1 pina4 n326
+00 1
+.names n245 n326 n327
+00 1
+.names n325 n327 n328
+11 1
+.names n236 n328 n329
+11 1
+.names pinc4 pmusel4 n330
+11 1
+.names pmusel1 n330 n331
+01 1
+.names pmusel2 n331 n332
+01 1
+.names pmusel3 n332 n333
+01 1
+.names n329 n333 n334
+00 1
+.names n322 n334 n335
+00 1
+.names n322 n334 n336
+11 1
+.names n335 n336 n337
+00 1
+.names pina5 n118 n338
+00 1
+.names n118 n241 n339
+01 1
+.names n338 n339 n340
+00 1
+.names pmusel1 pina5 n341
+00 1
+.names n245 n341 n342
+00 1
+.names n340 n342 n343
+11 1
+.names n236 n343 n344
+11 1
+.names pinc5 pmusel4 n345
+11 1
+.names pmusel1 n345 n346
+01 1
+.names pmusel2 n346 n347
+01 1
+.names pmusel3 n347 n348
+01 1
+.names n344 n348 n349
+00 1
+.names n322 n349 n350
+00 1
+.names n322 n349 n351
+11 1
+.names n350 n351 n352
+00 1
+.names n337 n352 n353
+00 1
+.names pmusel3 pinb5 n354
+01 1
+.names pmusel2 n354 n355
+11 1
+.names pmusel1 n355 n356
+01 1
+.names pind5 pmusel3 n357
+11 1
+.names pmusel2 n357 n358
+01 1
+.names pmusel1 n358 n359
+01 1
+.names n356 n359 n360
+00 1
+.names pmusel1 pmusel3 n361
+10 1
+.names pmusel2 pina5 n362
+00 1
+.names pinc5 pina5 n363
+00 1
+.names pmusel2 pinc5 n364
+10 1
+.names n363 n364 n365
+00 1
+.names n362 n365 n366
+01 1
+.names n361 n366 n367
+11 1
+.names n360 n367 n368
+10 1
+.names pmusel4 n368 n369
+00 1
+.names n337 n369 n370
+01 1
+.names pmusel3 pinb4 n371
+01 1
+.names pmusel2 n371 n372
+11 1
+.names pmusel1 n372 n373
+01 1
+.names pind4 pmusel3 n374
+11 1
+.names pmusel2 n374 n375
+01 1
+.names pmusel1 n375 n376
+01 1
+.names n373 n376 n377
+00 1
+.names pmusel2 pina4 n378
+00 1
+.names pinc4 pina4 n379
+00 1
+.names pinc4 pmusel2 n380
+01 1
+.names n379 n380 n381
+00 1
+.names n378 n381 n382
+01 1
+.names n361 n382 n383
+11 1
+.names n377 n383 n384
+10 1
+.names pmusel4 n384 n385
+00 1
+.names n369 n385 n386
+11 1
+.names n370 n386 n387
+00 1
+.names n353 n387 n388
+01 1
+.names pina6 n108 n389
+00 1
+.names n108 n241 n390
+01 1
+.names n389 n390 n391
+00 1
+.names pmusel1 pina6 n392
+00 1
+.names n245 n392 n393
+00 1
+.names n391 n393 n394
+11 1
+.names n236 n394 n395
+11 1
+.names pinc6 pmusel4 n396
+11 1
+.names pmusel1 n396 n397
+01 1
+.names pmusel2 n397 n398
+01 1
+.names pmusel3 n398 n399
+01 1
+.names n395 n399 n400
+00 1
+.names n322 n400 n401
+00 1
+.names n322 n400 n402
+11 1
+.names n401 n402 n403
+00 1
+.names pina7 n127 n404
+00 1
+.names n127 n241 n405
+01 1
+.names n404 n405 n406
+00 1
+.names pmusel1 pina7 n407
+00 1
+.names n245 n407 n408
+00 1
+.names n406 n408 n409
+11 1
+.names n236 n409 n410
+11 1
+.names pmusel4 pinc7 n411
+11 1
+.names pmusel1 n411 n412
+01 1
+.names pmusel2 n412 n413
+01 1
+.names pmusel3 n413 n414
+01 1
+.names n410 n414 n415
+00 1
+.names n322 n415 n416
+00 1
+.names n322 n415 n417
+11 1
+.names n416 n417 n418
+00 1
+.names n403 n418 n419
+00 1
+.names pmusel3 pinb7 n420
+01 1
+.names pmusel2 n420 n421
+11 1
+.names pmusel1 n421 n422
+01 1
+.names pmusel3 pind7 n423
+11 1
+.names pmusel2 n423 n424
+01 1
+.names pmusel1 n424 n425
+01 1
+.names n422 n425 n426
+00 1
+.names pmusel2 pina7 n427
+00 1
+.names pina7 pinc7 n428
+00 1
+.names pmusel2 pinc7 n429
+10 1
+.names n428 n429 n430
+00 1
+.names n427 n430 n431
+01 1
+.names n361 n431 n432
+11 1
+.names n426 n432 n433
+10 1
+.names pmusel4 n433 n434
+00 1
+.names n403 n434 n435
+01 1
+.names pmusel3 pinb6 n436
+01 1
+.names pmusel2 n436 n437
+11 1
+.names pmusel1 n437 n438
+01 1
+.names pmusel3 pind6 n439
+11 1
+.names pmusel2 n439 n440
+01 1
+.names pmusel1 n440 n441
+01 1
+.names n438 n441 n442
+00 1
+.names pmusel2 pina6 n443
+00 1
+.names pina6 pinc6 n444
+00 1
+.names pmusel2 pinc6 n445
+10 1
+.names n444 n445 n446
+00 1
+.names n443 n446 n447
+01 1
+.names n361 n447 n448
+11 1
+.names n442 n448 n449
+10 1
+.names pmusel4 n449 n450
+00 1
+.names n434 n450 n451
+11 1
+.names n435 n451 n452
+00 1
+.names n419 n452 n453
+01 1
+.names n388 n453 n454
+00 1
+.names pina1 n157 n455
+00 1
+.names n157 n241 n456
+01 1
+.names n455 n456 n457
+00 1
+.names pina1 pmusel1 n458
+00 1
+.names n245 n458 n459
+00 1
+.names n457 n459 n460
+11 1
+.names n236 n460 n461
+11 1
+.names pinc1 pmusel4 n462
+11 1
+.names pmusel1 n462 n463
+01 1
+.names pmusel2 n463 n464
+01 1
+.names pmusel3 n464 n465
+01 1
+.names n461 n465 n466
+00 1
+.names n322 n466 n467
+00 1
+.names n322 n466 n468
+11 1
+.names n467 n468 n469
+00 1
+.names pina0 n138 n470
+00 1
+.names n138 n241 n471
+01 1
+.names n470 n471 n472
+00 1
+.names pina0 pmusel1 n473
+00 1
+.names n245 n473 n474
+00 1
+.names n472 n474 n475
+11 1
+.names n236 n475 n476
+11 1
+.names pinc0 pmusel4 n477
+11 1
+.names pmusel1 n477 n478
+01 1
+.names pmusel2 n478 n479
+01 1
+.names pmusel3 n479 n480
+01 1
+.names n476 n480 n481
+00 1
+.names n322 n481 n482
+00 1
+.names n322 n481 n483
+11 1
+.names n482 n483 n484
+00 1
+.names n469 n484 n485
+00 1
+.names pinb1 pmusel3 n486
+10 1
+.names pmusel2 n486 n487
+11 1
+.names pmusel1 n487 n488
+01 1
+.names pmusel3 pind1 n489
+11 1
+.names pmusel2 n489 n490
+01 1
+.names pmusel1 n490 n491
+01 1
+.names n488 n491 n492
+00 1
+.names pina1 pmusel2 n493
+00 1
+.names pina1 pinc1 n494
+00 1
+.names pmusel2 pinc1 n495
+10 1
+.names n494 n495 n496
+00 1
+.names n493 n496 n497
+01 1
+.names n361 n497 n498
+11 1
+.names n492 n498 n499
+10 1
+.names pmusel4 n499 n500
+00 1
+.names n469 n500 n501
+01 1
+.names pinb0 pmusel3 n502
+10 1
+.names pmusel2 n502 n503
+11 1
+.names pmusel1 n503 n504
+01 1
+.names pmusel3 pind0 n505
+11 1
+.names pmusel2 n505 n506
+01 1
+.names pmusel1 n506 n507
+01 1
+.names n504 n507 n508
+00 1
+.names pina0 pmusel2 n509
+00 1
+.names pina0 pinc0 n510
+00 1
+.names pmusel2 pinc0 n511
+10 1
+.names n510 n511 n512
+00 1
+.names n509 n512 n513
+01 1
+.names n361 n513 n514
+11 1
+.names n508 n514 n515
+10 1
+.names pmusel4 n515 n516
+00 1
+.names n500 n516 n517
+11 1
+.names n501 n517 n518
+00 1
+.names n485 n518 n519
+01 1
+.names pina3 n166 n520
+00 1
+.names n166 n241 n521
+01 1
+.names n520 n521 n522
+00 1
+.names pmusel1 pina3 n523
+00 1
+.names n245 n523 n524
+00 1
+.names n522 n524 n525
+11 1
+.names n236 n525 n526
+11 1
+.names pinc3 pmusel4 n527
+11 1
+.names pmusel1 n527 n528
+01 1
+.names pmusel2 n528 n529
+01 1
+.names pmusel3 n529 n530
+01 1
+.names n526 n530 n531
+00 1
+.names n322 n531 n532
+00 1
+.names n322 n531 n533
+11 1
+.names n532 n533 n534
+00 1
+.names pina2 n147 n535
+00 1
+.names n147 n241 n536
+01 1
+.names n535 n536 n537
+00 1
+.names pmusel1 pina2 n538
+00 1
+.names n245 n538 n539
+00 1
+.names n537 n539 n540
+11 1
+.names n236 n540 n541
+11 1
+.names pinc2 pmusel4 n542
+11 1
+.names pmusel1 n542 n543
+01 1
+.names pmusel2 n543 n544
+01 1
+.names pmusel3 n544 n545
+01 1
+.names n541 n545 n546
+00 1
+.names n322 n546 n547
+00 1
+.names n322 n546 n548
+11 1
+.names n547 n548 n549
+00 1
+.names n534 n549 n550
+00 1
+.names pmusel3 pinb3 n551
+01 1
+.names pmusel2 n551 n552
+11 1
+.names pmusel1 n552 n553
+01 1
+.names pind3 pmusel3 n554
+11 1
+.names pmusel2 n554 n555
+01 1
+.names pmusel1 n555 n556
+01 1
+.names n553 n556 n557
+00 1
+.names pmusel2 pina3 n558
+00 1
+.names pinc3 pina3 n559
+00 1
+.names pinc3 pmusel2 n560
+01 1
+.names n559 n560 n561
+00 1
+.names n558 n561 n562
+01 1
+.names n361 n562 n563
+11 1
+.names n557 n563 n564
+10 1
+.names pmusel4 n564 n565
+00 1
+.names n534 n565 n566
+01 1
+.names pmusel3 pinb2 n567
+01 1
+.names pmusel2 n567 n568
+11 1
+.names pmusel1 n568 n569
+01 1
+.names pind2 pmusel3 n570
+11 1
+.names pmusel2 n570 n571
+01 1
+.names pmusel1 n571 n572
+01 1
+.names n569 n572 n573
+00 1
+.names pmusel2 pina2 n574
+00 1
+.names pinc2 pina2 n575
+00 1
+.names pinc2 pmusel2 n576
+01 1
+.names n575 n576 n577
+00 1
+.names n574 n577 n578
+01 1
+.names n361 n578 n579
+11 1
+.names n573 n579 n580
+10 1
+.names pmusel4 n580 n581
+00 1
+.names n565 n581 n582
+11 1
+.names n566 n582 n583
+00 1
+.names n550 n583 n584
+01 1
+.names n519 n584 n585
+00 1
+.names n322 n585 n586
+11 1
+.names n454 n586 n587
+11 1
+.names pina10 n186 n588
+00 1
+.names n186 n241 n589
+01 1
+.names n588 n589 n590
+00 1
+.names pmusel1 pina10 n591
+00 1
+.names n245 n591 n592
+00 1
+.names n590 n592 n593
+11 1
+.names n236 n593 n594
+11 1
+.names pinc10 pmusel4 n595
+11 1
+.names pmusel1 n595 n596
+01 1
+.names pmusel2 n596 n597
+01 1
+.names pmusel3 n597 n598
+01 1
+.names n594 n598 n599
+00 1
+.names n322 n599 n600
+00 1
+.names n322 n599 n601
+11 1
+.names n600 n601 n602
+00 1
+.names pina11 n205 n603
+00 1
+.names n205 n241 n604
+01 1
+.names n603 n604 n605
+00 1
+.names pmusel1 pina11 n606
+00 1
+.names n245 n606 n607
+00 1
+.names n605 n607 n608
+11 1
+.names n236 n608 n609
+11 1
+.names pinc11 pmusel4 n610
+11 1
+.names pmusel1 n610 n611
+01 1
+.names pmusel2 n611 n612
+01 1
+.names pmusel3 n612 n613
+01 1
+.names n609 n613 n614
+00 1
+.names n322 n614 n615
+00 1
+.names n322 n614 n616
+11 1
+.names n615 n616 n617
+00 1
+.names n602 n617 n618
+00 1
+.names pmusel3 pinb11 n619
+01 1
+.names pmusel2 n619 n620
+11 1
+.names pmusel1 n620 n621
+01 1
+.names pmusel3 pind11 n622
+11 1
+.names pmusel2 n622 n623
+01 1
+.names pmusel1 n623 n624
+01 1
+.names n621 n624 n625
+00 1
+.names pmusel2 pina11 n626
+00 1
+.names pina11 pinc11 n627
+00 1
+.names pmusel2 pinc11 n628
+10 1
+.names n627 n628 n629
+00 1
+.names n626 n629 n630
+01 1
+.names n361 n630 n631
+11 1
+.names n625 n631 n632
+10 1
+.names pmusel4 n632 n633
+00 1
+.names n602 n633 n634
+01 1
+.names pmusel3 pinb10 n635
+01 1
+.names pmusel2 n635 n636
+11 1
+.names pmusel1 n636 n637
+01 1
+.names pmusel3 pind10 n638
+11 1
+.names pmusel2 n638 n639
+01 1
+.names pmusel1 n639 n640
+01 1
+.names n637 n640 n641
+00 1
+.names pmusel2 pina10 n642
+00 1
+.names pina10 pinc10 n643
+00 1
+.names pmusel2 pinc10 n644
+10 1
+.names n643 n644 n645
+00 1
+.names n642 n645 n646
+01 1
+.names n361 n646 n647
+11 1
+.names n641 n647 n648
+10 1
+.names pmusel4 n648 n649
+00 1
+.names n633 n649 n650
+11 1
+.names n634 n650 n651
+00 1
+.names n618 n651 n652
+01 1
+.names pina9 n196 n653
+00 1
+.names n196 n241 n654
+01 1
+.names n653 n654 n655
+00 1
+.names pmusel1 pina9 n656
+00 1
+.names n245 n656 n657
+00 1
+.names n655 n657 n658
+11 1
+.names n236 n658 n659
+11 1
+.names pmusel4 pinc9 n660
+11 1
+.names pmusel1 n660 n661
+01 1
+.names pmusel2 n661 n662
+01 1
+.names pmusel3 n662 n663
+01 1
+.names n659 n663 n664
+00 1
+.names n322 n664 n665
+00 1
+.names n322 n664 n666
+11 1
+.names n665 n666 n667
+00 1
+.names pina8 n177 n668
+00 1
+.names n177 n241 n669
+01 1
+.names n668 n669 n670
+00 1
+.names pmusel1 pina8 n671
+00 1
+.names n245 n671 n672
+00 1
+.names n670 n672 n673
+11 1
+.names n236 n673 n674
+11 1
+.names pmusel4 pinc8 n675
+11 1
+.names pmusel1 n675 n676
+01 1
+.names pmusel2 n676 n677
+01 1
+.names pmusel3 n677 n678
+01 1
+.names n674 n678 n679
+00 1
+.names n322 n679 n680
+00 1
+.names n322 n679 n681
+11 1
+.names n680 n681 n682
+00 1
+.names n667 n682 n683
+00 1
+.names pmusel3 pinb9 n684
+01 1
+.names pmusel2 n684 n685
+11 1
+.names pmusel1 n685 n686
+01 1
+.names pmusel3 pind9 n687
+11 1
+.names pmusel2 n687 n688
+01 1
+.names pmusel1 n688 n689
+01 1
+.names n686 n689 n690
+00 1
+.names pmusel2 pina9 n691
+00 1
+.names pina9 pinc9 n692
+00 1
+.names pmusel2 pinc9 n693
+10 1
+.names n692 n693 n694
+00 1
+.names n691 n694 n695
+01 1
+.names n361 n695 n696
+11 1
+.names n690 n696 n697
+10 1
+.names pmusel4 n697 n698
+00 1
+.names n667 n698 n699
+01 1
+.names pmusel3 pinb8 n700
+01 1
+.names pmusel2 n700 n701
+11 1
+.names pmusel1 n701 n702
+01 1
+.names pmusel3 pind8 n703
+11 1
+.names pmusel2 n703 n704
+01 1
+.names pmusel1 n704 n705
+01 1
+.names n702 n705 n706
+00 1
+.names pmusel2 pina8 n707
+00 1
+.names pina8 pinc8 n708
+00 1
+.names pmusel2 pinc8 n709
+10 1
+.names n708 n709 n710
+00 1
+.names n707 n710 n711
+01 1
+.names n361 n711 n712
+11 1
+.names n706 n712 n713
+10 1
+.names pmusel4 n713 n714
+00 1
+.names n698 n714 n715
+11 1
+.names n699 n715 n716
+00 1
+.names n683 n716 n717
+01 1
+.names n652 n717 n718
+00 1
+.names n587 n718 n719
+11 1
+.names pina12 n219 n720
+00 1
+.names n219 n241 n721
+01 1
+.names n720 n721 n722
+00 1
+.names pmusel1 pina12 n723
+00 1
+.names n245 n723 n724
+00 1
+.names n722 n724 n725
+11 1
+.names n236 n725 n726
+11 1
+.names pinc12 pmusel4 n727
+11 1
+.names pmusel1 n727 n728
+01 1
+.names pmusel2 n728 n729
+01 1
+.names pmusel3 n729 n730
+01 1
+.names n726 n730 n731
+00 1
+.names n322 n731 n732
+00 1
+.names n322 n731 n733
+11 1
+.names n732 n733 n734
+00 1
+.names pmusel3 pinb12 n735
+01 1
+.names pmusel2 n735 n736
+11 1
+.names pmusel1 n736 n737
+01 1
+.names pmusel3 pind12 n738
+11 1
+.names pmusel2 n738 n739
+01 1
+.names pmusel1 n739 n740
+01 1
+.names n737 n740 n741
+00 1
+.names pmusel2 pina12 n742
+00 1
+.names pinc12 pina12 n743
+00 1
+.names pmusel2 pinc12 n744
+10 1
+.names n743 n744 n745
+00 1
+.names n742 n745 n746
+01 1
+.names n361 n746 n747
+11 1
+.names n741 n747 n748
+10 1
+.names pmusel4 n748 n749
+00 1
+.names n734 n749 n750
+11 1
+.names n734 n749 n751
+00 1
+.names n750 n751 n752
+00 1
+.names n719 n752 n753
+00 1
+.names n719 n752 n754
+11 1
+.names n753 n754 n755
+00 1
+.names n232 n755 n756
+01 1
+.names n316 n756 n757
+00 1
+.names n303 n315 n758
+11 1
+.names n303 n755 n759
+11 1
+.names n758 n759 n760
+00 1
+.names n757 n760 n761
+11 1
+.names n312 n761 n762
+11 1
+.names n311 n762 po12
+00 0
+.names n213 n217 n764
+00 1
+.names popsel2 n764 n765
+11 1
+.names n232 n765 n766
+11 1
+.names popsel2 n764 n767
+00 1
+.names psh2 n278 n768
+00 1
+.names psh2 n768 n769
+00 1
+.names pmusel2 pind11 n770
+11 1
+.names pinb11 n770 n771
+00 1
+.names n241 n770 n772
+10 1
+.names n771 n772 n773
+00 1
+.names pmusel1 pinb11 n774
+00 1
+.names n245 n774 n775
+00 1
+.names n773 n775 n776
+11 1
+.names n236 n776 n777
+11 1
+.names pmusel3 pind11 n778
+01 1
+.names n263 n778 n779
+11 1
+.names n777 n779 n780
+00 1
+.names n768 n780 n781
+01 1
+.names n769 n781 n782
+00 1
+.names n235 n782 n783
+11 1
+.names psh1 n265 n784
+10 1
+.names n780 n784 n785
+10 1
+.names psh1 n784 n786
+10 1
+.names n785 n786 n787
+00 1
+.names psh0 n787 n788
+01 1
+.names n253 n290 n789
+10 1
+.names n788 n789 n790
+00 1
+.names psh2 n251 n791
+10 1
+.names n790 n791 n792
+10 1
+.names psh2 n791 n793
+10 1
+.names n792 n793 n794
+00 1
+.names n235 n794 n795
+01 1
+.names n783 n795 n796
+00 1
+.names n764 n796 n797
+01 1
+.names popsel2 n796 n798
+11 1
+.names n797 n798 n799
+00 1
+.names n767 n799 n800
+01 1
+.names n766 n800 n801
+00 1
+.names n232 n766 n802
+10 1
+.names n801 n802 n803
+00 1
+.names popsel3 n803 n804
+01 1
+.names n602 n649 n805
+10 1
+.names n682 n714 n806
+10 1
+.names n587 n806 n807
+10 1
+.names n667 n698 n808
+10 1
+.names n807 n808 n809
+10 1
+.names n805 n809 n810
+01 1
+.names n617 n633 n811
+00 1
+.names n617 n633 n812
+11 1
+.names n811 n812 n813
+00 1
+.names n810 n813 n814
+11 1
+.names n810 n814 n815
+10 1
+.names n813 n814 n816
+10 1
+.names n815 n816 n817
+00 1
+.names n315 n817 n818
+01 1
+.names n232 n796 n819
+10 1
+.names n818 n819 n820
+00 1
+.names n312 n820 n821
+10 1
+.names n804 n821 po11
+00 0
+.names pmusel2 pinc13 n823
+11 1
+.names pmusel1 n823 n824
+01 1
+.names pmusel2 pina13 n825
+01 1
+.names pmusel1 n825 n826
+11 1
+.names n824 n826 n827
+00 1
+.names n92 n827 n828
+10 1
+.names n98 n828 n829
+01 1
+.names n98 n828 n830
+10 1
+.names n829 n830 n831
+00 1
+.names n227 n831 n832
+00 1
+.names n218 n832 n833
+11 1
+.names pmusel2 pinc14 n834
+11 1
+.names pmusel1 n834 n835
+01 1
+.names pmusel2 pina14 n836
+01 1
+.names pmusel1 n836 n837
+11 1
+.names n835 n837 n838
+00 1
+.names n92 n838 n839
+10 1
+.names n98 n839 n840
+01 1
+.names n98 n839 n841
+10 1
+.names n840 n841 n842
+00 1
+.names n833 n842 n843
+11 1
+.names n833 n842 n844
+00 1
+.names n843 n844 n845
+00 1
+.names popsel2 n845 n846
+10 1
+.names n232 n846 n847
+11 1
+.names popsel2 n845 n848
+01 1
+.names psh1 psh2 n849
+10 1
+.names psh0 psh2 n850
+00 1
+.names n849 n850 n851
+00 1
+.names n235 n851 n852
+01 1
+.names n849 n852 n853
+00 1
+.names n278 n853 n854
+01 1
+.names n251 n853 n855
+00 1
+.names n854 n855 n856
+00 1
+.names n845 n856 n857
+11 1
+.names popsel2 n856 n858
+11 1
+.names n857 n858 n859
+00 1
+.names n848 n859 n860
+01 1
+.names n847 n860 n861
+00 1
+.names n232 n847 n862
+10 1
+.names n861 n862 n863
+00 1
+.names popsel3 n863 n864
+01 1
+.names pina14 n834 n865
+00 1
+.names n241 n834 n866
+10 1
+.names n865 n866 n867
+00 1
+.names pmusel1 pina14 n868
+00 1
+.names n245 n868 n869
+00 1
+.names n867 n869 n870
+11 1
+.names n236 n870 n871
+11 1
+.names pinc14 pmusel4 n872
+11 1
+.names pmusel1 n872 n873
+01 1
+.names pmusel2 n873 n874
+01 1
+.names pmusel3 n874 n875
+01 1
+.names n871 n875 n876
+00 1
+.names n322 n876 n877
+00 1
+.names n322 n876 n878
+11 1
+.names n877 n878 n879
+00 1
+.names pmusel3 pinb14 n880
+01 1
+.names pmusel2 n880 n881
+11 1
+.names pmusel1 n881 n882
+01 1
+.names pmusel3 pind14 n883
+11 1
+.names pmusel2 n883 n884
+01 1
+.names pmusel1 n884 n885
+01 1
+.names n882 n885 n886
+00 1
+.names pmusel2 pina14 n887
+00 1
+.names pinc14 pina14 n888
+00 1
+.names pmusel2 pinc14 n889
+10 1
+.names n888 n889 n890
+00 1
+.names n887 n890 n891
+01 1
+.names n361 n891 n892
+11 1
+.names n886 n892 n893
+10 1
+.names pmusel4 n893 n894
+00 1
+.names n879 n894 n895
+00 1
+.names n879 n894 n896
+11 1
+.names n895 n896 n897
+00 1
+.names n734 n749 n898
+10 1
+.names n719 n898 n899
+10 1
+.names pina13 n823 n900
+00 1
+.names n241 n823 n901
+10 1
+.names n900 n901 n902
+00 1
+.names pmusel1 pina13 n903
+00 1
+.names n245 n903 n904
+00 1
+.names n902 n904 n905
+11 1
+.names n236 n905 n906
+11 1
+.names pinc13 pmusel4 n907
+11 1
+.names pmusel1 n907 n908
+01 1
+.names pmusel2 n908 n909
+01 1
+.names pmusel3 n909 n910
+01 1
+.names n906 n910 n911
+00 1
+.names n322 n911 n912
+00 1
+.names n322 n911 n913
+11 1
+.names n912 n913 n914
+00 1
+.names pmusel3 pinb13 n915
+01 1
+.names pmusel2 n915 n916
+11 1
+.names pmusel1 n916 n917
+01 1
+.names pmusel3 pind13 n918
+11 1
+.names pmusel2 n918 n919
+01 1
+.names pmusel1 n919 n920
+01 1
+.names n917 n920 n921
+00 1
+.names pmusel2 pina13 n922
+00 1
+.names pinc13 pina13 n923
+00 1
+.names pmusel2 pinc13 n924
+10 1
+.names n923 n924 n925
+00 1
+.names n922 n925 n926
+01 1
+.names n361 n926 n927
+11 1
+.names n921 n927 n928
+10 1
+.names pmusel4 n928 n929
+00 1
+.names n914 n929 n930
+10 1
+.names n899 n930 n931
+10 1
+.names n897 n931 n932
+11 1
+.names n897 n932 n933
+10 1
+.names n931 n932 n934
+10 1
+.names n933 n934 n935
+00 1
+.names n315 n935 n936
+01 1
+.names n232 n856 n937
+10 1
+.names n936 n937 n938
+00 1
+.names n312 n938 n939
+10 1
+.names n864 n939 po14
+00 0
+.names n218 n227 n941
+10 1
+.names n831 n941 n942
+11 1
+.names n831 n941 n943
+00 1
+.names n942 n943 n944
+00 1
+.names popsel2 n944 n945
+10 1
+.names n232 n945 n946
+11 1
+.names popsel2 n944 n947
+01 1
+.names psh0 psh2 n948
+11 1
+.names n784 n948 n949
+11 1
+.names psh2 n235 n950
+11 1
+.names psh1 psh2 n951
+01 1
+.names psh1 n948 n952
+10 1
+.names n951 n952 n953
+00 1
+.names psh0 n278 n954
+10 1
+.names psh0 n265 n955
+00 1
+.names n954 n955 n956
+00 1
+.names n953 n956 n957
+11 1
+.names n950 n957 n958
+00 1
+.names psh1 psh2 n959
+00 1
+.names n251 n959 n960
+10 1
+.names n251 n956 n961
+11 1
+.names n960 n961 n962
+00 1
+.names n958 n962 n963
+11 1
+.names n949 n963 n964
+00 1
+.names n944 n964 n965
+11 1
+.names popsel2 n964 n966
+11 1
+.names n965 n966 n967
+00 1
+.names n947 n967 n968
+01 1
+.names n946 n968 n969
+00 1
+.names n232 n946 n970
+10 1
+.names n969 n970 n971
+00 1
+.names popsel3 n971 n972
+01 1
+.names n914 n929 n973
+00 1
+.names n914 n929 n974
+11 1
+.names n973 n974 n975
+00 1
+.names n899 n975 n976
+11 1
+.names n975 n976 n977
+10 1
+.names n899 n976 n978
+10 1
+.names n977 n978 n979
+00 1
+.names n315 n979 n980
+01 1
+.names n232 n964 n981
+10 1
+.names n980 n981 n982
+00 1
+.names n312 n982 n983
+10 1
+.names n972 n983 po13
+00 0
+.names n218 n831 n985
+10 1
+.names n227 n842 n986
+00 1
+.names n985 n986 n987
+11 1
+.names popsel2 n987 n988
+11 1
+.names n232 n988 n989
+11 1
+.names popsel2 n987 n990
+01 1
+.names popsel2 n251 n991
+10 1
+.names n990 n991 n992
+00 1
+.names n989 n992 n993
+01 1
+.names n232 n989 n994
+10 1
+.names n993 n994 n995
+00 1
+.names popsel3 n995 n996
+01 1
+.names n879 n894 n997
+10 1
+.names n931 n997 n998
+10 1
+.names pina15 n93 n999
+00 1
+.names n93 n241 n1000
+01 1
+.names n999 n1000 n1001
+00 1
+.names pmusel1 pina15 n1002
+00 1
+.names n245 n1002 n1003
+00 1
+.names n1001 n1003 n1004
+11 1
+.names n236 n1004 n1005
+11 1
+.names pinc15 pmusel4 n1006
+11 1
+.names pmusel1 n1006 n1007
+01 1
+.names pmusel2 n1007 n1008
+01 1
+.names pmusel3 n1008 n1009
+01 1
+.names n1005 n1009 n1010
+00 1
+.names n322 n1010 n1011
+00 1
+.names n322 n1010 n1012
+11 1
+.names n1011 n1012 n1013
+00 1
+.names pmusel3 pinb15 n1014
+01 1
+.names pmusel2 n1014 n1015
+11 1
+.names pmusel1 n1015 n1016
+01 1
+.names pmusel3 pind15 n1017
+11 1
+.names pmusel2 n1017 n1018
+01 1
+.names pmusel1 n1018 n1019
+01 1
+.names n1016 n1019 n1020
+00 1
+.names pmusel2 pina15 n1021
+00 1
+.names pinc15 pina15 n1022
+00 1
+.names pmusel2 pinc15 n1023
+10 1
+.names n1022 n1023 n1024
+00 1
+.names n1021 n1024 n1025
+01 1
+.names n361 n1025 n1026
+11 1
+.names n1020 n1026 n1027
+10 1
+.names pmusel4 n1027 n1028
+00 1
+.names n1013 n1028 n1029
+11 1
+.names n1013 n1028 n1030
+00 1
+.names n1029 n1030 n1031
+00 1
+.names n998 n1031 n1032
+11 1
+.names n998 n1032 n1033
+10 1
+.names n1031 n1032 n1034
+10 1
+.names n1033 n1034 n1035
+00 1
+.names n315 n1035 n1036
+01 1
+.names n232 n251 n1037
+10 1
+.names n1036 n1037 n1038
+00 1
+.names n312 n1038 n1039
+10 1
+.names n996 n1039 po15
+00 0
+.names n204 n217 n1041
+00 1
+.names popsel2 n1041 n1042
+11 1
+.names n232 n1042 n1043
+11 1
+.names popsel2 n1041 n1044
+00 1
+.names psh2 n265 n1045
+10 1
+.names pmusel2 pind9 n1046
+11 1
+.names pinb9 n1046 n1047
+00 1
+.names n241 n1046 n1048
+10 1
+.names n1047 n1048 n1049
+00 1
+.names pmusel1 pinb9 n1050
+00 1
+.names n245 n1050 n1051
+00 1
+.names n1049 n1051 n1052
+11 1
+.names n236 n1052 n1053
+11 1
+.names pmusel3 pind9 n1054
+01 1
+.names n263 n1054 n1055
+11 1
+.names n1053 n1055 n1056
+00 1
+.names psh2 n1056 n1057
+00 1
+.names n1045 n1057 n1058
+00 1
+.names psh1 n1058 n1059
+01 1
+.names psh2 n780 n1060
+00 1
+.names n791 n1060 n1061
+00 1
+.names n1058 n1061 n1062
+11 1
+.names psh1 n1061 n1063
+11 1
+.names n1062 n1063 n1064
+00 1
+.names n1059 n1064 n1065
+01 1
+.names psh0 n1065 n1066
+01 1
+.names psh2 n278 n1067
+10 1
+.names pmusel2 pind10 n1068
+11 1
+.names pinb10 n1068 n1069
+00 1
+.names n241 n1068 n1070
+10 1
+.names n1069 n1070 n1071
+00 1
+.names pmusel1 pinb10 n1072
+00 1
+.names n245 n1072 n1073
+00 1
+.names n1071 n1073 n1074
+11 1
+.names n236 n1074 n1075
+11 1
+.names pmusel3 pind10 n1076
+01 1
+.names n263 n1076 n1077
+11 1
+.names n1075 n1077 n1078
+00 1
+.names psh2 n1078 n1079
+00 1
+.names n1067 n1079 n1080
+00 1
+.names psh1 n1080 n1081
+01 1
+.names psh2 n290 n1082
+00 1
+.names psh2 n1056 n1083
+10 1
+.names n1082 n1083 n1084
+00 1
+.names n1080 n1084 n1085
+11 1
+.names psh1 n1084 n1086
+11 1
+.names n1085 n1086 n1087
+00 1
+.names n1081 n1087 n1088
+01 1
+.names psh0 n1088 n1089
+11 1
+.names n1066 n1089 n1090
+00 1
+.names n1041 n1090 n1091
+01 1
+.names popsel2 n1090 n1092
+11 1
+.names n1091 n1092 n1093
+00 1
+.names n1044 n1093 n1094
+01 1
+.names n1043 n1094 n1095
+00 1
+.names n232 n1043 n1096
+10 1
+.names n1095 n1096 n1097
+00 1
+.names popsel3 n1097 n1098
+01 1
+.names n667 n698 n1099
+00 1
+.names n667 n698 n1100
+11 1
+.names n1099 n1100 n1101
+00 1
+.names n807 n1101 n1102
+11 1
+.names n1101 n1102 n1103
+10 1
+.names n807 n1102 n1104
+10 1
+.names n1103 n1104 n1105
+00 1
+.names n315 n1105 n1106
+01 1
+.names n232 n1090 n1107
+10 1
+.names n1106 n1107 n1108
+00 1
+.names n312 n1108 n1109
+10 1
+.names n1098 n1109 po9
+00 0
+.names n185 n217 n1111
+00 1
+.names popsel2 n1111 n1112
+11 1
+.names n232 n1112 n1113
+11 1
+.names popsel2 n1111 n1114
+00 1
+.names psh2 n290 n1115
+10 1
+.names pmusel2 pind8 n1116
+11 1
+.names pinb8 n1116 n1117
+00 1
+.names n241 n1116 n1118
+10 1
+.names n1117 n1118 n1119
+00 1
+.names pmusel1 pinb8 n1120
+00 1
+.names n245 n1120 n1121
+00 1
+.names n1119 n1121 n1122
+11 1
+.names n236 n1122 n1123
+11 1
+.names pmusel3 pind8 n1124
+01 1
+.names n263 n1124 n1125
+11 1
+.names n1123 n1125 n1126
+00 1
+.names psh2 n1126 n1127
+00 1
+.names n1115 n1127 n1128
+00 1
+.names psh1 n1128 n1129
+01 1
+.names n791 n1079 n1130
+00 1
+.names n1128 n1130 n1131
+11 1
+.names psh1 n1130 n1132
+11 1
+.names n1131 n1132 n1133
+00 1
+.names n1129 n1133 n1134
+01 1
+.names psh0 n1134 n1135
+01 1
+.names psh2 n1126 n1136
+10 1
+.names n1060 n1136 n1137
+00 1
+.names n1058 n1137 n1138
+11 1
+.names psh1 n1137 n1139
+11 1
+.names n1138 n1139 n1140
+00 1
+.names n1059 n1140 n1141
+01 1
+.names psh0 n1141 n1142
+11 1
+.names n1135 n1142 n1143
+00 1
+.names n1111 n1143 n1144
+01 1
+.names popsel2 n1143 n1145
+11 1
+.names n1144 n1145 n1146
+00 1
+.names n1114 n1146 n1147
+01 1
+.names n1113 n1147 n1148
+00 1
+.names n232 n1113 n1149
+10 1
+.names n1148 n1149 n1150
+00 1
+.names popsel3 n1150 n1151
+01 1
+.names n682 n714 n1152
+00 1
+.names n682 n714 n1153
+11 1
+.names n1152 n1153 n1154
+00 1
+.names n587 n1154 n1155
+00 1
+.names n587 n1154 n1156
+11 1
+.names n1155 n1156 n1157
+00 1
+.names n232 n1157 n1158
+01 1
+.names n316 n1158 n1159
+00 1
+.names n315 n1143 n1160
+11 1
+.names n1143 n1157 n1161
+11 1
+.names n1160 n1161 n1162
+00 1
+.names n1159 n1162 n1163
+11 1
+.names n312 n1163 n1164
+11 1
+.names n1151 n1164 po8
+00 0
+.names n98 n176 n1166
+11 1
+.names n126 n1166 n1167
+01 1
+.names n117 n1167 n1168
+11 1
+.names n135 n1168 n1169
+11 1
+.names n135 n1168 n1170
+00 1
+.names n1169 n1170 n1171
+00 1
+.names popsel2 n1171 n1172
+10 1
+.names n232 n1172 n1173
+11 1
+.names popsel2 n1171 n1174
+01 1
+.names psh2 n780 n1175
+10 1
+.names pmusel2 pind7 n1176
+11 1
+.names pinb7 n1176 n1177
+00 1
+.names n241 n1176 n1178
+10 1
+.names n1177 n1178 n1179
+00 1
+.names pmusel1 pinb7 n1180
+00 1
+.names n245 n1180 n1181
+00 1
+.names n1179 n1181 n1182
+11 1
+.names n236 n1182 n1183
+11 1
+.names pmusel3 pind7 n1184
+01 1
+.names n263 n1184 n1185
+11 1
+.names n1183 n1185 n1186
+00 1
+.names psh2 n1186 n1187
+00 1
+.names n1175 n1187 n1188
+00 1
+.names psh1 n1188 n1189
+01 1
+.names n791 n1057 n1190
+00 1
+.names n1188 n1190 n1191
+11 1
+.names psh1 n1190 n1192
+11 1
+.names n1191 n1192 n1193
+00 1
+.names n1189 n1193 n1194
+01 1
+.names psh0 n1194 n1195
+01 1
+.names psh2 n1186 n1196
+10 1
+.names n1079 n1196 n1197
+00 1
+.names n1128 n1197 n1198
+11 1
+.names psh1 n1197 n1199
+11 1
+.names n1198 n1199 n1200
+00 1
+.names n1129 n1200 n1201
+01 1
+.names psh0 n1201 n1202
+11 1
+.names n1195 n1202 n1203
+00 1
+.names n1171 n1203 n1204
+11 1
+.names popsel2 n1203 n1205
+11 1
+.names n1204 n1205 n1206
+00 1
+.names n1174 n1206 n1207
+01 1
+.names n1173 n1207 n1208
+00 1
+.names n232 n1173 n1209
+10 1
+.names n1208 n1209 n1210
+00 1
+.names popsel3 n1210 n1211
+01 1
+.names n352 n369 n1212
+10 1
+.names n337 n385 n1213
+10 1
+.names n586 n1213 n1214
+10 1
+.names n1212 n1214 n1215
+01 1
+.names n403 n450 n1216
+10 1
+.names n1215 n1216 n1217
+10 1
+.names n418 n434 n1218
+00 1
+.names n418 n434 n1219
+11 1
+.names n1218 n1219 n1220
+00 1
+.names n1217 n1220 n1221
+11 1
+.names n1217 n1221 n1222
+10 1
+.names n1220 n1221 n1223
+10 1
+.names n1222 n1223 n1224
+00 1
+.names n315 n1224 n1225
+01 1
+.names n232 n1203 n1226
+10 1
+.names n1225 n1226 n1227
+00 1
+.names n312 n1227 n1228
+10 1
+.names n1211 n1228 po7
+00 0
+.names n107 n126 n1230
+00 1
+.names n1166 n1230 n1231
+11 1
+.names n116 n1231 n1232
+11 1
+.names n116 n1231 n1233
+00 1
+.names n1232 n1233 n1234
+00 1
+.names popsel2 n1234 n1235
+10 1
+.names n232 n1235 n1236
+11 1
+.names popsel2 n1234 n1237
+01 1
+.names psh2 n1078 n1238
+10 1
+.names pmusel2 pind6 n1239
+11 1
+.names pinb6 n1239 n1240
+00 1
+.names n241 n1239 n1241
+10 1
+.names n1240 n1241 n1242
+00 1
+.names pmusel1 pinb6 n1243
+00 1
+.names n245 n1243 n1244
+00 1
+.names n1242 n1244 n1245
+11 1
+.names n236 n1245 n1246
+11 1
+.names pmusel3 pind6 n1247
+01 1
+.names n263 n1247 n1248
+11 1
+.names n1246 n1248 n1249
+00 1
+.names psh2 n1249 n1250
+00 1
+.names n1238 n1250 n1251
+00 1
+.names psh1 n1251 n1252
+01 1
+.names n1067 n1127 n1253
+00 1
+.names n1251 n1253 n1254
+11 1
+.names psh1 n1253 n1255
+11 1
+.names n1254 n1255 n1256
+00 1
+.names n1252 n1256 n1257
+01 1
+.names psh0 n1257 n1258
+01 1
+.names psh2 n1249 n1259
+10 1
+.names n1057 n1259 n1260
+00 1
+.names n1188 n1260 n1261
+11 1
+.names psh1 n1260 n1262
+11 1
+.names n1261 n1262 n1263
+00 1
+.names n1189 n1263 n1264
+01 1
+.names psh0 n1264 n1265
+11 1
+.names n1258 n1265 n1266
+00 1
+.names n1234 n1266 n1267
+11 1
+.names popsel2 n1266 n1268
+11 1
+.names n1267 n1268 n1269
+00 1
+.names n1237 n1269 n1270
+01 1
+.names n1236 n1270 n1271
+00 1
+.names n232 n1236 n1272
+10 1
+.names n1271 n1272 n1273
+00 1
+.names popsel3 n1273 n1274
+01 1
+.names n403 n450 n1275
+00 1
+.names n403 n450 n1276
+11 1
+.names n1275 n1276 n1277
+00 1
+.names n1215 n1277 n1278
+11 1
+.names n1277 n1278 n1279
+10 1
+.names n1215 n1278 n1280
+10 1
+.names n1279 n1280 n1281
+00 1
+.names n315 n1281 n1282
+01 1
+.names n232 n1266 n1283
+10 1
+.names n1282 n1283 n1284
+00 1
+.names n312 n1284 n1285
+10 1
+.names n1274 n1285 po6
+00 0
+.names n107 n1166 n1287
+01 1
+.names n126 n1287 n1288
+11 1
+.names n126 n1287 n1289
+00 1
+.names n1288 n1289 n1290
+00 1
+.names popsel2 n1290 n1291
+10 1
+.names n232 n1291 n1292
+11 1
+.names popsel2 n1290 n1293
+01 1
+.names pind5 pmusel2 n1294
+11 1
+.names pinb5 n1294 n1295
+00 1
+.names n241 n1294 n1296
+10 1
+.names n1295 n1296 n1297
+00 1
+.names pmusel1 pinb5 n1298
+00 1
+.names n245 n1298 n1299
+00 1
+.names n1297 n1299 n1300
+11 1
+.names n236 n1300 n1301
+11 1
+.names pind5 pmusel3 n1302
+10 1
+.names n263 n1302 n1303
+11 1
+.names n1301 n1303 n1304
+00 1
+.names psh2 n1304 n1305
+00 1
+.names n1083 n1305 n1306
+00 1
+.names psh1 n1306 n1307
+01 1
+.names n1045 n1187 n1308
+00 1
+.names n1306 n1308 n1309
+11 1
+.names psh1 n1308 n1310
+11 1
+.names n1309 n1310 n1311
+00 1
+.names n1307 n1311 n1312
+01 1
+.names psh0 n1312 n1313
+01 1
+.names psh2 n1304 n1314
+10 1
+.names n1127 n1314 n1315
+00 1
+.names n1251 n1315 n1316
+11 1
+.names psh1 n1315 n1317
+11 1
+.names n1316 n1317 n1318
+00 1
+.names n1252 n1318 n1319
+01 1
+.names psh0 n1319 n1320
+11 1
+.names n1313 n1320 n1321
+00 1
+.names n1290 n1321 n1322
+11 1
+.names popsel2 n1321 n1323
+11 1
+.names n1322 n1323 n1324
+00 1
+.names n1293 n1324 n1325
+01 1
+.names n1292 n1325 n1326
+00 1
+.names n232 n1292 n1327
+10 1
+.names n1326 n1327 n1328
+00 1
+.names popsel3 n1328 n1329
+01 1
+.names n352 n369 n1330
+00 1
+.names n352 n369 n1331
+11 1
+.names n1330 n1331 n1332
+00 1
+.names n1214 n1332 n1333
+11 1
+.names n1332 n1333 n1334
+10 1
+.names n1214 n1333 n1335
+10 1
+.names n1334 n1335 n1336
+00 1
+.names n315 n1336 n1337
+01 1
+.names n232 n1321 n1338
+10 1
+.names n1337 n1338 n1339
+00 1
+.names n312 n1339 n1340
+10 1
+.names n1329 n1340 po5
+00 0
+.names n107 n1166 n1342
+11 1
+.names n107 n1166 n1343
+00 1
+.names n1342 n1343 n1344
+00 1
+.names popsel2 n1344 n1345
+10 1
+.names n232 n1345 n1346
+11 1
+.names popsel2 n1344 n1347
+01 1
+.names pmusel2 pind4 n1348
+11 1
+.names pinb4 n1348 n1349
+00 1
+.names n241 n1348 n1350
+10 1
+.names n1349 n1350 n1351
+00 1
+.names pmusel1 pinb4 n1352
+00 1
+.names n245 n1352 n1353
+00 1
+.names n1351 n1353 n1354
+11 1
+.names n236 n1354 n1355
+11 1
+.names pind4 pmusel3 n1356
+10 1
+.names n263 n1356 n1357
+11 1
+.names n1355 n1357 n1358
+00 1
+.names psh2 n1358 n1359
+00 1
+.names n1136 n1359 n1360
+00 1
+.names psh1 n1360 n1361
+01 1
+.names n1115 n1250 n1362
+00 1
+.names n1360 n1362 n1363
+11 1
+.names psh1 n1362 n1364
+11 1
+.names n1363 n1364 n1365
+00 1
+.names n1361 n1365 n1366
+01 1
+.names psh0 n1366 n1367
+01 1
+.names psh2 n1358 n1368
+10 1
+.names n1187 n1368 n1369
+00 1
+.names n1306 n1369 n1370
+11 1
+.names psh1 n1369 n1371
+11 1
+.names n1370 n1371 n1372
+00 1
+.names n1307 n1372 n1373
+01 1
+.names psh0 n1373 n1374
+11 1
+.names n1367 n1374 n1375
+00 1
+.names n1344 n1375 n1376
+11 1
+.names popsel2 n1375 n1377
+11 1
+.names n1376 n1377 n1378
+00 1
+.names n1347 n1378 n1379
+01 1
+.names n1346 n1379 n1380
+00 1
+.names n232 n1346 n1381
+10 1
+.names n1380 n1381 n1382
+00 1
+.names popsel3 n1382 n1383
+01 1
+.names n337 n385 n1384
+11 1
+.names n337 n385 n1385
+00 1
+.names n1384 n1385 n1386
+00 1
+.names n586 n1386 n1387
+00 1
+.names n586 n1386 n1388
+11 1
+.names n1387 n1388 n1389
+00 1
+.names n232 n1389 n1390
+01 1
+.names n316 n1390 n1391
+00 1
+.names n315 n1375 n1392
+11 1
+.names n1375 n1389 n1393
+11 1
+.names n1392 n1393 n1394
+00 1
+.names n1391 n1394 n1395
+11 1
+.names n312 n1395 n1396
+11 1
+.names n1383 n1396 po4
+00 0
+.names n156 n164 n1398
+11 1
+.names n174 n1398 n1399
+11 1
+.names n174 n1398 n1400
+00 1
+.names n1399 n1400 n1401
+00 1
+.names popsel2 n1401 n1402
+10 1
+.names n232 n1402 n1403
+11 1
+.names popsel2 n1401 n1404
+01 1
+.names pind3 pmusel2 n1405
+11 1
+.names pinb3 n1405 n1406
+00 1
+.names n241 n1405 n1407
+10 1
+.names n1406 n1407 n1408
+00 1
+.names pmusel1 pinb3 n1409
+00 1
+.names n245 n1409 n1410
+00 1
+.names n1408 n1410 n1411
+11 1
+.names n236 n1411 n1412
+11 1
+.names pind3 pmusel3 n1413
+10 1
+.names n263 n1413 n1414
+11 1
+.names n1412 n1414 n1415
+00 1
+.names psh2 n1415 n1416
+00 1
+.names n1196 n1416 n1417
+00 1
+.names psh1 n1417 n1418
+01 1
+.names n1175 n1305 n1419
+00 1
+.names n1417 n1419 n1420
+11 1
+.names psh1 n1419 n1421
+11 1
+.names n1420 n1421 n1422
+00 1
+.names n1418 n1422 n1423
+01 1
+.names psh0 n1423 n1424
+01 1
+.names psh2 n1415 n1425
+10 1
+.names n1250 n1425 n1426
+00 1
+.names n1360 n1426 n1427
+11 1
+.names psh1 n1426 n1428
+11 1
+.names n1427 n1428 n1429
+00 1
+.names n1361 n1429 n1430
+01 1
+.names psh0 n1430 n1431
+11 1
+.names n1424 n1431 n1432
+00 1
+.names n1401 n1432 n1433
+11 1
+.names popsel2 n1432 n1434
+11 1
+.names n1433 n1434 n1435
+00 1
+.names n1404 n1435 n1436
+01 1
+.names n1403 n1436 n1437
+00 1
+.names n232 n1403 n1438
+10 1
+.names n1437 n1438 n1439
+00 1
+.names popsel3 n1439 n1440
+01 1
+.names n469 n500 n1441
+10 1
+.names n483 n1441 n1442
+10 1
+.names n549 n581 n1443
+10 1
+.names n1442 n1443 n1444
+10 1
+.names n534 n565 n1445
+00 1
+.names n534 n565 n1446
+11 1
+.names n1445 n1446 n1447
+00 1
+.names n1444 n1447 n1448
+11 1
+.names n1444 n1448 n1449
+10 1
+.names n1447 n1448 n1450
+10 1
+.names n1449 n1450 n1451
+00 1
+.names n315 n1451 n1452
+01 1
+.names n232 n1432 n1453
+10 1
+.names n1452 n1453 n1454
+00 1
+.names n312 n1454 n1455
+10 1
+.names n1440 n1455 po3
+00 0
+.names n146 n165 n1457
+00 1
+.names n98 n1457 n1458
+11 1
+.names n155 n1458 n1459
+11 1
+.names n155 n1458 n1460
+00 1
+.names n1459 n1460 n1461
+00 1
+.names popsel2 n1461 n1462
+10 1
+.names n232 n1462 n1463
+11 1
+.names popsel2 n1461 n1464
+01 1
+.names pind2 pmusel2 n1465
+11 1
+.names pinb2 n1465 n1466
+00 1
+.names n241 n1465 n1467
+10 1
+.names n1466 n1467 n1468
+00 1
+.names pmusel1 pinb2 n1469
+00 1
+.names n245 n1469 n1470
+00 1
+.names n1468 n1470 n1471
+11 1
+.names n236 n1471 n1472
+11 1
+.names pind2 pmusel3 n1473
+10 1
+.names n263 n1473 n1474
+11 1
+.names n1472 n1474 n1475
+00 1
+.names psh2 n1475 n1476
+00 1
+.names n1259 n1476 n1477
+00 1
+.names psh1 n1477 n1478
+01 1
+.names n1238 n1359 n1479
+00 1
+.names n1477 n1479 n1480
+11 1
+.names psh1 n1479 n1481
+11 1
+.names n1480 n1481 n1482
+00 1
+.names n1478 n1482 n1483
+01 1
+.names psh0 n1483 n1484
+01 1
+.names psh2 n1475 n1485
+10 1
+.names n1305 n1485 n1486
+00 1
+.names n1417 n1486 n1487
+11 1
+.names psh1 n1486 n1488
+11 1
+.names n1487 n1488 n1489
+00 1
+.names n1418 n1489 n1490
+01 1
+.names psh0 n1490 n1491
+11 1
+.names n1484 n1491 n1492
+00 1
+.names n1461 n1492 n1493
+11 1
+.names popsel2 n1492 n1494
+11 1
+.names n1493 n1494 n1495
+00 1
+.names n1464 n1495 n1496
+01 1
+.names n1463 n1496 n1497
+00 1
+.names n232 n1463 n1498
+10 1
+.names n1497 n1498 n1499
+00 1
+.names popsel3 n1499 n1500
+01 1
+.names n549 n581 n1501
+00 1
+.names n549 n581 n1502
+11 1
+.names n1501 n1502 n1503
+00 1
+.names n1442 n1503 n1504
+11 1
+.names n1503 n1504 n1505
+10 1
+.names n1442 n1504 n1506
+10 1
+.names n1505 n1506 n1507
+00 1
+.names n315 n1507 n1508
+01 1
+.names n232 n1492 n1509
+10 1
+.names n1508 n1509 n1510
+00 1
+.names n312 n1510 n1511
+10 1
+.names n1500 n1511 po2
+00 0
+.names n145 n165 n1513
+11 1
+.names n145 n165 n1514
+00 1
+.names n1513 n1514 n1515
+00 1
+.names popsel2 n1515 n1516
+10 1
+.names n232 n1516 n1517
+11 1
+.names popsel2 n1515 n1518
+01 1
+.names pmusel2 pind1 n1519
+11 1
+.names pinb1 n1519 n1520
+00 1
+.names n241 n1519 n1521
+10 1
+.names n1520 n1521 n1522
+00 1
+.names pinb1 pmusel1 n1523
+00 1
+.names n245 n1523 n1524
+00 1
+.names n1522 n1524 n1525
+11 1
+.names n236 n1525 n1526
+11 1
+.names pmusel3 pind1 n1527
+01 1
+.names n263 n1527 n1528
+11 1
+.names n1526 n1528 n1529
+00 1
+.names psh2 n1529 n1530
+00 1
+.names n1314 n1530 n1531
+00 1
+.names psh1 n1531 n1532
+01 1
+.names n1083 n1416 n1533
+00 1
+.names n1531 n1533 n1534
+11 1
+.names psh1 n1533 n1535
+11 1
+.names n1534 n1535 n1536
+00 1
+.names n1532 n1536 n1537
+01 1
+.names psh0 n1537 n1538
+01 1
+.names psh2 n1529 n1539
+10 1
+.names n1359 n1539 n1540
+00 1
+.names n1477 n1540 n1541
+11 1
+.names psh1 n1540 n1542
+11 1
+.names n1541 n1542 n1543
+00 1
+.names n1478 n1543 n1544
+01 1
+.names psh0 n1544 n1545
+11 1
+.names n1538 n1545 n1546
+00 1
+.names n1515 n1546 n1547
+11 1
+.names popsel2 n1546 n1548
+11 1
+.names n1547 n1548 n1549
+00 1
+.names n1518 n1549 n1550
+01 1
+.names n1517 n1550 n1551
+00 1
+.names n232 n1517 n1552
+10 1
+.names n1551 n1552 n1553
+00 1
+.names popsel3 n1553 n1554
+01 1
+.names n469 n500 n1555
+00 1
+.names n469 n500 n1556
+11 1
+.names n1555 n1556 n1557
+00 1
+.names n483 n1557 n1558
+11 1
+.names n1557 n1558 n1559
+10 1
+.names n483 n1558 n1560
+10 1
+.names n1559 n1560 n1561
+00 1
+.names n315 n1561 n1562
+01 1
+.names n232 n1546 n1563
+10 1
+.names n1562 n1563 n1564
+00 1
+.names n312 n1564 n1565
+10 1
+.names n1554 n1565 po1
+00 0
+.names popsel2 n143 n1567
+11 1
+.names n232 n1567 n1568
+11 1
+.names popsel2 n143 n1569
+00 1
+.names pmusel2 pind0 n1570
+11 1
+.names pinb0 n1570 n1571
+00 1
+.names n241 n1570 n1572
+10 1
+.names n1571 n1572 n1573
+00 1
+.names pinb0 pmusel1 n1574
+00 1
+.names n245 n1574 n1575
+00 1
+.names n1573 n1575 n1576
+11 1
+.names n236 n1576 n1577
+11 1
+.names pmusel3 pind0 n1578
+01 1
+.names n263 n1578 n1579
+11 1
+.names n1577 n1579 n1580
+00 1
+.names psh2 n1580 n1581
+00 1
+.names n1368 n1581 n1582
+00 1
+.names psh1 n1582 n1583
+01 1
+.names n1136 n1476 n1584
+00 1
+.names n1582 n1584 n1585
+11 1
+.names psh1 n1584 n1586
+11 1
+.names n1585 n1586 n1587
+00 1
+.names n1583 n1587 n1588
+01 1
+.names psh0 n1588 n1589
+01 1
+.names psh2 n1580 n1590
+10 1
+.names n1416 n1590 n1591
+00 1
+.names n1531 n1591 n1592
+11 1
+.names psh1 n1591 n1593
+11 1
+.names n1592 n1593 n1594
+00 1
+.names n1532 n1594 n1595
+01 1
+.names psh0 n1595 n1596
+11 1
+.names n1589 n1596 n1597
+00 1
+.names n143 n1597 n1598
+01 1
+.names popsel2 n1597 n1599
+11 1
+.names n1598 n1599 n1600
+00 1
+.names n1569 n1600 n1601
+01 1
+.names n1568 n1601 n1602
+00 1
+.names n232 n1568 n1603
+10 1
+.names n1602 n1603 n1604
+00 1
+.names popsel3 n1604 n1605
+01 1
+.names n484 n516 n1606
+11 1
+.names n484 n516 n1607
+00 1
+.names n1606 n1607 n1608
+00 1
+.names n322 n1608 n1609
+11 1
+.names n1608 n1609 n1610
+10 1
+.names n322 n1609 n1611
+10 1
+.names n1610 n1611 n1612
+00 1
+.names n315 n1612 n1613
+01 1
+.names n232 n1597 n1614
+10 1
+.names n1613 n1614 n1615
+00 1
+.names n312 n1615 n1616
+10 1
+.names n1605 n1616 po0
+00 0
+.names n194 n217 n1618
+00 1
+.names popsel2 n1618 n1619
+11 1
+.names n232 n1619 n1620
+11 1
+.names popsel2 n1618 n1621
+00 1
+.names n791 n1082 n1622
+00 1
+.names n1080 n1622 n1623
+11 1
+.names psh1 n1622 n1624
+11 1
+.names n1623 n1624 n1625
+00 1
+.names n1081 n1625 n1626
+01 1
+.names psh0 n1626 n1627
+01 1
+.names psh1 n1061 n1628
+01 1
+.names psh2 n265 n1629
+00 1
+.names n1238 n1629 n1630
+00 1
+.names n1061 n1630 n1631
+11 1
+.names psh1 n1630 n1632
+11 1
+.names n1631 n1632 n1633
+00 1
+.names n1628 n1633 n1634
+01 1
+.names psh0 n1634 n1635
+11 1
+.names n1627 n1635 n1636
+00 1
+.names n1618 n1636 n1637
+01 1
+.names popsel2 n1636 n1638
+11 1
+.names n1637 n1638 n1639
+00 1
+.names n1621 n1639 n1640
+01 1
+.names n1620 n1640 n1641
+00 1
+.names n232 n1620 n1642
+10 1
+.names n1641 n1642 n1643
+00 1
+.names popsel3 n1643 n1644
+01 1
+.names n602 n649 n1645
+00 1
+.names n602 n649 n1646
+11 1
+.names n1645 n1646 n1647
+00 1
+.names n809 n1647 n1648
+11 1
+.names n1647 n1648 n1649
+10 1
+.names n809 n1648 n1650
+10 1
+.names n1649 n1650 n1651
+00 1
+.names n315 n1651 n1652
+01 1
+.names n232 n1636 n1653
+10 1
+.names n1652 n1653 n1654
+00 1
+.names n312 n1654 n1655
+10 1
+.names n1644 n1655 po10
+00 0
+.end

@@ -8,6 +8,6 @@ src/map/mio/mioUtils.d src/map/mio/mioUtils.o: src/map/mio/mioUtils.c src/map/mi
  src/base/main/main.h src/base/abc/abc.h src/aig/hop/hop.h \
  src/aig/gia/gia.h src/misc/vec/vecWec.h src/misc/util/utilCex.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/extra/extra.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h \
- src/map/mio/exp.h src/misc/util/utilTruth.h src/opt/dau/dau.h \
- src/map/scl/sclLib.h src/map/scl/sclCon.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
+ src/misc/util/utilNam.h src/map/mio/exp.h src/misc/util/utilTruth.h \
+ src/opt/dau/dau.h src/map/scl/sclLib.h src/map/scl/sclCon.h

@@ -1,0 +1,1353 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs txwrd3 a qpr4 txwrd2 b i1zzz0 txwrd5 c p1zzz0 txwrd4 xzfs i1zzz2 \
+ i2zzz1 p1zzz1 p2zzz0 qpr1 i1zzz1 i2zzz0 p1zzz2 p2zzz1 qpr0 i1zzz4 i2zzz3 \
+ infin p1zzz3 p2zzz2 qpr3 txwrd1 vybb1 i1zzz3 i2zzz2 p1zzz4 p2zzz3 qpr2 \
+ txwrd0 vybb0 comppar psrw xz323 cbt2 mmerr ryz xz324 esrsum v1zzz7 v2zzz6 \
+ xz161 pfin stw_n v2zzz7 vzzze xz162 xz320 cbt1 slad0 v1zzz5 v2zzz4 xz163 \
+ xz321 cbt0 slad1 v1zzz6 v2zzz5 xz322 pybb5 slad2 txwrd14 v1zzz3 v2zzz2 \
+ xz160_n pybb4 slad3 txwrd13 v1zzz4 v2zzz3 iclr pybb3 rptwin txwrd12 v1zzz1 \
+ v2zzz0 pybb2 txwrd11 v1zzz2 v2zzz1 axz1 inzzze axz0 pybb8 v1zzz0 inybb8 \
+ pybb7 xzfr0 enwin ofs1 pybb6 pzzze txmess_n txwrd15 xzfr1 i1zzz6 i2zzz5 \
+ inybb6 ofs2 p1zzz5 p2zzz4 rxz0 i1zzz5 i2zzz4 inybb7 p1zzz6 p2zzz5 rpten \
+ rxz1 i2zzz7 inybb4 p1zzz7 p2zzz6 i1zzz7 i2zzz6 inybb5 p2zzz7 inybb2 pybb1 \
+ txwrd7 txwrd10 inybb3 pybb0 txwrd6 inybb0 txwrd9 inybb1 psync txwrd8 vfin
+.outputs i1zzz0_p v1zzz0_p i1zzz3_p i2zzz2_p txwrd8_p v1zzz2_p v2zzz1_p \
+ i1zzz4_p i2zzz3_p stw_f txwrd9_p v1zzz1_p v2zzz0_p xz163_p c_p enwin_p \
+ i1zzz1_p i2zzz0_p txwrd6_p v1zzz4_p v2zzz3_p i1zzz2_p i2zzz1_p txwrd7_p \
+ v1zzz3_p v2zzz2_p p1zzz4_p p2zzz3_p xz162_p b_p p1zzz3_p p2zzz2_p p1zzz2_p \
+ p2zzz1_p xzfr1_p p1zzz1_p p2zzz0_p txwrd14_p xz161_p a_p p1zzz0_p axz0_p \
+ txwrd15_p axz1_p td_p fsesr_p rptwin_p txwrd12_p txwrd11_p xz322_p \
+ p2zzz7_p txwrd13_p xz324_p xzfs_p p1zzz7_p p2zzz6_p xzfr0_p p1zzz6_p \
+ p2zzz5_p rxz1_p comppar_p ofs2_p p1zzz5_p p2zzz4_p rxz0_p xz323_p i1zzz7_p \
+ i2zzz6_p ofs1_p ryz_p sbuff txwrd4_p v1zzz6_p v2zzz5_p xz160_f xz320_p \
+ i2zzz7_p txwrd5_p v1zzz5_p v2zzz4_p i1zzz5_p i2zzz4_p qpr4_p txwrd2_p \
+ v2zzz7_p i1zzz6_p i2zzz5_p txwrd3_p v1zzz7_p v2zzz6_p qpr2_p txwrd0_p \
+ qpr3_p txwrd1_p xz321_p qpr0_p qpr1_p txmess_f txwrd10_p
+.names inzzze inybb0 n235
+01 1
+.names ryz n235 n236
+01 1
+.names inybb1 n236 n237
+11 1
+.names ryz n235 n238
+00 1
+.names i1zzz0 n238 n239
+11 1
+.names n237 n239 i1zzz0_p
+00 0
+.names vybb0 vzzze n241
+10 1
+.names ryz n241 n242
+01 1
+.names v1zzz1 n242 n243
+11 1
+.names ryz n241 n244
+00 1
+.names v1zzz0 n244 n245
+11 1
+.names n243 n245 v1zzz0_p
+00 0
+.names inybb4 n236 n247
+11 1
+.names i1zzz3 n238 n248
+11 1
+.names n247 n248 i1zzz3_p
+00 0
+.names inzzze inybb0 n250
+11 1
+.names ryz n250 n251
+01 1
+.names inybb3 n251 n252
+11 1
+.names ryz n250 n253
+00 1
+.names i2zzz2 n253 n254
+11 1
+.names n252 n254 i2zzz2_p
+00 0
+.names infin ryz n256
+10 1
+.names i2zzz0 n256 n257
+11 1
+.names infin ryz n258
+00 1
+.names pfin n258 n259
+11 1
+.names p2zzz0 n259 n260
+11 1
+.names pfin n258 n261
+01 1
+.names v2zzz0 vfin n262
+11 1
+.names b c n263
+00 1
+.names txmess_n n263 n264
+00 1
+.names vfin n264 n265
+00 1
+.names txwrd8 n265 n266
+11 1
+.names vfin n264 n267
+01 1
+.names txwrd9 n267 n268
+11 1
+.names n266 n268 n269
+00 1
+.names n262 n269 n270
+01 1
+.names n261 n270 n271
+10 1
+.names n260 n271 n272
+00 1
+.names n257 n272 txwrd8_p
+01 0
+.names v1zzz3 n242 n274
+11 1
+.names v1zzz2 n244 n275
+11 1
+.names n274 n275 v1zzz2_p
+00 0
+.names vybb0 vzzze n277
+11 1
+.names ryz n277 n278
+01 1
+.names v2zzz2 n278 n279
+11 1
+.names ryz n277 n280
+00 1
+.names v2zzz1 n280 n281
+11 1
+.names n279 n281 v2zzz1_p
+00 0
+.names inybb5 n236 n283
+11 1
+.names i1zzz4 n238 n284
+11 1
+.names n283 n284 i1zzz4_p
+00 0
+.names inybb4 n251 n286
+11 1
+.names i2zzz3 n253 n287
+11 1
+.names n286 n287 i2zzz3_p
+00 0
+.names infin pfin n289
+00 1
+.names axz1 axz0 n290
+11 1
+.names txmess_n n290 n291
+01 1
+.names a n291 n292
+11 1
+.names stw_n n292 n293
+00 1
+.names n289 n293 n294
+10 1
+.names vfin n294 n295
+01 1
+.names ryz n295 stw_f
+00 0
+.names pfin vfin n297
+01 1
+.names v2zzz1 n297 n298
+11 1
+.names pfin n265 n299
+01 1
+.names txwrd9 n299 n300
+11 1
+.names n298 n300 n301
+00 1
+.names pfin n267 n302
+01 1
+.names txwrd10 n302 n303
+11 1
+.names p2zzz1 pfin n304
+11 1
+.names n303 n304 n305
+00 1
+.names n301 n305 n306
+11 1
+.names n258 n306 n307
+10 1
+.names i2zzz1 n256 n308
+11 1
+.names n307 n308 txwrd9_p
+00 0
+.names v1zzz2 n242 n310
+11 1
+.names v1zzz1 n244 n311
+11 1
+.names n310 n311 v1zzz1_p
+00 0
+.names v2zzz1 n278 n313
+11 1
+.names v2zzz0 n280 n314
+11 1
+.names n313 n314 v2zzz0_p
+00 0
+.names xz321 xz322 n316
+11 1
+.names xz324 n316 n317
+11 1
+.names xz323 n317 n318
+11 1
+.names xz160_n n318 n319
+01 1
+.names xz161 n319 n320
+11 1
+.names xz320 n320 n321
+11 1
+.names iclr psync n322
+00 1
+.names xz162 n322 n323
+11 1
+.names xz163 n323 n324
+01 1
+.names n321 n324 n325
+11 1
+.names xz161 xz162 n326
+11 1
+.names n322 n326 n327
+10 1
+.names n319 n322 n328
+01 1
+.names xz320 n322 xz320_p
+01 1
+.names n328 xz320_p n330
+00 1
+.names n327 n330 n331
+01 1
+.names xz163 n331 n332
+10 1
+.names n325 n332 xz163_p
+00 0
+.names cbt2 cbt1 n334
+10 1
+.names cbt0 n334 n335
+01 1
+.names qpr4 n335 n336
+00 1
+.names qpr3 n336 n337
+00 1
+.names qpr1 qpr2 n338
+01 1
+.names qpr0 n338 n339
+11 1
+.names txmess_n n339 n340
+01 1
+.names n337 n340 n341
+11 1
+.names c n341 n342
+01 1
+.names c n341 n343
+10 1
+.names n342 n343 n344
+00 1
+.names ryz n344 c_p
+00 1
+.names iclr psync ofs1_p
+01 1
+.names xzfs ofs1_p n347
+11 1
+.names iclr enwin n348
+01 1
+.names n347 n348 n349
+00 1
+.names ofs1 ofs2 n350
+11 1
+.names n349 n350 n351
+00 1
+.names psrw n351 enwin_p
+11 1
+.names inybb2 n236 n353
+11 1
+.names i1zzz1 n238 n354
+11 1
+.names n353 n354 i1zzz1_p
+00 0
+.names inybb1 n251 n356
+11 1
+.names i2zzz0 n253 n357
+11 1
+.names n356 n357 i2zzz0_p
+00 0
+.names i1zzz6 n256 n359
+11 1
+.names p1zzz6 n259 n360
+11 1
+.names v1zzz6 vfin n361
+11 1
+.names txwrd6 n265 n362
+11 1
+.names txwrd7 n267 n363
+11 1
+.names n362 n363 n364
+00 1
+.names n361 n364 n365
+01 1
+.names n261 n365 n366
+10 1
+.names n360 n366 n367
+00 1
+.names n359 n367 txwrd6_p
+01 0
+.names v1zzz5 n242 n369
+11 1
+.names v1zzz4 n244 n370
+11 1
+.names n369 n370 v1zzz4_p
+00 0
+.names v2zzz4 n278 n372
+11 1
+.names v2zzz3 n280 n373
+11 1
+.names n372 n373 v2zzz3_p
+00 0
+.names inybb3 n236 n375
+11 1
+.names i1zzz2 n238 n376
+11 1
+.names n375 n376 i1zzz2_p
+00 0
+.names inybb2 n251 n378
+11 1
+.names i2zzz1 n253 n379
+11 1
+.names n378 n379 i2zzz1_p
+00 0
+.names v1zzz7 vfin n381
+11 1
+.names txwrd7 n265 n382
+11 1
+.names txwrd8 n267 n383
+11 1
+.names n382 n383 n384
+00 1
+.names n381 n384 n385
+01 1
+.names n289 n385 n386
+10 1
+.names infin i1zzz7 n387
+11 1
+.names infin pfin n388
+01 1
+.names p1zzz7 n388 n389
+11 1
+.names n387 n389 n390
+00 1
+.names n386 n390 n391
+01 1
+.names ryz n391 txwrd7_p
+00 1
+.names v1zzz4 n242 n393
+11 1
+.names v1zzz3 n244 n394
+11 1
+.names n393 n394 v1zzz3_p
+00 0
+.names v2zzz3 n278 n396
+11 1
+.names v2zzz2 n280 n397
+11 1
+.names n396 n397 v2zzz2_p
+00 0
+.names pzzze pybb0 n399
+01 1
+.names ryz n399 n400
+01 1
+.names pybb5 n400 n401
+11 1
+.names ryz n399 n402
+00 1
+.names p1zzz4 n402 n403
+11 1
+.names n401 n403 p1zzz4_p
+00 0
+.names pzzze pybb0 n405
+11 1
+.names ryz n405 n406
+01 1
+.names pybb4 n406 n407
+11 1
+.names ryz n405 n408
+00 1
+.names p2zzz3 n408 n409
+11 1
+.names n407 n409 p2zzz3_p
+00 0
+.names xz162 n322 n411
+01 1
+.names n321 n411 n412
+11 1
+.names xz161 n322 n413
+01 1
+.names n330 n413 n414
+10 1
+.names xz162 n414 n415
+10 1
+.names n412 n415 xz162_p
+00 0
+.names cbt1 cbt0 n417
+00 1
+.names cbt2 n417 n418
+10 1
+.names qpr4 qpr3 n419
+00 1
+.names n339 n419 n420
+11 1
+.names b n420 n421
+01 1
+.names n418 n421 n422
+11 1
+.names txmess_n n422 n423
+01 1
+.names qpr3 n418 n424
+00 1
+.names n339 n424 n425
+10 1
+.names qpr4 txmess_n n426
+00 1
+.names n425 n426 n427
+11 1
+.names b n427 n428
+10 1
+.names n423 n428 n429
+00 1
+.names ryz n429 b_p
+00 1
+.names pybb4 n400 n431
+11 1
+.names p1zzz3 n402 n432
+11 1
+.names n431 n432 p1zzz3_p
+00 0
+.names pybb3 n406 n434
+11 1
+.names p2zzz2 n408 n435
+11 1
+.names n434 n435 p2zzz2_p
+00 0
+.names pybb3 n400 n437
+11 1
+.names p1zzz2 n402 n438
+11 1
+.names n437 n438 p1zzz2_p
+00 0
+.names pybb2 n406 n440
+11 1
+.names p2zzz1 n408 n441
+11 1
+.names n440 n441 p2zzz1_p
+00 0
+.names xz320 n322 n443
+11 1
+.names xz163 n318 n444
+01 1
+.names xz161 n444 n445
+01 1
+.names xz162 xz160_n n446
+01 1
+.names n445 n446 n447
+11 1
+.names xzfr1 n447 n448
+01 1
+.names n443 n448 n449
+11 1
+.names xzfr0 n449 n450
+11 1
+.names xzfr0 n322 n451
+01 1
+.names n322 n447 n452
+10 1
+.names xz320_p n452 n453
+00 1
+.names n451 n453 n454
+01 1
+.names xzfr1 n454 n455
+10 1
+.names n450 n455 xzfr1_p
+00 0
+.names pybb2 n400 n457
+11 1
+.names p1zzz1 n402 n458
+11 1
+.names n457 n458 p1zzz1_p
+00 0
+.names pybb1 n406 n460
+11 1
+.names p2zzz0 n408 n461
+11 1
+.names n460 n461 p2zzz0_p
+00 0
+.names p2zzz6 n259 n463
+11 1
+.names i2zzz6 n256 n464
+11 1
+.names v2zzz6 vfin n465
+11 1
+.names txwrd14 n265 n466
+11 1
+.names txwrd15 n267 n467
+11 1
+.names n466 n467 n468
+00 1
+.names n465 n468 n469
+01 1
+.names n261 n469 n470
+10 1
+.names n464 n470 n471
+00 1
+.names n463 n471 txwrd14_p
+01 0
+.names n319 n443 n473
+11 1
+.names xz161 n473 n474
+01 1
+.names xz161 n330 n475
+10 1
+.names n474 n475 xz161_p
+00 0
+.names qpr4 b n477
+01 1
+.names qpr3 n477 n478
+11 1
+.names qpr4 cbt2 n479
+01 1
+.names qpr3 n479 n480
+00 1
+.names n478 n480 n481
+00 1
+.names n339 n481 n482
+10 1
+.names txmess_n n482 n483
+01 1
+.names a n483 n484
+00 1
+.names ryz n484 a_p
+00 1
+.names pybb1 n400 n486
+11 1
+.names p1zzz0 n402 n487
+11 1
+.names n486 n487 p1zzz0_p
+00 0
+.names a n482 n489
+00 1
+.names txmess_n n489 n490
+00 1
+.names axz0 n490 n491
+01 1
+.names axz0 n490 n492
+10 1
+.names n491 n492 n493
+00 1
+.names ryz n493 axz0_p
+00 1
+.names pfin p2zzz7 n495
+11 1
+.names txwrd15 n299 n496
+11 1
+.names v2zzz7 n297 n497
+11 1
+.names n496 n497 n498
+00 1
+.names n495 n498 n499
+01 1
+.names n258 n499 n500
+10 1
+.names i2zzz7 n256 n501
+11 1
+.names n500 n501 txwrd15_p
+00 0
+.names axz1 axz0 n503
+01 1
+.names n490 n503 n504
+11 1
+.names axz0 n490 n505
+11 1
+.names axz1 n505 n506
+10 1
+.names n504 n506 n507
+00 1
+.names ryz n507 axz1_p
+00 1
+.names axz1 axz0 n509
+00 1
+.names a n509 n510
+10 1
+.names txwrd0 n510 n511
+10 1
+.names n263 n511 n512
+01 1
+.names mmerr n503 n513
+01 1
+.names comppar axz0 n514
+01 1
+.names esrsum axz0 n515
+10 1
+.names n514 n515 n516
+00 1
+.names axz1 n516 n517
+10 1
+.names n513 n517 n518
+00 1
+.names a n518 n519
+10 1
+.names n512 n519 n520
+00 1
+.names txmess_n n520 n521
+00 1
+.names rptwin n521 n522
+01 1
+.names rxz0 rxz1 n523
+10 1
+.names esrsum n523 n524
+01 1
+.names rxz0 rxz1 n525
+01 1
+.names esrsum n525 n526
+11 1
+.names n524 n526 n527
+00 1
+.names rpten n527 n528
+10 1
+.names rptwin n528 n529
+11 1
+.names qpr0 slad1 n530
+01 1
+.names qpr0 slad0 n531
+11 1
+.names n530 n531 n532
+00 1
+.names qpr2 n532 n533
+10 1
+.names qpr1 n533 n534
+01 1
+.names qpr0 slad3 n535
+01 1
+.names qpr0 slad2 n536
+11 1
+.names n535 n536 n537
+00 1
+.names qpr2 n537 n538
+00 1
+.names qpr1 n538 n539
+11 1
+.names n534 n539 n540
+00 1
+.names n263 n510 n541
+10 1
+.names rptwin n541 n542
+01 1
+.names rptwin txmess_n sbuff
+01 0
+.names n542 sbuff n544
+01 1
+.names qpr3 n544 n545
+00 1
+.names qpr4 n545 n546
+01 1
+.names n540 n546 n547
+01 1
+.names n529 n547 n548
+00 1
+.names n522 n548 n549
+01 1
+.names ryz n549 td_p
+00 1
+.names iclr ofs1 ofs2_p
+01 1
+.names ofs2 ofs2_p n552
+11 1
+.names iclr xzfr1 n553
+01 1
+.names n552 n553 fsesr_p
+00 0
+.names slad0 xz160_n n555
+01 1
+.names slad0 xz160_n n556
+10 1
+.names n555 n556 n557
+00 1
+.names xz323 n316 n558
+11 1
+.names xz320 n558 n559
+11 1
+.names xz162 slad2 n560
+00 1
+.names xz162 slad2 n561
+11 1
+.names n560 n561 n562
+00 1
+.names xz163 slad3 n563
+00 1
+.names xz163 slad3 n564
+11 1
+.names n563 n564 n565
+00 1
+.names n562 n565 n566
+00 1
+.names xz161 slad1 n567
+00 1
+.names xz161 slad1 n568
+11 1
+.names n567 n568 n569
+00 1
+.names n566 n569 n570
+10 1
+.names enwin n570 n571
+11 1
+.names n559 n571 n572
+11 1
+.names xz324 n572 n573
+11 1
+.names n557 n573 n574
+01 1
+.names rxz0 rxz1 n575
+11 1
+.names rptwin n575 n576
+10 1
+.names xzfs slad3 n577
+10 1
+.names slad2 psync n578
+01 1
+.names n577 n578 n579
+11 1
+.names slad1 n579 n580
+01 1
+.names slad0 n580 n581
+01 1
+.names n576 n581 n582
+00 1
+.names n574 n582 n583
+01 1
+.names ryz n583 rptwin_p
+00 1
+.names p2zzz4 n388 n585
+11 1
+.names v2zzz4 vfin n586
+11 1
+.names txwrd12 n265 n587
+11 1
+.names txwrd13 n267 n588
+11 1
+.names n587 n588 n589
+00 1
+.names n586 n589 n590
+01 1
+.names n289 n590 n591
+10 1
+.names infin i2zzz4 n592
+11 1
+.names n591 n592 n593
+00 1
+.names n585 n593 n594
+01 1
+.names ryz n594 txwrd12_p
+00 1
+.names p2zzz3 n388 n596
+11 1
+.names v2zzz3 vfin n597
+11 1
+.names txwrd11 n265 n598
+11 1
+.names txwrd12 n267 n599
+11 1
+.names n598 n599 n600
+00 1
+.names n597 n600 n601
+01 1
+.names n289 n601 n602
+10 1
+.names i2zzz3 infin n603
+11 1
+.names n602 n603 n604
+00 1
+.names n596 n604 n605
+01 1
+.names ryz n605 txwrd11_p
+00 1
+.names xz322 n443 n607
+01 1
+.names xz321 n607 n608
+11 1
+.names xz321 n322 n609
+01 1
+.names xz320_p n609 n610
+00 1
+.names xz322 n610 n611
+10 1
+.names n608 n611 xz322_p
+00 0
+.names pybb8 n406 n613
+11 1
+.names p2zzz7 n408 n614
+11 1
+.names n613 n614 p2zzz7_p
+00 0
+.names p2zzz5 n259 n616
+11 1
+.names i2zzz5 n256 n617
+11 1
+.names v2zzz5 vfin n618
+11 1
+.names txwrd13 n265 n619
+11 1
+.names txwrd14 n267 n620
+11 1
+.names n619 n620 n621
+00 1
+.names n618 n621 n622
+01 1
+.names n261 n622 n623
+10 1
+.names n617 n623 n624
+00 1
+.names n616 n624 txwrd13_p
+01 0
+.names n322 n559 n626
+11 1
+.names xz324 n626 n627
+01 1
+.names xz323 xz322 n628
+11 1
+.names n322 n628 n629
+10 1
+.names n610 n629 n630
+10 1
+.names xz324 n630 n631
+10 1
+.names n627 n631 xz324_p
+00 0
+.names xzfs iclr n633
+10 1
+.names ofs1_p n633 n634
+00 1
+.names n350 n634 n635
+00 1
+.names psrw n635 xzfs_p
+11 1
+.names pybb8 n400 n637
+11 1
+.names p1zzz7 n402 n638
+11 1
+.names n637 n638 p1zzz7_p
+00 0
+.names pybb7 n406 n640
+11 1
+.names p2zzz6 n408 n641
+11 1
+.names n640 n641 p2zzz6_p
+00 0
+.names n443 n447 n643
+11 1
+.names xzfr0 n643 n644
+01 1
+.names xzfr0 n453 n645
+10 1
+.names n644 n645 xzfr0_p
+00 0
+.names pybb7 n400 n647
+11 1
+.names p1zzz6 n402 n648
+11 1
+.names n647 n648 p1zzz6_p
+00 0
+.names pybb6 n406 n650
+11 1
+.names p2zzz5 n408 n651
+11 1
+.names n650 n651 p2zzz5_p
+00 0
+.names slad1 slad2 n653
+00 1
+.names xzfs n653 n654
+11 1
+.names slad0 n654 n655
+01 1
+.names ofs1_p n655 n656
+11 1
+.names slad3 n656 n657
+01 1
+.names rptwin n574 n658
+00 1
+.names iclr n658 n659
+00 1
+.names n657 n659 n660
+00 1
+.names rxz1 n660 n661
+00 1
+.names rxz0 n661 n662
+11 1
+.names iclr rxz0 n663
+00 1
+.names xz162 slad2 n664
+10 1
+.names xz163 slad3 n665
+10 1
+.names n664 n665 n666
+00 1
+.names psync n666 n667
+00 1
+.names xz161 slad1 n668
+10 1
+.names enwin n668 n669
+10 1
+.names slad0 xz160_n n670
+00 1
+.names n318 n670 n671
+10 1
+.names n669 n671 n672
+11 1
+.names n579 n672 n673
+00 1
+.names n667 n673 n674
+00 1
+.names xz320 n666 n675
+11 1
+.names enwin n675 n676
+11 1
+.names xz161 n671 n677
+11 1
+.names n676 n677 n678
+11 1
+.names slad1 n678 n679
+10 1
+.names xz320 n664 n680
+10 1
+.names xz163 n680 n681
+11 1
+.names slad3 n681 n682
+10 1
+.names n679 n682 n683
+00 1
+.names n674 n683 n684
+11 1
+.names xzfs n675 n685
+00 1
+.names xz320 n665 n686
+10 1
+.names xz162 n686 n687
+11 1
+.names slad2 n687 n688
+10 1
+.names n669 n675 n689
+11 1
+.names n319 n689 n690
+11 1
+.names slad0 n690 n691
+10 1
+.names n688 n691 n692
+00 1
+.names n685 n692 n693
+01 1
+.names n684 n693 n694
+11 1
+.names iclr n694 n695
+00 1
+.names xz320_p n695 n696
+00 1
+.names rptwin n696 n697
+00 1
+.names n663 n697 n698
+00 1
+.names rxz1 n698 n699
+10 1
+.names n662 n699 rxz1_p
+00 0
+.names esrsum axz1 n701
+01 1
+.names mmerr axz0 n702
+11 1
+.names n701 n702 n703
+00 1
+.names comppar n703 n704
+10 1
+.names esrsum axz1 n705
+11 1
+.names mmerr axz0 n706
+01 1
+.names n705 n706 n707
+00 1
+.names comppar txmess_n n708
+00 1
+.names n707 n708 n709
+01 1
+.names n704 n709 n710
+00 1
+.names n291 n710 n711
+01 1
+.names a n711 n712
+10 1
+.names qpr3 n540 n713
+00 1
+.names qpr4 n713 n714
+01 1
+.names n263 n714 n715
+11 1
+.names txwrd0 n263 n716
+10 1
+.names n715 n716 n717
+00 1
+.names n510 n717 n718
+01 1
+.names txmess_n n718 n719
+00 1
+.names comppar n719 n720
+10 1
+.names comppar n510 n721
+00 1
+.names txmess_n n721 n722
+01 1
+.names n717 n722 n723
+01 1
+.names n720 n723 n724
+00 1
+.names n712 n724 n725
+01 1
+.names ryz n725 comppar_p
+00 1
+.names pybb6 n400 n727
+11 1
+.names p1zzz5 n402 n728
+11 1
+.names n727 n728 p1zzz5_p
+00 0
+.names pybb5 n406 n730
+11 1
+.names p2zzz4 n408 n731
+11 1
+.names n730 n731 p2zzz4_p
+00 0
+.names rxz0 n696 n733
+10 1
+.names rptwin n733 n734
+01 1
+.names rxz0 n660 n735
+00 1
+.names n734 n735 rxz0_p
+00 0
+.names n316 n443 n737
+11 1
+.names xz323 n737 n738
+01 1
+.names xz322 n322 n739
+01 1
+.names n610 n739 n740
+10 1
+.names xz323 n740 n741
+10 1
+.names n738 n741 xz323_p
+00 0
+.names inybb8 n236 n743
+11 1
+.names i1zzz7 n238 n744
+11 1
+.names n743 n744 i1zzz7_p
+00 0
+.names inybb7 n251 n746
+11 1
+.names i2zzz6 n253 n747
+11 1
+.names n746 n747 i2zzz6_p
+00 0
+.names iclr n292 ryz_p
+00 0
+.names i1zzz4 n256 n750
+11 1
+.names p1zzz4 n259 n751
+11 1
+.names v1zzz4 vfin n752
+11 1
+.names txwrd4 n265 n753
+11 1
+.names txwrd5 n267 n754
+11 1
+.names n753 n754 n755
+00 1
+.names n752 n755 n756
+01 1
+.names n261 n756 n757
+10 1
+.names n751 n757 n758
+00 1
+.names n750 n758 txwrd4_p
+01 0
+.names v1zzz7 n242 n760
+11 1
+.names v1zzz6 n244 n761
+11 1
+.names n760 n761 v1zzz6_p
+00 0
+.names v2zzz6 n278 n763
+11 1
+.names v2zzz5 n280 n764
+11 1
+.names n763 n764 v2zzz5_p
+00 0
+.names n318 n322 n766
+01 1
+.names xz320_p n766 n767
+00 1
+.names xz160_n n767 n768
+10 1
+.names n473 n768 xz160_f
+00 0
+.names inybb8 n251 n770
+11 1
+.names i2zzz7 n253 n771
+11 1
+.names n770 n771 i2zzz7_p
+00 0
+.names i1zzz5 n256 n773
+11 1
+.names p1zzz5 n259 n774
+11 1
+.names v1zzz5 vfin n775
+11 1
+.names txwrd5 n265 n776
+11 1
+.names txwrd6 n267 n777
+11 1
+.names n776 n777 n778
+00 1
+.names n775 n778 n779
+01 1
+.names n261 n779 n780
+10 1
+.names n774 n780 n781
+00 1
+.names n773 n781 txwrd5_p
+01 0
+.names v1zzz6 n242 n783
+11 1
+.names v1zzz5 n244 n784
+11 1
+.names n783 n784 v1zzz5_p
+00 0
+.names v2zzz5 n278 n786
+11 1
+.names v2zzz4 n280 n787
+11 1
+.names n786 n787 v2zzz4_p
+00 0
+.names inybb6 n236 n789
+11 1
+.names i1zzz5 n238 n790
+11 1
+.names n789 n790 i1zzz5_p
+00 0
+.names inybb5 n251 n792
+11 1
+.names i2zzz4 n253 n793
+11 1
+.names n792 n793 i2zzz4_p
+00 0
+.names vfin n289 n795
+01 1
+.names txmess_n n795 n796
+11 1
+.names ryz n796 txmess_f
+00 0
+.names qpr0 txmess_f n798
+10 1
+.names qpr1 n798 n799
+11 1
+.names qpr3 n799 n800
+11 1
+.names qpr4 n800 n801
+01 1
+.names qpr2 n801 n802
+11 1
+.names qpr0 n796 n803
+10 1
+.names qpr1 n803 n804
+11 1
+.names qpr2 n804 n805
+11 1
+.names qpr3 n805 n806
+11 1
+.names qpr4 ryz n807
+10 1
+.names n806 n807 n808
+01 1
+.names n802 n808 qpr4_p
+00 0
+.names i1zzz2 n256 n810
+11 1
+.names v1zzz2 n297 n811
+11 1
+.names txwrd2 n299 n812
+11 1
+.names n811 n812 n813
+00 1
+.names txwrd3 n302 n814
+11 1
+.names p1zzz2 pfin n815
+11 1
+.names n814 n815 n816
+00 1
+.names n813 n816 n817
+11 1
+.names n258 n817 n818
+10 1
+.names n810 n818 txwrd2_p
+00 0
+.names vybb1 n278 n820
+11 1
+.names v2zzz7 n280 n821
+11 1
+.names n820 n821 v2zzz7_p
+00 0
+.names inybb7 n236 n823
+11 1
+.names i1zzz6 n238 n824
+11 1
+.names n823 n824 i1zzz6_p
+00 0
+.names inybb6 n251 n826
+11 1
+.names i2zzz5 n253 n827
+11 1
+.names n826 n827 i2zzz5_p
+00 0
+.names i1zzz3 n256 n829
+11 1
+.names p1zzz3 n259 n830
+11 1
+.names v1zzz3 vfin n831
+11 1
+.names txwrd3 n265 n832
+11 1
+.names txwrd4 n267 n833
+11 1
+.names n832 n833 n834
+00 1
+.names n831 n834 n835
+01 1
+.names n261 n835 n836
+10 1
+.names n830 n836 n837
+00 1
+.names n829 n837 txwrd3_p
+01 0
+.names vybb1 n242 n839
+11 1
+.names v1zzz7 n244 n840
+11 1
+.names n839 n840 v1zzz7_p
+00 0
+.names v2zzz7 n278 n842
+11 1
+.names v2zzz6 n280 n843
+11 1
+.names n842 n843 v2zzz6_p
+00 0
+.names ryz n804 n845
+00 1
+.names qpr2 n845 n846
+11 1
+.names qpr2 n799 n847
+01 1
+.names n846 n847 qpr2_p
+00 0
+.names i1zzz0 infin n849
+11 1
+.names v1zzz0 vfin n850
+11 1
+.names txwrd0 n265 n851
+11 1
+.names txwrd1 n267 n852
+11 1
+.names n851 n852 n853
+00 1
+.names n850 n853 n854
+01 1
+.names n289 n854 n855
+10 1
+.names p1zzz0 n388 n856
+11 1
+.names n855 n856 n857
+00 1
+.names n849 n857 n858
+01 1
+.names ryz n858 txwrd0_p
+00 1
+.names ryz n805 n860
+00 1
+.names qpr3 n860 n861
+11 1
+.names qpr3 n799 n862
+01 1
+.names qpr2 n862 n863
+11 1
+.names n861 n863 qpr3_p
+00 0
+.names v1zzz1 n297 n865
+11 1
+.names txwrd1 n299 n866
+11 1
+.names n865 n866 n867
+00 1
+.names txwrd2 n302 n868
+11 1
+.names p1zzz1 pfin n869
+11 1
+.names n868 n869 n870
+00 1
+.names n867 n870 n871
+11 1
+.names n258 n871 n872
+10 1
+.names i1zzz1 n256 n873
+11 1
+.names n872 n873 txwrd1_p
+00 0
+.names xz321 xz320_p n875
+11 1
+.names xz321 n443 n876
+01 1
+.names n875 n876 xz321_p
+00 0
+.names qpr0 n796 n878
+11 1
+.names ryz n878 n879
+01 1
+.names qpr0 txmess_f n880
+00 1
+.names n879 n880 qpr0_p
+00 0
+.names ryz n803 n882
+00 1
+.names qpr1 n882 n883
+11 1
+.names qpr1 txmess_f n884
+00 1
+.names qpr0 n884 n885
+11 1
+.names n883 n885 qpr1_p
+00 0
+.names p2zzz2 n388 n887
+11 1
+.names v2zzz2 vfin n888
+11 1
+.names txwrd10 n265 n889
+11 1
+.names txwrd11 n267 n890
+11 1
+.names n889 n890 n891
+00 1
+.names n888 n891 n892
+01 1
+.names n289 n892 n893
+10 1
+.names infin i2zzz2 n894
+11 1
+.names n893 n894 n895
+00 1
+.names n887 n895 n896
+01 1
+.names ryz n896 txwrd10_p
+00 1
+.end

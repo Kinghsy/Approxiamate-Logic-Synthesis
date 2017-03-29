@@ -1,0 +1,241 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:50 2017
+.model top
+.inputs a b c d e f g h i j k l m n o p q r s t u v w x y
+.outputs q1 p1 a1 c1 b1 e1 d1 g1 f1 i1 h1 k1 z j1 m1 l1 o1 n1
+.names b c n44
+01 1
+.names a n44 q1
+01 1
+.names a b p1
+01 1
+.names b c n47
+00 1
+.names a n47 n48
+01 1
+.names k r n49
+10 1
+.names j n49 n50
+11 1
+.names s t n51
+00 1
+.names n50 n51 n52
+11 1
+.names n48 n52 a1
+11 1
+.names s t n54
+10 1
+.names r n54 n55
+01 1
+.names n48 n55 n56
+11 1
+.names b c n57
+11 1
+.names a n57 n58
+11 1
+.names k l n59
+11 1
+.names j n59 n60
+01 1
+.names m n60 n61
+11 1
+.names n58 n61 n62
+11 1
+.names n56 n62 c1
+00 0
+.names k r n64
+00 1
+.names j n64 n65
+11 1
+.names n51 n65 n66
+11 1
+.names n48 n66 b1
+11 1
+.names j k n68
+11 1
+.names n58 n68 e1
+11 1
+.names k l n70
+10 1
+.names j n70 n71
+01 1
+.names m n71 n72
+01 1
+.names n58 n72 d1
+11 1
+.names a n44 n74
+11 1
+.names l m n75
+10 1
+.names k n75 n76
+11 1
+.names c j n77
+10 1
+.names a n77 n78
+11 1
+.names n76 n78 n79
+11 1
+.names n74 n79 g1
+00 0
+.names n58 n60 f1
+11 1
+.names b s n82
+11 1
+.names a n82 n83
+01 1
+.names u v n84
+00 1
+.names t n84 n85
+01 1
+.names w n85 n86
+01 1
+.names n83 n86 n87
+11 1
+.names v w n88
+00 1
+.names u n88 n89
+11 1
+.names m n n90
+10 1
+.names l n90 n91
+01 1
+.names p q n92
+00 1
+.names o n92 n93
+01 1
+.names n91 n93 n94
+11 1
+.names q1 n94 n95
+11 1
+.names n89 n95 n96
+11 1
+.names n87 n96 i1
+00 0
+.names s t n98
+01 1
+.names r n98 n99
+11 1
+.names e f n100
+10 1
+.names d n100 n101
+01 1
+.names h i n102
+00 1
+.names g n102 n103
+01 1
+.names n101 n103 n104
+11 1
+.names q1 n104 n105
+11 1
+.names n99 n105 h1
+11 1
+.names u v n107
+01 1
+.names t n107 n108
+01 1
+.names w n108 n109
+01 1
+.names n83 n109 n110
+11 1
+.names p q n111
+10 1
+.names o n111 n112
+01 1
+.names n91 n112 n113
+11 1
+.names q1 n113 n114
+11 1
+.names n89 n114 n115
+11 1
+.names n110 n115 k1
+00 0
+.names j n49 n117
+01 1
+.names n51 n117 n118
+11 1
+.names n48 n118 z
+11 1
+.names w n108 n120
+11 1
+.names n83 n120 n121
+11 1
+.names p q n122
+11 1
+.names o n122 n123
+01 1
+.names n91 n123 n124
+11 1
+.names q1 n124 n125
+11 1
+.names n89 n125 n126
+11 1
+.names n121 n126 j1
+00 0
+.names r t n128
+10 1
+.names n48 n128 m1
+11 1
+.names j y n130
+10 1
+.names b c n131
+10 1
+.names a n131 n132
+11 1
+.names n130 n132 n133
+11 1
+.names k y n134
+00 1
+.names b j n135
+11 1
+.names a n135 n136
+11 1
+.names n134 n136 n137
+11 1
+.names n133 n137 n138
+00 1
+.names j n128 n139
+11 1
+.names y n139 n140
+01 1
+.names n48 n140 n141
+11 1
+.names x y n142
+10 1
+.names t n142 n143
+11 1
+.names b j n144
+01 1
+.names a n144 n145
+01 1
+.names n143 n145 n146
+11 1
+.names j n142 n147
+11 1
+.names q1 n147 n148
+11 1
+.names n146 n148 n149
+00 1
+.names n141 n149 n150
+01 1
+.names n138 n150 l1
+11 0
+.names c t n152
+01 1
+.names b n152 n153
+01 1
+.names b k n154
+10 1
+.names a n154 n155
+11 1
+.names a c n156
+10 1
+.names n155 n156 n157
+00 1
+.names n153 n157 o1
+01 0
+.names j n64 n159
+01 1
+.names n51 n159 n160
+11 1
+.names n48 n160 n1
+11 1
+.end

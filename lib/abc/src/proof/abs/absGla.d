@@ -7,11 +7,12 @@ src/proof/abs/absGla.d src/proof/abs/absGla.o: src/proof/abs/absGla.c src/base/m
  src/aig/hop/hop.h src/aig/gia/gia.h src/misc/vec/vecWec.h \
  src/misc/util/utilCex.h src/misc/st/st.h src/misc/st/stmm.h \
  src/misc/nm/nm.h src/misc/mem/mem.h src/misc/extra/extra.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h \
- src/sat/cnf/cnf.h src/aig/aig/aig.h src/opt/dar/darInt.h \
- src/opt/dar/dar.h src/sat/bsat/satSolver2.h src/sat/bsat/satVec.h \
- src/sat/bsat/satClause.h src/misc/vec/vecSet.h src/sat/bsat/satProof2.h \
- src/bool/kit/kit.h src/bool/kit/cloud.h src/bdd/extrab/extraBdd.h \
- src/bdd/cudd/cuddInt.h src/bdd/cudd/cudd.h src/bdd/mtr/mtr.h \
- src/bdd/epd/epd.h src/proof/abs/abs.h src/aig/gia/giaAig.h \
- src/aig/gia/gia.h src/aig/saig/saig.h src/proof/abs/absRef.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
+ src/misc/util/utilNam.h src/sat/cnf/cnf.h src/aig/aig/aig.h \
+ src/opt/dar/darInt.h src/opt/dar/dar.h src/sat/bsat/satSolver2.h \
+ src/sat/bsat/satVec.h src/sat/bsat/satClause.h src/misc/vec/vecSet.h \
+ src/sat/bsat/satProof2.h src/bool/kit/kit.h src/bool/kit/cloud.h \
+ src/bdd/extrab/extraBdd.h src/bdd/cudd/cuddInt.h src/bdd/cudd/cudd.h \
+ src/bdd/mtr/mtr.h src/bdd/epd/epd.h src/proof/abs/abs.h \
+ src/aig/gia/giaAig.h src/aig/gia/gia.h src/aig/saig/saig.h \
+ src/proof/abs/absRef.h

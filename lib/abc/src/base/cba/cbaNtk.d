@@ -8,4 +8,4 @@ src/base/cba/cbaNtk.d src/base/cba/cbaNtk.o: src/base/cba/cbaNtk.c src/base/cba/
  src/misc/st/st.h src/misc/util/utilNam.h src/misc/vec/vecHash.h \
  src/base/cba/cbaTypes.h src/base/main/main.h src/base/abc/abc.h \
  src/aig/hop/hop.h src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h

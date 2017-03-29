@@ -11,5 +11,5 @@ src/proof/pdr/pdrInv.d src/proof/pdr/pdrInv.o: src/proof/pdr/pdrInv.c src/proof/
  src/misc/extra/extra.h src/misc/st/st.h src/aig/gia/giaAig.h \
  src/aig/gia/gia.h src/base/abc/abc.h src/aig/hop/hop.h src/aig/gia/gia.h \
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
- src/base/main/main.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
- src/misc/util/utilNam.h src/aig/ioa/ioa.h
+ src/base/main/main.h src/base/main/abcapis.h src/base/cmd/cmd.h \
+ src/base/io/ioAbc.h src/misc/util/utilNam.h src/aig/ioa/ioa.h

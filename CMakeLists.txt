@@ -13,6 +13,9 @@ if(Boost_FOUND)
     include_directories(${Boost_INCLUDE_DIRS})
 endif()
 
+add_definitions(
+        -DPROJECT_BASE="${PROJECT_SOURCE_DIR}")
+
 include_directories(lib/GTest/googletest/include)
 include_directories(lib/abc/include)
 include_directories(common)
@@ -31,6 +34,7 @@ add_subdirectory(approxiamate)
 add_subdirectory(MFFC)
 add_subdirectory(blif_replace)
 add_subdirectory(circuit_profile)
+add_subdirectory(abc_expansion)
 
 add_subdirectory(policy)
 
@@ -40,5 +44,6 @@ add_subdirectory(util/subDecCal)
 add_subdirectory(util/abc_demo)
 add_subdirectory(util/blif_info)
 add_subdirectory(util/precomp)
+add_subdirectory(util/gen_benchmarks)
 
 

@@ -8,5 +8,5 @@ src/base/abci/abcTim.d src/base/abci/abcTim.o: src/base/abci/abcTim.c src/base/a
  src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
  src/misc/extra/extra.h src/aig/gia/giaAig.h src/aig/aig/aig.h \
  src/aig/gia/gia.h src/misc/tim/tim.h src/opt/dar/dar.h \
- src/proof/dch/dch.h src/base/main/main.h src/base/cmd/cmd.h \
- src/base/io/ioAbc.h src/misc/util/utilNam.h
+ src/proof/dch/dch.h src/base/main/main.h src/base/main/abcapis.h \
+ src/base/cmd/cmd.h src/base/io/ioAbc.h src/misc/util/utilNam.h

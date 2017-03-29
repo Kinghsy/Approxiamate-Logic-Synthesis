@@ -9,4 +9,4 @@ src/base/io/ioReadBlifMv.d src/base/io/ioReadBlifMv.o: src/base/io/ioReadBlifMv.
  src/misc/st/st.h src/misc/st/stmm.h src/misc/nm/nm.h src/misc/mem/mem.h \
  src/misc/extra/extra.h src/misc/vec/vecPtr.h src/base/io/ioAbc.h \
  src/misc/util/utilNam.h src/map/mio/mio.h src/base/main/main.h \
- src/base/cmd/cmd.h src/base/io/ioAbc.h
+ src/base/main/abcapis.h src/base/cmd/cmd.h src/base/io/ioAbc.h

@@ -11,6 +11,6 @@ src/proof/pdr/pdrCore.d src/proof/pdr/pdrCore.o: src/proof/pdr/pdrCore.c src/pro
  src/misc/extra/extra.h src/misc/st/st.h src/aig/gia/giaAig.h \
  src/aig/gia/gia.h src/base/main/main.h src/base/abc/abc.h \
  src/aig/hop/hop.h src/aig/gia/gia.h src/misc/st/stmm.h src/misc/nm/nm.h \
- src/misc/mem/mem.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
- src/misc/util/utilNam.h src/misc/hash/hash.h src/misc/hash/hashInt.h \
- src/misc/hash/hashFlt.h src/misc/hash/hashPtr.h
+ src/misc/mem/mem.h src/base/main/abcapis.h src/base/cmd/cmd.h \
+ src/base/io/ioAbc.h src/misc/util/utilNam.h src/misc/hash/hash.h \
+ src/misc/hash/hashInt.h src/misc/hash/hashFlt.h src/misc/hash/hashPtr.h

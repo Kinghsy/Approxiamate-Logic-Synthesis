@@ -1,0 +1,303 @@
+# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+.model top
+.inputs pp pq pr ps pa pb pc pd pe pf pg ph pi pj pk pl pm pn po
+.outputs pa0 pb0 pc0 pd0 pt pe0 pu pf0 pv pg0 pw ph0 px py pz
+.names pq pc n35
+10 1
+.names pj pk n36
+00 1
+.names pl n36 n37
+01 1
+.names pq n37 n38
+00 1
+.names pd pi n39
+00 1
+.names n38 n39 n40
+00 1
+.names pq ph n41
+00 1
+.names pq pg n42
+00 1
+.names n41 n42 n43
+00 1
+.names n40 n43 n44
+11 1
+.names pd ph n45
+00 1
+.names pd pg n46
+00 1
+.names n45 n46 n47
+00 1
+.names pq pi n48
+00 1
+.names pd n37 n49
+00 1
+.names n48 n49 n50
+00 1
+.names n47 n50 n51
+11 1
+.names n44 n51 n52
+11 1
+.names n35 n52 n53
+00 1
+.names ph n36 n54
+11 1
+.names pg n54 n55
+11 1
+.names pi n55 n56
+11 1
+.names pl n56 n57
+10 1
+.names pe n57 n58
+10 1
+.names n53 n58 pa0
+11 0
+.names pm n37 n60
+01 1
+.names pq n60 n61
+00 1
+.names n39 n61 n62
+00 1
+.names n43 n62 n63
+11 1
+.names pd n60 n64
+00 1
+.names n48 n64 n65
+00 1
+.names n47 n65 n66
+11 1
+.names n63 n66 n67
+11 1
+.names n35 n67 n68
+00 1
+.names ph n37 n69
+11 1
+.names pg n69 n70
+11 1
+.names pi n70 n71
+11 1
+.names pm n71 n72
+10 1
+.names pe n72 n73
+10 1
+.names n68 n73 pb0
+11 0
+.names pk pm n75
+00 1
+.names pl n75 n76
+01 1
+.names pn n76 n77
+01 1
+.names pq n77 n78
+00 1
+.names n45 n78 n79
+00 1
+.names pi pj n80
+10 1
+.names pq n80 n81
+00 1
+.names n42 n81 n82
+00 1
+.names n79 n82 n83
+11 1
+.names pd n80 n84
+00 1
+.names n46 n84 n85
+00 1
+.names pd n77 n86
+00 1
+.names n41 n86 n87
+00 1
+.names n85 n87 n88
+11 1
+.names n83 n88 n89
+11 1
+.names n35 n89 n90
+00 1
+.names ph n60 n91
+11 1
+.names pg n91 n92
+11 1
+.names pi n92 n93
+11 1
+.names pn n93 n94
+10 1
+.names pe n94 n95
+10 1
+.names n90 n95 pc0
+11 0
+.names ph pi n97
+11 1
+.names pj n97 n98
+01 1
+.names pa n77 n99
+00 1
+.names pc pd n100
+10 1
+.names pq n100 n101
+10 1
+.names n99 n101 n102
+00 1
+.names pe n102 n103
+11 1
+.names n98 n103 n104
+11 1
+.names pg n104 n105
+11 1
+.names pe n100 n106
+10 1
+.names pq po n107
+11 1
+.names n106 n107 n108
+11 1
+.names n105 n108 pd0
+00 0
+.names pb pc n110
+10 1
+.names pb po n111
+00 1
+.names pc po n112
+00 1
+.names n111 n112 n113
+00 1
+.names n110 n113 pt
+01 0
+.names pe pf n115
+11 1
+.names pp ps n116
+01 1
+.names pe n116 n117
+11 1
+.names pf n116 n118
+01 1
+.names n117 n118 n119
+00 1
+.names n115 n119 pu
+01 1
+.names pq pe n121
+11 1
+.names pc n121 n122
+01 1
+.names pd pe n123
+11 1
+.names n122 n123 pf0
+00 0
+.names pe pg n125
+10 1
+.names pc n125 n126
+11 1
+.names pd n126 n127
+01 1
+.names pq pe n128
+01 1
+.names pg n128 n129
+01 1
+.names n127 n129 pv
+00 0
+.names pq pd n131
+11 1
+.names pg ph n132
+11 1
+.names n131 n132 n133
+00 1
+.names pe n35 n134
+10 1
+.names n133 n134 n135
+11 1
+.names pg n135 n136
+11 1
+.names ph n135 n137
+11 1
+.names n136 n137 pw
+00 0
+.names pr pe ph0
+11 1
+.names pg n97 n140
+11 1
+.names n35 n140 n141
+00 1
+.names pe n131 n142
+10 1
+.names n141 n142 n143
+11 1
+.names ph n143 n144
+11 1
+.names pg n144 n145
+11 1
+.names pi n143 n146
+11 1
+.names n145 n146 px
+00 0
+.names pj n140 n148
+10 1
+.names pe pj n149
+11 1
+.names pq n149 n150
+01 1
+.names n127 n150 n151
+00 1
+.names ph n128 n152
+01 1
+.names pi n128 n153
+01 1
+.names n152 n153 n154
+00 1
+.names n151 n154 n155
+11 1
+.names pe ph n156
+10 1
+.names pc n156 n157
+11 1
+.names pd n157 n158
+01 1
+.names pe pi n159
+10 1
+.names pc n159 n160
+11 1
+.names pd n160 n161
+01 1
+.names n158 n161 n162
+00 1
+.names pc pj n163
+11 1
+.names pe n163 n164
+11 1
+.names pd n164 n165
+01 1
+.names n129 n165 n166
+00 1
+.names n162 n166 n167
+11 1
+.names n155 n167 n168
+11 1
+.names n148 n168 py
+00 0
+.names pq n36 n170
+00 1
+.names n39 n170 n171
+00 1
+.names n43 n171 n172
+11 1
+.names pd n36 n173
+00 1
+.names n48 n173 n174
+00 1
+.names n47 n174 n175
+11 1
+.names n172 n175 n176
+11 1
+.names n35 n176 n177
+00 1
+.names pj n140 n178
+01 1
+.names pk n178 n179
+10 1
+.names pe n179 n180
+10 1
+.names n177 n180 pz
+11 0
+.names pc pe0
+1 1
+.names pe pg0
+1 1
+.end

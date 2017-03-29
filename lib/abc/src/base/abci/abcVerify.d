@@ -7,6 +7,7 @@ src/base/abci/abcVerify.d src/base/abci/abcVerify.o: src/base/abci/abcVerify.c s
  src/aig/hop/hop.h src/aig/gia/gia.h src/misc/vec/vecWec.h \
  src/misc/util/utilCex.h src/misc/st/st.h src/misc/st/stmm.h \
  src/misc/nm/nm.h src/misc/mem/mem.h src/misc/extra/extra.h \
- src/base/main/main.h src/base/cmd/cmd.h src/base/io/ioAbc.h \
- src/misc/util/utilNam.h src/proof/fraig/fraig.h src/opt/sim/sim.h \
- src/aig/aig/aig.h src/aig/saig/saig.h src/proof/ssw/ssw.h
+ src/base/main/main.h src/base/main/abcapis.h src/base/cmd/cmd.h \
+ src/base/io/ioAbc.h src/misc/util/utilNam.h src/proof/fraig/fraig.h \
+ src/opt/sim/sim.h src/aig/aig/aig.h src/aig/saig/saig.h \
+ src/proof/ssw/ssw.h
