@@ -326,3 +326,47 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_RANDOM_CASE_1) {
     ASSERT_EQ('y', 'y');
 
 }
+
+TEST(SEARCH_METHOD_CORE_TEST, TC_RANDOM_CASE_2) {
+
+    srand(unsigned(time(NULL)));
+    int inputSize=3;
+    int truTab[]={1, 1, 1, 1, 1, s1, 1, 1};
+    int truTabSize=(1<<inputSize);
+    std::vector<int> v;
+    for (int i = 0; i < truTabSize; ++i)
+        v.push_back(truTab[i]);
+    TruthTable initTruthTable(inputSize, v);
+    initTruthTable.getName(0)="Sakata";
+    initTruthTable.getName(1)="YYF";
+    initTruthTable.getName(2)="820";
+    initTruthTable.outName="Zhou";
+
+    for (int i = 0; i < initTruthTable.numInput(); ++i) {
+        std::cout << " " << initTruthTable.getName(i) << " ";
+    }
+    std::cout << std::endl;
+    std::cout << initTruthTable.outName << std::endl;
+
+    TruthTable finalTruthTable(
+            writeApproxBlifFileByTruthTable_BFS(initTruthTable, "testing3.blif")
+    );
+    std::cout << "\n";
+    std::cout << "\n";
+    std::cout << "--------initTruthTable---------------\n";
+    initTruthTable.print();
+    std::cout << "\n";
+    std::cout << "-------------------------------------\n";
+    std::cout << "\n";
+    std::cout << "--------finalTruthTable--------------\n";
+    finalTruthTable.print();
+    std::cout << "\n";
+    std::cout << "-------------------------------------\n";
+    std::cout << "\n";
+
+    std::cout << "above is result, please check. (y/n)" << std::endl;
+    char ch;
+    //std::cin >> ch;
+    ASSERT_EQ('y', 'y');
+
+}
