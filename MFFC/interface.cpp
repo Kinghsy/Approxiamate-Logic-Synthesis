@@ -1,6 +1,8 @@
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+
 #include <vector>
 #include "../lib/libblif/bnet.h"
 
@@ -149,27 +151,49 @@ int BlifBooleanNet::nOutputs() const {
     return net->noutputs;
 }
 
-const set<string> & BlifBooleanNet::inputNodeSet() const {
+const vector<string> & BlifBooleanNet::inputNodeSet() const {
     if (inputNodes.isValid())
         return inputNodes.get();
-    std::set<std::string> s;
+    std::vector<std::string> s;
     for (int i = 0; i < net->ninputs; ++i) {
-        s.insert(net->inputs[i]);
+        s.push_back(net->inputs[i]);
     }
     inputNodes.setData(s);
     return inputNodes.get();
 }
 
-const set<string> & BlifBooleanNet::outputNodeSet() const {
+const vector<string> & BlifBooleanNet::outputNodeSet() const {
     if (outputNodes.isValid())
         return outputNodes.get();
-    std::set<std::string> s;
+    std::vector<std::string> s;
     for (int i = 0; i < net->noutputs; ++i) {
-        s.insert(net->outputs[i]);
+        s.push_back(net->outputs[i]);
     }
     outputNodes.setData(s);
     return outputNodes.get();
 }
+
+const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::internalNodeSet() const {
+    if (internalNodes.isValid())
+        return internalNodes.get();
+    std::set<std::string> s;
+    BnetNode *node = net->nodes;
+    while (node != nullptr) {
+        if (node->type == BNET_INPUT_NODE) {
+            node = node->next;
+            continue;
+        }
+        if (node->type == BNET_OUTPUT_NODE) {
+            node = node->next;
+            continue;
+        }
+        s.insert(string(node->name));
+        node = node->next;
+    }
+    internalNodes.setData(s);
+    return internalNodes.get();
+}
+
 
 const set<string> & BlifBooleanNet::totalNodeSet() const {
     if (totalNodes.isValid())
@@ -391,3 +415,6 @@ CircuitProfile BlifBooleanNet::profile(int samples) {
     }
     return p;
 }
+
+
+

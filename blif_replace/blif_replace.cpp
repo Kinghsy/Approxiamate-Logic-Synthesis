@@ -51,10 +51,10 @@ void replacePartialBlif(const string& source,
     BlifBooleanNet withNet(withFile);
 
     // Verify the replacement is actually valid
-    std::set<string> replacedIn = replacedNet.inputNodeSet();
-    std::set<string> replacedOut = replacedNet.outputNodeSet();
-    std::set<string> withIn = withNet.inputNodeSet();
-    std::set<string> withOut = withNet.outputNodeSet();
+    std::vector<string> replacedIn = replacedNet.inputNodeSet();
+    std::vector<string> replacedOut = replacedNet.outputNodeSet();
+    std::vector<string> withIn = withNet.inputNodeSet();
+    std::vector<string> withOut = withNet.outputNodeSet();
     if (replacedIn.size() != withIn.size()) assert(0);
     if (!std::is_permutation(
             replacedIn.begin(),

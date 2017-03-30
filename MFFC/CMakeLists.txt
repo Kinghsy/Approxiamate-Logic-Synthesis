@@ -18,6 +18,8 @@ set(SOURCE_LIB
         interface.cpp interface.h
         err_asses.cpp err_asses.h
         net_algorithms.cpp
+        convert_to_cpp.cpp
+        prof_sim.cpp
         pattern_gen.cpp pattern_gen.h
         )
 

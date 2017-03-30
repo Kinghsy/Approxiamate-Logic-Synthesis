@@ -46,9 +46,10 @@ private:
 
     mutable Memorized<int> nNode;
     mutable Memorized<int> nGates;
-    mutable Memorized<std::set<BnetNodeID> > inputNodes;
-    mutable Memorized<std::set<BnetNodeID> > outputNodes;
+    mutable Memorized<std::vector<BnetNodeID> > inputNodes;
+    mutable Memorized<std::vector<BnetNodeID> > outputNodes;
     mutable Memorized<std::set<BnetNodeID> > totalNodes;
+    mutable Memorized<std::set<BnetNodeID> > internalNodes;
     mutable Memorized<std::vector<BnetNodeID> > topSortedNodes;
 
     BnetNode* getNodeByName(const std::string& name) const;
@@ -73,8 +74,10 @@ public:
     int nodeCount() const;
     int gateCount() const;
 
-    const std::set<BnetNodeID> & inputNodeSet() const;
-    const std::set<BnetNodeID> & outputNodeSet() const;
+    // Note inputs and out put nodes are ORDERED!!
+    const std::vector<BnetNodeID> & inputNodeSet() const;
+    const std::vector<BnetNodeID> & outputNodeSet() const;
+    const std::set<BnetNodeID> & internalNodeSet() const;
     const std::set<BnetNodeID> & totalNodeSet() const;
 
     int getMinDepths2Input(const std::set<BnetNodeID>& s) const;
@@ -101,6 +104,8 @@ public:
                                      const std::set<std::string >& HLNodes,
                                      const std::string color) const;
 
+    void exportToCpp(const std::string& fname) const;
+    CircuitProfile profileBySimulation(int samples);
 
     ~BlifBooleanNet();
 };
