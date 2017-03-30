@@ -15,7 +15,15 @@ set(SOURCE_FILES
 
 add_executable(main ${SOURCE_FILES})
 
+add_executable(playground playground.cpp)
+
 target_link_libraries(main
+        policy mffc blif profile
+        approx blif_replace common
+        ${Boost_LIBRARIES}
+        ${CUDD_LINK_LIB})
+
+target_link_libraries(playground
         policy mffc blif profile
         approx blif_replace common
         ${Boost_LIBRARIES}
