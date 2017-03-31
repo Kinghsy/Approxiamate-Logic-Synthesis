@@ -1,227 +1,129 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:36 2017
 .model top
 .inputs i_3_ i_4_ i_1_ i_2_ i_0_
 .outputs o_1_ o_2_ o_0_ o_7_ o_5_ o_6_ o_3_ o_4_
 .names i_3_ i_4_ n14
 00 1
 .names i_1_ i_2_ n15
-00 1
+11 1
 .names i_0_ n15 n16
 11 1
 .names n14 n16 n17
-11 1
-.names i_3_ i_4_ n18
 01 1
-.names n16 n18 n19
-11 1
-.names n17 n19 n20
+.names i_1_ i_2_ n18
 00 1
-.names i_1_ i_2_ n21
+.names i_0_ n18 n19
 11 1
-.names i_0_ n21 n22
-11 1
-.names i_3_ i_4_ n23
-11 1
-.names n22 n23 n24
+.names i_1_ i_2_ n20
+01 1
+.names i_0_ n20 n21
 11 1
 .names i_3_ i_4_ o_7_
 10 1
-.names n22 o_7_ n26
-11 1
-.names n18 n22 n27
+.names i_3_ i_4_ n23
+01 1
+.names o_7_ n23 n24
+00 1
+.names n21 n24 n25
+10 1
+.names n15 n20 n26
+00 1
+.names i_0_ n14 n27
 11 1
 .names n26 n27 n28
+01 1
+.names n17 n19 n29
 00 1
-.names n24 n28 n29
-01 1
-.names n14 n22 n30
-11 1
-.names i_1_ i_2_ n31
-01 1
-.names i_0_ n31 n32
-11 1
-.names o_7_ n32 n33
-11 1
-.names n18 n32 n34
-11 1
-.names n33 n34 n35
+.names n25 n28 n30
 00 1
-.names n30 n35 n36
-01 1
-.names n14 n32 n37
-11 1
-.names n16 n23 n38
-11 1
-.names n16 o_7_ n39
-11 1
-.names n38 n39 n40
-00 1
-.names n37 n40 n41
-01 1
-.names n36 n41 n42
-11 1
-.names n29 n42 n43
-11 1
-.names n20 n43 o_1_
+.names n29 n30 o_1_
 11 0
-.names i_0_ n21 n45
+.names i_3_ i_4_ n32
+11 1
+.names i_1_ n32 n33
 01 1
-.names n14 n45 n46
-11 1
-.names n18 n45 n47
-11 1
-.names n46 n47 n48
-00 1
-.names i_1_ i_2_ n49
+.names i_0_ n33 n34
 10 1
-.names i_0_ n49 n50
-11 1
-.names n23 n50 n51
-11 1
-.names n26 n51 n52
+.names n15 n34 n35
 00 1
-.names n24 n52 n53
+.names i_3_ i_1_ n36
 01 1
-.names o_7_ n50 n54
+.names i_0_ n36 n37
 11 1
-.names n35 n54 n55
+.names n18 n37 n38
+00 1
+.names n35 n38 o_2_
+01 1
+.names i_2_ n32 n40
+11 1
+.names i_1_ n40 n41
+00 1
+.names i_0_ n41 o_0_
 10 1
-.names n23 n45 n56
-11 1
-.names o_7_ n45 n57
-11 1
-.names n56 n57 n58
+.names i_1_ i_2_ n43
+10 1
+.names n20 n43 n44
 00 1
-.names n37 n58 n59
+.names i_4_ n44 n45
+11 1
+.names i_4_ i_2_ n46
+00 1
+.names o_7_ n46 n47
+00 1
+.names n45 n47 o_5_
 01 1
-.names n55 n59 n60
+.names i_2_ n32 n49
+00 1
+.names i_2_ n23 n50
+10 1
+.names n49 n50 o_6_
+00 1
+.names n16 n23 n52
 11 1
-.names n53 n60 n61
+.names i_3_ i_0_ n53
+10 1
+.names n15 n53 n54
 11 1
-.names n48 n61 o_2_
+.names n16 n32 n55
+11 1
+.names i_0_ o_7_ n56
+10 1
+.names n43 n56 n57
+11 1
+.names n21 o_7_ n58
+11 1
+.names i_0_ n43 n59
+01 1
+.names i_3_ n19 n60
+11 1
+.names n54 n59 n61
+00 1
+.names n52 n61 n62
+01 1
+.names n55 n57 n63
+00 1
+.names n58 n60 n64
+00 1
+.names n63 n64 n65
+11 1
+.names n62 n65 o_3_
 11 0
-.names n51 n54 n63
+.names n15 n18 n67
+10 1
+.names i_3_ n18 n68
+10 1
+.names n67 n68 n69
 00 1
-.names n30 n63 n64
+.names i_0_ n69 n70
+10 1
+.names i_0_ n69 n71
 01 1
-.names n18 n50 n65
-11 1
-.names n14 n50 n66
-11 1
-.names n23 n32 n67
-11 1
-.names n66 n67 n68
-00 1
-.names n65 n68 n69
+.names i_4_ n70 n72
+10 1
+.names n71 n72 n73
 01 1
-.names n64 n69 n70
-11 1
-.names n29 n70 o_0_
-11 0
-.names i_0_ n31 n72
-01 1
-.names n23 n72 n73
-11 1
-.names n18 n72 n74
-11 1
-.names n14 n72 n75
-11 1
-.names n74 n75 n76
-00 1
-.names n73 n76 n77
-01 1
-.names n51 n65 n78
-00 1
-.names n30 n78 n79
-01 1
-.names n34 n37 n80
-00 1
-.names n67 n80 n81
-01 1
-.names i_0_ n49 n82
-01 1
-.names n23 n82 n83
-11 1
-.names n18 n82 n84
-11 1
-.names n83 n84 n85
-00 1
-.names n46 n85 n86
-01 1
-.names n81 n86 n87
-11 1
-.names n79 n87 n88
-11 1
-.names n77 n88 o_5_
-11 0
-.names n34 n51 n90
-00 1
-.names n27 n90 n91
-01 1
-.names n47 n83 n92
-00 1
-.names n38 n92 n93
-01 1
-.names i_0_ n15 n94
-01 1
-.names n23 n94 n95
-11 1
-.names n74 n95 n96
-00 1
-.names n93 n96 n97
-11 1
-.names n91 n97 o_6_
-11 0
-.names n14 n82 n99
-11 1
-.names n84 n99 n100
-00 1
-.names o_7_ n82 n101
-11 1
-.names n83 n101 n102
-00 1
-.names n57 n102 n103
-01 1
-.names n100 n103 n104
-11 1
-.names n27 n51 n105
-00 1
-.names n24 n105 n106
-01 1
-.names n33 n66 n107
-00 1
-.names n65 n107 n108
-01 1
-.names n39 n56 n109
-00 1
-.names n38 n109 n110
-01 1
-.names n108 n110 n111
-11 1
-.names n106 n111 n112
-11 1
-.names n104 n112 o_3_
-11 0
-.names o_7_ n72 n114
-11 1
-.names n73 n114 n115
-00 1
-.names n101 n115 n116
-01 1
-.names n33 n65 n117
-00 1
-.names n54 n117 n118
-01 1
-.names n19 n38 n119
-00 1
-.names n34 n119 n120
-01 1
-.names n56 n92 n121
-01 1
-.names n120 n121 n122
-11 1
-.names n118 n122 n123
-11 1
-.names n116 n123 o_4_
-11 0
+.names o_7_ n44 n74
+10 1
+.names n73 n74 o_4_
+00 0
 .end

@@ -2,14 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:14:16 1998
 ############################################
 .model top
-.inputs _1gat_0_ _11gat_3_ _17gat_5_ _95gat_29_ _112gat_34_ _4gat_1_ _30gat_9_\
- _27gat_8_ _8gat_2_ _40gat_12_ _47gat_14_ _69gat_21_ _73gat_22_ _89gat_27_\
- _53gat_16_ _115gat_35_ _37gat_11_ _63gat_19_ _99gat_30_ _79gat_24_ _14gat_4_\
- _102gat_31_ _24gat_7_ _82gat_25_ _66gat_20_ _43gat_13_ _92gat_28_ _76gat_23_\
- _86gat_26_ _50gat_15_ _108gat_33_ _21gat_6_ _60gat_18_ _56gat_17_ _105gat_32_\
- _34gat_10_
-.outputs _421gat_188_ _329gat_133_ _223gat_84_ _370gat_163_ _431gat_194_\
- _432gat_195_ _430gat_193_
+.inputs _1gat_0_ _11gat_3_ _17gat_5_ _95gat_29_ _112gat_34_ _4gat_1_ _30gat_9_  _27gat_8_ _8gat_2_ _40gat_12_ _47gat_14_ _69gat_21_ _73gat_22_ _89gat_27_  _53gat_16_ _115gat_35_ _37gat_11_ _63gat_19_ _99gat_30_ _79gat_24_ _14gat_4_  _102gat_31_ _24gat_7_ _82gat_25_ _66gat_20_ _43gat_13_ _92gat_28_ _76gat_23_  _86gat_26_ _50gat_15_ _108gat_33_ _21gat_6_ _60gat_18_ _56gat_17_ _105gat_32_  _34gat_10_
+.outputs _421gat_188_ _329gat_133_ _223gat_84_ _370gat_163_ _431gat_194_  _432gat_195_ _430gat_193_
 # connect ports to nets with different names
 .names _1gat_0_ n_n354
 1  1

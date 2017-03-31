@@ -2,15 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:14:02 1998
 ############################################
 .model top
-.inputs pina0 pinb1 pinc2 pind3 pina1 pinb0 pinc3 pind2 pmusel1 pinc4 pind5\
- pmusel2 pinc5 pind4 pmusel3 pina4 pinb5 pina5 pinb4 pina2 pinb3 pinc0 pind1\
- pina3 pinb2 pinc1 pind0 pind15 pinc15 pind14 pinb15 pinc14 pind13 popsel3\
- popsel1 popsel2 pina11 pinb10 pina10 popsel0 pina15 pinb14 pinc13 pind12\
- pina14 pinb13 pinc12 pind11 pina13 pinb12 pinc11 pind10 pina12 pinb11 pinc10\
- pina8 pinb9 pina9 pinb8 pina6 pinb7 pina7 pinb6 psh0 pinc6 pind7 pmusel4\
- psh1 pinc7 pind6 psh2 pinc8 pind9 pinc9 pind8
-.outputs po12 po11 po14 po13 po15 po9 po8 po7 po6 po5 po4 po3 po2 po1 po0\
- po10
+.inputs pina0 pinb1 pinc2 pind3 pina1 pinb0 pinc3 pind2 pmusel1 pinc4 pind5  pmusel2 pinc5 pind4 pmusel3 pina4 pinb5 pina5 pinb4 pina2 pinb3 pinc0 pind1  pina3 pinb2 pinc1 pind0 pind15 pinc15 pind14 pinb15 pinc14 pind13 popsel3  popsel1 popsel2 pina11 pinb10 pina10 popsel0 pina15 pinb14 pinc13 pind12  pina14 pinb13 pinc12 pind11 pina13 pinb12 pinc11 pind10 pina12 pinb11 pinc10  pina8 pinb9 pina9 pinb8 pina6 pinb7 pina7 pinb6 psh0 pinc6 pind7 pmusel4  psh1 pinc7 pind6 psh2 pinc8 pind9 pinc9 pind8
+.outputs po12 po11 po14 po13 po15 po9 po8 po7 po6 po5 po4 po3 po2 po1 po0  po10
 # connect ports to nets with different names
 .names no12 po12
 1  1

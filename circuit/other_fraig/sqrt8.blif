@@ -1,207 +1,151 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:50 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:35 2017
 .model top
 .inputs v_6_ v_7_ v_4_ v_5_ v_2_ v_3_ v_0_ v_1_
 .outputs sqrt_3_ sqrt_2_ sqrt_1_ sqrt_0_
 .names v_6_ v_7_ sqrt_3_
 00 0
-.names v_6_ v_7_ n14
-11 1
-.names v_6_ v_5_ n15
-01 1
-.names v_6_ v_4_ n16
-01 1
-.names n15 n16 n17
+.names v_4_ v_5_ n14
 00 1
-.names n14 n17 sqrt_2_
-01 0
-.names v_5_ v_2_ n19
+.names v_6_ n14 n15
+00 1
+.names v_6_ v_7_ n16
 11 1
+.names n15 n16 sqrt_2_
+00 0
+.names v_2_ v_3_ n18
+00 1
+.names v_6_ v_5_ n19
+10 1
 .names v_7_ n19 n20
+10 1
+.names v_4_ n18 n21
 01 1
-.names v_6_ v_5_ n21
+.names n20 n21 n22
+01 1
+.names v_7_ v_5_ n23
+01 1
+.names n15 n23 n24
+10 1
+.names v_7_ n19 n25
+01 1
+.names n22 n25 n26
 00 1
-.names v_7_ n21 n22
-11 1
-.names v_4_ n22 n23
+.names n24 n26 sqrt_1_
 01 1
-.names v_6_ v_5_ n24
-11 1
-.names v_7_ n24 n25
-11 1
-.names v_4_ v_5_ n26
-11 1
-.names v_7_ n26 n27
+.names v_6_ n14 n28
 01 1
-.names n25 n27 n28
-00 1
-.names n23 n28 n29
-01 1
-.names v_4_ v_5_ n30
+.names v_4_ v_5_ n29
+11 1
+.names n28 n29 n30
 00 1
 .names v_7_ n30 n31
-11 1
-.names v_3_ n31 n32
-11 1
-.names v_6_ n30 n33
-01 1
-.names v_3_ n33 n34
-11 1
-.names v_5_ v_3_ n35
-11 1
-.names v_7_ n35 n36
-01 1
-.names n34 n36 n37
-00 1
-.names n32 n37 n38
-01 1
-.names v_2_ n31 n39
-11 1
-.names v_2_ n33 n40
-11 1
-.names v_6_ v_4_ n41
-11 1
-.names v_7_ n41 n42
-11 1
-.names n40 n42 n43
-00 1
-.names n39 n43 n44
-01 1
-.names n38 n44 n45
-11 1
-.names n29 n45 n46
-11 1
-.names n20 n46 sqrt_1_
-01 0
-.names v_3_ n25 n48
-11 1
-.names v_6_ v_5_ n49
 10 1
-.names v_7_ n49 n50
+.names v_7_ v_5_ n32
+11 1
+.names v_3_ n32 n33
+11 1
+.names v_1_ n33 n34
+11 1
+.names v_2_ v_3_ n35
+11 1
+.names n28 n35 n36
+11 1
+.names v_2_ v_1_ n37
 01 1
-.names v_4_ v_3_ n51
+.names n28 n37 n38
 11 1
-.names n50 n51 n52
+.names v_7_ v_4_ n39
+01 1
+.names n35 n39 n40
 11 1
-.names v_4_ v_2_ n53
-11 1
-.names n50 n53 n54
-11 1
-.names n52 n54 n55
+.names v_6_ n29 n41
+01 1
+.names n33 n41 n42
 00 1
-.names n48 n55 n56
-01 1
-.names v_6_ n26 n57
-01 1
-.names v_3_ n57 n58
-11 1
-.names v_2_ n57 n59
-11 1
-.names v_7_ n35 n60
-11 1
-.names v_2_ n60 n61
-11 1
-.names n59 n61 n62
-00 1
-.names n58 n62 n63
-01 1
-.names v_4_ v_5_ n64
-01 1
-.names v_6_ n64 n65
-11 1
-.names v_2_ v_1_ n66
-01 1
-.names v_3_ n66 n67
-01 1
-.names n65 n67 n68
-11 1
-.names v_4_ v_1_ n69
-11 1
-.names n50 n69 n70
-11 1
-.names v_7_ n51 n71
-01 1
-.names v_2_ n71 n72
-11 1
-.names n70 n72 n73
-00 1
-.names n68 n73 n74
-01 1
-.names n63 n74 n75
-11 1
-.names n56 n75 n76
-11 1
-.names n33 n66 n77
-11 1
-.names v_1_ n60 n78
-11 1
-.names v_1_ n57 n79
-11 1
-.names n78 n79 n80
-00 1
-.names n77 n80 n81
-01 1
-.names v_2_ v_0_ n82
-01 1
-.names v_3_ n82 n83
-01 1
-.names n65 n83 n84
-11 1
-.names v_4_ v_0_ n85
-11 1
-.names n50 n85 n86
-11 1
-.names n23 n86 n87
-00 1
-.names n84 n87 n88
-01 1
-.names v_2_ n25 n89
-11 1
-.names v_1_ n71 n90
-11 1
-.names n33 n82 n91
-11 1
-.names n90 n91 n92
-00 1
-.names n89 n92 n93
-01 1
-.names n88 n93 n94
-11 1
-.names n81 n94 n95
-11 1
-.names v_0_ n60 n96
-11 1
-.names v_0_ n57 n97
-11 1
-.names v_7_ n26 n98
-11 1
-.names n97 n98 n99
-00 1
-.names n96 n99 n100
-01 1
-.names v_2_ v_3_ n101
-00 1
-.names n31 n101 n102
-11 1
-.names v_7_ n64 n103
-01 1
-.names n101 n103 n104
-11 1
-.names v_2_ v_3_ n105
-11 1
-.names n33 n105 n106
-11 1
-.names n104 n106 n107
-00 1
-.names n102 n107 n108
-01 1
-.names v_0_ n71 n109
-11 1
-.names n108 n109 n110
+.names v_0_ n42 n43
 10 1
-.names n100 n110 n111
+.names n18 n41 n44
+01 1
+.names v_6_ n33 n45
 11 1
-.names n95 n111 n112
+.names v_7_ v_5_ n46
+10 1
+.names n23 n46 n47
+00 1
+.names n21 n47 n48
+10 1
+.names v_6_ v_4_ n49
+10 1
+.names v_5_ v_3_ n50
+10 1
+.names n49 n50 n51
 11 1
-.names n76 n112 sqrt_0_
+.names n37 n51 n52
+11 1
+.names v_2_ v_0_ n53
+01 1
+.names n28 n53 n54
+11 1
+.names v_0_ v_1_ n55
+00 1
+.names v_3_ n39 n56
+11 1
+.names n55 n56 n57
+01 1
+.names n51 n53 n58
+11 1
+.names v_4_ v_1_ n59
+11 1
+.names n25 n59 n60
+11 1
+.names v_1_ n41 n61
+11 1
+.names v_6_ v_2_ n62
+11 1
+.names n35 n62 n63
+00 1
+.names n32 n63 n64
+10 1
+.names v_4_ v_0_ n65
+11 1
+.names n25 n65 n66
+11 1
+.names v_4_ n18 n67
+10 1
+.names n25 n67 n68
+11 1
+.names n34 n40 n69
+00 1
+.names n36 n38 n70
+00 1
+.names n44 n45 n71
+00 1
+.names n48 n52 n72
+00 1
+.names n54 n57 n73
+00 1
+.names n58 n60 n74
+00 1
+.names n61 n64 n75
+00 1
+.names n66 n68 n76
+00 1
+.names n75 n76 n77
+11 1
+.names n73 n74 n78
+11 1
+.names n71 n72 n79
+11 1
+.names n69 n70 n80
+11 1
+.names n31 n43 n81
+00 1
+.names n80 n81 n82
+11 1
+.names n78 n79 n83
+11 1
+.names n77 n83 n84
+11 1
+.names n82 n84 sqrt_0_
 11 0
 .end

@@ -2,8 +2,7 @@
 # Written by e2fmt Tue Mar 31 16:21:47 1998
 ############################################
 .model top
-.inputs pp pa0 pq pr pc0 ps pd0 pt pe0 pu pf0 pv pg0 pw ph0 px pi0 py pz\
- pa pb pc pd pe pf pg ph pi pj pk pl pm pn po
+.inputs pp pa0 pq pr pc0 ps pd0 pt pe0 pu pf0 pv pg0 pw ph0 px pi0 py pz  pa pb pc pd pe pf pg ph pi pj pk pl pm pn po
 .outputs pj0 pk0 pl0 pm0 pn0 po0 pp0 pq0 pr0 ps0
 # connect ports to nets with different names
 .names pp np

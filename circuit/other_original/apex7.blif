@@ -2,16 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:18:12 1998
 ############################################
 .model top
-.inputs pdel1 pratr pbull1 pbull0 pwatch povacc pverr_n porwd_n pvlenesr\
- pmmerr paccrpy pvacc pcat4 pvst1 pcapsd pcat3 pcat2 pcat1 plsd pvst0 pcat0\
- pibt2 pkbg_n pmarssr pend pvsumesr pbull5 ppluto4 pstar2 pbull4 ppluto5\
- ppy pstar3 pbull3 pcomppar pibt1 pstar0 pbull2 pibt0 pstar1 ppluto0 pfbi\
- powl_n ppluto1 piclr ppluto2 pbull6 pcat5 ppluto3
-.outputs pbull2_p pend_p pbull3_p porwd_f pbull4_p ppluto3_p pwatch_p pbull5_p\
- pbull6_p ppluto5_p ppy_p ppluto4_p plsd_p pvlenesr_p pfbi_p pstar1_p pvsumesr_p\
- paccrpy_p pkbg_f pmarssr_p pstar0_p pstar3_p pdel1_p pstar2_p pvst0_p pcomppar_p\
- powl_f psdo pvst1_p ppluto1_p pratr_p ppluto0_p povacc_p ppluto2_p pbull0_p\
- pverr_f pbull1_p
+.inputs pdel1 pratr pbull1 pbull0 pwatch povacc pverr_n porwd_n pvlenesr  pmmerr paccrpy pvacc pcat4 pvst1 pcapsd pcat3 pcat2 pcat1 plsd pvst0 pcat0  pibt2 pkbg_n pmarssr pend pvsumesr pbull5 ppluto4 pstar2 pbull4 ppluto5  ppy pstar3 pbull3 pcomppar pibt1 pstar0 pbull2 pibt0 pstar1 ppluto0 pfbi  powl_n ppluto1 piclr ppluto2 pbull6 pcat5 ppluto3
+.outputs pbull2_p pend_p pbull3_p porwd_f pbull4_p ppluto3_p pwatch_p pbull5_p  pbull6_p ppluto5_p ppy_p ppluto4_p plsd_p pvlenesr_p pfbi_p pstar1_p pvsumesr_p  paccrpy_p pkbg_f pmarssr_p pstar0_p pstar3_p pdel1_p pstar2_p pvst0_p pcomppar_p  powl_f psdo pvst1_p ppluto1_p pratr_p ppluto0_p povacc_p ppluto2_p pbull0_p  pverr_f pbull1_p
 # connect ports to nets with different names
 .names nbull2_p pbull2_p
 1  1

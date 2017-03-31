@@ -1,119 +1,71 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:37 2017
 .model top
 .inputs pa pb pc pd pe pf pg ph pi pj
 .outputs pp pq pk pl pm pn po
-.names pe ph n18
+.names ph pi n18
 01 1
-.names pd n18 n19
+.names pf pj n19
 11 1
-.names pj n19 n20
-01 1
-.names pc ph n21
+.names n18 n19 n20
+11 1
+.names pg n20 n21
 10 1
-.names pa n21 n22
-01 1
-.names pb n22 n23
-01 1
-.names pi n23 n24
-01 1
-.names n20 n24 n25
-00 1
-.names pg n25 n26
-11 1
-.names pb pc n27
-01 1
-.names pj n27 n28
-11 1
-.names pa n28 n29
-01 1
-.names pi n29 n30
-11 1
-.names ph n30 n31
-11 1
-.names pi pj n32
-00 1
-.names ph pj n33
-01 1
-.names pi n33 n34
-11 1
-.names pf n34 n35
-11 1
-.names n32 n35 n36
-00 1
-.names n31 n36 n37
-01 1
-.names n26 n37 pp
-11 0
-.names ph n32 pm
-01 1
-.names ph pj n40
-11 1
-.names pb n40 n41
-01 1
-.names pc n41 n42
-01 1
-.names pa n42 n43
-01 1
-.names pg n43 n44
+.names ph pj n22
 10 1
-.names pm n44 n45
-01 1
-.names pe pi n46
-11 1
-.names pj n46 n47
-01 1
-.names pd n47 n48
-11 1
-.names ph n48 n49
-11 1
-.names pi pj n50
-01 1
-.names ph n50 n51
-11 1
-.names n35 n51 n52
-00 1
-.names n49 n52 n53
-01 1
-.names n45 n53 pq
-11 0
-.names pi pj n55
-11 1
-.names n51 n55 n56
-00 1
-.names ph pi n57
-01 1
-.names n32 n33 n58
-00 1
-.names n57 n58 n59
-01 1
-.names n56 n59 pk
-11 0
-.names ph pj n61
+.names pd pe n23
 10 1
-.names n55 n61 n62
-00 1
-.names n33 n57 n63
-00 1
-.names n62 n63 pl
-11 0
-.names pa pb n65
-00 1
-.names pm n61 n66
-00 1
-.names n65 n66 n67
+.names n22 n23 n24
 11 1
-.names pc n33 n68
+.names pi pj n25
 00 1
-.names n56 n68 n69
+.names pa pb n26
+00 1
+.names pi pj n27
 11 1
-.names n67 n69 pn
-11 0
-.names pm n55 n71
-00 1
-.names pg n33 n72
+.names ph n27 n28
 10 1
-.names n57 n72 n73
+.names pc n18 n29
+10 1
+.names n26 n29 n30
+11 1
+.names n28 n30 n31
 01 1
-.names n71 n73 po
+.names n24 n25 n32
+00 1
+.names n21 n32 n33
+11 1
+.names n31 n33 pp
+01 0
+.names ph pj n35
+11 1
+.names ph pj n36
+00 1
+.names n35 n36 n37
+00 1
+.names pi n37 pl
+00 0
+.names pc n26 n39
+01 1
+.names n35 n39 n40
+11 1
+.names pi n22 pk
+11 0
+.names pd pe n42
+11 1
+.names pk n42 n43
+01 1
+.names n21 pl n44
+11 1
+.names n40 n43 n45
+00 1
+.names n44 n45 pq
+11 0
+.names ph n25 pm
+01 1
+.names pj n18 n48
+01 1
+.names n39 n48 pn
+11 0
+.names pg n28 po
 11 0
 .end

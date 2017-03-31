@@ -2,8 +2,7 @@
 # Written by e2fmt Thu Feb 11 18:00:15 1999
 ############################################
 .model top
-.inputs ey0 ex0 z2 y1 x0 y0 x1 z0 y3 x2 z1 y2 x3 a3 a2 a5 a4 v a6 ey2 ex1\
- ey1 ex2
+.inputs ey0 ex0 z2 y1 x0 y0 x1 z0 y3 x2 z1 y2 x3 a3 a2 a5 a4 v a6 ey2 ex1  ey1 ex2
 .outputs d dn
 # connect ports to nets with different names
 .names nd d

@@ -2,25 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:16:27 1998
 ############################################
 .model top
-.inputs pa1 pb2 pc3 pd4 pe5 pp pa0 pb3 pc2 pd5 pe4 pq pa3 pb0 pc1 pf4 pg5\
- pr pa2 pb1 pc0 pf5 pg4 ps pa5 pd0 pe1 pf2 pg3 pt pa4 pd1 pe0 pf3 pg2 pu\
- pb4 pc5 pd2 pe3 pf0 pg1 pv pb5 pc4 pd3 pe2 pf1 pg0 pw ph0 pi1 pj2 pk3 pl4\
- pm5 ph1 pi0 pj3 pk2 pl5 pm4 py ph2 pi3 pj0 pk1 pn4 po5 pz ph3 pi2 pj1 pk0\
- pn5 po4 ph4 pi5 pl0 pm1 pn2 po3 ph5 pi4 pl1 pm0 pn3 po2 pj4 pk5 pl2 pm3\
- pn0 po1 pj5 pk4 pl3 pm2 pn1 po0 pp0 pq1 pr2 ps3 pt4 pa pp1 pq0 pr3 ps2\
- pu4 pb pp2 pq3 pr0 ps1 pv4 pc pp3 pq2 pr1 ps0 pw4 pd pp4 pq5 pt0 pu1 pv2\
- pw3 pe pp5 pq4 pt1 pu0 pv3 pw2 pf pr4 pt2 pu3 pv0 pw1 pg pr5 ps4 pt3 pu2\
- pv1 pw0 ph px0 py1 pz2 pi px1 py0 pz3 pj px2 py3 pz0 pk px3 py2 pz1 pl\
- px4 pm py4 pn pz4 po
-.outputs pf6 pg7 ph8 pi9 pq10 pf7 pg6 ph9 pi8 pp10 pd6 pe7 pj8 pk9 ps10\
- pd7 pe6 pj9 pk8 pr10 pb6 pc7 pl8 pm9 pu10 pb7 pc6 pl9 pm8 pt10 pa7 pn8\
- po9 pw10 pa6 pn9 po8 pv10 pa9 pn6 po7 py10 pa8 pn7 po6 px10 pb8 pc9 pl6\
- pm7 pb9 pc8 pl7 pm6 pd8 pe9 pj6 pk7 pd9 pe8 pj7 pk6 pf8 pg9 ph6 pi7 pf9\
- pg8 ph7 pi6 pa10 pu5 pv6 pw7 px8 py9 pt5 pv7 pw6 px9 py8 pc10 pt6 pu7 pw5\
- pz8 pb10 pt7 pu6 pv5 pz9 pe10 pr6 ps7 pd10 pr7 ps6 pg10 pp6 pq7 ps5 pf10\
- pp7 pq6 pi10 pp8 pq9 ph10 pp9 pq8 pk10 pr8 ps9 pj10 pr9 ps8 pm10 pt8 pu9\
- py5 pz6 pl10 pt9 pu8 px5 pz7 po10 pv8 pw9 px6 py7 pn10 pv9 pw8 px7 py6\
- pz5
+.inputs pa1 pb2 pc3 pd4 pe5 pp pa0 pb3 pc2 pd5 pe4 pq pa3 pb0 pc1 pf4 pg5  pr pa2 pb1 pc0 pf5 pg4 ps pa5 pd0 pe1 pf2 pg3 pt pa4 pd1 pe0 pf3 pg2 pu  pb4 pc5 pd2 pe3 pf0 pg1 pv pb5 pc4 pd3 pe2 pf1 pg0 pw ph0 pi1 pj2 pk3 pl4  pm5 ph1 pi0 pj3 pk2 pl5 pm4 py ph2 pi3 pj0 pk1 pn4 po5 pz ph3 pi2 pj1 pk0  pn5 po4 ph4 pi5 pl0 pm1 pn2 po3 ph5 pi4 pl1 pm0 pn3 po2 pj4 pk5 pl2 pm3  pn0 po1 pj5 pk4 pl3 pm2 pn1 po0 pp0 pq1 pr2 ps3 pt4 pa pp1 pq0 pr3 ps2  pu4 pb pp2 pq3 pr0 ps1 pv4 pc pp3 pq2 pr1 ps0 pw4 pd pp4 pq5 pt0 pu1 pv2  pw3 pe pp5 pq4 pt1 pu0 pv3 pw2 pf pr4 pt2 pu3 pv0 pw1 pg pr5 ps4 pt3 pu2  pv1 pw0 ph px0 py1 pz2 pi px1 py0 pz3 pj px2 py3 pz0 pk px3 py2 pz1 pl  px4 pm py4 pn pz4 po
+.outputs pf6 pg7 ph8 pi9 pq10 pf7 pg6 ph9 pi8 pp10 pd6 pe7 pj8 pk9 ps10  pd7 pe6 pj9 pk8 pr10 pb6 pc7 pl8 pm9 pu10 pb7 pc6 pl9 pm8 pt10 pa7 pn8  po9 pw10 pa6 pn9 po8 pv10 pa9 pn6 po7 py10 pa8 pn7 po6 px10 pb8 pc9 pl6  pm7 pb9 pc8 pl7 pm6 pd8 pe9 pj6 pk7 pd9 pe8 pj7 pk6 pf8 pg9 ph6 pi7 pf9  pg8 ph7 pi6 pa10 pu5 pv6 pw7 px8 py9 pt5 pv7 pw6 px9 py8 pc10 pt6 pu7 pw5  pz8 pb10 pt7 pu6 pv5 pz9 pe10 pr6 ps7 pd10 pr7 ps6 pg10 pp6 pq7 ps5 pf10  pp7 pq6 pi10 pp8 pq9 ph10 pp9 pq8 pk10 pr8 ps9 pj10 pr9 ps8 pm10 pt8 pu9  py5 pz6 pl10 pt9 pu8 px5 pz7 po10 pv8 pw9 px6 py7 pn10 pv9 pw8 px7 py6  pz5
 # connect ports to nets with different names
 .names pa1 na1
 1  1

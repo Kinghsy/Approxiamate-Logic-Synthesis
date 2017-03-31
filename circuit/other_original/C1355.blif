@@ -2,20 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:13:16 1998
 ############################################
 .model top
-.inputs p_127gat_18_ p_155gat_22_ p_120gat_17_ p_64gat_9_ p_106gat_15_ p_204gat_29_\
- p_1gat_0_ p_43gat_6_ p_85gat_12_ p_141gat_20_ p_183gat_26_ p_57gat_8_ p_148gat_21_\
- p_169gat_24_ p_225gat_32_ p_99gat_14_ p_230gat_37_ p_134gat_19_ p_162gat_23_\
- p_29gat_4_ p_78gat_11_ p_226gat_33_ p_22gat_3_ p_231gat_38_ p_36gat_5_\
- p_113gat_16_ p_8gat_1_ p_50gat_7_ p_227gat_34_ p_92gat_13_ p_197gat_28_\
- p_232gat_39_ p_233gat_40_ p_71gat_10_ p_190gat_27_ p_15gat_2_ p_228gat_35_\
- p_176gat_25_ p_218gat_31_ p_211gat_30_ p_229gat_36_
-.outputs p_1332gat_585_ p_1331gat_572_ p_1334gat_577_ p_1354gat_562_ p_1352gat_570_\
- p_1336gat_586_ p_1330gat_576_ p_1335gat_573_ p_1353gat_566_ p_1329gat_580_\
- p_1328gat_584_ p_1342gat_559_ p_1351gat_557_ p_1333gat_581_ p_1349gat_565_\
- p_1350gat_561_ p_1348gat_569_ p_1347gat_556_ p_1341gat_563_ p_1325gat_579_\
- p_1326gat_575_ p_1344gat_568_ p_1324gat_583_ p_1343gat_555_ p_1345gat_564_\
- p_1337gat_582_ p_1327gat_571_ p_1340gat_567_ p_1346gat_560_ p_1339gat_574_\
- p_1355gat_558_ p_1338gat_578_
+.inputs p_127gat_18_ p_155gat_22_ p_120gat_17_ p_64gat_9_ p_106gat_15_ p_204gat_29_  p_1gat_0_ p_43gat_6_ p_85gat_12_ p_141gat_20_ p_183gat_26_ p_57gat_8_ p_148gat_21_  p_169gat_24_ p_225gat_32_ p_99gat_14_ p_230gat_37_ p_134gat_19_ p_162gat_23_  p_29gat_4_ p_78gat_11_ p_226gat_33_ p_22gat_3_ p_231gat_38_ p_36gat_5_  p_113gat_16_ p_8gat_1_ p_50gat_7_ p_227gat_34_ p_92gat_13_ p_197gat_28_  p_232gat_39_ p_233gat_40_ p_71gat_10_ p_190gat_27_ p_15gat_2_ p_228gat_35_  p_176gat_25_ p_218gat_31_ p_211gat_30_ p_229gat_36_
+.outputs p_1332gat_585_ p_1331gat_572_ p_1334gat_577_ p_1354gat_562_ p_1352gat_570_  p_1336gat_586_ p_1330gat_576_ p_1335gat_573_ p_1353gat_566_ p_1329gat_580_  p_1328gat_584_ p_1342gat_559_ p_1351gat_557_ p_1333gat_581_ p_1349gat_565_  p_1350gat_561_ p_1348gat_569_ p_1347gat_556_ p_1341gat_563_ p_1325gat_579_  p_1326gat_575_ p_1344gat_568_ p_1324gat_583_ p_1343gat_555_ p_1345gat_564_  p_1337gat_582_ p_1327gat_571_ p_1340gat_567_ p_1346gat_560_ p_1339gat_574_  p_1355gat_558_ p_1338gat_578_
 # connect ports to nets with different names
 .names p_127gat_18_ n_n930
 1  1

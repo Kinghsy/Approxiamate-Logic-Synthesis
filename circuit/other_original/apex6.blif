@@ -2,30 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:17:07 1998
 ############################################
 .model top
-.inputs txwrd3 a qpr4 txwrd2 b i1zzz0 txwrd5 c p1zzz0 txwrd4 xzfs i1zzz2\
- i2zzz1 p1zzz1 p2zzz0 qpr1 i1zzz1 i2zzz0 p1zzz2 p2zzz1 qpr0 i1zzz4 i2zzz3\
- infin p1zzz3 p2zzz2 qpr3 txwrd1 vybb1 i1zzz3 i2zzz2 p1zzz4 p2zzz3 qpr2\
- txwrd0 vybb0 comppar psrw xz323 cbt2 mmerr ryz xz324 esrsum v1zzz7 v2zzz6\
- xz161 pfin stw_n v2zzz7 vzzze xz162 xz320 cbt1 slad0 v1zzz5 v2zzz4 xz163\
- xz321 cbt0 slad1 v1zzz6 v2zzz5 xz322 pybb5 slad2 txwrd14 v1zzz3 v2zzz2\
- xz160_n pybb4 slad3 txwrd13 v1zzz4 v2zzz3 iclr pybb3 rptwin txwrd12 v1zzz1\
- v2zzz0 pybb2 txwrd11 v1zzz2 v2zzz1 axz1 inzzze axz0 pybb8 v1zzz0 inybb8\
- pybb7 xzfr0 enwin ofs1 pybb6 pzzze txmess_n txwrd15 xzfr1 i1zzz6 i2zzz5\
- inybb6 ofs2 p1zzz5 p2zzz4 rxz0 i1zzz5 i2zzz4 inybb7 p1zzz6 p2zzz5 rpten\
- rxz1 i2zzz7 inybb4 p1zzz7 p2zzz6 i1zzz7 i2zzz6 inybb5 p2zzz7 inybb2 pybb1\
- txwrd7 txwrd10 inybb3 pybb0 txwrd6 inybb0 txwrd9 inybb1 psync txwrd8 vfin
-.outputs i1zzz0_p v1zzz0_p i1zzz3_p i2zzz2_p txwrd8_p v1zzz2_p v2zzz1_p\
- i1zzz4_p i2zzz3_p stw_f txwrd9_p v1zzz1_p v2zzz0_p xz163_p c_p enwin_p\
- i1zzz1_p i2zzz0_p txwrd6_p v1zzz4_p v2zzz3_p i1zzz2_p i2zzz1_p txwrd7_p\
- v1zzz3_p v2zzz2_p p1zzz4_p p2zzz3_p xz162_p b_p p1zzz3_p p2zzz2_p p1zzz2_p\
- p2zzz1_p xzfr1_p p1zzz1_p p2zzz0_p txwrd14_p xz161_p a_p p1zzz0_p axz0_p\
- txwrd15_p axz1_p td_p fsesr_p rptwin_p txwrd12_p txwrd11_p xz322_p p2zzz7_p\
- txwrd13_p xz324_p xzfs_p p1zzz7_p p2zzz6_p xzfr0_p p1zzz6_p p2zzz5_p rxz1_p\
- comppar_p ofs2_p p1zzz5_p p2zzz4_p rxz0_p xz323_p i1zzz7_p i2zzz6_p ofs1_p\
- ryz_p sbuff txwrd4_p v1zzz6_p v2zzz5_p xz160_f xz320_p i2zzz7_p txwrd5_p\
- v1zzz5_p v2zzz4_p i1zzz5_p i2zzz4_p qpr4_p txwrd2_p v2zzz7_p i1zzz6_p i2zzz5_p\
- txwrd3_p v1zzz7_p v2zzz6_p qpr2_p txwrd0_p qpr3_p txwrd1_p xz321_p qpr0_p\
- qpr1_p txmess_f txwrd10_p
+.inputs txwrd3 a qpr4 txwrd2 b i1zzz0 txwrd5 c p1zzz0 txwrd4 xzfs i1zzz2  i2zzz1 p1zzz1 p2zzz0 qpr1 i1zzz1 i2zzz0 p1zzz2 p2zzz1 qpr0 i1zzz4 i2zzz3  infin p1zzz3 p2zzz2 qpr3 txwrd1 vybb1 i1zzz3 i2zzz2 p1zzz4 p2zzz3 qpr2  txwrd0 vybb0 comppar psrw xz323 cbt2 mmerr ryz xz324 esrsum v1zzz7 v2zzz6  xz161 pfin stw_n v2zzz7 vzzze xz162 xz320 cbt1 slad0 v1zzz5 v2zzz4 xz163  xz321 cbt0 slad1 v1zzz6 v2zzz5 xz322 pybb5 slad2 txwrd14 v1zzz3 v2zzz2  xz160_n pybb4 slad3 txwrd13 v1zzz4 v2zzz3 iclr pybb3 rptwin txwrd12 v1zzz1  v2zzz0 pybb2 txwrd11 v1zzz2 v2zzz1 axz1 inzzze axz0 pybb8 v1zzz0 inybb8  pybb7 xzfr0 enwin ofs1 pybb6 pzzze txmess_n txwrd15 xzfr1 i1zzz6 i2zzz5  inybb6 ofs2 p1zzz5 p2zzz4 rxz0 i1zzz5 i2zzz4 inybb7 p1zzz6 p2zzz5 rpten  rxz1 i2zzz7 inybb4 p1zzz7 p2zzz6 i1zzz7 i2zzz6 inybb5 p2zzz7 inybb2 pybb1  txwrd7 txwrd10 inybb3 pybb0 txwrd6 inybb0 txwrd9 inybb1 psync txwrd8 vfin
+.outputs i1zzz0_p v1zzz0_p i1zzz3_p i2zzz2_p txwrd8_p v1zzz2_p v2zzz1_p  i1zzz4_p i2zzz3_p stw_f txwrd9_p v1zzz1_p v2zzz0_p xz163_p c_p enwin_p  i1zzz1_p i2zzz0_p txwrd6_p v1zzz4_p v2zzz3_p i1zzz2_p i2zzz1_p txwrd7_p  v1zzz3_p v2zzz2_p p1zzz4_p p2zzz3_p xz162_p b_p p1zzz3_p p2zzz2_p p1zzz2_p  p2zzz1_p xzfr1_p p1zzz1_p p2zzz0_p txwrd14_p xz161_p a_p p1zzz0_p axz0_p  txwrd15_p axz1_p td_p fsesr_p rptwin_p txwrd12_p txwrd11_p xz322_p p2zzz7_p  txwrd13_p xz324_p xzfs_p p1zzz7_p p2zzz6_p xzfr0_p p1zzz6_p p2zzz5_p rxz1_p  comppar_p ofs2_p p1zzz5_p p2zzz4_p rxz0_p xz323_p i1zzz7_p i2zzz6_p ofs1_p  ryz_p sbuff txwrd4_p v1zzz6_p v2zzz5_p xz160_f xz320_p i2zzz7_p txwrd5_p  v1zzz5_p v2zzz4_p i1zzz5_p i2zzz4_p qpr4_p txwrd2_p v2zzz7_p i1zzz6_p i2zzz5_p  txwrd3_p v1zzz7_p v2zzz6_p qpr2_p txwrd0_p qpr3_p txwrd1_p xz321_p qpr0_p  qpr1_p txmess_f txwrd10_p
 # connect ports to nets with different names
 .names txwrd3 ntxwrd3
 1  1

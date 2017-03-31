@@ -1,45 +1,39 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:38 2017
 .model top
 .inputs a b c d f g h
 .outputs f0 f1
-.names a b n10
-11 1
-.names b h n11
-11 1
-.names f n11 n12
+.names f h n10
 01 1
-.names c d n13
-01 1
-.names b n13 n14
-01 1
-.names c d n15
-11 1
-.names f n15 n16
-11 1
-.names n14 n16 n17
+.names a n10 n11
 00 1
-.names n12 n17 n18
+.names b n11 n12
+10 1
+.names c f n13
+10 1
+.names b c n14
+10 1
+.names d n13 n15
+10 1
+.names n14 n15 n16
 01 1
-.names n10 n18 f0
+.names n12 n16 f0
+00 0
+.names f g n18
+00 1
+.names b d n19
+00 1
+.names f n19 n20
+11 1
+.names b f n21
+10 1
+.names a n21 n22
+10 1
+.names a n21 n23
+01 1
+.names n22 n23 n24
+00 1
+.names n18 n20 n25
+00 1
+.names n24 n25 f1
 01 0
-.names a b n20
-00 1
-.names a f n21
-01 1
-.names n20 n21 n22
-00 1
-.names b d n23
-00 1
-.names f n23 n24
-11 1
-.names f n10 n25
-01 1
-.names f g n26
-00 1
-.names n25 n26 n27
-00 1
-.names n24 n27 n28
-01 1
-.names n22 n28 f1
-11 0
 .end

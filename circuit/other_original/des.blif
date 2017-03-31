@@ -2,84 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:14:26 1998
 ############################################
 .model top
-.inputs pcount_3_ pdata_22_ pdata_35_ pdata_48_ pinreg_1_ poutreg_51_ pcount_2_\
- pdata_10_ pdata_21_ pdata_36_ pdata_47_ pinreg_0_ poutreg_52_ poutreg_63_\
- pcount_1_ pdata_8_ pdata_24_ pdata_37_ pdata_46_ pdata_59_ poutreg_40_\
- poutreg_53_ poutreg_62_ pcount_0_ pdata_9_ pdata_23_ pdata_38_ pdata_45_\
- poutreg_54_ poutreg_61_ pdata_6_ pdata_26_ pdata_31_ pdata_44_ pinreg_5_\
- poutreg_55_ pdata_7_ pdata_25_ pdata_32_ pdata_43_ pinreg_4_ poutreg_30_\
- poutreg_56_ pdata_4_ pdata_28_ pdata_33_ pdata_42_ pinreg_3_ poutreg_57_\
- pdata_5_ pdata_27_ pdata_34_ pdata_41_ pinreg_2_ poutreg_58_ pd_20_ pdata_17_\
- pdata_40_ pinreg_9_ poutreg_0_ poutreg_33_ poutreg_46_ pc_20_ pd_10_ pdata_18_\
- pinreg_8_ poutreg_1_ poutreg_34_ poutreg_45_ preset_0_ pc_21_ pd_11_ pd_22_\
- pdata_15_ pinreg_7_ poutreg_31_ poutreg_48_ pc_22_ pd_12_ pd_21_ pdata_16_\
- pdata_30_ pinreg_6_ poutreg_32_ poutreg_47_ pc_12_ pdata_13_ poutreg_19_\
- poutreg_37_ poutreg_42_ poutreg_60_ pc_11_ pdata_14_ poutreg_38_ poutreg_41_\
- pc_10_ pdata_11_ pdata_20_ poutreg_35_ poutreg_44_ pdata_12_ poutreg_29_\
- poutreg_36_ poutreg_43_ poutreg_50_ pc_9_ pc_16_ pc_27_ pd_8_ pd_17_ pdata_in_4_\
- pinreg_30_ pinreg_41_ pinreg_52_ poutreg_8_ poutreg_15_ poutreg_28_ pc_15_\
- pd_9_ pd_18_ pd_27_ pdata_in_3_ pinreg_31_ pinreg_40_ pinreg_53_ poutreg_9_\
- poutreg_16_ poutreg_27_ pc_14_ pd_19_ pdata_60_ pdata_in_6_ pinreg_32_\
- pinreg_43_ pinreg_50_ poutreg_6_ poutreg_17_ poutreg_26_ poutreg_39_ pc_13_\
- pdata_in_5_ pinreg_33_ pinreg_42_ pinreg_51_ poutreg_7_ poutreg_18_ poutreg_25_\
- pc_5_ pc_23_ pd_4_ pd_13_ pd_24_ pinreg_12_ pinreg_23_ poutreg_4_ poutreg_11_\
- poutreg_24_ pc_6_ pc_19_ pc_24_ pd_5_ pd_14_ pd_23_ pdata_50_ pdata_in_7_\
- pencrypt_0_ pinreg_13_ pinreg_22_ poutreg_5_ poutreg_12_ poutreg_23_ poutreg_49_\
- pc_7_ pc_18_ pc_25_ pd_6_ pd_15_ pd_26_ pdata_19_ pinreg_10_ pinreg_21_\
- pload_key_0_ poutreg_2_ poutreg_13_ poutreg_22_ pc_8_ pc_17_ pc_26_ pd_7_\
- pd_16_ pd_25_ pinreg_11_ pinreg_20_ poutreg_3_ poutreg_14_ poutreg_21_\
- pc_1_ pd_0_ pdata_2_ pdata_53_ pinreg_16_ pinreg_27_ pinreg_38_ pinreg_49_\
- poutreg_20_ poutreg_59_ pc_2_ pd_1_ pdata_3_ pdata_29_ pdata_54_ pinreg_17_\
- pinreg_26_ pinreg_39_ pinreg_48_ pc_3_ pd_2_ pdata_0_ pdata_51_ pinreg_14_\
- pinreg_25_ pc_4_ pd_3_ pdata_1_ pdata_52_ pencrypt_mode_0_ pinreg_15_ pinreg_24_\
- poutreg_10_ pdata_39_ pdata_57_ pdata_62_ pdata_in_0_ pinreg_34_ pinreg_45_\
- pdata_58_ pdata_61_ pinreg_35_ pinreg_44_ pdata_55_ pdata_in_2_ pinreg_18_\
- pinreg_29_ pinreg_36_ pinreg_47_ pinreg_54_ pc_0_ pdata_49_ pdata_56_ pdata_63_\
- pdata_in_1_ pinreg_19_ pinreg_28_ pinreg_37_ pinreg_46_ pinreg_55_
-.outputs pc_new_6_ pc_new_19_ pd_new_5_ pdata_new_14_ pdata_new_27_ pinreg_new_6_\
- pinreg_new_19_ poutreg_new_9_ pc_new_7_ pd_new_6_ pd_new_19_ pdata_new_13_\
- pdata_new_28_ pdata_new_39_ pinreg_new_5_ pinreg_new_18_ poutreg_new_19_\
- pc_new_4_ pd_new_3_ pdata_new_9_ pdata_new_12_ pdata_new_25_ pinreg_new_8_\
- pinreg_new_17_ poutreg_new_7_ pc_new_5_ pd_new_4_ pdata_new_11_ pdata_new_26_\
- pinreg_new_7_ pinreg_new_16_ poutreg_new_8_ pc_new_2_ pd_new_1_ pdata_new_10_\
- pdata_new_36_ pinreg_new_2_ pinreg_new_15_ poutreg_new_16_ pc_new_3_ pd_new_2_\
- pdata_new_35_ pinreg_new_1_ pinreg_new_14_ poutreg_new_15_ pc_new_0_ pdata_new_29_\
- pdata_new_38_ pinreg_new_4_ pinreg_new_13_ poutreg_new_18_ pc_new_1_ pd_new_0_\
- pdata_new_37_ pinreg_new_3_ pinreg_new_12_ poutreg_new_17_ pc_new_11_ pc_new_22_\
- pd_new_12_ pd_new_23_ pcount_new_0_ pdata_new_3_ pdata_new_45_ pdata_new_58_\
- pinreg_new_22_ pinreg_new_33_ pinreg_new_44_ pinreg_new_55_ poutreg_new_1_\
- poutreg_new_25_ poutreg_new_38_ poutreg_new_61_ pc_new_12_ pc_new_21_ pd_new_11_\
- pd_new_24_ pdata_new_4_ pdata_new_46_ pdata_new_57_ pinreg_new_23_ pinreg_new_32_\
- pinreg_new_45_ pinreg_new_54_ poutreg_new_2_ poutreg_new_26_ poutreg_new_37_\
- poutreg_new_62_ pc_new_13_ pc_new_24_ pd_new_14_ pd_new_21_ pcount_new_2_\
- pdata_new_1_ pdata_new_47_ pdata_new_56_ pinreg_new_0_ pinreg_new_24_ pinreg_new_35_\
- pinreg_new_42_ pinreg_new_53_ poutreg_new_27_ poutreg_new_36_ poutreg_new_49_\
- poutreg_new_50_ poutreg_new_63_ pc_new_14_ pc_new_23_ pd_new_13_ pd_new_22_\
- pcount_new_1_ pdata_new_2_ pdata_new_48_ pdata_new_55_ pinreg_new_25_ pinreg_new_34_\
- pinreg_new_43_ pinreg_new_52_ poutreg_new_0_ poutreg_new_28_ poutreg_new_35_\
- pc_new_15_ pc_new_26_ pd_new_16_ pd_new_27_ pdata_new_7_ pdata_new_49_\
- pinreg_new_26_ pinreg_new_37_ pinreg_new_48_ poutreg_new_5_ poutreg_new_29_\
- poutreg_new_47_ poutreg_new_52_ pc_new_16_ pc_new_25_ pd_new_15_ pcount_new_3_\
- pdata_new_8_ pinreg_new_27_ pinreg_new_36_ pinreg_new_49_ poutreg_new_6_\
- poutreg_new_48_ poutreg_new_51_ pc_new_17_ pd_new_18_ pd_new_25_ pdata_new_5_\
- pinreg_new_28_ pinreg_new_39_ pinreg_new_46_ poutreg_new_3_ poutreg_new_45_\
- poutreg_new_54_ pc_new_18_ pc_new_27_ pd_new_17_ pd_new_26_ pdata_new_6_\
- pdata_new_59_ pinreg_new_29_ pinreg_new_38_ pinreg_new_47_ poutreg_new_4_\
- poutreg_new_39_ poutreg_new_46_ poutreg_new_53_ poutreg_new_60_ pdata_new_50_\
- pdata_new_63_ poutreg_new_30_ poutreg_new_43_ poutreg_new_56_ poutreg_new_44_\
- poutreg_new_55_ pdata_new_61_ pencrypt_mode_new_0_ poutreg_new_41_ poutreg_new_58_\
- pdata_new_40_ pdata_new_62_ poutreg_new_20_ poutreg_new_42_ poutreg_new_57_\
- pdata_new_41_ pdata_new_54_ pinreg_new_40_ pinreg_new_51_ poutreg_new_21_\
- poutreg_new_34_ pd_new_20_ pdata_new_0_ pdata_new_42_ pdata_new_53_ pdata_new_60_\
- pinreg_new_41_ pinreg_new_50_ poutreg_new_22_ poutreg_new_33_ poutreg_new_40_\
- poutreg_new_59_ pc_new_20_ pd_new_10_ pdata_new_43_ pdata_new_52_ pinreg_new_20_\
- pinreg_new_31_ poutreg_new_23_ poutreg_new_32_ pc_new_10_ pdata_new_44_\
- pdata_new_51_ pinreg_new_21_ pinreg_new_30_ poutreg_new_24_ poutreg_new_31_\
- pdata_new_32_ pinreg_new_11_ poutreg_new_12_ pdata_new_20_ pdata_new_31_\
- pinreg_new_10_ poutreg_new_11_ pdata_new_34_ poutreg_new_14_ pdata_new_19_\
- pdata_new_33_ poutreg_new_13_ pd_new_9_ pdata_new_18_ pdata_new_23_ pdata_new_17_\
- pdata_new_24_ pinreg_new_9_ pc_new_8_ pd_new_7_ pdata_new_16_ pdata_new_21_\
- pdata_new_30_ poutreg_new_10_ pc_new_9_ pd_new_8_ pdata_new_15_ pdata_new_22_
+.inputs pcount_3_ pdata_22_ pdata_35_ pdata_48_ pinreg_1_ poutreg_51_ pcount_2_  pdata_10_ pdata_21_ pdata_36_ pdata_47_ pinreg_0_ poutreg_52_ poutreg_63_  pcount_1_ pdata_8_ pdata_24_ pdata_37_ pdata_46_ pdata_59_ poutreg_40_  poutreg_53_ poutreg_62_ pcount_0_ pdata_9_ pdata_23_ pdata_38_ pdata_45_  poutreg_54_ poutreg_61_ pdata_6_ pdata_26_ pdata_31_ pdata_44_ pinreg_5_  poutreg_55_ pdata_7_ pdata_25_ pdata_32_ pdata_43_ pinreg_4_ poutreg_30_  poutreg_56_ pdata_4_ pdata_28_ pdata_33_ pdata_42_ pinreg_3_ poutreg_57_  pdata_5_ pdata_27_ pdata_34_ pdata_41_ pinreg_2_ poutreg_58_ pd_20_ pdata_17_  pdata_40_ pinreg_9_ poutreg_0_ poutreg_33_ poutreg_46_ pc_20_ pd_10_ pdata_18_  pinreg_8_ poutreg_1_ poutreg_34_ poutreg_45_ preset_0_ pc_21_ pd_11_ pd_22_  pdata_15_ pinreg_7_ poutreg_31_ poutreg_48_ pc_22_ pd_12_ pd_21_ pdata_16_  pdata_30_ pinreg_6_ poutreg_32_ poutreg_47_ pc_12_ pdata_13_ poutreg_19_  poutreg_37_ poutreg_42_ poutreg_60_ pc_11_ pdata_14_ poutreg_38_ poutreg_41_  pc_10_ pdata_11_ pdata_20_ poutreg_35_ poutreg_44_ pdata_12_ poutreg_29_  poutreg_36_ poutreg_43_ poutreg_50_ pc_9_ pc_16_ pc_27_ pd_8_ pd_17_ pdata_in_4_  pinreg_30_ pinreg_41_ pinreg_52_ poutreg_8_ poutreg_15_ poutreg_28_ pc_15_  pd_9_ pd_18_ pd_27_ pdata_in_3_ pinreg_31_ pinreg_40_ pinreg_53_ poutreg_9_  poutreg_16_ poutreg_27_ pc_14_ pd_19_ pdata_60_ pdata_in_6_ pinreg_32_  pinreg_43_ pinreg_50_ poutreg_6_ poutreg_17_ poutreg_26_ poutreg_39_ pc_13_  pdata_in_5_ pinreg_33_ pinreg_42_ pinreg_51_ poutreg_7_ poutreg_18_ poutreg_25_  pc_5_ pc_23_ pd_4_ pd_13_ pd_24_ pinreg_12_ pinreg_23_ poutreg_4_ poutreg_11_  poutreg_24_ pc_6_ pc_19_ pc_24_ pd_5_ pd_14_ pd_23_ pdata_50_ pdata_in_7_  pencrypt_0_ pinreg_13_ pinreg_22_ poutreg_5_ poutreg_12_ poutreg_23_ poutreg_49_  pc_7_ pc_18_ pc_25_ pd_6_ pd_15_ pd_26_ pdata_19_ pinreg_10_ pinreg_21_  pload_key_0_ poutreg_2_ poutreg_13_ poutreg_22_ pc_8_ pc_17_ pc_26_ pd_7_  pd_16_ pd_25_ pinreg_11_ pinreg_20_ poutreg_3_ poutreg_14_ poutreg_21_  pc_1_ pd_0_ pdata_2_ pdata_53_ pinreg_16_ pinreg_27_ pinreg_38_ pinreg_49_  poutreg_20_ poutreg_59_ pc_2_ pd_1_ pdata_3_ pdata_29_ pdata_54_ pinreg_17_  pinreg_26_ pinreg_39_ pinreg_48_ pc_3_ pd_2_ pdata_0_ pdata_51_ pinreg_14_  pinreg_25_ pc_4_ pd_3_ pdata_1_ pdata_52_ pencrypt_mode_0_ pinreg_15_ pinreg_24_  poutreg_10_ pdata_39_ pdata_57_ pdata_62_ pdata_in_0_ pinreg_34_ pinreg_45_  pdata_58_ pdata_61_ pinreg_35_ pinreg_44_ pdata_55_ pdata_in_2_ pinreg_18_  pinreg_29_ pinreg_36_ pinreg_47_ pinreg_54_ pc_0_ pdata_49_ pdata_56_ pdata_63_  pdata_in_1_ pinreg_19_ pinreg_28_ pinreg_37_ pinreg_46_ pinreg_55_
+.outputs pc_new_6_ pc_new_19_ pd_new_5_ pdata_new_14_ pdata_new_27_ pinreg_new_6_  pinreg_new_19_ poutreg_new_9_ pc_new_7_ pd_new_6_ pd_new_19_ pdata_new_13_  pdata_new_28_ pdata_new_39_ pinreg_new_5_ pinreg_new_18_ poutreg_new_19_  pc_new_4_ pd_new_3_ pdata_new_9_ pdata_new_12_ pdata_new_25_ pinreg_new_8_  pinreg_new_17_ poutreg_new_7_ pc_new_5_ pd_new_4_ pdata_new_11_ pdata_new_26_  pinreg_new_7_ pinreg_new_16_ poutreg_new_8_ pc_new_2_ pd_new_1_ pdata_new_10_  pdata_new_36_ pinreg_new_2_ pinreg_new_15_ poutreg_new_16_ pc_new_3_ pd_new_2_  pdata_new_35_ pinreg_new_1_ pinreg_new_14_ poutreg_new_15_ pc_new_0_ pdata_new_29_  pdata_new_38_ pinreg_new_4_ pinreg_new_13_ poutreg_new_18_ pc_new_1_ pd_new_0_  pdata_new_37_ pinreg_new_3_ pinreg_new_12_ poutreg_new_17_ pc_new_11_ pc_new_22_  pd_new_12_ pd_new_23_ pcount_new_0_ pdata_new_3_ pdata_new_45_ pdata_new_58_  pinreg_new_22_ pinreg_new_33_ pinreg_new_44_ pinreg_new_55_ poutreg_new_1_  poutreg_new_25_ poutreg_new_38_ poutreg_new_61_ pc_new_12_ pc_new_21_ pd_new_11_  pd_new_24_ pdata_new_4_ pdata_new_46_ pdata_new_57_ pinreg_new_23_ pinreg_new_32_  pinreg_new_45_ pinreg_new_54_ poutreg_new_2_ poutreg_new_26_ poutreg_new_37_  poutreg_new_62_ pc_new_13_ pc_new_24_ pd_new_14_ pd_new_21_ pcount_new_2_  pdata_new_1_ pdata_new_47_ pdata_new_56_ pinreg_new_0_ pinreg_new_24_ pinreg_new_35_  pinreg_new_42_ pinreg_new_53_ poutreg_new_27_ poutreg_new_36_ poutreg_new_49_  poutreg_new_50_ poutreg_new_63_ pc_new_14_ pc_new_23_ pd_new_13_ pd_new_22_  pcount_new_1_ pdata_new_2_ pdata_new_48_ pdata_new_55_ pinreg_new_25_ pinreg_new_34_  pinreg_new_43_ pinreg_new_52_ poutreg_new_0_ poutreg_new_28_ poutreg_new_35_  pc_new_15_ pc_new_26_ pd_new_16_ pd_new_27_ pdata_new_7_ pdata_new_49_  pinreg_new_26_ pinreg_new_37_ pinreg_new_48_ poutreg_new_5_ poutreg_new_29_  poutreg_new_47_ poutreg_new_52_ pc_new_16_ pc_new_25_ pd_new_15_ pcount_new_3_  pdata_new_8_ pinreg_new_27_ pinreg_new_36_ pinreg_new_49_ poutreg_new_6_  poutreg_new_48_ poutreg_new_51_ pc_new_17_ pd_new_18_ pd_new_25_ pdata_new_5_  pinreg_new_28_ pinreg_new_39_ pinreg_new_46_ poutreg_new_3_ poutreg_new_45_  poutreg_new_54_ pc_new_18_ pc_new_27_ pd_new_17_ pd_new_26_ pdata_new_6_  pdata_new_59_ pinreg_new_29_ pinreg_new_38_ pinreg_new_47_ poutreg_new_4_  poutreg_new_39_ poutreg_new_46_ poutreg_new_53_ poutreg_new_60_ pdata_new_50_  pdata_new_63_ poutreg_new_30_ poutreg_new_43_ poutreg_new_56_ poutreg_new_44_  poutreg_new_55_ pdata_new_61_ pencrypt_mode_new_0_ poutreg_new_41_ poutreg_new_58_  pdata_new_40_ pdata_new_62_ poutreg_new_20_ poutreg_new_42_ poutreg_new_57_  pdata_new_41_ pdata_new_54_ pinreg_new_40_ pinreg_new_51_ poutreg_new_21_  poutreg_new_34_ pd_new_20_ pdata_new_0_ pdata_new_42_ pdata_new_53_ pdata_new_60_  pinreg_new_41_ pinreg_new_50_ poutreg_new_22_ poutreg_new_33_ poutreg_new_40_  poutreg_new_59_ pc_new_20_ pd_new_10_ pdata_new_43_ pdata_new_52_ pinreg_new_20_  pinreg_new_31_ poutreg_new_23_ poutreg_new_32_ pc_new_10_ pdata_new_44_  pdata_new_51_ pinreg_new_21_ pinreg_new_30_ poutreg_new_24_ poutreg_new_31_  pdata_new_32_ pinreg_new_11_ poutreg_new_12_ pdata_new_20_ pdata_new_31_  pinreg_new_10_ poutreg_new_11_ pdata_new_34_ poutreg_new_14_ pdata_new_19_  pdata_new_33_ poutreg_new_13_ pd_new_9_ pdata_new_18_ pdata_new_23_ pdata_new_17_  pdata_new_24_ pinreg_new_9_ pc_new_8_ pd_new_7_ pdata_new_16_ pdata_new_21_  pdata_new_30_ poutreg_new_10_ pc_new_9_ pd_new_8_ pdata_new_15_ pdata_new_22_
 # connect ports to nets with different names
 .names n_n1798 pc_new_6_
 1  1

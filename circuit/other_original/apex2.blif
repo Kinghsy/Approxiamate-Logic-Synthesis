@@ -2,10 +2,7 @@
 # Written by e2fmt Tue Mar 31 16:16:02 1998
 ############################################
 .model top
-.inputs i_30_ i_20_ i_9_ i_10_ i_7_ i_8_ i_5_ i_6_ i_27_ i_14_ i_3_ i_28_\
- i_13_ i_4_ i_25_ i_12_ i_1_ i_26_ i_11_ i_2_ i_23_ i_18_ i_24_ i_17_ i_0_\
- i_21_ i_16_ i_22_ i_15_ i_32_ i_31_ i_34_ i_33_ i_19_ i_36_ i_35_ i_38_\
- i_29_ i_37_
+.inputs i_30_ i_20_ i_9_ i_10_ i_7_ i_8_ i_5_ i_6_ i_27_ i_14_ i_3_ i_28_  i_13_ i_4_ i_25_ i_12_ i_1_ i_26_ i_11_ i_2_ i_23_ i_18_ i_24_ i_17_ i_0_  i_21_ i_16_ i_22_ i_15_ i_32_ i_31_ i_34_ i_33_ i_19_ i_36_ i_35_ i_38_  i_29_ i_37_
 .outputs o_1_ o_2_ o_0_
 # connect ports to nets with different names
 .names no_1_ o_1_

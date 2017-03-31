@@ -2,17 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:21:21 1998
 ############################################
 .model top
-.inputs p0 q1 r2 s3 a p1 q0 r3 s2 b p2 q3 r0 s1 c p3 q2 r1 s0 d t0 u1 v2\
- w3 e t1 u0 v3 w2 f t2 u3 v0 w1 g t3 u2 v1 w0 h x0 y1 z2 i x1 y0 z3 j x2\
- y3 z0 k x3 y2 z1 l m n o a1 b2 c3 d4 p a0 b3 c2 e4 q a3 b0 c1 r a2 b1 c0\
- s d0 e1 f2 g3 t a4 d1 e0 f3 g2 u b4 d2 e3 f0 g1 v c4 d3 e2 f1 g0 w h0 i1\
- j2 k3 x h1 i0 j3 k2 y h2 i3 j0 k1 z h3 i2 j1 k0 l0 m1 n2 o3 l1 m0 n3 o2\
- l2 m3 n0 o1 l3 m2 n1 o0
-.outputs t4 u5 v6 w7 t5 u4 v7 w6 t6 u7 v4 w5 t7 u6 v5 w4 p4 q5 r6 s7 p5\
- q4 r7 s6 p6 q7 r4 s5 p7 q6 r5 s4 x4 y5 z6 x5 y4 z7 x6 y7 z4 x7 y6 z5 e5\
- f6 g7 h8 d5 f7 g6 d6 e7 f4 g5 d7 e6 f5 g4 a5 b6 c7 b7 c6 a7 c5 a6 b5 l4\
- m5 n6 o7 a8 l5 m4 n7 o6 b8 l6 m7 n4 o5 c8 l7 m6 n5 o4 d8 h4 i5 j6 k7 e8\
- h5 i4 j7 k6 f8 h6 i7 j4 k5 g8 h7 i6 j5 k4
+.inputs p0 q1 r2 s3 a p1 q0 r3 s2 b p2 q3 r0 s1 c p3 q2 r1 s0 d t0 u1 v2  w3 e t1 u0 v3 w2 f t2 u3 v0 w1 g t3 u2 v1 w0 h x0 y1 z2 i x1 y0 z3 j x2  y3 z0 k x3 y2 z1 l m n o a1 b2 c3 d4 p a0 b3 c2 e4 q a3 b0 c1 r a2 b1 c0  s d0 e1 f2 g3 t a4 d1 e0 f3 g2 u b4 d2 e3 f0 g1 v c4 d3 e2 f1 g0 w h0 i1  j2 k3 x h1 i0 j3 k2 y h2 i3 j0 k1 z h3 i2 j1 k0 l0 m1 n2 o3 l1 m0 n3 o2  l2 m3 n0 o1 l3 m2 n1 o0
+.outputs t4 u5 v6 w7 t5 u4 v7 w6 t6 u7 v4 w5 t7 u6 v5 w4 p4 q5 r6 s7 p5  q4 r7 s6 p6 q7 r4 s5 p7 q6 r5 s4 x4 y5 z6 x5 y4 z7 x6 y7 z4 x7 y6 z5 e5  f6 g7 h8 d5 f7 g6 d6 e7 f4 g5 d7 e6 f5 g4 a5 b6 c7 b7 c6 a7 c5 a6 b5 l4  m5 n6 o7 a8 l5 m4 n7 o6 b8 l6 m7 n4 o5 c8 l7 m6 n5 o4 d8 h4 i5 j6 k7 e8  h5 i4 j7 k6 f8 h6 i7 j4 k5 g8 h7 i6 j5 k4
 # connect ports to nets with different names
 .names p0 np0
 1  1

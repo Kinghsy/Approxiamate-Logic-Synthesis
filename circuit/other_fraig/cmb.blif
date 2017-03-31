@@ -1,89 +1,99 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:38 2017
 .model top
 .inputs pp pa pb pc pd pe pf pg ph pi pj pk pl pm pn po
 .outputs pq pr ps pt
-.names pf ph n21
+.names pi pj n21
 11 1
-.names pg n21 n22
+.names pe pg n22
 11 1
-.names pi n22 n23
+.names pa pb n23
 11 1
-.names pa n23 n24
+.names pc pd n24
 11 1
-.names pc pd n25
+.names pf ph n25
 11 1
-.names pe n25 n26
+.names pk pl n26
 11 1
-.names pb n26 n27
+.names n25 n26 n27
 11 1
-.names n24 n27 n28
+.names n23 n24 n28
 11 1
-.names pk n28 n29
+.names n21 n22 n29
 11 1
-.names pj n29 n30
+.names n28 n29 n30
 11 1
-.names pl n30 pq
+.names n27 n30 pq
 11 1
-.names pj pk n32
+.names pk pl n32
 01 1
 .names ph pi n33
 01 1
-.names n32 n33 n34
+.names pp pe n34
+01 1
+.names pm pn n35
+01 1
+.names pj pk n36
 00 1
-.names pi pj n35
-01 1
-.names pp pe n36
-01 1
-.names pm pn n37
-01 1
-.names n36 n37 n38
+.names n21 n36 n37
 00 1
-.names pn po n39
+.names pn po n38
 01 1
-.names pl pm n40
+.names pl pm n39
 01 1
-.names n39 n40 n41
+.names n32 n33 n40
 00 1
-.names n38 n41 n42
+.names n34 n35 n41
+00 1
+.names n38 n39 n42
+00 1
+.names n41 n42 n43
 11 1
-.names pk n42 n43
-11 1
-.names pl n42 n44
+.names n37 n40 n44
 01 1
 .names n43 n44 n45
-00 1
-.names n35 n45 n46
-00 1
-.names n34 n46 n47
 11 1
-.names pg n47 n48
+.names pg ph n46
+00 1
+.names n45 n46 n47
+11 1
+.names pf n47 n48
 01 1
-.names ph n48 n49
-01 1
-.names pf n49 n50
-01 1
-.names pf n47 n51
+.names pf n45 n49
 11 1
-.names ph n51 n52
-01 1
-.names pe n52 n53
+.names pe ph n50
+10 1
+.names n49 n50 n51
 11 1
-.names n50 n53 n54
+.names pe n47 n52
+11 1
+.names n22 n49 n53
+11 1
+.names n48 n51 n54
 00 1
-.names pe n49 n55
-11 1
-.names pg n51 n56
-11 1
-.names pe n56 n57
-11 1
-.names n55 n57 n58
+.names n52 n53 n55
 00 1
-.names n54 n58 n59
+.names n54 n55 n56
 11 1
-.names pp n59 pt
-00 1
-.names po n59 ps
+.names pp n56 pr
+00 0
+.names po n56 ps
 10 0
-.names pt pr
-0 1
+.names pp pe n59
+00 1
+.names pf pi n60
+00 1
+.names pl pm n61
+00 1
+.names pn po n62
+00 1
+.names n61 n62 n63
+11 1
+.names n59 n60 n64
+11 1
+.names n36 n46 n65
+11 1
+.names n64 n65 n66
+11 1
+.names n63 n66 pt
+11 1
 .end

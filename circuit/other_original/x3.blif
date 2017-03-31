@@ -2,20 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:25:43 1998
 ############################################
 .model top
-.inputs pa1 pb2 pc3 pd4 pp pa0 pb3 pc2 pe4 pq pa3 pb0 pc1 pf4 pr pa2 pb1\
- pc0 pg4 ps pd0 pe1 pf2 pg3 pt pa4 pd1 pe0 pf3 pg2 pu pb4 pd2 pe3 pf0 pg1\
- pv pc4 pd3 pe2 pf1 pg0 pw ph0 pi1 pj2 pk3 px ph1 pi0 pj3 pk2 py ph2 pi3\
- pj0 pk1 pz ph3 pi2 pj1 pk0 ph4 pl0 pm1 pn2 po3 pl1 pm0 pn3 po2 pl2 pm3\
- pn0 po1 pl3 pm2 pn1 po0 pq1 pr2 ps3 pp1 pr3 ps2 pb pp2 pq3 pr0 ps1 pc pp3\
- pq2 pr1 ps0 pd pt0 pu1 pv2 pw3 pe pt1 pu0 pv3 pw2 pf pt2 pu3 pv0 pw1 pg\
- pt3 pu2 pv1 pw0 ph px0 py1 pz2 pi px1 py0 pz3 pj px2 py3 pz0 pk px3 py2\
- pz1 pl pm pn po
-.outputs pe5 pf6 pg7 pd5 pf7 pg6 pd6 pe7 pg5 pd7 pe6 pf5 pa5 pb6 pc7 pb7\
- pc6 pa7 pc5 pa6 pb5 pl4 pm5 pn6 po7 pa8 pl5 pm4 pn7 po6 pb8 pl6 pm7 pn4\
- po5 pc8 pl7 pm6 pn5 po4 pi5 pj6 pk7 ph5 pi4 pj7 pk6 ph6 pi7 pj4 pk5 ph7\
- pi6 pj5 pk4 pt4 pu5 pv6 pw7 pt5 pu4 pv7 pw6 pt6 pu7 pv4 pw5 pt7 pu6 pv5\
- pw4 pp4 pq5 pr6 ps7 pp5 pq4 pr7 ps6 pp6 pq7 pr4 ps5 pp7 pq6 pr5 ps4 px4\
- py5 pz6 px5 py4 pz7 px6 py7 pz4 px7 py6 pz5
+.inputs pa1 pb2 pc3 pd4 pp pa0 pb3 pc2 pe4 pq pa3 pb0 pc1 pf4 pr pa2 pb1  pc0 pg4 ps pd0 pe1 pf2 pg3 pt pa4 pd1 pe0 pf3 pg2 pu pb4 pd2 pe3 pf0 pg1  pv pc4 pd3 pe2 pf1 pg0 pw ph0 pi1 pj2 pk3 px ph1 pi0 pj3 pk2 py ph2 pi3  pj0 pk1 pz ph3 pi2 pj1 pk0 ph4 pl0 pm1 pn2 po3 pl1 pm0 pn3 po2 pl2 pm3  pn0 po1 pl3 pm2 pn1 po0 pq1 pr2 ps3 pp1 pr3 ps2 pb pp2 pq3 pr0 ps1 pc pp3  pq2 pr1 ps0 pd pt0 pu1 pv2 pw3 pe pt1 pu0 pv3 pw2 pf pt2 pu3 pv0 pw1 pg  pt3 pu2 pv1 pw0 ph px0 py1 pz2 pi px1 py0 pz3 pj px2 py3 pz0 pk px3 py2  pz1 pl pm pn po
+.outputs pe5 pf6 pg7 pd5 pf7 pg6 pd6 pe7 pg5 pd7 pe6 pf5 pa5 pb6 pc7 pb7  pc6 pa7 pc5 pa6 pb5 pl4 pm5 pn6 po7 pa8 pl5 pm4 pn7 po6 pb8 pl6 pm7 pn4  po5 pc8 pl7 pm6 pn5 po4 pi5 pj6 pk7 ph5 pi4 pj7 pk6 ph6 pi7 pj4 pk5 ph7  pi6 pj5 pk4 pt4 pu5 pv6 pw7 pt5 pu4 pv7 pw6 pt6 pu7 pv4 pw5 pt7 pu6 pv5  pw4 pp4 pq5 pr6 ps7 pp5 pq4 pr7 ps6 pp6 pq7 pr4 ps5 pp7 pq6 pr5 ps4 px4  py5 pz6 px5 py4 pz7 px6 py7 pz4 px7 py6 pz5
 # connect ports to nets with different names
 .names pa1 na1
 1  1

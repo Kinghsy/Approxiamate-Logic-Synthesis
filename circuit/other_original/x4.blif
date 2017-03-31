@@ -2,16 +2,8 @@
 # Written by e2fmt Tue Mar 31 16:25:50 1998
 ############################################
 .model top
-.inputs pa1 pb2 pp pa0 pc2 pq pb0 pc1 pr pa2 pb1 pc0 ps pd0 pe1 pf2 pt pd1\
- pe0 pg2 pu pd2 pf0 pg1 pv pe2 pf1 pg0 pw ph0 pi1 pj2 px ph1 pi0 pk2 py\
- ph2 pk1 pz pi2 pj1 pk0 pl0 pm1 pn2 pl1 pm0 po2 pl2 pn0 po1 pm2 pn1 po0\
- pp0 pq1 pr2 pa pp1 pq0 ps2 pb pp2 pr0 ps1 pq2 pr1 ps0 pt0 pu1 pv2 pt1 pu0\
- pt2 pv0 pw1 pg pu2 pv1 pw0 ph px0 py1 pi px1 py0 pz0 pk pz1 pl pm pn po
-.outputs pc3 pd4 pe5 pb3 pd5 pe4 pa3 pf4 pg5 pf5 pg4 pa5 pg3 pa4 pf3 pb4\
- pc5 pe3 pb5 pc4 pd3 pk3 pl4 pm5 pj3 pl5 pm4 pi3 pn4 po5 ph3 pn5 po4 ph4\
- pi5 po3 ph5 pi4 pn3 pj4 pk5 pm3 pj5 pk4 pl3 ps3 pt4 pr3 pu4 pq3 pv4 pp3\
- pw4 pp4 pw3 pq4 pv3 pw2 pr4 pu3 ps4 pt3 pz2 pz3 px2 py3 px3 py2 px4 py4\
- pz4
+.inputs pa1 pb2 pp pa0 pc2 pq pb0 pc1 pr pa2 pb1 pc0 ps pd0 pe1 pf2 pt pd1  pe0 pg2 pu pd2 pf0 pg1 pv pe2 pf1 pg0 pw ph0 pi1 pj2 px ph1 pi0 pk2 py  ph2 pk1 pz pi2 pj1 pk0 pl0 pm1 pn2 pl1 pm0 po2 pl2 pn0 po1 pm2 pn1 po0  pp0 pq1 pr2 pa pp1 pq0 ps2 pb pp2 pr0 ps1 pq2 pr1 ps0 pt0 pu1 pv2 pt1 pu0  pt2 pv0 pw1 pg pu2 pv1 pw0 ph px0 py1 pi px1 py0 pz0 pk pz1 pl pm pn po
+.outputs pc3 pd4 pe5 pb3 pd5 pe4 pa3 pf4 pg5 pf5 pg4 pa5 pg3 pa4 pf3 pb4  pc5 pe3 pb5 pc4 pd3 pk3 pl4 pm5 pj3 pl5 pm4 pi3 pn4 po5 ph3 pn5 po4 ph4  pi5 po3 ph5 pi4 pn3 pj4 pk5 pm3 pj5 pk4 pl3 ps3 pt4 pr3 pu4 pq3 pv4 pp3  pw4 pp4 pw3 pq4 pv3 pw2 pr4 pu3 ps4 pt3 pz2 pz3 px2 py3 px3 py2 px4 py4  pz4
 # connect ports to nets with different names
 .names pa1 na1
 1  1

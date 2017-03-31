@@ -1,4 +1,4 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:50 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:35 2017
 .model top
 .inputs pv27_3 pv7_2 pv7_1 pv10_0 pv11_0 pv14_0 pv22_5 pv27_0 pv7_7 pv15_0 \
  pv22_4 pv12_0 pv29_0 pv13_0 pv7_4 pv18_0 pv7_3 pv8_0 pv7_6 pv9_0 pv16_0 \
@@ -9,69 +9,67 @@
 00 0
 .names pv11_0 pv22_5 pv32_0
 11 1
-.names pv14_0 pv22_3 n41
+.names pv14_0 pv22_5 n41
+10 1
+.names pv22_3 n41 pv33_0
 11 1
-.names pv22_5 n41 pv33_0
+.names pv22_5 pv22_3 n43
 01 1
-.names pv22_3 pv17_0 n43
+.names pv17_0 n43 pv34_0
 11 1
-.names pv22_5 n43 pv34_0
-01 1
-.names pv14_0 pv22_4 n45
+.names pv22_4 n41 pv35_0
 11 1
-.names pv22_5 n45 pv35_0
+.names pv22_5 pv22_4 n46
 01 1
-.names pv22_4 pv17_0 n47
+.names pv17_0 n46 pv36_0
 11 1
-.names pv22_5 n47 pv36_0
-01 1
 .names pv22_5 pv16_0 pv37_0
 01 1
-.names pv14_0 pv13_0 n50
+.names pv14_0 pv15_0 n49
 00 1
-.names pv12_0 n50 n51
-01 1
-.names pv15_0 n51 pv38_0
-01 0
-.names pv7_2 pv7_1 n53
+.names pv12_0 pv13_0 n50
 00 1
-.names pv7_5 n53 n54
+.names n49 n50 pv38_0
+11 0
+.names pv7_2 pv7_1 n52
+00 1
+.names pv7_7 pv7_4 n53
+00 1
+.names pv7_3 pv7_6 n54
+00 1
+.names pv7_5 n54 n55
 01 1
-.names pv7_3 n54 n55
-01 1
-.names pv7_7 n55 n56
-01 1
-.names pv7_4 n56 n57
-01 1
-.names pv7_6 n57 n58
-01 1
-.names pv27_0 pv29_0 n59
+.names n52 n53 n56
 11 1
-.names n58 n59 n60
-01 1
-.names pv8_0 n58 n61
+.names n55 n56 n57
 11 1
-.names pv29_0 n61 n62
+.names pv29_0 pv8_0 n58
 11 1
-.names pv9_0 n62 n63
+.names n57 n58 n59
+11 1
+.names pv9_0 n59 n60
 01 1
-.names n60 n63 pv27_2
+.names pv27_0 pv29_0 n61
+11 1
+.names n57 n61 n62
+01 1
+.names n60 n62 pv27_2
 00 0
-.names pv9_0 n62 n65
+.names pv29_0 pv8_0 n64
+10 1
+.names n57 n64 n65
 11 1
-.names pv27_0 pv29_0 n66
+.names pv9_0 n65 n66
 01 1
-.names pv29_0 n58 n67
+.names pv9_0 n59 n67
 11 1
-.names pv8_0 n67 n68
+.names pv27_0 pv29_0 n68
 01 1
-.names pv9_0 n68 n69
-01 1
-.names n66 n69 n70
+.names n66 n68 n69
 00 1
-.names n65 n70 pv27_1
+.names n67 n69 pv27_1
 01 0
-.names pv10_0 n68 pv28_0
+.names pv10_0 n65 pv28_0
 00 0
 .names pv22_5 pv18_0 pv30_0
 11 1

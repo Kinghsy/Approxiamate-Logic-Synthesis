@@ -2,8 +2,7 @@
 # Written by e2fmt Tue Mar 31 16:15:46 1998
 ############################################
 .model top
-.inputs i_9_ i_10_ i_7_ i_8_ i_5_ i_6_ i_3_ i_13_ i_4_ i_12_ i_1_ i_11_\
- i_2_ i_0_
+.inputs i_9_ i_10_ i_7_ i_8_ i_5_ i_6_ i_3_ i_13_ i_4_ i_12_ i_1_ i_11_  i_2_ i_0_
 .outputs o_1_ o_2_ o_0_ o_7_ o_5_ o_6_ o_3_ o_4_
 # connect ports to nets with different names
 .names no_1_ o_1_

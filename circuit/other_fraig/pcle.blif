@@ -1,129 +1,103 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:50 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:36 2017
 .model top
 .inputs pp pq pr ps pa pb pc pd pe pf pg ph pi pj pk pl pm pn po
 .outputs pa0 pb0 pt pu pv pw px py pz
 .names pg pi n29
 11 1
-.names pj pk n30
-10 1
-.names pi n30 n31
-01 1
-.names pl pm n32
+.names pl pm n30
 11 1
-.names pn n32 n33
+.names pn n30 n31
 11 1
-.names po n33 n34
+.names po n31 n32
 11 1
-.names pp n34 n35
+.names pp n32 n33
 11 1
-.names pq n35 n36
+.names pq n33 n34
 11 1
-.names pr n36 n37
-01 1
-.names n31 n37 n38
+.names pr n34 n35
 11 1
-.names pr n36 n39
-10 1
-.names n31 n39 n40
-11 1
-.names n38 n40 n41
+.names pr n34 n36
 00 1
-.names n29 n41 pa0
-01 0
-.names ph pi n43
-11 1
-.names pr n36 n44
-11 1
-.names ps n44 n45
+.names pi pj n37
 01 1
-.names n31 n45 n46
-11 1
-.names ps n44 n47
-10 1
-.names n31 n47 n48
-11 1
-.names n46 n48 n49
-00 1
-.names n43 n49 pb0
-01 0
-.names n31 n44 n51
-11 1
-.names ps n51 pt
-11 1
-.names pl n31 n53
+.names pk n37 n38
 01 1
-.names pa pi n54
-11 1
-.names n53 n54 pu
+.names n35 n38 n39
+01 1
+.names n36 n39 n40
+01 1
+.names n29 n40 pa0
 00 0
-.names pb pi n56
+.names ps n38 n42
 11 1
-.names pl pm n57
+.names n35 n42 n43
 01 1
-.names n31 n57 n58
+.names ph pi n44
 11 1
-.names pl pm n59
-10 1
-.names n31 n59 n60
-11 1
-.names n58 n60 n61
-00 1
-.names n56 n61 pv
-01 0
-.names pc pi n63
-11 1
-.names pn n32 n64
+.names ps n38 n45
 01 1
-.names n31 n64 n65
+.names n35 n45 n46
 11 1
-.names pn n32 n66
-10 1
-.names n31 n66 n67
-11 1
-.names n65 n67 n68
+.names n43 n44 n47
 00 1
-.names n63 n68 pw
+.names n46 n47 pb0
 01 0
-.names pd pi n70
+.names n35 n42 pt
 11 1
-.names po n33 n71
+.names pl n38 n50
 01 1
-.names n31 n71 n72
+.names pa pi n51
 11 1
-.names po n33 n73
-10 1
-.names n31 n73 n74
+.names n50 n51 pu
+00 0
+.names pb pi n53
 11 1
-.names n72 n74 n75
+.names pl pm n54
 00 1
-.names n70 n75 px
-01 0
-.names pe pi n77
+.names n30 n54 n55
+00 1
+.names n38 n55 n56
 11 1
-.names pp n34 n78
+.names n53 n56 pv
+00 0
+.names pc pi n58
+11 1
+.names pn n30 n59
+00 1
+.names n31 n38 n60
 01 1
-.names n31 n78 n79
-11 1
-.names pp n34 n80
-10 1
-.names n31 n80 n81
-11 1
-.names n79 n81 n82
-00 1
-.names n77 n82 py
-01 0
-.names pf pi n84
-11 1
-.names pq n35 n85
+.names n59 n60 n61
 01 1
-.names n31 n85 n86
+.names n58 n61 pw
+00 0
+.names pd pi n63
 11 1
-.names pq n35 n87
-10 1
-.names n31 n87 n88
-11 1
-.names n86 n88 n89
+.names po n31 n64
 00 1
-.names n84 n89 pz
-01 0
+.names n32 n38 n65
+01 1
+.names n64 n65 n66
+01 1
+.names n63 n66 px
+00 0
+.names pe pi n68
+11 1
+.names pp n32 n69
+00 1
+.names n33 n38 n70
+01 1
+.names n69 n70 n71
+01 1
+.names n68 n71 py
+00 0
+.names pf pi n73
+11 1
+.names pq n33 n74
+00 1
+.names n34 n38 n75
+01 1
+.names n74 n75 n76
+01 1
+.names n73 n76 pz
+00 0
 .end

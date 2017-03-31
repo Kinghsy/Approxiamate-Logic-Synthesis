@@ -1,4 +1,4 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:50 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:36 2017
 .model top
 .inputs v_6_ v_7_ v_4_ v_5_ v_2_ v_3_ v_0_ v_1_
 .outputs sqrt_3_ sqrt_2_ sqrt_1_ sqrt_0_
@@ -9,123 +9,93 @@
 .names v_4_ v_5_ n15
 00 1
 .names v_6_ n15 n16
-01 1
-.names v_6_ n16 n17
 00 1
-.names n14 n17 sqrt_2_
+.names n14 n16 sqrt_2_
 00 0
-.names v_6_ sqrt_3_ n19
-01 1
-.names sqrt_2_ n19 n20
-01 1
-.names v_6_ n15 n21
+.names v_4_ sqrt_2_ n18
 10 1
-.names n16 n21 n22
+.names v_2_ v_3_ n19
 00 1
-.names sqrt_2_ n22 n23
-10 1
-.names n20 n23 n24
+.names v_4_ n19 n20
 00 1
-.names v_5_ sqrt_2_ n25
-10 1
-.names v_4_ v_5_ n26
+.names n18 n20 n21
+00 1
+.names sqrt_3_ n21 n22
 11 1
-.names n15 n26 n27
-00 1
-.names sqrt_2_ n27 n28
-10 1
-.names n25 n28 n29
-00 1
-.names sqrt_3_ n29 n30
-11 1
-.names v_4_ sqrt_2_ n31
-10 1
-.names v_4_ sqrt_2_ n32
+.names v_4_ sqrt_2_ n23
 01 1
-.names n31 n32 n33
-00 1
-.names sqrt_2_ n33 n34
+.names v_5_ n23 n24
+10 1
+.names n14 n15 n25
 11 1
-.names v_2_ v_3_ n35
+.names n24 n25 n26
 00 1
-.names v_4_ n35 n36
+.names n22 n26 n27
+00 1
+.names sqrt_3_ n21 n28
+00 1
+.names v_6_ n15 n29
+11 1
+.names v_7_ n16 n30
+10 1
+.names n29 n30 n31
 01 1
-.names n34 n36 n37
+.names n28 n31 n32
 00 1
-.names sqrt_3_ n29 n38
-00 1
-.names n30 n38 n39
-00 1
-.names n37 n39 n40
+.names n27 n32 sqrt_1_
+01 0
+.names v_2_ sqrt_1_ n34
 01 1
-.names n30 n40 n41
+.names v_3_ n34 n35
 00 1
-.names n24 n41 sqrt_1_
-10 0
-.names n29 sqrt_1_ n43
-00 1
-.names n37 n39 n44
-10 1
-.names n40 n44 n45
-00 1
-.names sqrt_1_ n45 n46
-10 1
-.names n43 n46 n47
-00 1
-.names n33 sqrt_1_ n48
-00 1
-.names v_4_ n35 n49
-10 1
-.names n36 n49 n50
-00 1
-.names sqrt_1_ n50 n51
-10 1
-.names n48 n51 n52
-00 1
-.names sqrt_3_ n52 n53
+.names v_3_ n34 n36
 11 1
-.names v_3_ sqrt_1_ n54
-10 1
-.names v_2_ v_3_ n55
-11 1
-.names n35 n55 n56
+.names n35 n36 n37
 00 1
-.names sqrt_1_ n56 n57
+.names v_2_ sqrt_1_ n38
 10 1
+.names v_0_ v_1_ n39
+00 1
+.names v_2_ n39 n40
+00 1
+.names n38 n40 n41
+00 1
+.names sqrt_2_ n41 n42
+00 1
+.names n37 n42 n43
+00 1
+.names n18 n23 n44
+00 1
+.names sqrt_1_ n44 n45
+00 1
+.names v_4_ n19 n46
+11 1
+.names n20 n46 n47
+00 1
+.names sqrt_1_ n47 n48
+11 1
+.names n45 n48 n49
+00 1
+.names sqrt_3_ n49 n50
+11 1
+.names sqrt_2_ n41 n51
+11 1
+.names n50 n51 n52
+00 1
+.names n43 n52 n53
+01 1
+.names n21 n31 n54
+01 1
+.names sqrt_3_ n49 n55
+00 1
+.names n22 n28 n56
+00 1
+.names n26 n56 n57
+00 1
 .names n54 n57 n58
 00 1
-.names sqrt_2_ n58 n59
-11 1
-.names v_2_ sqrt_1_ n60
-10 1
-.names v_2_ sqrt_1_ n61
+.names n55 n58 n59
 01 1
-.names n60 n61 n62
-00 1
-.names sqrt_1_ n62 n63
-11 1
-.names v_0_ v_1_ n64
-00 1
-.names v_2_ n64 n65
-01 1
-.names n63 n65 n66
-00 1
-.names sqrt_2_ n58 n67
-00 1
-.names n59 n67 n68
-00 1
-.names n66 n68 n69
-01 1
-.names n59 n69 n70
-00 1
-.names sqrt_3_ n52 n71
-00 1
-.names n53 n71 n72
-00 1
-.names n70 n72 n73
-01 1
-.names n53 n73 n74
-00 1
-.names n47 n74 sqrt_0_
-10 0
+.names n53 n59 sqrt_0_
+01 0
 .end

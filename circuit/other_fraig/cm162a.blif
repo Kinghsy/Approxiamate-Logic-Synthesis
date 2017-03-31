@@ -1,103 +1,75 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:51 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:38 2017
 .model top
 .inputs pa pb pc pd pe pf pg ph pi pj pk pl pm pn
 .outputs pp pq pr ps po
-.names pd pe n20
+.names pd pf n20
+01 1
+.names pb n20 n21
 11 1
-.names pc n20 n21
+.names pc pd n22
 11 1
-.names pj pn n22
+.names pe n22 n23
 11 1
-.names n21 n22 n23
-11 1
-.names pd pf n24
+.names pj pn n24
 11 1
 .names n23 n24 n25
-01 1
-.names pb n25 n26
-00 1
-.names pi n21 n27
-01 1
-.names pk n27 n28
-00 1
-.names pk n27 n29
 11 1
-.names n28 n29 n30
-00 1
-.names pb n30 n31
+.names pd pf n26
+11 1
+.names n25 n26 n27
 01 1
-.names n26 n31 n32
-00 1
-.names pd pf n33
+.names pi n23 n28
 01 1
-.names n25 n33 n34
-00 1
-.names n30 n33 n35
+.names pk n28 n29
 10 1
-.names n34 n35 n36
+.names pi pk n30
 00 1
-.names n32 n36 pp
-11 0
-.names pg n25 n38
-00 1
-.names pi pk n39
-00 1
-.names n21 n39 n40
+.names n23 n30 n31
 11 1
-.names pl n40 n41
+.names n27 n31 n32
+10 1
+.names n29 n32 n33
+01 1
+.names n21 n33 pp
 00 1
-.names pl n40 n42
+.names pg n20 n35
 11 1
-.names n41 n42 n43
-00 1
-.names pg n43 n44
+.names pl n31 n36
+10 1
+.names pl n31 n37
 01 1
-.names n38 n44 n45
-00 1
-.names n33 n43 n46
+.names n27 n36 n38
+10 1
+.names n37 n38 n39
 01 1
-.names n34 n46 n47
+.names n35 n39 pq
 00 1
-.names n45 n47 pq
-11 0
-.names ph n25 n49
-00 1
-.names pl n40 n50
-01 1
-.names pm n50 n51
-00 1
-.names pm n50 n52
+.names ph n20 n41
 11 1
-.names n51 n52 n53
-00 1
-.names ph n53 n54
+.names pl n30 n42
 01 1
-.names n49 n54 n55
-00 1
-.names n33 n53 n56
-01 1
-.names n34 n56 n57
-00 1
-.names n55 n57 pr
-11 0
-.names pe n22 ps
+.names n23 n42 n43
 11 1
-.names pa n25 n60
+.names pm n43 n44
+10 1
+.names pm n37 n45
+01 1
+.names n27 n44 n46
+10 1
+.names n45 n46 n47
+01 1
+.names n41 n47 pr
 00 1
-.names pi n21 n61
-00 1
-.names pi n21 n62
+.names pe n24 ps
 11 1
-.names n61 n62 n63
+.names pa n20 n50
+11 1
+.names pi n23 n51
+10 1
+.names n28 n51 n52
 00 1
-.names pa n63 n64
-01 1
-.names n60 n64 n65
+.names n27 n52 n53
+11 1
+.names n50 n53 po
 00 1
-.names n33 n63 n66
-01 1
-.names n34 n66 n67
-00 1
-.names n65 n67 po
-11 0
 .end

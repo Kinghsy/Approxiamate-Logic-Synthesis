@@ -3,9 +3,7 @@
 ############################################
 .model top
 .inputs pp pq pa pb pc pd pe pf pg ph pi pj pk pl pm pn po
-.outputs pa1 pa0 pb0 pc1 pr pb1 pc0 ps pd0 pt pd1 pe0 pu pf0 pv pg0 pw ph0\
- px pi0 py pj0 pz pk0 pl0 pm0 pn0 po0 pp0 pq0 pr0 ps0 pt0 pu0 pv0 pw0 px0\
- py0 pz0
+.outputs pa1 pa0 pb0 pc1 pr pb1 pc0 ps pd0 pt pd1 pe0 pu pf0 pv pg0 pw ph0  px pi0 py pj0 pz pk0 pl0 pm0 pn0 po0 pp0 pq0 pr0 ps0 pt0 pu0 pv0 pw0 px0  py0 pz0
 # connect ports to nets with different names
 .names na1 pa1
 1  1

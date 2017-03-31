@@ -1,85 +1,69 @@
-# Benchmark "top" written by ABC on Tue Mar 28 02:40:50 2017
+# Benchmark "top" written by ABC on Fri Mar 31 00:53:35 2017
 .model top
 .inputs pa pb pc pd pe pf pg ph pi pj pk
 .outputs pl pm pn
 .names pj pk n15
 01 1
-.names ph pi n16
-00 1
-.names ph pi n17
-11 1
-.names n16 n17 n18
-00 1
-.names pf pg n19
+.names pd pe n16
+01 1
+.names pd pe n17
 10 1
+.names pb n16 n18
+10 1
+.names n17 n18 n19
+01 1
 .names pf pg n20
-01 1
-.names n19 n20 n21
-00 1
-.names pd pe n22
-00 1
-.names pd pe n23
-11 1
-.names n22 n23 n24
-00 1
-.names pb n24 n25
 10 1
-.names n21 n25 n26
-11 1
-.names n18 n26 n27
+.names pf pg n21
 01 1
+.names n20 n21 n22
+00 1
+.names n19 n22 n23
+11 1
+.names ph pi n24
+01 1
+.names ph pi n25
+10 1
+.names n24 n25 n26
+00 1
+.names n23 n26 n27
+11 1
 .names n15 n27 n28
 11 1
-.names n20 n25 n29
+.names n23 n24 n29
 11 1
-.names pd pe n30
+.names n19 n21 n30
+11 1
+.names pb n16 n31
+11 1
+.names pa n31 n32
+00 1
+.names n30 n32 n33
 01 1
-.names pa n30 n31
-00 1
-.names pa pb n32
-00 1
-.names n31 n32 n33
-00 1
 .names n29 n33 n34
-00 1
-.names ph pi n35
 01 1
-.names n34 n35 n36
+.names n28 n34 pl
+01 0
+.names pj pk n36
 10 1
-.names n26 n34 n37
+.names n15 n36 n37
+00 1
+.names n27 n37 pm
+11 1
+.names pb n17 n39
+11 1
+.names n25 n36 n40
+00 1
+.names n21 n24 n41
+00 1
+.names n40 n41 n42
 01 1
-.names n36 n37 n38
+.names n20 n42 n43
 00 1
-.names n28 n38 pl
-00 0
-.names pj pk n40
+.names n19 n43 n44
 10 1
-.names n15 n40 n41
+.names pc n39 n45
 00 1
-.names n27 n41 pm
-11 1
-.names n27 n40 n43
-11 1
-.names n19 n25 n44
-11 1
-.names pd pe n45
-10 1
-.names pc n45 n46
-00 1
-.names pb pc n47
-00 1
-.names n46 n47 n48
-00 1
-.names n44 n48 n49
-00 1
-.names ph pi n50
-10 1
-.names n49 n50 n51
-10 1
-.names n26 n49 n52
-01 1
-.names n51 n52 n53
-00 1
-.names n43 n53 pn
-00 0
+.names n44 n45 pn
+01 0
 .end
