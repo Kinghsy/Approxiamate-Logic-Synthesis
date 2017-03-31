@@ -4,11 +4,36 @@
 
 #include <common.h>
 #include <resource.h>
+#include <random>
+#include <ctime>
+#include <iostream>
+
 #include "../MFFC/interface.h"
 
+
 int main() {
+    std::srand(std::time(0));
     Path p = ProjectBase.sub("circuit/other_fraig");
-    BlifBooleanNet net(p / "C880.blif");
-    net.profileBySimulation(10);
+    BlifBooleanNet net(p / "C2670.blif");
+    auto i = net.inputNodeSet();
+    auto o = net.outputNodeSet();
+    auto all = net.totalNodeSet();
+    std::cout << "intputs:" << std::endl;
+    for (const auto& e : i) std::cout << e << " ";
+
+    std::cout << std::endl;
+
+    std::cout << "outputs:" << std::endl;
+    for (const auto& e : o) std::cout << e << " ";
+
+    std::cout << std::endl;
+
+    std::cout << "all:" << std::endl;
+    for (const auto& e : all) std::cout << e << " ";
+
+    std::cout << std::endl;
+
+    std::cout << net.gateCount() << std::endl;
+    //net.profileBySimulation(10);
     return 0;
 }

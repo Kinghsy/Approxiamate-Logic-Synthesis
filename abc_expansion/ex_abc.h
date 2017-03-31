@@ -19,7 +19,11 @@ public:
     std::map<std::string, std::set<std::string> > Mffc();
     int nGates();
     int empty();
-    int nAndGates();
+    void resyn2();
+    void rewrite(bool z = false);
+    void balance();
+    void refactor(bool z = false);
+
 
 
 private:

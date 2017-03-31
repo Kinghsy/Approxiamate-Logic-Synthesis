@@ -48,50 +48,50 @@ const std::vector<string> &BlifBooleanNet::topologicalSort() const {
 }
 
 void BlifBooleanNet::prepareDepth2Input(BnetNode *node) {
-    int thisDepth = attribute.depth2input.at(node->name);
-    for (int i = 0; i < node->nfo; ++i) {
-        char* name = node->fanouts[i];
-        if (attribute.depth2input.count(name)) {
-            int& currentDepth = attribute.depth2input.at(name);
-            if (currentDepth > thisDepth + 1)
-                currentDepth = thisDepth + 1;
-        } else {
-            attribute.depth2input.insert(
-                    std::make_pair(name, thisDepth + 1)
-            );
-        }
-        prepareDepth2Input(getNodeByName(name));
-    }
+//    int thisDepth = attribute.depth2input.at(node->name);
+//    for (int i = 0; i < node->nfo; ++i) {
+//        char* name = node->fanouts[i];
+//        if (attribute.depth2input.count(name)) {
+//            int& currentDepth = attribute.depth2input.at(name);
+//            if (currentDepth > thisDepth + 1)
+//                currentDepth = thisDepth + 1;
+//        } else {
+//            attribute.depth2input.insert(
+//                    std::make_pair(name, thisDepth + 1)
+//            );
+//        }
+//        prepareDepth2Input(getNodeByName(name));
+//    }
 }
 
 void BlifBooleanNet::prepareDepth2Output(BnetNode *node) {
-    int thisDepth = attribute.depth2output.at(node->name);
-    for (int i = 0; i < node->ninp; ++i) {
-        char* name = node->inputs[i];
-        if (attribute.depth2output.count(name)) {
-            int& currentDepth = attribute.depth2output.at(name);
-            if (currentDepth > thisDepth + 1)
-                currentDepth = thisDepth + 1;
-        } else {
-            attribute.depth2output.insert(
-                    std::make_pair(name, thisDepth + 1)
-            );
-        }
-        prepareDepth2Output(getNodeByName(name));
-    }
+//    int thisDepth = attribute.depth2output.at(node->name);
+//    for (int i = 0; i < node->ninp; ++i) {
+//        char* name = node->inputs[i];
+//        if (attribute.depth2output.count(name)) {
+//            int& currentDepth = attribute.depth2output.at(name);
+//            if (currentDepth > thisDepth + 1)
+//                currentDepth = thisDepth + 1;
+//        } else {
+//            attribute.depth2output.insert(
+//                    std::make_pair(name, thisDepth + 1)
+//            );
+//        }
+//        prepareDepth2Output(getNodeByName(name));
+//    }
 }
 
 void BlifBooleanNet::prepareDepths() {
-    for (int i = 0; i < net->ninputs; ++i) {
-        BnetNode* node = getNodeByName(net->inputs[i]);
-        attribute.depth2input[net->inputs[i]] = 0;
-        prepareDepth2Input(node);
-    }
-    for (int i = 0; i < net->noutputs; ++i) {
-        BnetNode* node = getNodeByName(net->outputs[i]);
-        attribute.depth2output[net->outputs[i]] = 0;
-        prepareDepth2Output(node);
-    }
+//    for (int i = 0; i < net->ninputs; ++i) {
+//        BnetNode* node = getNodeByName(net->inputs[i]);
+//        attribute.depth2input[net->inputs[i]] = 0;
+//        prepareDepth2Input(node);
+//    }
+//    for (int i = 0; i < net->noutputs; ++i) {
+//        BnetNode* node = getNodeByName(net->outputs[i]);
+//        attribute.depth2output[net->outputs[i]] = 0;
+//        prepareDepth2Output(node);
+//    }
 }
 
 std::map<BlifBooleanNet::BnetNodeID, BlifBooleanNet::FFC>
@@ -103,8 +103,8 @@ BlifBooleanNet::getFFC() const {
         ffc.nodeSet = mffc_pair.second;
         ffc.inputNode = getInputFromSet(mffc_pair.second);
         ffc.name = mffc_pair.first;
-        ffc.depth2Input = attribute.depth2input.at(ffc.name);
-        ffc.depth2Output = attribute.depth2output.at(ffc.name);
+//        ffc.depth2Input = attribute.depth2input.at(ffc.name);
+//        ffc.depth2Output = attribute.depth2output.at(ffc.name);
         ffc.totalSet = ffc.nodeSet;
         ffc.totalSet.insert(
                 ffc.inputNode.begin(),
@@ -201,23 +201,25 @@ BlifBooleanNet::getInputFromSet(
 }
 
 int BlifBooleanNet::getMinDepths2Input(const std::set<BnetNodeID> &s) const {
-    std::vector<int> v;
-    v.resize(s.size());
-    std::transform(s.begin(), s.end(), v.begin(),
-                   [this] (const BnetNodeID& nodeID) -> int  {
-                       return attribute.depth2input.at(nodeID);
-                   }
-    );
-    return *min_element(v.begin(), v.end());
+//    std::vector<int> v;
+//    v.resize(s.size());
+//    std::transform(s.begin(), s.end(), v.begin(),
+//                   [this] (const BnetNodeID& nodeID) -> int  {
+//                       return attribute.depth2input.at(nodeID);
+//                   }
+//    );
+//    return *min_element(v.begin(), v.end());
+    return -1;
 }
 
 int BlifBooleanNet::getMinDepths2Output(const std::set<BnetNodeID> &s) const {
-    std::vector<int> v;
-    v.resize(s.size());
-    std::transform(s.begin(), s.end(), v.begin(),
-                   [this] (const BnetNodeID& nodeID) -> int {
-                       return attribute.depth2output.at(nodeID);
-                   }
-    );
-    return *min_element(v.begin(), v.end());
+//    std::vector<int> v;
+//    v.resize(s.size());
+//    std::transform(s.begin(), s.end(), v.begin(),
+//                   [this] (const BnetNodeID& nodeID) -> int {
+//                       return attribute.depth2output.at(nodeID);
+//                   }
+//    );
+//    return *min_element(v.begin(), v.end());
+    return -1;
 }

@@ -13,53 +13,59 @@ using namespace boost::filesystem;
 
 int main() {
 
+    Path orig = ProjectBase.sub("circuit/other_original");
+    Path _aig = ProjectBase.sub("circuit/other_fraig");
 
-    path mcncBPath(McncPath.toString());
-    if (!is_directory(mcncBPath)) {
+    path original(orig.toString());
+    path aig(_aig.toString());
+
+    if (!is_directory(original)) {
+        std::cout << McncPath.toString() << " is not path." << std::endl;
+        return -1;
+    }
+    if (!is_directory(aig)) {
         std::cout << McncPath.toString() << " is not path." << std::endl;
         return -1;
     }
 
     ExAbc& abc = ExAbc::getInstance();
 
-//    for (directory_entry& e : directory_iterator(mcncBPath))  {
-//        if (e.path().extension() == ".blif") {
+    for (directory_entry& e : directory_iterator(original))  {
+        if (e.path().extension() == ".blif") {
 //            abc.loadBlif(e.path().string());
 //            abc.toAig();
 //            abc.writeBlif(McncAigPath / e.path().filename().string());
 //            abc.empty();
-//            abc.loadBlif(e.path().string());
-//            abc.execute("fraig");
-//            abc.writeBlif(McncFraigPath / e.path().filename().string());
+            std::cout << "Reading " << e.path().filename() << std::endl;
+            abc.loadBlif(e.path().string());
+            abc.resyn2();
+            abc.writeBlif(_aig / e.path().filename().string());
+            abc.empty();
+//            abc.loadBlif(_aig / e.path().filename().string());
 //            abc.empty();
-//        }
-//    }
+        }
+    }
 
-    for (directory_entry& e : directory_iterator(path(mcncBPath))) {
+    for (directory_entry& e : directory_iterator(original)) {
         if (e.path().extension() == ".blif") {
             std::string name = e.path().filename().string();
             std::cout << name << " : ";
-            abc.loadBlif(McncAigPath / name);
+            abc.loadBlif(orig / name);
             std::cout << abc.nGates() << " / " ;
-            abc.loadBlif(McncFraigPath / name);
+            abc.loadBlif(_aig / name);
             std::cout << abc.nGates() << " | ";
-            if (name == "s38584.1.blif" ||
-                    name == "diffeq.blif" ||
-                    name == "s298.blif" ||
-                    name == "tseng.blif" ||
-                    name == "bigkey.blif" ||
-                    name == "elliptic.blif" ||
-                    name == "clma.blif" ||
-                    name == "dsip.blif" ||
-                    name == "s38417.blif" ||
-                    name == "frisc.blif") {
-                std::cout << std::endl;
-                abc.empty();
-                continue;
-            }
-            BlifBooleanNet netAig(McncAigPath / name);
-            BlifBooleanNet netFraig(McncFraigPath / name);
-            std::cout << netAig.gateCount() << " / " <<  netFraig.gateCount() << std::endl;
+//            if (name == "") {
+//                std::cout << std::endl;
+//                abc.empty();
+//                continue;
+//            }
+            // std::cout << "Reading " << orig / name << std::endl;
+            BlifBooleanNet netOrig(orig / name);
+            // std::cout << "Reading " << _aig / name << std::endl;
+            BlifBooleanNet netAig(_aig / name);
+            std::cout << netOrig.gateCount()
+                      << " / " << netAig.gateCount();
+            std::cout << std::endl;
             abc.empty();
         }
     }

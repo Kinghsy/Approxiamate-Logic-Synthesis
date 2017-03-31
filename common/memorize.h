@@ -14,7 +14,10 @@ public:
     Memorized() {valid = false;}
 
     inline bool isValid() const {return valid;}
-    inline const T& get() const {return data;}
+    inline const T& get() const {
+        if (!valid) assert(0);
+        return data;
+    }
 
     virtual void setData(const T& d) {
         data = d;

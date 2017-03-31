@@ -96,8 +96,43 @@ int ExAbc::empty() {
     return execute("empty");
 }
 
-int ExAbc::nAndGates() {
-    return 0;
+void ExAbc::resyn2() {
+    //alias resyn2 "b; rw; rf;
+    //              b; rw; rwz;
+    //              b; rfz; rwz;
+    //              b"
+    balance();
+    rewrite();
+    refactor();
+
+    balance();
+    rewrite();
+    rewrite(true);
+
+    balance();
+    refactor(true);
+    rewrite(true);
+
+    balance();
+
+}
+
+void ExAbc::rewrite(bool z) {
+    if (z)
+        this->execute("rewrite -z");
+    else
+        this->execute("rewrite");
+}
+
+void ExAbc::balance() {
+    this->execute("balance");
+}
+
+void ExAbc::refactor(bool z) {
+    if (z)
+        this->execute("refactor -z");
+    else
+        this->execute("refactor");
 }
 
 

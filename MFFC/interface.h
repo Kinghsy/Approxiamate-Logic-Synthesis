@@ -36,11 +36,15 @@ public:
 
 private:
     struct NodeAttribute {
-        std::map<BnetNodeID, int> depth2input;
-        std::map<BnetNodeID, int> depth2output;
+        int null;
+        //std::map<BnetNodeID, int> depth2input;
+        //std::map<BnetNodeID, int> depth2output;
     }attribute;
 
-    DdManager *ddmanager;
+    mutable Memorized<DdManager*> ddmanager;
+
+    void prepareBDD() const;
+
     BnetNetwork *net;
     std::string filename;
 

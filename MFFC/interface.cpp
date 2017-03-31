@@ -38,34 +38,48 @@ string getMFFC(string infile, int minInput, int maxInput) {
 BlifBooleanNet::BlifBooleanNet(const std::string &file) {
     filename = file;
 
-    ddmanager = NULL;		/* pointer to DD manager */
     FILE *fp;
     fp = fopen(file.c_str(), "r");
     if (fp == NULL) assert(0);
+    net = NULL;
     net = Bnet_ReadNetwork(fp);
-
-    ddmanager = Cudd_Init(0, 0, CUDD_UNIQUE_SLOTS, CUDD_CACHE_SLOTS, 0);
-    if (ddmanager == NULL) exit(-2);
-    cudd_build_v2(net, &ddmanager, file.c_str(), BNET_GLOBAL_DD);
+    if (net == NULL) assert(0);
 
     assert(net->noutputs == net->npos);
     assert(net->ninputs == net->npis);
 
-    prepareDepths();
+    //prepareDepths();
 
     fclose(fp);
 }
+
+
+
+void BlifBooleanNet::prepareBDD() const{
+    if (ddmanager.isValid()) return;
+    DdManager* ddm =
+            Cudd_Init(0, 0, CUDD_UNIQUE_SLOTS, CUDD_CACHE_SLOTS, 0);
+    if (ddm == NULL) exit(-2);
+    cudd_build_v2(net, &ddm, filename.c_str(), BNET_GLOBAL_DD);
+    ddmanager.setData(ddm);
+}
+
 
 int BlifBooleanNet::nInputs() const {
     return net->ninputs;
 }
 
 BlifBooleanNet::~BlifBooleanNet() {
-    Bnet_FreeNetwork_Bdd(net, ddmanager);
-    Cudd_Quit(ddmanager);
+    if (ddmanager.isValid()) {
+        Bnet_FreeNetwork_Bdd(net, ddmanager.get());
+        Cudd_Quit(ddmanager.get());
+    } else {
+        Bnet_FreeNetwork(net);
+    }
 }
 
 TruthTable BlifBooleanNet::truthTable() const {
+    prepareBDD();
     BnetNode *auxnd;
     st_lookup(net->hash,net->outputs[0],&auxnd);
     DdNode *ddnode_pt = auxnd->dd;
@@ -78,7 +92,7 @@ TruthTable BlifBooleanNet::truthTable() const {
     for (ulli i = 0; i < max ; ++i) {
         getBits(i, ivec, nInputs);
         int n =
-                (Cudd_ReadOne(ddmanager) == Cudd_Eval(ddmanager, ddnode_pt, ivec));
+                (Cudd_ReadOne(ddmanager.get()) == Cudd_Eval(ddmanager.get(), ddnode_pt, ivec));
         out.push_back(n);
     }
     delete[] ivec;
@@ -94,13 +108,14 @@ TruthTable BlifBooleanNet::truthTable() const {
 
 int BlifBooleanNet::evalAt(const std::vector<int> &v,
                            const std::string& name) const {
+    prepareBDD();
     if (v.size() != net->ninputs)
         assert(0);
     BnetNode *auxnd;
     st_lookup(net->hash,net->outputs[0],&auxnd);
     DdNode *ddnode_pt = auxnd->dd;
-    int n = (Cudd_ReadOne(ddmanager)
-             == Cudd_Eval(ddmanager, ddnode_pt, (int*)(v.data()) ));
+    int n = (Cudd_ReadOne(ddmanager.get())
+             == Cudd_Eval(ddmanager.get(), ddnode_pt, (int*)(v.data()) ));
     return n;
 }
 
@@ -209,6 +224,7 @@ const set<string> & BlifBooleanNet::totalNodeSet() const {
 }
 
 std::vector<int> BlifBooleanNet::evalAllOutputAt(const std::vector<int> &v) const {
+    prepareBDD();
     if (v.size() != net->ninputs)
         assert(0);
     std::vector<int> out;
@@ -216,8 +232,8 @@ std::vector<int> BlifBooleanNet::evalAllOutputAt(const std::vector<int> &v) cons
         BnetNode *auxnd;
         st_lookup(net->hash, net->outputs[i], &auxnd);
         DdNode *ddnode_pt = auxnd->dd;
-        int n = (Cudd_ReadOne(ddmanager)
-                 == Cudd_Eval(ddmanager, ddnode_pt, (int *) (v.data())));
+        int n = (Cudd_ReadOne(ddmanager.get())
+                 == Cudd_Eval(ddmanager.get(), ddnode_pt, (int *) (v.data())));
         out.push_back(n);
     }
     return out;
@@ -336,6 +352,7 @@ void BlifBooleanNet::exportGraphVizwithHighlight(
 BnetNode *BlifBooleanNet::getNodeByName(const std::string &name) const{
     BnetNode* n = nullptr;
     st_lookup(net->hash, (void*)name.c_str(), &n);
+    if (n == nullptr) assert(0);
     return n;
 }
 
@@ -415,6 +432,5 @@ CircuitProfile BlifBooleanNet::profile(int samples) {
     }
     return p;
 }
-
 
 
