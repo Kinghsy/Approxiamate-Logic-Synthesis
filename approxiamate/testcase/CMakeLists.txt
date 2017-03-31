@@ -42,3 +42,15 @@ target_link_libraries(SearchMethodCoreTest
         dddmp cudd mtr st util epd
         dl readline termcap pthread rt
         readline termcap pthread)
+
+add_executable(PredecompTest predecomp_test.cpp)
+target_link_libraries(PredecompTest
+        gtest gtest_main)
+target_link_libraries(PredecompTest
+        mffc approx blif_replace common
+        ${Boost_LIBRARIES} blif profile
+        dddmp cudd mtr st util epd
+        dl readline termcap pthread rt
+        readline termcap pthread
+        precomp_lib
+)
