@@ -56,11 +56,11 @@ std::tuple<std::vector<uint8_t>, std::vector<uint16_t >, std::vector<uint32_t > 
         if (lut5[i] > 0)
             decomp_lut5.push_back(i);
     }
-    std::cout << std::endl;
-    std::cout << "lut3.size():" << decomp_lut3.size() << std::endl;
-    std::cout << "lut4.size():" << decomp_lut4.size() << std::endl;
-    std::cout << "lut5.size():" << decomp_lut5.size() << std::endl;
-    //delete[] lut3;
+    //std::cout << std::endl;
+    //std::cout << "lut3.size():" << decomp_lut3.size() << std::endl;
+    //std::cout << "lut4.size():" << decomp_lut4.size() << std::endl;
+    //std::cout << "lut5.size():" << decomp_lut5.size() << std::endl;
+    delete[] lut3;
     delete[] lut4;
     delete[] lut5;
 
