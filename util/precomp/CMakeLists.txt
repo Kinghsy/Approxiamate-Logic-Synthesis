@@ -25,5 +25,5 @@ set(Source_Files
 
 add_library(precomp_lib ${Source_Files})
 
-target_compile_options(precomp BEFORE PRIVATE -Og)
+target_compile_options(precomp BEFORE PRIVATE -O0)
 target_compile_options(precomp_rel BEFORE PRIVATE -O0)

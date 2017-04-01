@@ -24,22 +24,13 @@ using std::cout;
 using std::endl;
 using std::bitset;
 
-extern void do3inputs(uint8_t* lut3);
-extern void do3inputs2(uint8_t* lut3);
-extern void do3inputs3(uint8_t* lut3);
-
 int main() {
-    std::cout << std::bitset<32>(expansionMask(5, 5, 3)) << std::endl;
+    std::vector<uint16_t> t = selectWithout(4, 2);
+    std::cout << std::bitset<32>(std::bitset<32>("101010")) << std::endl;
 
-    cout << bitset<32>(fillWith(5, 3, bin2int({1, 0}))) << endl;
-
-    cout << bitset<32>(expand<5>(1,
-                                 bin2int({1, 0}),
-                                 bin2int({0, 0, 0, 0, 1}))) << endl;
-
-    cout << 65536ll * 65536ll << endl;
-
-    cout << sizeof(65536ll) << endl;
+    for (auto x : t) {
+        cout << std::bitset<4>(x) << endl;
+    }
 
 //    do3input(lut3);
 //    do3inputs2(lut3_2);
