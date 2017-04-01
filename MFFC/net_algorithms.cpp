@@ -209,6 +209,7 @@ int BlifBooleanNet::getMinDepths2Input(const std::set<BnetNodeID> &s) const {
 //                   }
 //    );
 //    return *min_element(v.begin(), v.end());
+    assert(0);
     return -1;
 }
 
@@ -221,5 +222,6 @@ int BlifBooleanNet::getMinDepths2Output(const std::set<BnetNodeID> &s) const {
 //                   }
 //    );
 //    return *min_element(v.begin(), v.end());
+    assert(0);
     return -1;
 }

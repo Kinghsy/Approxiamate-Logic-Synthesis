@@ -82,13 +82,13 @@ int ExAbc::nGates() {
 
     //Abc_Print( 1," i/o =%5d/%5d", Abc_NtkPiNum(pNtk), Abc_NtkPoNum(pNtk) );
     if ( Abc_NtkIsNetlist(pNtk) ) {
-        return Abc_NtkNodeNum(pNtk) - nSingles;
+        return Abc_NtkNodeNum(pNtk);
     }
     else if ( Abc_NtkIsStrash(pNtk) ) {
         return Abc_NtkNodeNum(pNtk);
     }
     else {
-        return Abc_NtkNodeNum(pNtk) - nSingles;
+        return Abc_NtkNodeNum(pNtk);
     }
 }
 
