@@ -14,16 +14,16 @@ void do4input(uint8_t* lut4,
               const uint8_t* lut3, const int nLut3) {
     // Decompose as 1 vs 3
     for (int i = 0; i < nLUT1; ++i) {
-        uint32_t left = lut1[i];
+        uint64_t left = lut1[i];
         for (int j = 0; j < nLut3; ++j) {
-            uint32_t right = lut3[j];
-            vector<uint32_t> llist{
+            uint64_t right = lut3[j];
+            vector<uint64_t> llist{
                     expand<4>(1, left, bin2int({1, 0, 0, 0})),
                     expand<4>(1, left, bin2int({0, 1, 0, 0})),
                     expand<4>(1, left, bin2int({0, 0, 1, 0})),
                     expand<4>(1, left, bin2int({0, 0, 0, 1})),
             };
-            vector<uint32_t> rlist{
+            vector<uint64_t> rlist{
                     expand<4>(3, right, bin2int({0, 1, 1, 1})),
                     expand<4>(3, right, bin2int({1, 0, 1, 1})),
                     expand<4>(3, right, bin2int({1, 1, 0, 1})),
@@ -51,7 +51,7 @@ void do4input(uint8_t* lut4,
         uint16_t left = lut2[i];
         for (int j = 0; j < nLUT2; ++j) {
             uint16_t right = lut2[j];
-            vector<uint32_t> llist{
+            vector<uint64_t> llist{
                     expand<4>(2, left, bin2int({1, 0, 0, 1})),
                     expand<4>(2, left, bin2int({1, 0, 1, 0})),
                     expand<4>(2, left, bin2int({1, 1, 0, 0})),
@@ -59,7 +59,7 @@ void do4input(uint8_t* lut4,
                     expand<4>(2, left, bin2int({0, 1, 1, 0})),
                     expand<4>(2, left, bin2int({0, 0, 1, 1})),
             };
-            vector<uint32_t> rlist{
+            vector<uint64_t> rlist{
                     expand<4>(2, right, bin2int({0, 1, 1, 0})),
                     expand<4>(2, right, bin2int({0, 1, 0, 1})),
                     expand<4>(2, right, bin2int({0, 0, 1, 1})),

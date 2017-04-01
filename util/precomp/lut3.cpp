@@ -136,12 +136,12 @@ void do3input(uint8_t* lut3) {
         uint8_t left= lut1[i];
         for (int j = 0; j < nLUT2; ++j) {
             uint8_t right = lut2[j];
-            vector<uint32_t> llist{
+            vector<uint64_t> llist{
                     expand<3>(1, left, bin2int({1, 0, 0})),
                     expand<3>(1, left, bin2int({0, 1, 0})),
                     expand<3>(1, left, bin2int({0, 0, 1})),
             };
-            vector<uint32_t> rlist{
+            vector<uint64_t> rlist{
                     expand<3>(2, right, bin2int({0, 1, 1})),
                     expand<3>(2, right, bin2int({1, 0, 1})),
                     expand<3>(2, right, bin2int({1, 1, 0})),

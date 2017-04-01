@@ -9,11 +9,26 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <unordered_set>
 
 using std::cout;
 using std::endl;
 using std::shared_ptr;
 using std::vector;
+using std::unordered_set;
+
+void do3input(uint8_t* lut3);
+void do4input(uint8_t* lut4,
+              const uint8_t* lut3, const int nLut3);
+
+void do5input(uint8_t* lut5,
+              const uint16_t* lut4, const int nLut4,
+              const uint8_t* lut3, const int nLut3);
+
+std::unordered_set<uint64_t>
+do6input(const uint32_t *lut5, const int nLut5,
+         const uint16_t *lut4, const int nLut4,
+         const uint8_t *lut3, const int nLut3);
 
 int main() {
     uint8_t* lut3 = new uint8_t[256];
@@ -52,6 +67,13 @@ int main() {
     }
 
     cout << "Total " << decomp_lut5.size() << " decomposable LUT5s." << endl;
+
+    auto lut6 = do6input(
+            decomp_lut5.data(), decomp_lut5.size(),
+            decomp_lut4.data(), decomp_lut4.size(),
+            decomp_lut3.data(), decomp_lut3.size());
+
+    cout << "Total " << lut6.size() << " decomposable LUT6s" << endl;
 
     return 0;
 }
