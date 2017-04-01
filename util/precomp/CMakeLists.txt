@@ -12,5 +12,18 @@ add_executable(
         gen.cpp lut3.cpp lut4.cpp lut5.cpp lut6.cpp
 )
 
+set(Source_Files
+        common.h
+        gen.cpp
+        lut3.cpp
+        lut4.cpp
+        lut5.cpp
+        main.cpp
+        interface.h
+        interface.cpp
+)
+
+add_library(precomp_lib ${Source_Files})
+
 target_compile_options(precomp BEFORE PRIVATE -Og)
-target_compile_options(precomp_rel BEFORE PRIVATE -O2)
+target_compile_options(precomp_rel BEFORE PRIVATE -O0)

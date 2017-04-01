@@ -3,8 +3,6 @@
 //
 
 #include "common.h"
-#include "lut3.h"
-#include "lut4.h"
 #include <memory>
 #include <iostream>
 #include <fstream>
@@ -66,6 +64,10 @@ int main() {
             decomp_lut5.push_back(i);
     }
 
+    delete[] lut3;
+    delete[] lut4;
+    delete[] lut5;
+    
     cout << "Total " << decomp_lut5.size() << " decomposable LUT5s." << endl;
 
     auto lut6 = do6input(

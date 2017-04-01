@@ -331,7 +331,7 @@ TEST(SEARCH_METHOD_CORE_TEST, TC_RANDOM_CASE_2) {
 
     srand(unsigned(time(NULL)));
     int inputSize=3;
-    int truTab[]={1, 1, 1, 1, 1, s1, 1, 1};
+    int truTab[]={1, 1, 1, 1, 1, 1, 1, 1};
     int truTabSize=(1<<inputSize);
     std::vector<int> v;
     for (int i = 0; i < truTabSize; ++i)
