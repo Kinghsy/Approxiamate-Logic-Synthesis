@@ -5,3 +5,7 @@ set(SOURCE_LIB
         )
 
 add_library(blif ${SOURCE_LIB})
+
+target_compile_options(blif BEFORE
+        PRIVATE -O3
+)
