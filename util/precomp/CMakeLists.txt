@@ -1,19 +1,21 @@
 add_executable(
         precomp
-        main.cpp common.h
-        lut3.cpp lut3.h
-        lut4.cpp lut4.h
+        main.cpp
+        common.cpp common.h
+        lut3.cpp
+        lut4.cpp
+        lut5.cpp
         lut5.cpp lut5.h
         lut6.cpp lut6.h
 )
 
 add_executable(
         precomp_rel
-        gen.cpp lut3.cpp lut4.cpp lut5.cpp lut6.cpp
+        gen.cpp do_lut.cpp do_lut.h common.cpp
 )
 
 set(Source_Files
-        common.h
+        common.cpp common.h
         gen.cpp
         lut3.cpp
         lut4.cpp
