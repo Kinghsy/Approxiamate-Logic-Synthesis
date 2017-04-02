@@ -94,18 +94,40 @@ int main() {
 
     std::cout << cofactor<2>(fun2("0011"), 1 , true) << endl;
 
+//    for (const auto& pair : lut6) {
+//        auto function = pair.first;
+//        auto mask = pair.second.maskDiscard;
+//        for (int i = 0; i < mask.size(); ++i) {
+//            if (mask.test(i)) {
+//                assert(cofactor<6>(function, i, true) == cofactor<6>(function, i, false));
+//            } else {
+//                assert(cofactor<6>(function, i, true) != cofactor<6>(function, i, false));
+//            }
+//        }
+//    }
+//
+    std::cout << "begin" << endl;
+    fun6 f("00101001000101001010010010100100101001001010010010100100101001");
+    fun6 min;
+    size_t diffmin = (f ^ min).count();
     for (const auto& pair : lut6) {
-        auto function = pair.first;
-        auto mask = pair.second.maskDiscard;
-        for (int i = 0; i < mask.size(); ++i) {
-            if (mask.test(i)) {
-                assert(cofactor<6>(function, i, true) == cofactor<6>(function, i, false));
-            } else {
-                assert(cofactor<6>(function, i, true) != cofactor<6>(function, i, false));
-            }
+        const auto& pf = pair.first;
+        size_t d = (pf ^ f).count();
+        if (d < diffmin) {
+            diffmin = d;
+            min = pf;
         }
     }
-
+    std::cout << "diff = " << diffmin << std::endl;
+    std::cout << f << std::endl;
+    std::cout << min << std::endl;
+    std::cout << "Other solutions" << std::endl;
+    for (const auto& pair : lut6) {
+        const auto& pf = pair.first;
+        size_t d = (pf ^ f).count();
+        if (d == diffmin && pf != min)
+            std::cout << pf << endl;
+    }
 
     return 0;
 }
