@@ -57,11 +57,13 @@ BlifBooleanNet::BlifBooleanNet(const std::string &file) {
 
 void BlifBooleanNet::prepareBDD() const{
     if (ddmanager.isValid()) return;
+    std::cout << "Building BDD... This could take a while." << std::endl;
     DdManager* ddm =
             Cudd_Init(0, 0, CUDD_UNIQUE_SLOTS, CUDD_CACHE_SLOTS, 0);
     if (ddm == NULL) exit(-2);
     cudd_build_v2(net, &ddm, filename.c_str(), BNET_GLOBAL_DD);
     ddmanager.setData(ddm);
+    std::cout << "Done! BDD build complete." << std::endl;
 }
 
 
@@ -193,12 +195,16 @@ const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::internalNodeSet() const {
         return internalNodes.get();
     std::set<std::string> s;
     BnetNode *node = net->nodes;
+    std::set<std::string> in(this->inputNodeSet().begin(),
+                             this->inputNodeSet().end());
+    std::set<std::string> out(this->outputNodeSet().begin(),
+                              this->outputNodeSet().end());
     while (node != nullptr) {
-        if (node->type == BNET_INPUT_NODE) {
+        if (in.count(node->name) != 0) {
             node = node->next;
             continue;
         }
-        if (node->type == BNET_OUTPUT_NODE) {
+        if (out.count(node->name) != 0) {
             node = node->next;
             continue;
         }

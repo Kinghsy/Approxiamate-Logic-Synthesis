@@ -11,21 +11,24 @@
 link_directories(${CUDD_LINK_DIR})
 
 set(SOURCE_FILES
-        main.cpp)
+        main.cpp verify_simulator.cpp)
 
 add_executable(main ${SOURCE_FILES})
 
 add_executable(playground playground.cpp)
 
-target_link_libraries(main
+add_executable(verify_simulator verify_simulator.cpp)
+
+set(ALL_LIBS
         policy mffc blif profile
         approx blif_replace common
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})
 
-target_link_libraries(playground
-        policy mffc blif profile
-        approx blif_replace common
-        ${Boost_LIBRARIES}
-        ${CUDD_LINK_LIB})
+target_link_libraries(main ${ALL_LIBS})
+
+target_link_libraries(playground ${ALL_LIBS})
+
+target_link_libraries(verify_simulator ${ALL_LIBS})
+
 #add_subdirectory(testcase)

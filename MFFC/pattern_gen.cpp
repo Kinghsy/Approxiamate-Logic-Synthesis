@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include "pattern_gen.h"
+#include <urandom.h>
 
 FullPatternGenerator::FullPatternGenerator(int nInputs) {
     assert(nInputs > 0);
@@ -51,11 +52,7 @@ int InfiniteRandomPatternGenerator::nInputs() {
 
 std::vector<int> InfiniteRandomPatternGenerator::generate() {
     assert(!this->hasEnded());
-    std::vector<int> v(inputSize, 0);
-    for (int j = 0; j < v.size(); ++j) {
-        v.at(j) = std::rand() & 1;
-    }
-    return v;
+    return Random::randomBitVector(inputSize);
 }
 
 bool InfiniteRandomPatternGenerator::hasEnded() const {

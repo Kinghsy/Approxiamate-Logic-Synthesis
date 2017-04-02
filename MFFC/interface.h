@@ -109,6 +109,9 @@ public:
                                      const std::string color) const;
 
     void exportToCpp(const std::string& fname) const;
+
+    void verifySimulator(int samples);
+
     CircuitProfile profileBySimulation(int samples);
 
     ~BlifBooleanNet();
