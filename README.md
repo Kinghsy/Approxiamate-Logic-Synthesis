@@ -1,2 +1,2 @@
-# UMJI-VE482
-VE482 Operating Systems @ SJTU-UM Joint Institutue 
+# Approxiamate Logic Synthesis
+An inovative approach to cut down chip size by approximating the original circuit.
