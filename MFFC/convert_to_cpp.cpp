@@ -108,6 +108,37 @@ static string getFunctionString(const string& i1,
     }
 }
 
+static string getFunctionString(const string& i,
+                                BnetNode* node) {
+    std::bitset<2> truthTable(0);
+    BnetTabline* f = node->f;
+    assert(f != nullptr);
+    while (f != nullptr) {
+        string line = f->values;
+        assert(line.size() == 1);
+        if (line == "0")
+            truthTable[0] = 1;
+        else if (line == "1")
+            truthTable[1] = 1;
+        else if (line == "-")
+            truthTable[0] = truthTable [1] = 1;
+        else {
+            std::cerr << "line = " << line << std::endl;
+            assert(0);
+        }
+        f = f->next;
+    }
+    if (node->polarity == 1) truthTable.flip();
+    switch (truthTable.to_ulong()) {
+        case 0x0: return "false";
+        case 0x3: return "true";
+        case 0x1: return i;
+        case 0x2: return notG(i);
+        default:
+            assert(0);
+    }
+}
+
 void BlifBooleanNet::exportToCpp(const std::string &fname) const {
     auto topSort = this->topologicalSort();
     auto inputs = this->inputNodeSet();
@@ -159,6 +190,19 @@ void BlifBooleanNet::exportToCpp(const std::string &fname) const {
     for (const auto& node : topSort) {
         BnetNode* n = getNodeByName(node);
         if (n->type == BNET_INPUT_NODE) continue;
+        if (n->type == BNET_CONSTANT_NODE) {
+            if (n->polarity == 1) {
+                ofile << node << " = " << "false;\n";
+            } else {
+                ofile << node << " = " << "true;\n";
+            }
+            continue;
+        }
+        if (n->ninp == 1) {
+            std::string i = n->inputs[0];
+            ofile << node << " = " << getFunctionString(i, n) << ";\n";
+            continue;
+        }
         assert(n->ninp == 2);
         std::string i1 = n->inputs[0];
         std::string i2 = n->inputs[1];

@@ -4,7 +4,7 @@ add_executable(test_common
 add_library(common
         truth_table.cpp truth_table.h
         resource.cpp resource.h
-        )
+        urandom.cpp urandom.h)
 
 add_executable(template_pseudo
         dummy.cpp
