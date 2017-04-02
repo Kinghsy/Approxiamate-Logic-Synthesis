@@ -13,8 +13,8 @@
 int main() {
     Path p = ProjectBase.sub("circuit/other_fraig");
     BlifBooleanNet net(p / "comp.blif");
-    auto i = net.inputNodeSet();
-    auto o = net.outputNodeSet();
+    auto i = net.inputNodeList();
+    auto o = net.outputNodeList();
     auto all = net.totalNodeSet();
     std::cout << "intputs:" << std::endl;
     for (const auto& e : i) std::cout << e << " ";
@@ -33,7 +33,7 @@ int main() {
 
     std::cout << net.gateCount() << std::endl;
 
-    net.verifySimulator(100000);
+    net.verifySimulator(10000);
 
     return 0;
 }

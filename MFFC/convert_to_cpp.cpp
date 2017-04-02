@@ -141,8 +141,8 @@ static string getFunctionString(const string& i,
 
 void BlifBooleanNet::exportToCpp(const std::string &fname) const {
     auto topSort = this->topologicalSort();
-    auto inputs = this->inputNodeSet();
-    auto outputs = this->outputNodeSet();
+    auto inputs = this->inputNodeList();
+    auto outputs = this->outputNodeList();
     auto internalSet = this->internalNodeSet();
     std::vector<string> internals(internalSet.begin(), internalSet.end());
 
@@ -164,7 +164,7 @@ void BlifBooleanNet::exportToCpp(const std::string &fname) const {
     ofile << "#include <vector>\n";
     ofile << "#include <string>\n";
 
-    ofile << "#define TYPE char\n";
+    ofile << "#define TYPE int\n";
 
     ofile << "extern \"C\" {\n"
           << "void circuit(const TYPE input[], TYPE output[], TYPE node[]);\n"
@@ -177,37 +177,44 @@ void BlifBooleanNet::exportToCpp(const std::string &fname) const {
     ofile << "{\n";
     for (const auto& nodeName : inputs) {
         const auto& aliasName = inputAlias.at(nodeName);
-        ofile << "const TYPE& " << nodeName << " = " << aliasName << ";\n";
+        ofile << "\tconst TYPE& " << nodeName << " = " << aliasName << ";\n";
     }
     for (const auto& nodeName : outputs) {
         const auto& aliasName = outputAlias.at(nodeName);
-        ofile << "TYPE& " << nodeName << " = " << aliasName << ";\n";
+        ofile << "\tTYPE& " << nodeName << " = " << aliasName << ";\n";
     }
     for (const auto& nodeName : internals) {
         const auto& aliasName = internalAlias.at(nodeName);
-        ofile << "TYPE& " << nodeName << " = " << aliasName << ";\n";
+        ofile << "\tTYPE& " << nodeName << " = " << aliasName << ";\n";
     }
     for (const auto& node : topSort) {
         BnetNode* n = getNodeByName(node);
         if (n->type == BNET_INPUT_NODE) continue;
         if (n->type == BNET_CONSTANT_NODE) {
             if (n->polarity == 1) {
-                ofile << node << " = " << "false;\n";
+                ofile << "\t" <<  node << " = " << "false;\n";
             } else {
-                ofile << node << " = " << "true;\n";
+                ofile << "\t" << node << " = " << "true;\n";
             }
             continue;
         }
         if (n->ninp == 1) {
             std::string i = n->inputs[0];
-            ofile << node << " = " << getFunctionString(i, n) << ";\n";
+            ofile << "\t" << node << " = " << getFunctionString(i, n) << ";\n";
             continue;
         }
         assert(n->ninp == 2);
         std::string i1 = n->inputs[0];
         std::string i2 = n->inputs[1];
-        ofile << node << " = " << getFunctionString(i1, i2, n) << ";\n";
+        ofile << "\t" << node << " = " << getFunctionString(i1, i2, n) << ";\n";
     }
+
+    // Normalize the result.
+    ofile << "\tfor (int i = 0; i < " << nOutputs << "; ++i)\n";
+    ofile << "\t\toutput[i] &= 0x01;\n";
+
+    ofile << "\tfor (int i = 0; i < " << nInternals << "; ++i)\n";
+    ofile << "\t\tnode[i] &= 0x01;\n";
 
 //    for (const auto& node : topSort) {
 //        if (inputs.count(node) != 0) continue;

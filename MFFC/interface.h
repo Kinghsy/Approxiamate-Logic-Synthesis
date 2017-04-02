@@ -34,6 +34,22 @@ public:
         std::set<BnetNodeID> totalSet;
     };
 
+    struct SimulationResult {
+
+        size_t nSamples;
+
+        std::vector<std::vector<int> > inputResult;
+        std::vector<std::vector<int> > outputResult;
+        std::vector<std::vector<int> > internalResult;
+
+        std::vector<std::string> inputName;
+        std::vector<std::string> outputName;
+        std::vector<std::string> internalName;
+
+        SimulationResult(const BlifBooleanNet& net,
+                         size_t nSamples);
+    };
+
 private:
     struct NodeAttribute {
         int null;
@@ -51,7 +67,9 @@ private:
     mutable Memorized<int> nNode;
     mutable Memorized<int> nGates;
     mutable Memorized<std::vector<BnetNodeID> > inputNodes;
+    mutable Memorized<std::set<BnetNodeID> > inputNodesSet;
     mutable Memorized<std::vector<BnetNodeID> > outputNodes;
+    mutable Memorized<std::set<BnetNodeID> > outputNodesSet;
     mutable Memorized<std::set<BnetNodeID> > totalNodes;
     mutable Memorized<std::set<BnetNodeID> > internalNodes;
     mutable Memorized<std::vector<BnetNodeID> > topSortedNodes;
@@ -78,9 +96,11 @@ public:
     int nodeCount() const;
     int gateCount() const;
 
-    // Note inputs and out put nodes are ORDERED!!
-    const std::vector<BnetNodeID> & inputNodeSet() const;
-    const std::vector<BnetNodeID> & outputNodeSet() const;
+    // Note inputs and output lists, vecs are not! are ORDERED!!
+    const std::set<BnetNodeID> & inputNodeSet() const;
+    const std::vector<BnetNodeID> & inputNodeList() const;
+    const std::set<BnetNodeID> & outputNodeSet() const;
+    const std::vector<BnetNodeID> & outputNodeList() const;
     const std::set<BnetNodeID> & internalNodeSet() const;
     const std::set<BnetNodeID> & totalNodeSet() const;
 
@@ -112,7 +132,7 @@ public:
 
     void verifySimulator(int samples);
 
-    CircuitProfile profileBySimulation(int samples);
+    SimulationResult profileBySimulation(int samples);
 
     ~BlifBooleanNet();
 };

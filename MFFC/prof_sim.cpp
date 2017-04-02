@@ -9,7 +9,25 @@
 #include "pattern_gen.h"
 
 
-CircuitProfile BlifBooleanNet::profileBySimulation(int samples) {
+BlifBooleanNet::SimulationResult::SimulationResult(
+        const BlifBooleanNet &net, size_t nSamples) {
+    size_t nInputs = net.nInputs();
+    size_t nOutputs = net.nOutputs();
+    size_t nInternals = net.internalNodeSet().size();
+
+    this->inputResult.resize(nSamples);
+    this->outputResult.resize(nSamples);
+    this->internalResult.resize(nSamples);
+
+    for (auto& v : inputResult) v.resize(nInputs);
+    for (auto& v : outputResult) v.resize(nOutputs);
+    for (auto& v : internalResult) v.resize(nInternals);
+
+    this->nSamples = nSamples;
+}
+
+BlifBooleanNet::SimulationResult
+BlifBooleanNet::profileBySimulation(int samples) {
     std::string library = Temp / "circuit.so";
     std::string source = Temp / "circuit.cpp";
 
@@ -24,9 +42,9 @@ CircuitProfile BlifBooleanNet::profileBySimulation(int samples) {
 
     assert(libhandle != nullptr);
 
-    typedef void (*CircuitFun)(const char input[],
-                               char output[],
-                               char node[]);
+    typedef void (*CircuitFun)(const int input[],
+                               int output[],
+                               int node[]);
     typedef std::vector<std::string> (*ConstVectorFun)();
 
     std::cout << "Accessing symbols... ";
@@ -46,28 +64,31 @@ CircuitProfile BlifBooleanNet::profileBySimulation(int samples) {
 
     InfiniteRandomPatternGenerator g(this->nInputs());
 
-    for (int j = 0; j < 2000000; j++) {
-        std::vector<int> p = g.generate();
-        std::vector<char> pat(p.begin(), p.end());
+    BlifBooleanNet::SimulationResult result(*this, samples);
 
-        auto ret1 = this->evalAllOutputAt(p);
-        std::vector<char> output;
-        std::vector<char> nodes;
-        nodes.resize(this->internalNodeSet().size());
-        output.resize(this->nOutputs());
+    result.inputName = inputNode();
+    result.outputName = outputNode();
+    result.internalName = internalNode();
 
-        circuit(pat.data(), output.data(), nodes.data());
+    for (int j = 0; j < samples; j++) {
+        auto& inputVec = result.inputResult[j];
+        inputVec = g.generate();
 
-        for (auto& e : output) e = e & 0x1;
+        auto& outputVec = result.outputResult[j];
+        auto& internalVec = result.internalResult[j];
 
-        std::vector<int> intOut(output.begin(), output.end());
+        assert(inputVec.size() == result.inputName.size());
+        assert(outputVec.size() == result.outputName.size());
+        assert(internalVec.size() == result.internalName.size());
 
-        assert(ret1 == intOut);
+        circuit(inputVec.data(), outputVec.data(), internalVec.data());
     }
 
     std::cout << "Done." << std::endl;
 
     dlclose(libhandle);
+
+    return result;
 }
 
 void BlifBooleanNet::verifySimulator(int samples) {
@@ -85,9 +106,9 @@ void BlifBooleanNet::verifySimulator(int samples) {
 
     assert(libhandle != nullptr);
 
-    typedef void (*CircuitFun)(const char input[],
-                               char output[],
-                               char node[]);
+    typedef void (*CircuitFun)(const int input[],
+                               int output[],
+                               int node[]);
     typedef std::vector<std::string> (*ConstVectorFun)();
 
     std::cout << "Accessing symbols... ";
@@ -109,21 +130,16 @@ void BlifBooleanNet::verifySimulator(int samples) {
 
     for (int j = 0; j < samples; j++) {
         std::vector<int> p = g.generate();
-        std::vector<char> pat(p.begin(), p.end());
 
         auto ret1 = this->evalAllOutputAt(p);
-        std::vector<char> output;
-        std::vector<char> nodes;
+        std::vector<int> output;
+        std::vector<int> nodes;
         nodes.resize(this->internalNodeSet().size());
         output.resize(this->nOutputs());
 
-        circuit(pat.data(), output.data(), nodes.data());
+        circuit(p.data(), output.data(), nodes.data());
 
-        for (auto& e : output) e = e & 0x1;
-
-        std::vector<int> intOut(output.begin(), output.end());
-
-        assert(ret1 == intOut);
+        assert(ret1 == output);
     }
 
     std::cout << "Done." << std::endl;
