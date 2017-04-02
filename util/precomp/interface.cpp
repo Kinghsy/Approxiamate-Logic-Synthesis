@@ -15,6 +15,13 @@ using std::shared_ptr;
 using std::vector;
 using std::tuple;
 
+void do3input(uint8_t* lut3);
+void do4input(uint8_t* lut4,
+              const uint8_t* lut3, const int nLut3);
+
+void do5input(uint8_t* lut5,
+              const uint16_t* lut4, const int nLut4,
+              const uint8_t* lut3, const int nLut3);
 
 std::tuple<std::vector<uint8_t>, std::vector<uint16_t >, std::vector<uint32_t > > preDecomp() {
     uint8_t* lut3 = new uint8_t[256];
