@@ -1,12 +1,7 @@
 add_executable(
         precomp
         main.cpp
-        common.cpp common.h
-        lut3.cpp
-        lut4.cpp
-        lut5.cpp
-        lut5.cpp lut5.h
-        lut6.cpp lut6.h
+        common.cpp do_lut.cpp
 )
 
 add_executable(

@@ -53,28 +53,28 @@ int main() {
 
     cout << transfer<10, 4>(std::bitset<4>("1001"), std::bitset<10>("0100101100")) << endl;
 
-    for (const auto& e : lut1Rst) {
-        cout << "=== === === ===" << endl;
-        cout << "Function: " << e.first << endl;
-        cout << "LeftFun: " << e.second.leftFun << endl;
-        cout << "RightFun: " << e.second.rightFun << endl;
-        cout << "CombineFun: " << e.second.combine << endl;
-        cout << "MaskLeft: " << e.second.maskLeft << endl;
-        cout << "MaskRight: " << e.second.maskRight << endl;
-        cout << "MaskDiscard:" << e.second.maskDiscard << endl;
-    }
-
-    cout << endl << "Count: " << lut2Rst.size() << endl;
-    for (const auto& e : lut2Rst) {
-        cout << "=== === === ===" << endl;
-        cout << "Function: " << e.first << endl;
-        cout << "LeftFun: " << e.second.leftFun << endl;
-        cout << "RightFun: " << e.second.rightFun << endl;
-        cout << "CombineFun: " << e.second.combine << endl;
-        cout << "MaskLeft: " << e.second.maskLeft << endl;
-        cout << "MaskRight: " << e.second.maskRight << endl;
-        cout << "MaskDiscard:" << e.second.maskDiscard << endl;
-    }
+//    for (const auto& e : lut1Rst) {
+//        cout << "=== === === ===" << endl;
+//        cout << "Function: " << e.first << endl;
+//        cout << "LeftFun: " << e.second.leftFun << endl;
+//        cout << "RightFun: " << e.second.rightFun << endl;
+//        cout << "CombineFun: " << e.second.combine << endl;
+//        cout << "MaskLeft: " << e.second.maskLeft << endl;
+//        cout << "MaskRight: " << e.second.maskRight << endl;
+//        cout << "MaskDiscard:" << e.second.maskDiscard << endl;
+//    }
+//
+//    cout << endl << "Count: " << lut2Rst.size() << endl;
+//    for (const auto& e : lut2Rst) {
+//        cout << "=== === === ===" << endl;
+//        cout << "Function: " << e.first << endl;
+//        cout << "LeftFun: " << e.second.leftFun << endl;
+//        cout << "RightFun: " << e.second.rightFun << endl;
+//        cout << "CombineFun: " << e.second.combine << endl;
+//        cout << "MaskLeft: " << e.second.maskLeft << endl;
+//        cout << "MaskRight: " << e.second.maskRight << endl;
+//        cout << "MaskDiscard:" << e.second.maskDiscard << endl;
+//    }
 
     PRECOM_RESULT(3) lut3 = do3input();
 
@@ -87,6 +87,26 @@ int main() {
     PRECOM_RESULT(5) lut5 = do5input(lut3, lut4);
 
     std::cout << lut5.size() << endl;
+
+    PRECOM_RESULT(6) lut6 = do6input(lut3, lut4, lut5);
+
+    std::cout << lut6.size() << endl;
+
+    std::cout << cofactor<2>(fun2("0011"), 1 , true) << endl;
+
+    for (const auto& pair : lut6) {
+        auto function = pair.first;
+        auto mask = pair.second.maskDiscard;
+        for (int i = 0; i < mask.size(); ++i) {
+            if (mask.test(i)) {
+                assert(cofactor<6>(function, i, true) == cofactor<6>(function, i, false));
+            } else {
+                assert(cofactor<6>(function, i, true) != cofactor<6>(function, i, false));
+            }
+        }
+    }
+
+
     return 0;
 }
 

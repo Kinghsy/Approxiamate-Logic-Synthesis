@@ -32,6 +32,21 @@ std::bitset<l2> upCast(std::bitset<l1> f) {
     }
 };
 
+template<size_t k>
+std::bitset<1ul << (k - 1)> cofactor(std::bitset<1 << k> f, size_t n, bool t) {
+    assert(k > 1);
+    std::bitset<1ul << (k - 1)> result;
+    int counter = 0;
+    for (size_t i = 0; i < (1 << k); i++) {
+        if (std::bitset<k>(i).test(n) == t){
+            result[counter++] = f[i];
+        } else
+            continue;
+    }
+    assert(counter == result.size());
+    return result;
+}
+
 constexpr uint64_t bin2int(const int* a, int n) {
     return n == 0 ? 0 : bin2int(a + 1, n - 1) + ((*a) << (n - 1));
 }
@@ -59,14 +74,6 @@ constexpr uint64_t lut1[] = {
 };
 
 constexpr size_t nLUT1 = sizeof(lut1)/sizeof(*lut1);
-
-//constexpr uint64_t x_and_y = bin2int({0, 0, 0, 1});
-//constexpr uint64_t not_x_and_y = ~x_and_y;
-//constexpr uint64_t x_xor_y = bin2int({0, 1, 1, 0});
-//constexpr uint64_t not_x_xor_y = ~x_xor_y;
-//constexpr uint64_t x_only = bin2int({0, 0, 1, 1});
-//constexpr uint64_t y_only = bin2int({1, 1, 0, 0});
-
 
 // Duplicates the first n bits and fill them in the "l"
 // fillWith<16>(4, 0010 0100 0111 0110B)
@@ -199,22 +206,22 @@ void insertToResult(
     }
     PrecompResultAttribute<inp>& prevAttr = result.at(function);
     if (prevAttr.nDiscard() < attr.nDiscard()) {
-        std::cout << "MORE_DISCARD" << std::endl;
-        std::cout << "PrevAttr: " << std::endl;
-        prevAttr.print();
-        std::cout << "Attr: " << std::endl;
-        attr.print();
+//        std::cout << "MORE_DISCARD" << std::endl;
+//        std::cout << "PrevAttr: " << std::endl;
+//        prevAttr.print();
+//        std::cout << "Attr: " << std::endl;
+//        attr.print();
         prevAttr = attr;
         return;
     }
     if ((prevAttr.combine == "XOR" || prevAttr.combine == "NXOR") &&
             (attr.combine != "XOR" && attr.combine != "NXOR")) {
         if (prevAttr.nDiscard() != attr.nDiscard()) return;
-        std::cout << "COMBINATION" << std::endl;
-        std::cout << "PrevAttr: " << std::endl;
-        prevAttr.print();
-        std::cout << "Attr: " << std::endl;
-        attr.print();
+//        std::cout << "COMBINATION" << std::endl;
+//        std::cout << "PrevAttr: " << std::endl;
+//        prevAttr.print();
+//        std::cout << "Attr: " << std::endl;
+//        attr.print();
         prevAttr = attr;
         return;
     }
