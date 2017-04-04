@@ -12,12 +12,11 @@ add_executable(
 set(Source_Files
         common.cpp common.h
         gen.cpp
-        lut3.cpp
-        lut4.cpp
-        lut5.cpp
-        main.cpp
-        interface.h
+        do_lut.cpp
+        do_lut.h
         interface.cpp
+        interface.h
+        main.cpp
 )
 
 add_library(precomp_lib ${Source_Files})
