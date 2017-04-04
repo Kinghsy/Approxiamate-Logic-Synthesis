@@ -168,7 +168,7 @@ int BlifBooleanNet::nOutputs() const {
     return net->noutputs;
 }
 
-const vector<string> & BlifBooleanNet::inputNodeSet() const {
+const vector<string> & BlifBooleanNet::inputNodeList() const {
     if (inputNodes.isValid())
         return inputNodes.get();
     std::vector<std::string> s;
@@ -179,7 +179,7 @@ const vector<string> & BlifBooleanNet::inputNodeSet() const {
     return inputNodes.get();
 }
 
-const vector<string> & BlifBooleanNet::outputNodeSet() const {
+const vector<string> & BlifBooleanNet::outputNodeList() const {
     if (outputNodes.isValid())
         return outputNodes.get();
     std::vector<std::string> s;
@@ -195,10 +195,8 @@ const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::internalNodeSet() const {
         return internalNodes.get();
     std::set<std::string> s;
     BnetNode *node = net->nodes;
-    std::set<std::string> in(this->inputNodeSet().begin(),
-                             this->inputNodeSet().end());
-    std::set<std::string> out(this->outputNodeSet().begin(),
-                              this->outputNodeSet().end());
+    auto in = this->inputNodeSet();
+    auto out = this->outputNodeSet();
     while (node != nullptr) {
         if (in.count(node->name) != 0) {
             node = node->next;
@@ -423,6 +421,7 @@ void getBits(ulli n, int* vec, int digit) {
 }
 
 CircuitProfile BlifBooleanNet::profile(int samples) {
+    assert(0);
     assert(samples >= 0);
     InfiniteRandomPatternGenerator g(this->nInputs());
     CircuitProfile p(this->name());
@@ -437,6 +436,28 @@ CircuitProfile BlifBooleanNet::profile(int samples) {
         }
     }
     return p;
+}
+
+const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::inputNodeSet() const {
+    if (this->inputNodesSet.isValid())
+        return inputNodesSet.get();
+    inputNodesSet.setData(
+            std::set<string>(
+                    this->inputNodeList().begin(),
+                    this->inputNodeList().end()
+            ));
+    return inputNodesSet.get();
+}
+
+const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::outputNodeSet() const {
+    if (this->outputNodesSet.isValid())
+        return outputNodesSet.get();
+    outputNodesSet.setData(
+            std::set<string>(
+                    this->outputNodeList().begin(),
+                    this->outputNodeList().end()
+            ));
+    return outputNodesSet.get();
 }
 
 

@@ -33,11 +33,11 @@ int main() {
     cout << "Total " << lut5.size() << " decomposable LUT5s." << endl;
 
     auto lut6 = do6input(lut3, lut4, lut5);
-
+//
     cout << "Total " << lut6.size() << " decomposable LUT6s" << endl;
-
-    auto s = lut6.begin();
-    for (int i = 0; i < 1400; ++i) s++;
+//
+//    auto s = lut6.begin();
+//    for (int i = 0; i < 1400; ++i) s++;
 
     return 0;
 }
