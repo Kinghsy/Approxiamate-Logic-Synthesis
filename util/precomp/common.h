@@ -235,6 +235,20 @@ void enumerate(
         const PRECOM_RESULT(kIn2)& rhs) {
     assert(kOut == kIn1 + kIn2);
 
+    // Adds 2 constants:
+    PrecompResultAttribute<kOut> constAttr;
+    constAttr.maskLeft.flip();
+    constAttr.maskDiscard.flip();
+    constAttr.combine = "LEFT";
+
+    std::bitset<1ul << kOut> zeroFun;
+
+    constAttr.leftFun = zeroFun.to_string();
+    result[zeroFun] = constAttr;
+
+    constAttr.leftFun = zeroFun.flip().to_string();
+    result[zeroFun] = constAttr;
+
     auto comb = selectWithin<kOut>(kIn1);
     for (const auto& lpair : lhs) {
 //        FUN(kOut) left = upCast<kIn1, kOut>(lpair.first());

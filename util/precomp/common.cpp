@@ -16,9 +16,9 @@ PRECOM_RESULT(1) getLut1Result() {
     rstIrrelavant.maskDiscard = std::bitset<1>("1");
 
     return PRECOM_RESULT(1) {
-            { FUN(1)("00"), rstIrrelavant },
+//            { FUN(1)("00"), rstIrrelavant },
             { FUN(1)("01"), rstRelavant },
-            { FUN(1)("11"), rstIrrelavant },
+//            { FUN(1)("11"), rstIrrelavant },
             { FUN(1)("10"), rstRelavant },
     };
 }
