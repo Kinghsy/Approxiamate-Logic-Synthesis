@@ -11,7 +11,7 @@
 link_directories(${CUDD_LINK_DIR})
 
 set(SOURCE_FILES
-        main.cpp verify_simulator.cpp)
+        main.cpp)
 
 add_executable(main ${SOURCE_FILES})
 

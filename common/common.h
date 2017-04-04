@@ -5,8 +5,6 @@
 #ifndef VE281_FA16_COMMON_H
 #define VE281_FA16_COMMON_H
 
-#include "dataset.h"
-#include "data.h"
 #include "exception.h"
 #include "generator.h"
 

@@ -5,7 +5,6 @@
 #ifndef VE490_INTERFACE_H
 #define VE490_INTERFACE_H
 
-#include "exception.h"
 #include "../lib/cudd-2.5.0/cudd/cudd.h"
 #include "../lib/libblif/bnet.h"
 #include "memorize.h"
