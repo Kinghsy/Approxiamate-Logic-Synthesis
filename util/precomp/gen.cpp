@@ -3,6 +3,7 @@
 //
 
 #include "common.h"
+#include <common.h>
 #include <memory>
 #include <iostream>
 #include <fstream>
@@ -38,6 +39,60 @@ int main() {
 //
 //    auto s = lut6.begin();
 //    for (int i = 0; i < 1400; ++i) s++;
+
+    FileClass pdb("pcdb");
+
+    std::ofstream dbfile(PrecompDbPath / pdb("db"));
+
+    dbfile << "100" << "\n"; // Database version
+
+    for (const auto& e : lut3) {
+        dbfile << e.first.size() << "\t" << e.first << "\t";
+        const auto& attr = e.second;
+        dbfile << attr.maskLeft.to_string() << "\t"
+               << attr.maskRight.to_string() << "\t"
+               << attr.leftFun << "\t"
+               << attr.rightFun << "\t"
+               << attr.combine << "\t"
+               << attr.maskDiscard.to_string() << "\t";
+        dbfile << std::endl;
+    }
+
+    for (const auto& e : lut4) {
+        dbfile << e.first.size() << "\t" << e.first << "\t";
+        const auto& attr = e.second;
+        dbfile << attr.maskLeft.to_string() << "\t"
+               << attr.maskRight.to_string() << "\t"
+               << attr.leftFun << "\t"
+               << attr.rightFun << "\t"
+               << attr.combine << "\t"
+               << attr.maskDiscard.to_string() << "\t";
+        dbfile << std::endl;
+    }
+
+    for (const auto& e : lut5) {
+        dbfile << e.first.size() << "\t" << e.first << "\t";
+        const auto& attr = e.second;
+        dbfile << attr.maskLeft.to_string() << "\t"
+               << attr.maskRight.to_string() << "\t"
+               << attr.leftFun << "\t"
+               << attr.rightFun << "\t"
+               << attr.combine << "\t"
+               << attr.maskDiscard.to_string() << "\t";
+        dbfile << std::endl;
+    }
+
+    for (const auto& e : lut6) {
+        dbfile << e.first.size() << "\t" << e.first << "\t";
+        const auto& attr = e.second;
+        dbfile << attr.maskLeft.to_string() << "\t"
+               << attr.maskRight.to_string() << "\t"
+               << attr.leftFun << "\t"
+               << attr.rightFun << "\t"
+               << attr.combine << "\t"
+               << attr.maskDiscard.to_string() << "\t";
+        dbfile << std::endl;
+    }
 
     return 0;
 }

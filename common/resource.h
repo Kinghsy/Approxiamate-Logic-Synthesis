@@ -47,7 +47,7 @@ static const Path McncPath = CircuitPath.sub("mcnc_original");
 static const Path McncAigPath = CircuitPath.sub("mcnc_aig");
 static const Path McncFraigPath = CircuitPath.sub("mcnc_fraig");
 
-static const Path PrecompDB = DataPath.sub("precomp");
+static const Path PrecompDbPath = DataPath.sub("precomp");
 
 static const Path TempPath = ProjectBase.sub("bin/temp");
 

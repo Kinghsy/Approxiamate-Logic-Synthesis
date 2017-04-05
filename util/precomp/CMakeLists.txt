@@ -22,4 +22,7 @@ set(Source_Files
 add_library(precomp_lib ${Source_Files})
 
 target_compile_options(precomp BEFORE PRIVATE -O0)
-target_compile_options(precomp_rel BEFORE PRIVATE -O0)
+target_compile_options(precomp_rel BEFORE PRIVATE -Ofast)
+
+target_link_libraries(precomp_rel common)
+target_link_libraries(precomp common)

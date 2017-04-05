@@ -39,3 +39,5 @@ run/
 # Archives
 *.rar
 *.zip
+
+/data/precomp/db.pcdb
