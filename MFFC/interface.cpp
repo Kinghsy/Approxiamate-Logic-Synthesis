@@ -8,8 +8,11 @@
 
 #include <truth_table.h>
 #include "interface.h"
-#include "../lib/libblif/cudd_build_v2.h"
 #include "pattern_gen.h"
+#include "../lib/cudd-2.5.0/cudd/cudd.h"
+#include "../lib/libblif/bnet.h"
+#include "../lib/libblif/cudd_build_v2.h"
+
 
 using namespace std;
 

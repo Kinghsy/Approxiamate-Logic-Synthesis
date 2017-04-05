@@ -4,7 +4,7 @@
 
 #include <cassert>
 #include "pattern_gen.h"
-#include <urandom.h>
+#include <common.h>
 
 FullPatternGenerator::FullPatternGenerator(int nInputs) {
     assert(nInputs > 0);

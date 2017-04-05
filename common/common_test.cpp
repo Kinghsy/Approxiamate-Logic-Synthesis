@@ -5,7 +5,6 @@
 #include <gtest/gtest.h>
 
 #include "generator.h"
-#include "dataset.h"
 #include "OrderedQueue.h"
 
 #include <iostream>
@@ -30,45 +29,6 @@ TEST(GENERATOR, INT_SEQ) {
     }
 }
 
-TEST(DATASET, CONTENT) {
-#define data_ d2
-    StaticSequenceGenerator<int> g(data_);
-    Dataset<int> dataset(g);
-    const int *raw = dataset.getData();
-    int size = dataset.getSize();
-    ASSERT_EQ(size, g.getSize());
-    for (int i = 0; i < size ; ++i) {
-        ASSERT_EQ(data_[i], raw[i]);
-    }
-    int* copied = dataset.getCopied();
-    for (int i = 0; i < size ; ++i) {
-        ASSERT_EQ(data_[i], copied[i]);
-    }
-#undef data_
-}
-
-TEST(SORTABLEDATASET, SORT) {
-#define data_ d5
-    StaticSequenceGenerator<int> g(data_);
-    SortableDataset<int> dataset(g);
-    const int *raw = dataset.getData();
-    int size = dataset.getSize();
-    ASSERT_EQ(size, g.getSize());
-    for (int i = 0; i < size ; ++i) {
-        ASSERT_EQ(data_[i], raw[i]);
-    }
-    int* copied = dataset.getCopied();
-    for (int i = 0; i < size ; ++i) {
-        ASSERT_EQ(data_[i], copied[i]);
-    }
-    const int* sorted = dataset.getSorted();
-    cout << endl;
-    for (int i = 0; i < size ; ++i) {
-        cout << sorted[i] << " ";
-    }
-    cout << endl;
-#undef data_
-}
 
 TEST(OrderedQueue, TestCase1) {
     int data[]={1,6,2,4,5,3,9,7,8};
