@@ -78,6 +78,7 @@ BlifBooleanNet::~BlifBooleanNet() {
     } else {
         Bnet_FreeNetwork(net);
     }
+    releaseSimulationContext();
 }
 
 TruthTable BlifBooleanNet::truthTable() const {
@@ -459,5 +460,6 @@ const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::outputNodeSet() const {
             ));
     return outputNodesSet.get();
 }
+
 
 

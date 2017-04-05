@@ -49,6 +49,14 @@ public:
                          size_t nSamples);
     };
 
+    struct CompareResult {
+
+        size_t nSamples;
+
+        size_t nErrors;
+
+    };
+
 private:
     struct NodeAttribute {
         int null;
@@ -72,12 +80,16 @@ private:
     mutable Memorized<std::set<BnetNodeID> > totalNodes;
     mutable Memorized<std::set<BnetNodeID> > internalNodes;
     mutable Memorized<std::vector<BnetNodeID> > topSortedNodes;
+    mutable Memorized<void*> simulationContext;
 
     BnetNode* getNodeByName(const std::string& name) const;
 
     void prepareDepth2Input(BnetNode *node);
     void prepareDepth2Output(BnetNode *node);
     void prepareDepths();
+
+    void* getSimulationContext() const;
+    void releaseSimulationContext();
 
     std::map<BnetNodeID, std::set<BnetNodeID> >getMffcSet() const;
     std::map<BnetNodeID, std::set<BnetNodeID> >getFaninSet() const;
@@ -132,6 +144,9 @@ public:
     void verifySimulator(int samples);
 
     SimulationResult profileBySimulation(int samples);
+
+    CompareResult compareBySimulation(const BlifBooleanNet& net2,
+                                      size_t nSamples);
 
     ~BlifBooleanNet();
 };
