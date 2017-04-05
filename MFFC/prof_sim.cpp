@@ -47,8 +47,8 @@ void *BlifBooleanNet::getSimulationContext() const{
 
     std::cout << "Preparing Simulation Context." << std::endl;
 
-    std::string library = Temp / "circuit.so";
-    std::string source = Temp / "circuit.cpp";
+    std::string library = TempPath / "circuit.so";
+    std::string source = TempPath / "circuit.cpp";
 
     this->exportToCpp(source);
 

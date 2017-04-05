@@ -11,8 +11,8 @@
 #include "../MFFC/interface.h"
 
 int main() {
-    Path p = ProjectBase.sub("circuit/other_fraig");
-    BlifBooleanNet net(p / "comp.blif");
+
+    BlifBooleanNet net(BenchmarkAigPath / "C880.blif");
     auto i = net.inputNodeList();
     auto o = net.outputNodeList();
     auto all = net.totalNodeSet();

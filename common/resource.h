@@ -35,13 +35,24 @@ public:
     Path sub(const std::string& f) const;
 };
 
-extern Path ProjectBase;
-extern Path McncPath;
-extern Path McncAigPath;
-extern Path McncFraigPath;
-extern Path Temp;
+static const Path ProjectBase(PROJECT_BASE);
+static const Path DataPath = ProjectBase.sub("data");
 
-extern FileClass fBlif;
+static const Path CircuitPath = DataPath.sub("circuit");
 
+static const Path BenchmarkPath = CircuitPath.sub("other_original");
+static const Path BenchmarkAigPath = CircuitPath.sub("other_fraig");
+
+static const Path McncPath = CircuitPath.sub("mcnc_original");
+static const Path McncAigPath = CircuitPath.sub("mcnc_aig");
+static const Path McncFraigPath = CircuitPath.sub("mcnc_fraig");
+
+static const Path PrecompDB = DataPath.sub("precomp");
+
+static const Path TempPath = ProjectBase.sub("bin/temp");
+
+static const FileClass fBlif("blif");
+static const FileClass fCpp("cpp");
+static const FileClass fSo("so");
 
 #endif //VE490_RESOURCE_H

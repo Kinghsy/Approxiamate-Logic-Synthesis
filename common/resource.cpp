@@ -63,9 +63,3 @@ Path Path::sub(const std::string &f) const {
     return Path(this->path + s );
 }
 
-Path ProjectBase(PROJECT_BASE);
-Path McncPath = ProjectBase.sub("circuit/mcnc_original");
-Path McncAigPath = ProjectBase.sub("circuit/mcnc_aig");
-Path McncFraigPath = ProjectBase.sub("circuit/mcnc_fraig");
-Path Temp = ProjectBase.sub("bin/temp");
-FileClass fBlif("blif");

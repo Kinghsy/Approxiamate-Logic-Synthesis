@@ -43,7 +43,10 @@ BlifBooleanNet::BlifBooleanNet(const std::string &file) {
 
     FILE *fp;
     fp = fopen(file.c_str(), "r");
-    if (fp == NULL) assert(0);
+    if (fp == NULL) {
+        std::cerr << file << std::endl;
+        assert(0);
+    }
     net = NULL;
     net = Bnet_ReadNetwork(fp);
     if (net == NULL) assert(0);
