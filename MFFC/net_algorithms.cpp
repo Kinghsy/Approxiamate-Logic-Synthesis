@@ -8,6 +8,8 @@
 #include <algorithm>
 
 #include "interface.h"
+#include "../lib/cudd-2.5.0/cudd/cudd.h"
+#include "../lib/libblif/bnet.h"
 
 using std::string;
 using std::vector;

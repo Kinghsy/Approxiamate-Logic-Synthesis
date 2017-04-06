@@ -10,6 +10,9 @@
 
 #include "interface.h"
 
+#include "../lib/libblif/interface.h"
+
+
 using std::unordered_map;
 using std::vector;
 using std::string;

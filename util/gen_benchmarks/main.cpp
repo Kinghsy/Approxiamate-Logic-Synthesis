@@ -13,8 +13,8 @@ using namespace boost::filesystem;
 
 int main() {
 
-    Path orig = ProjectBase.sub("circuit/other_original");
-    Path _aig = ProjectBase.sub("circuit/other_fraig");
+    const Path& orig = BenchmarkPath;
+    const Path& _aig = BenchmarkAigPath;
 
     path original(orig.toString());
     path aig(_aig.toString());

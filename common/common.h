@@ -7,5 +7,9 @@
 
 #include "exception.h"
 #include "generator.h"
+#include "stopwatch.h"
+#include "resource.h"
+#include "memorize.h"
+#include "urandom.h"
 
 #endif //VE281_FA16_COMMON_H

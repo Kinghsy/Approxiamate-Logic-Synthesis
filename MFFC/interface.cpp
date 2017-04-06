@@ -8,8 +8,11 @@
 
 #include <truth_table.h>
 #include "interface.h"
-#include "../lib/libblif/cudd_build_v2.h"
 #include "pattern_gen.h"
+#include "../lib/cudd-2.5.0/cudd/cudd.h"
+#include "../lib/libblif/bnet.h"
+#include "../lib/libblif/cudd_build_v2.h"
+
 
 using namespace std;
 
@@ -40,7 +43,10 @@ BlifBooleanNet::BlifBooleanNet(const std::string &file) {
 
     FILE *fp;
     fp = fopen(file.c_str(), "r");
-    if (fp == NULL) assert(0);
+    if (fp == NULL) {
+        std::cerr << file << std::endl;
+        assert(0);
+    }
     net = NULL;
     net = Bnet_ReadNetwork(fp);
     if (net == NULL) assert(0);
@@ -78,6 +84,7 @@ BlifBooleanNet::~BlifBooleanNet() {
     } else {
         Bnet_FreeNetwork(net);
     }
+    releaseSimulationContext();
 }
 
 TruthTable BlifBooleanNet::truthTable() const {
@@ -459,5 +466,6 @@ const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::outputNodeSet() const {
             ));
     return outputNodesSet.get();
 }
+
 
 

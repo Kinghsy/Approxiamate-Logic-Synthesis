@@ -5,6 +5,8 @@
 #ifndef VE490_MEMORIZE_H
 #define VE490_MEMORIZE_H
 
+#include <cassert>
+
 template <class T>
 class Memorized {
     bool valid;
