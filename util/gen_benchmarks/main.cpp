@@ -7,7 +7,7 @@
 #include <iostream>
 
 #include "../../abc_expansion/ex_abc.h"
-#include "../../MFFC/interface.h"
+#include "../../circuit/interface.h"
 
 using namespace boost::filesystem;
 

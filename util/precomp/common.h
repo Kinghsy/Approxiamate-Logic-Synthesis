@@ -243,6 +243,8 @@ void enumerate(
 
     std::bitset<1ul << kOut> zeroFun;
 
+    constAttr.rightFun = zeroFun.to_string();
+
     constAttr.leftFun = zeroFun.to_string();
     result[zeroFun] = constAttr;
 

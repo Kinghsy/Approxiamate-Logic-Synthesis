@@ -8,7 +8,7 @@
 #include <ctime>
 #include <iostream>
 
-#include "../MFFC/interface.h"
+#include "../circuit/interface.h"
 
 
 int main() {

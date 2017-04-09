@@ -44,7 +44,7 @@ int main() {
 
     std::ofstream dbfile(PrecompDbPath / pdb("db"));
 
-    dbfile << "100" << "\n"; // Database version
+    dbfile << "101" << "\n"; // Database version
 
     for (const auto& e : lut3) {
         dbfile << e.first.size() << "\t" << e.first << "\t";

@@ -31,10 +31,10 @@ private:
     void* abcFramework = nullptr;
 
     ExAbc();
-    ExAbc(const ExAbc& exAbc) {}
-    ExAbc(ExAbc&& exAbc) noexcept {}
-    ExAbc& operator=(const ExAbc& exAbc) {return *this;}
-    ExAbc& operator=(ExAbc&& exAbc) noexcept {return *this;}
+    ExAbc(const ExAbc& exAbc) = delete;
+    ExAbc(ExAbc&& exAbc) noexcept = delete;
+    ExAbc& operator=(const ExAbc& exAbc) = delete;
+    ExAbc& operator=(ExAbc&& exAbc) = delete;
     ~ExAbc() noexcept;
 
 };

@@ -19,9 +19,11 @@ add_executable(playground playground.cpp)
 
 add_executable(verify_simulator verify_simulator.cpp)
 
+add_executable(preDecomp_test pre_decomp.cpp)
+
 set(ALL_LIBS
         policy mffc blif profile
-        approx blif_replace common
+        approx blif_replace preDecomp common
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})
 
@@ -30,5 +32,7 @@ target_link_libraries(main ${ALL_LIBS})
 target_link_libraries(playground ${ALL_LIBS})
 
 target_link_libraries(verify_simulator ${ALL_LIBS})
+
+target_link_libraries(preDecomp_test ${ALL_LIBS})
 
 #add_subdirectory(testcase)
