@@ -22,7 +22,7 @@ using std::get;
 using std::move;
 using std::cout;
 using std::endl;
-
+using std::string;
 
 /*
 TEST(PreDecomp, TC1) {
@@ -49,7 +49,7 @@ TEST(PreDecomp, TC1) {
 
 void bitArrange(int *arr, int n);
 
-
+/*
 TEST(PreDecomp, COMBINATION) {
 
     std::cout << std::endl;
@@ -67,6 +67,9 @@ TEST(PreDecomp, Some_Tool) {
     size_t count = a.count();
     cout << endl;
     cout << a << endl;
+    a[0] = 0;
+    a[1] = 1;
+    cout << a << endl;
     cout << b << endl;
     cout << count << endl;
     size_t diffCount = (a^b).count();
@@ -80,8 +83,10 @@ TEST(PreDecomp, All_Cases_3_Input) {
     std::ofstream outFile("3_input_test.txt");
     int inputSize = 3;
 
-    int worstCase = 0;
-    int totalErr = 0;
+    int worstCase1 = 0;
+    int totalErr1 = 0;
+    int worstCase2 = 0;
+    int totalErr2 = 0;
 
     outFile << std::endl;
     outFile << "------------------------" << std::endl;
@@ -118,8 +123,8 @@ TEST(PreDecomp, All_Cases_3_Input) {
             minDiff1 = std::min((int)(countDiff), minDiff1);
         }
 
-        worstCase = std::max(minDiff1, worstCase);
-        totalErr += minDiff1;
+        worstCase1 = std::max(minDiff1, worstCase1);
+        totalErr1 += minDiff1;
 
         std::vector<int > truthTabVec;
         for (int l = 0; l < (1<<inputSize); ++l) {
@@ -131,6 +136,8 @@ TEST(PreDecomp, All_Cases_3_Input) {
         for (int k = 0; k < (1<<inputSize); ++k) {
             minDiff2 += ( int(initTruthTab[k]) != int(finalTruthTab[k]) ? 1 : 0);
         }
+        worstCase2 = std::max(minDiff2, worstCase2);
+        totalErr2 += minDiff2;
 
         if ( ( minDiff1 == 0 ) && ( minDiff2 == 0 ) ) continue;
         if ( ( minDiff1 == 0 ) || ( minDiff2 == 0 ) ) {
@@ -143,8 +150,10 @@ TEST(PreDecomp, All_Cases_3_Input) {
 
     }
 
-    outFile << "worstCase: " << worstCase << endl;
-    outFile << "average error: " << (double)(totalErr) / ( 1<< (1 << inputSize) ) << endl;
+    outFile << "worstCase for predecomp: " << worstCase1 << endl;
+    outFile << "average error for predecomp: " << (double)(totalErr1) / ( 1<< (1 << inputSize) ) << endl;
+    outFile << "worstCase for approximation: " << worstCase2 << endl;
+    outFile << "average error for approximation: " << (double)(totalErr2) / ( 1<< (1 << inputSize) ) << endl;
 
     //delete[] arr;
 
@@ -158,8 +167,10 @@ TEST(PreDecomp, All_Cases_4_Input) {
 
     int inputSize = 4;
 
-    int worstCase = 0;
-    int totalErr = 0;
+    int worstCase1 = 0;
+    int totalErr1 = 0;
+    int worstCase2 = 0;
+    int totalErr2 = 0;
 
     outFile << std::endl;
     outFile << "------------------------" << std::endl;
@@ -196,8 +207,8 @@ TEST(PreDecomp, All_Cases_4_Input) {
             minDiff1 = std::min((int)(countDiff), minDiff1);
         }
 
-        worstCase = std::max(worstCase, minDiff1);
-        totalErr += minDiff1;
+        worstCase1 = std::max(worstCase1, minDiff1);
+        totalErr1 += minDiff1;
 
         std::vector<int > truthTabVec;
         for (int l = 0; l < (1<<inputSize); ++l) {
@@ -210,6 +221,9 @@ TEST(PreDecomp, All_Cases_4_Input) {
             minDiff2 += ( int(initTruthTab[k]) != int(finalTruthTab[k]) ? 1 : 0);
         }
 
+        worstCase2 = std::max(worstCase2, minDiff2);
+        totalErr2 += minDiff2;
+
         if ( ( minDiff1 == 0 ) && ( minDiff2 == 0 ) ) continue;
         if ( ( minDiff1 == 0 ) || ( minDiff2 == 0 ) ) {
             outFile << fun4( bin2int(arr,1<<inputSize) ) << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
@@ -221,8 +235,11 @@ TEST(PreDecomp, All_Cases_4_Input) {
 
     }
 
-    outFile << "worstCase: " << worstCase << endl;
-    outFile << "average error: " << (double)(totalErr) / ( 1<< (1 << inputSize) ) << endl;
+    outFile << "worstCase for predecomp: " << worstCase1 << endl;
+    outFile << "average error for predecomp: " << (double)(totalErr1) / ( 1<< (1 << inputSize) ) << endl;
+
+    outFile << "worstCase for approximation: " << worstCase2 << endl;
+    outFile << "average error for approximation: " << (double)(totalErr2) / ( 1<< (1 << inputSize) ) << endl;
 
     //delete[] arr;
 
@@ -236,8 +253,10 @@ TEST(PreDecomp, Random_Cases_5_Input) {
     srand((unsigned)time(0));
     int inputSize = 5;
 
-    int worstCase = 0;
-    int totalErr = 0;
+    int worstCase1 = 0;
+    int totalErr1 = 0;
+    int worstCase2 = 0;
+    int totalErr2 = 0;
 
     outFile << std::endl;
     outFile << "------------------------" << std::endl;
@@ -255,7 +274,7 @@ TEST(PreDecomp, Random_Cases_5_Input) {
     //int* arr = new int( 1 << inputSize );
     int arr[32]={0};
 
-    for (int i = 0; i < (1 << 20); ++i) {
+    for (int i = 0; i < (1 << 16); ++i) {
 
         //cout << i << endl;
 
@@ -271,8 +290,8 @@ TEST(PreDecomp, Random_Cases_5_Input) {
             minDiff1 = std::min((int)(countDiff), minDiff1);
         }
 
-        worstCase = std::max(worstCase, minDiff1);
-        totalErr += minDiff1;
+        worstCase1 = std::max(worstCase1, minDiff1);
+        totalErr1 += minDiff1;
 
         std::vector<int > truthTabVec;
         for (int l = 0; l < (1<<inputSize); ++l) {
@@ -285,34 +304,41 @@ TEST(PreDecomp, Random_Cases_5_Input) {
             minDiff2 += ( int(initTruthTab[k]) != int(finalTruthTab[k]) ? 1 : 0);
         }
 
+        worstCase2 = std::max(worstCase2, minDiff2);
+        totalErr2 += minDiff2;
+
         if ( ( minDiff1 == 0 ) && ( minDiff2 == 0 ) ) continue;
         if ( ( minDiff1 == 0 ) || ( minDiff2 == 0 ) ) {
-            outFile << fun5( bin2int(arr,1<<inputSize) ) << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
+            outFile << i << " : " << fun5( bin2int(arr,1<<inputSize) ) << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
             continue;
         }
         if ( ( minDiff1 == minDiff2) ) continue;
-        outFile << fun5( bin2int(arr,1<<inputSize) ) << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
+        outFile << i << " : " << fun5( bin2int(arr,1<<inputSize) ) << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
         continue;
 
     }
 
-    outFile << "worstCase: " << worstCase << endl;
-    outFile << "average error: " << (double)(totalErr) / ( 1<< (1 << inputSize) ) << endl;
+    outFile << "worstCase for predecomp: " << worstCase1 << endl;
+    outFile << "average error for predecomp: " << (double)(totalErr1) / ( 1<< 16 ) << endl;
+    outFile << "worstCase for approximation: " << worstCase2 << endl;
+    outFile << "average error for approximation: " << (double)(totalErr2) / ( 1<< 16 ) << endl;
 
     //delete[] arr;
     outFile.close();
 
     ASSERT_EQ(1, 1);
 }
-
+*/
 TEST(PreDecomp, Random_Cases_6_Input) {
 
     std::ofstream outFile("6_input_test.txt");
     srand((unsigned)time(0));
     int inputSize = 6;
 
-    int worstCase = 0;
-    int totalErr = 0;
+    int worstCase1 = 0;
+    int totalErr1 = 0;
+    int worstCase2 = 0;
+    int totalErr2 = 0;
 
     outFile << std::endl;
     outFile << "------------------------" << std::endl;
@@ -330,7 +356,7 @@ TEST(PreDecomp, Random_Cases_6_Input) {
     //int* arr = new int( 1 << inputSize );
     int arr[64]={0};
 
-    for (int i = 0; i < (1 << 24); ++i) {
+    for (int i = 0; i < (1 << 14); ++i) {
 
         //cout << i << endl;
 
@@ -339,6 +365,11 @@ TEST(PreDecomp, Random_Cases_6_Input) {
         bitArrange(arr, (1<<inputSize));
 
         fun6 rec( bin2int(arr, 1 << inputSize) );
+        for (int m = 0; m < (1<<inputSize); ++m) {
+            rec[m] = arr[m];
+        }
+        //outFile << rec << endl;
+
         int minDiff1 = 1 << inputSize;
         for (const auto& ite : lut6) {
             const auto& itePf = ite.first;
@@ -346,8 +377,8 @@ TEST(PreDecomp, Random_Cases_6_Input) {
             minDiff1 = std::min((int)(countDiff), minDiff1);
         }
 
-        worstCase = std::max(worstCase, minDiff1);
-        totalErr += minDiff1;
+        worstCase1 = std::max(worstCase1, minDiff1);
+        totalErr1 += minDiff1;
 
         std::vector<int > truthTabVec;
         for (int l = 0; l < (1<<inputSize); ++l) {
@@ -360,19 +391,25 @@ TEST(PreDecomp, Random_Cases_6_Input) {
             minDiff2 += ( int(initTruthTab[k]) != int(finalTruthTab[k]) ? 1 : 0);
         }
 
+        worstCase2 = std::max(worstCase2, minDiff2);
+        totalErr2 += minDiff2;
+
         if ( ( minDiff1 == 0 ) && ( minDiff2 == 0 ) ) continue;
         if ( ( minDiff1 == 0 ) || ( minDiff2 == 0 ) ) {
-            outFile << fun6( bin2int(arr,1<<inputSize) ) << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
+            outFile << i << " : " <<  rec << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
             continue;
         }
         if ( ( minDiff1 == minDiff2) ) continue;
-        outFile << fun6( bin2int(arr,1<<inputSize) ) << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
+        outFile << i << " : " <<  rec << " " << minDiff1 << " " << minDiff2 <<  " " << std::endl;
         continue;
 
     }
 
-    outFile << "worstCase: " << worstCase << endl;
-    outFile << "average error: " << (double)(totalErr) / ( 1<< (1 << inputSize) ) << endl;
+    outFile << "worstCase1 for predecomp: " << worstCase1 << endl;
+    outFile << "average error for predecomp: " << (double)(totalErr1) / ( 1 << 14 ) << endl;
+
+    outFile << "worstCase1 for approximation: " << worstCase2 << endl;
+    outFile << "average error for approximation: " << (double)(totalErr2) / ( 1 << 14 ) << endl;
 
     //delete[] arr;
     outFile.close();
