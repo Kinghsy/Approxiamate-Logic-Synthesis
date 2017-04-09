@@ -17,7 +17,7 @@ typedef std::map<ID, Ffc> NodeFfcMap;
 typedef std::vector<Ffc> FfcCollection;
 
 FfcSelectPolicy::FfcSelectPolicy()
-        : minInput(4), maxInput(8), numChoose(0) {}
+        : minInput(3), maxInput(8), numChoose(0) {}
 
 void FfcSelectPolicy::numAdd() { numChoose++; return; }
 

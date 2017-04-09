@@ -5,7 +5,7 @@
 #ifndef VE490_POLICY_H
 #define VE490_POLICY_H
 
-#include "../MFFC/interface.h"
+#include "../circuit/interface.h"
 
 struct FfcSelectPolicy {
     int minInput;

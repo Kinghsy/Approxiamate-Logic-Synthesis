@@ -9,8 +9,8 @@
 #include <fstream>
 #include <cstdlib>
 
-#include "../MFFC/interface.h"
-#include "../MFFC/err_asses.h"
+#include "../circuit/interface.h"
+#include "../circuit/err_asses.h"
 #include "../approxiamate/src/search_method_core.h"
 #include "../approxiamate/src/conts.h"
 #include "../blif_replace/blif_replace.h"

@@ -10,7 +10,7 @@
 #include <boost/tokenizer.hpp>
 
 #include "blif_replace.h"
-#include "../MFFC/interface.h"
+#include "../circuit/interface.h"
 
 using std::string;
 using std::endl;
