@@ -107,10 +107,19 @@ std::bitset<l> ones(size_t n = l) {
 // Repeats these first 32 bits on remaining sections
 template<size_t k>
 std::bitset<1ul << k> expansionMask(size_t m, size_t n) {
+    static bool c[k + 1][k + 1] = {false};
+    static std::bitset<1ul << k> ret[k + 1][k + 1];
+
+    if (c[m][n]) return ret[m][n];
+
+    c[m][n] = true;
+
     size_t halfLengthN = 1ul << (n - 1);
     size_t halfLengthM = 1ul << (m - 1);
     std::bitset<1ul << k> mask = ones<1ul << k>(halfLengthN);
-    return fillWith<1ul << k>(1ul << m, mask | (mask << halfLengthM));
+
+    ret[m][n] = fillWith<1ul << k>(1ul << m, mask | (mask << halfLengthM));
+    return ret[m][n];
 }
 
 template <size_t k, size_t kFun>
@@ -145,6 +154,11 @@ std::vector<std::bitset<l> >
 selectWithin(size_t n, size_t ignore = 0) {
     assert (l >= n + ignore);
 
+    static bool computed[l + 1] = {false};
+    static std::vector<std::bitset<l> > ret[l + 1];
+
+    if (computed[n] && ignore == 0) return ret[n];
+
     std::vector<std::bitset<l> > result;
     if (l == ignore + n || n == 0) {
         result.push_back(ones<l>(n));
@@ -153,9 +167,14 @@ selectWithin(size_t n, size_t ignore = 0) {
     auto p1 = selectWithin<l>(n - 1, ignore + 1);
     auto p2 = selectWithin<l>(n, ignore + 1);
     for (auto t : p2) result.push_back(t);
-    for (std::bitset<l>& t : p1) {
+    for (std::bitset<l> &t : p1) {
         t.flip(l - ignore - 1);
         result.push_back(t);
+    }
+
+    if (ignore == 0) {
+        computed[n] = true;
+        ret[n] = result;
     }
     return result;
 }

@@ -48,3 +48,22 @@ PRECOM_RESULT(6) do6input(
 
     return result;
 }
+
+PRECOM_RESULT(7) do7input(
+        const PRECOM_RESULT(3)& lut3Rst,
+        const PRECOM_RESULT(4)& lut4Rst,
+        const PRECOM_RESULT(5)& lut5Rst,
+        const PRECOM_RESULT(6)& lut6Rst) {
+
+    PRECOM_RESULT(7) result;
+
+    std::cout << "begin" << std::endl;
+    //enumerate<7, 1, 6>(result, lut1Rst, lut6Rst);
+    std::cout << "16" << std::endl;
+    enumerate<7, 2, 5>(result, lut2Rst, lut5Rst);
+    std::cout << "25" << std::endl;
+    enumerate<7, 3, 4>(result, lut3Rst, lut4Rst);
+    std::cout << "34" << std::endl;
+
+    return result;
+}

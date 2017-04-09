@@ -14,6 +14,7 @@
 #include <array>
 #include <numeric>
 #include <bitset>
+#include <common.h>
 
 #include "common.h"
 #include "do_lut.h"
@@ -76,23 +77,31 @@ int main() {
 //        cout << "MaskDiscard:" << e.second.maskDiscard << endl;
 //    }
 
+    StopWatch sw;
+
+    sw.start();
+
     PRECOM_RESULT(3) lut3 = do3input();
 
-    std::cout << lut3.size() << endl;
+    std::cout << lut3.size() << endl; sw.take();
 
     PRECOM_RESULT(4) lut4 = do4input(lut3);
 
-    std::cout << lut4.size() << endl;
+    std::cout << lut4.size() << endl; sw.take();
 
     PRECOM_RESULT(5) lut5 = do5input(lut3, lut4);
 
-    std::cout << lut5.size() << endl;
+    std::cout << lut5.size() << endl; sw.take();
 
     PRECOM_RESULT(6) lut6 = do6input(lut3, lut4, lut5);
 
-    std::cout << lut6.size() << endl;
+    std::cout << lut6.size() << endl; sw.take();
 
-    std::cout << cofactor<2>(fun2("0011"), 1 , true) << endl;
+    PRECOM_RESULT(7) lut7 = do7input(lut3, lut4, lut5, lut6);
+
+    std::cout << lut7.size() << endl; sw.take();
+
+    sw.report();
 
 //    for (const auto& pair : lut6) {
 //        auto function = pair.first;
@@ -106,28 +115,28 @@ int main() {
 //        }
 //    }
 //
-    std::cout << "begin" << endl;
-    fun6 f("00101001000101001010010010100100101001001010010010100100101001");
-    fun6 min;
-    size_t diffmin = (f ^ min).count();
-    for (const auto& pair : lut6) {
-        const auto& pf = pair.first;
-        size_t d = (pf ^ f).count();
-        if (d < diffmin) {
-            diffmin = d;
-            min = pf;
-        }
-    }
-    std::cout << "diff = " << diffmin << std::endl;
-    std::cout << f << std::endl;
-    std::cout << min << std::endl;
-    std::cout << "Other solutions" << std::endl;
-    for (const auto& pair : lut6) {
-        const auto& pf = pair.first;
-        size_t d = (pf ^ f).count();
-        if (d == diffmin && pf != min)
-            std::cout << pf << endl;
-    }
+//    std::cout << "begin" << endl;
+//    fun6 f("00101001000101001010010010100100101001001010010010100100101001");
+//    fun6 min;
+//    size_t diffmin = (f ^ min).count();
+//    for (const auto& pair : lut6) {
+//        const auto& pf = pair.first;
+//        size_t d = (pf ^ f).count();
+//        if (d < diffmin) {
+//            diffmin = d;
+//            min = pf;
+//        }
+//    }
+//    std::cout << "diff = " << diffmin << std::endl;
+//    std::cout << f << std::endl;
+//    std::cout << min << std::endl;
+//    std::cout << "Other solutions" << std::endl;
+//    for (const auto& pair : lut6) {
+//        const auto& pf = pair.first;
+//        size_t d = (pf ^ f).count();
+//        if (d == diffmin && pf != min)
+//            std::cout << pf << endl;
+//    }
 
     return 0;
 }

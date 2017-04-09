@@ -19,21 +19,23 @@ using std::vector;
 using std::unordered_set;
 
 int main() {
+    StopWatch sw;
+    sw.start();
 
-    PRECOM_RESULT(3) lut3 = do3input();
+    PRECOM_RESULT(3) lut3 = do3input(); sw.take();
 
     cout << "Total " << lut3.size() << " decomposable LUT3s." << endl;
 
-    PRECOM_RESULT(4) lut4 = do4input(lut3);
+    PRECOM_RESULT(4) lut4 = do4input(lut3); sw.take();
 
     cout << "Total " << lut4.size() << " decomposable LUT4s." << endl;
 
-    auto lut5 = do5input(lut3, lut4);
+    auto lut5 = do5input(lut3, lut4); sw.take();
 
     
     cout << "Total " << lut5.size() << " decomposable LUT5s." << endl;
 
-    auto lut6 = do6input(lut3, lut4, lut5);
+    auto lut6 = do6input(lut3, lut4, lut5); sw.take();
 //
     cout << "Total " << lut6.size() << " decomposable LUT6s" << endl;
 //
@@ -94,5 +96,7 @@ int main() {
         dbfile << std::endl;
     }
 
+    sw.take();
+    sw.report();
     return 0;
 }

@@ -21,4 +21,10 @@ PRECOM_RESULT(6) do6input(
         const PRECOM_RESULT(4)& lut4Rst,
         const PRECOM_RESULT(5)& lut5Rst);
 
+PRECOM_RESULT(7) do7input(
+        const PRECOM_RESULT(3)& lut3Rst,
+        const PRECOM_RESULT(4)& lut4Rst,
+        const PRECOM_RESULT(5)& lut5Rst,
+        const PRECOM_RESULT(6)& lut6Rst);
+
 #endif //VE490_DO_LUT_H
