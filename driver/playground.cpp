@@ -15,8 +15,7 @@ int main() {
     StopWatch s("My Watch");
 
     s.start();
-    Path p = ProjectBase.sub("circuit/other_fraig");
-    BlifBooleanNet net(p / "C3540.blif");
+    BlifBooleanNet net(BenchmarkAigPath / "C3540.blif");
     s.take("Load");
     auto i = net.inputNodeList();
     auto o = net.outputNodeList();
@@ -40,7 +39,9 @@ int main() {
     std::cout << net.gateCount() << std::endl;
 
     s.take("Gate");
-    auto profile = net.profileBySimulation(100000);
+    net.profileBySimulation(1);
+    s.take("Compile");
+    auto profile = net.profileBySimulation(300000);
 
     s.take("Prof");
     std::cout << profile.nSamples << std::endl;

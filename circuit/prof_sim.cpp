@@ -24,22 +24,7 @@ struct SimulationContext {
 };
 
 
-BlifBooleanNet::SimulationResult::SimulationResult(
-        const BlifBooleanNet &net, size_t nSamples) {
-    size_t nInputs = net.nInputs();
-    size_t nOutputs = net.nOutputs();
-    size_t nInternals = net.internalNodeSet().size();
 
-    this->inputResult.resize(nSamples);
-    this->outputResult.resize(nSamples);
-    this->internalResult.resize(nSamples);
-
-    for (auto& v : inputResult) v.resize(nInputs);
-    for (auto& v : outputResult) v.resize(nOutputs);
-    for (auto& v : internalResult) v.resize(nInternals);
-
-    this->nSamples = nSamples;
-}
 
 void *BlifBooleanNet::getSimulationContext() const{
     if (simulationContext.isValid())
@@ -52,7 +37,7 @@ void *BlifBooleanNet::getSimulationContext() const{
 
     this->exportToCpp(source);
 
-    std::string cmd = "g++ -shared -fPIC -Ofast -march=native " + source + " -o " + library;
+    std::string cmd = "g++ -std=c++14 -shared -fPIC -Ofast -march=native " + source + " -o " + library;
     std::cout << "Executing: " << cmd << std::endl;
     system(cmd.c_str());
 
@@ -95,7 +80,7 @@ void BlifBooleanNet::releaseSimulationContext() {
     delete ctx;
 }
 
-BlifBooleanNet::SimulationResult
+SimulationResult
 BlifBooleanNet::profileBySimulation(int samples) {
 
     auto context = CONTEXT_PTR(getSimulationContext());
@@ -104,7 +89,7 @@ BlifBooleanNet::profileBySimulation(int samples) {
 
     InfiniteRandomPatternGenerator g(this->nInputs());
 
-    BlifBooleanNet::SimulationResult result(*this, samples);
+    SimulationResult result(*this, samples);
 
     result.inputName = context->inputNodeName();
     result.outputName = context->outputNodeName();
@@ -135,7 +120,7 @@ void BlifBooleanNet::verifySimulator(int samples) {
 
     std::cout << "Begin simulation" << std::endl;
 
-    BlifBooleanNet::SimulationResult result(*this, samples);
+    SimulationResult result(*this, samples);
 
     result.inputName = context->inputNodeName();
     result.outputName = context->outputNodeName();
@@ -163,7 +148,7 @@ void BlifBooleanNet::verifySimulator(int samples) {
 }
 
 
-BlifBooleanNet::CompareResult
+CompareResult
 BlifBooleanNet::compareBySimulation(const BlifBooleanNet &net2,
                                     size_t nSamples) {
 
@@ -210,7 +195,7 @@ BlifBooleanNet::compareBySimulation(const BlifBooleanNet &net2,
         if (output0 != output1) error++;
     }
 
-    BlifBooleanNet::CompareResult r;
+    CompareResult r;
 
     r.nSamples = nSamples;
     r.nErrors = error;

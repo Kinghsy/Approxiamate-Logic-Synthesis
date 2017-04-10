@@ -73,7 +73,7 @@ void BlifBooleanNet::prepareBDD() const{
 }
 
 
-int BlifBooleanNet::nInputs() const {
+size_t BlifBooleanNet::nInputs() const {
     return net->ninputs;
 }
 
@@ -132,7 +132,7 @@ const std::string &BlifBooleanNet::name() const {
     return filename;
 }
 
-int BlifBooleanNet::nodeCount() const {
+size_t BlifBooleanNet::nodeCount() const {
     if (nNode.isValid())
         return nNode.get();
     int count = 0;
@@ -145,7 +145,7 @@ int BlifBooleanNet::nodeCount() const {
     return count;
 }
 
-int BlifBooleanNet::gateCount() const {
+size_t BlifBooleanNet::gateCount() const {
     if (nGates.isValid())
         return nGates.get();
     int c = nodeCount();
@@ -171,7 +171,7 @@ BlifBooleanNet BlifBooleanNet::getMFFC(int minInput,
 }
 */
 
-int BlifBooleanNet::nOutputs() const {
+size_t BlifBooleanNet::nOutputs() const {
     return net->noutputs;
 }
 

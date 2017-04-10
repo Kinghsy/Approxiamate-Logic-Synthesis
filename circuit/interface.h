@@ -7,6 +7,7 @@
 
 #include "memorize.h"
 #include "../circuit_profile/profile.h"
+#include "../circuit_profile/sim_profile.h"
 
 #include <string>
 #include <vector>
@@ -32,30 +33,6 @@ public:
         std::set<BnetNodeID> inputNode;
         std::set<BnetNodeID> nodeSet;
         std::set<BnetNodeID> totalSet;
-    };
-
-    struct SimulationResult {
-
-        size_t nSamples;
-
-        std::vector<std::vector<int> > inputResult;
-        std::vector<std::vector<int> > outputResult;
-        std::vector<std::vector<int> > internalResult;
-
-        std::vector<std::string> inputName;
-        std::vector<std::string> outputName;
-        std::vector<std::string> internalName;
-
-        SimulationResult(const BlifBooleanNet& net,
-                         size_t nSamples);
-    };
-
-    struct CompareResult {
-
-        size_t nSamples;
-
-        size_t nErrors;
-
     };
 
 private:
@@ -103,10 +80,10 @@ public:
     const std::string& name() const;
     const std::string  netName() const;
 
-    int nInputs() const;
-    int nOutputs() const;
-    int nodeCount() const;
-    int gateCount() const;
+    size_t nInputs() const;
+    size_t nOutputs() const;
+    size_t nodeCount() const;
+    size_t gateCount() const;
 
     // Note inputs and output lists, vecs are not! are ORDERED!!
     const std::set<BnetNodeID> & inputNodeSet() const;
@@ -151,6 +128,7 @@ public:
 
     ~BlifBooleanNet();
 };
+
 
 
 
