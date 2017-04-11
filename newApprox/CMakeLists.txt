@@ -2,11 +2,15 @@
 # Builing of dependent libraries
 
 set(NEW_SOURCE_FILES
-        src/bool_function.h
+        src/boolean_function.h
+        src/algorithm_decompose.h
+        src/decomposition_info.h
         src/kmap.h
-        src/node.h
-        src/proce.h
-        src/proce.cpp)
+        src/truth_table.h
+        src/const.h
+
+        src/algorithm_decompose.cpp
+    )
 
 
 #list(APPEND SOURCE_FILES src/boolean_function.h
@@ -18,4 +22,4 @@ set(NEW_SOURCE_FILES
 # The default target
 #add_executable(approxiamate ${SOURCE_FILES})
 
-#add_library(newApprox ${NEW_SOURCE_FILES})
+add_library(newApprox ${NEW_SOURCE_FILES})

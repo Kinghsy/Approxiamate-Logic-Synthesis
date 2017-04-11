@@ -1,49 +1,52 @@
 //
-// Created by king on 17-4-10.
+// Created by king on 17-4-11.
 //
 
 #ifndef VE490_KMAP_H
 #define VE490_KMAP_H
 
-#include <vector>
+#include<vector>
 
+#include "boolean_function.h"
+#include "truth_table.h"
+#include "const.h"
 #include "../../circuit_profile/sim_profile.h"
-#include "bool_function.h"
 
 class Kmap {
 
 private:
 
-    std::vector<std::vector<int> > kmap;
-    std::vector<std::string > widthName;
+    int height, width;
+    std::vector<TruthTable > kmap;
     std::vector<std::string > heightName;
-
-    FocusedSimulationResult simRes;
-
-    int divideMode; // e.g.  divideMode = XOR_IGNORE
+    std::vector<std::string > widthName;
 
 public:
 
-    struct bestDivision {
-        BoolFunction leftFun;
-        BoolFunction rightFun;
-        int errorCaseNo;  // maybe double type? not sure yet. FIXME
-        int opera;
+    struct BestApprox {
+        BooleanFunction leftFunc;
+        BooleanFunction rightFunc;
+        int errorCount;
+        combineMethod method;
     };
 
-    bestDivision getBestDiv();
-
-    void operator= (const Kmap& initkmap);
-    bool operator== (const Kmap& initkmap);
-    std::vector<int> operator[] (const int& i);
-
-    Kmap(const Kmap& initkmap);
-    Kmap();
+    Kmap(const BooleanFunction& BF,
+         std::vector<std::string > heightName,
+         std::vector<std::string > widthName);
     ~Kmap();
 
-    void display();
+    bool operator== (const Kmap& initKmap);  // without name
+    size_t operator^ (const Kmap& initKmap);
+    TruthTable operator[] (const int& i);
 
-};
+    BestApprox divide(const SimulationResult& simData);
 
+    int getHeight();
+    int getWidth();
+    std::string getHeightName(const int& i);
+    std::string getWidthName(const int& j);
+
+
+}
 
 #endif //VE490_KMAP_H
