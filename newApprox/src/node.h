@@ -31,6 +31,8 @@ public:
         int opera;
     };
 
+    std::vector<DecomposedFuncPtr> inOrderTravel();
+
     void operator= (const DecomposedFunc& initDF); // Deep copy required.
     bool operator== (const DecomposedFunc& initDF);
     BoolFunction& operator* ();
@@ -38,6 +40,8 @@ public:
     BoolFunction combine(); // return (div.leftFun)->combine().combineWith((div.rightFun)->combine(), div.opera); ??
                             // FIXME
     bool divide();
+
+    bool isLeaf();
 
     DecomposedFunc();
     DecomposedFunc(const BoolFunction& initFun);

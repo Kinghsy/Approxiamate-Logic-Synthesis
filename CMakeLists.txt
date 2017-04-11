@@ -37,6 +37,8 @@ add_subdirectory(circuit_profile)
 add_subdirectory(abc_expansion)
 add_subdirectory(pre_decomp)
 
+add_subdirectory(newApprox)
+
 add_subdirectory(policy)
 
 add_subdirectory(driver)
