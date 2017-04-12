@@ -25,7 +25,8 @@ public:
 
     friend TTable combineTruthTable(
             const TTable& t1, const TTable& t2,
-            const DBitset& t1Mask, const DBitset& t2Mask);
+            const DBitset& t1Mask, const DBitset& t2Mask,
+            const TruthTable& method);
 
     DBitset::reference operator[](size_t term);
     DBitset::reference operator[](const DBitset& term);
