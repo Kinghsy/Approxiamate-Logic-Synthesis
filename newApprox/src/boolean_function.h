@@ -17,29 +17,46 @@
 class BooleanFunction {
 private:
     int inputSize;
-    TruthTable truthTab;
-    std::vector<std::string> portName;
-    std::string outPortName;
+    TTable truthTab;
+    std::vector<NodeName> portName;
+    NodeName outPortName;
 public:
-    BooleanFucntion(const int &inputSize,
-                    const TruthTable& truthTab,
-                    const std::vector<std::string>& portName,
-                    const std::string& outPortName);
+    BooleanFunction(): truthTab(std::string("00"));
+    BooleanFunction(const int &inputSize,
+                    TTable& truthTab,
+                    const std::vector<NodeName >& portName,
+                    const NodeName& outPortName);
     ~BooleanFunction();
 
     void operator= (const BooleanFunction &initBF);
-    bool opeator== (const BooleanFunction &initBF);
-    size_t operator^(const BooleanFunction &initBF);
+    bool operator== (const BooleanFunction &initBF);
+    int operator^(const BooleanFunction &initBF);
+
+    friend BooleanFunction combineBooleanFunction(
+            const BooleanFunction& bf1,
+            const BooleanFunction& bf2,
+            const TTable& method,
+            const NodeName& outName);
 
     int getInputSize();
     int getVal(const DBitset& term);
     int getVal(const size_t term);
     bool isAll0s();
     bool isAll1s();
+    TTable& getTTable();
 
-    friend combineMethod findMethod(const BooleanFunction& bf);
+    //friend TTable findMethod(const BooleanFunction& bf);
 
-    std::string getPortName(const int& i);
-    std::string getOutPortName();
-}
+    int getProtNum(const NodeName& name) const;
+    NodeName getPortName(const int& i) const;
+    NodeName getOutPortName() const;
+};
+
+BooleanFunction combineBooleanFunction(
+        const BooleanFunction& bf1,
+        const BooleanFunction& bf2,
+        const TTable& method,
+        const NodeName& outName
+);
+
 #endif //VE490_BOOLEAN_FUNCTION_H

@@ -10,6 +10,7 @@
 #include "boolean_function.h"
 #include "decomposition_info.h"
 #include "algorithm_decompose.h"
+#include "truth_table.h"
 
 using std::string;
 using std::vector;
@@ -20,7 +21,7 @@ AlgorithmDecompose::~AlgorithmDecompose() {}
 
 ResultType AlgorithmDecompose::operate(
         const BooleanFunction &bf,
-        const SimulationResult &simData) {
+        SimulationResult &simData) {
 
     initBF = bf;
     return searchPrcoe(bf, simData);
@@ -29,35 +30,25 @@ ResultType AlgorithmDecompose::operate(
 }
 
 ResultType AlgorithmDecompose::searchPrcoe(
-        BooleanFunction bf, const SimulationResult &simData) {
+        BooleanFunction bf, SimulationResult &simData) {
 
-    if (bf.isAll0s() || bf.isAll1s()) {
-        BlifBuilder::Connection conn;
-        conn.n1 = ""; conn.n2 = "";
-        conn.method = (bf.isAll0s()) ? ALL_OS:ALL_1S;
-        BlifBuilder info(bf.getOutPortName(), conn);
+    if (bf.getInputSize() == 1) {
         ResultType res;
-        res.errorCount = 0; res.deInfo = info;
+        if ((bf.getTTable()) == NOT_1_INPUT) {
+            res.deInfo.BlifBuilder(bf.getOutPortName(), true);
+        } else {
+            res.deInfo.BlifBuilder(bf.getOutPortName(), false);
+        } //FIXME
+        res.errorCount = 0; res.fun = bf;
         return res;
     }
 
-    // include one input, which could be consider as a kind of cache?
 
-    if (bf.getInputSize() <= 2) {
-        BlifBuilder::Connection conn;
-        conn.n1 = bf.getPortName(0); conn.n2 = bf.getPortName(1);
-        conn.method = findMethod(bf);
-        BlifBuilder info(bf.getOutPortName(), conn);
-        ResultType res;
-        res.errorCount = 0; res.deInfo = info;
-        return res;
-    }
-
-    // here means this bf at least has three inputs and it is divideble
+    // here means this bf at least has two inputs and it is divideble
     // now try some method to divide bf's inputs into two sets.
 
-
     ResultType bestApproximation;
+
     bestApproximation.errorCount = MAX_VALUE;
     for (size_t i = 1; i < (1 << bf.getInputSize() - 1); ++i) {
 
@@ -73,19 +64,20 @@ ResultType AlgorithmDecompose::searchPrcoe(
 
         ResultType leftRes = searchPrcoe(approx.leftFunc, simData);
         ResultType rightRes = searchPrcoe(approx.rightFunc, simData);
-        BlifBuilder::Connection conn;
-        conn.n1 = leftRes.deInfo.outputNodeName();
-        conn.n2 = rightRes.deInfo.outputNodeName();
-        conn.method = approx.method;
+        // search for the left best solution and right best solution
 
-        BlifBuilder thisStep(bf.getOutPortName(), conn);
-        BlifBuilder wholeDecompInfo =
-                combineDecompositionInfo(thisStep, leftRes.deInfo, rightRes.deInfo);
-        if ( ((wholeDecompInfo.buildDecompInfo()) ^ (initBF)) < bestApproximation.errorCount) {
-            bestApproximation.errorCount =  (wholeDecompInfo.buildDecompInfo()) ^ (initBF);
-            bestApproximation.deInfo = wholeDecompInfo;
+        BooleanFunction approxFun = combineBooleanFunction(
+                leftRes.fun, rightRes.fun, approx.method, bf.getOutPortName()
+        );
+        // obtain approximation boolean function and compare it with initial
+
+        if ( (approxFun^bf) < bestApproximation.errorCount) {
+            bestApproximation.errorCount =  approxFun ^ bf;
+            bestApproximation.deInfo = combineBilfBuilder(
+                    leftRes.deInfo, rightRes.deInfo, approx.method, bf.getOutPortName()
+            );
+            bestApproximation.fun = approxFun;
         }
-
     }
 
     return bestApproximation;

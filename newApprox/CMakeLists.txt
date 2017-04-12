@@ -10,6 +10,8 @@ set(NEW_SOURCE_FILES
         src/const.h
 
         src/algorithm_decompose.cpp
+        src/kmap.cpp
+        src/boolean_function.cpp
     )
 
 

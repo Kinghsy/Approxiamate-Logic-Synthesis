@@ -26,7 +26,7 @@ public:
     friend TTable combineTruthTable(
             const TTable& t1, const TTable& t2,
             const DBitset& t1Mask, const DBitset& t2Mask,
-            const TruthTable& method);
+            const TTable& method);
 
     DBitset::reference operator[](size_t term);
     DBitset::reference operator[](const DBitset& term);
@@ -34,6 +34,7 @@ public:
     TTable& set(const DBitset&, bool);
 
     TTable operator^(const TTable& t2);
+    bool operator== (const TTable& t2); // shuyang added. this is needed.
 
     TTable& flip(); // Returns reference to itself
     TTable& reset(); // Returns reference to itself
@@ -49,9 +50,14 @@ public:
     size_t nInputs();
 };
 
+const TTable NOT_1_INPUT= TTable("10");
+const TTable NORMAL_1_INPUT= TTable("01");
+
 const TTable XOR_TABLE= TTable("0110");
 const TTable AND_TABLE= TTable("0001");
 const TTable OR_TABLE = TTable("0111");
+
+
 
 
 

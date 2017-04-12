@@ -8,6 +8,7 @@
 #include<map>
 #include<set>
 
+#include "truth_table.h"
 #include "boolean_function.h"
 #include "kmap.h"
 #include "const.h"
@@ -19,7 +20,7 @@ class BlifBuilder
         NodeName out;
         NodeName in1;
         NodeName in2;
-        TruthTable method;
+        TTable method;
     };
 
     std::vector<NodeName, Connection> data;
@@ -30,12 +31,12 @@ public:
     BlifBuilder(const NodeName& node, bool flip=false);
 
     friend BlifBuilder
-    combineDecompositionInfo(const BlifBuilder & d1,
-                             const BlifBuilder & d2,
-                             const TruthTable& table,
-                             const NodeName& newOutput);
+    combineBilfBuilder(const BlifBuilder &d1,
+                       const BlifBuilder &d2,
+                       const TTable &table,
+                       const NodeName &newOutput);
     // for real program convenience
-    // return combineDecompositionInfo(combineDecompositionInfo(d1, d2) , d3)
+    // return combineDecompositionInfo(combineBilfBuilder(d1, d2) , d3)
 
     NodeName outputNode();
 
@@ -45,9 +46,9 @@ public:
 };
 
 BlifBuilder
-combineDecompositionInfo(const BlifBuilder & d1,
-                         const BlifBuilder & d2,
-                         const TruthTable& table,
-                         const NodeName& newOutput);
+combineBilfBuilder(const BlifBuilder &d1,
+                   const BlifBuilder &d2,
+                   const TTable &table,
+                   const NodeName &newOutput);
 
 #endif //VE490_DECOMPOSITION_INFO_H

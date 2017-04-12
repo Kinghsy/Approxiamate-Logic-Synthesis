@@ -19,6 +19,7 @@ public:
     //std::deque<BooleanFunction> BooleanFunctionPool;
     struct ResultType {
         size_t errorCount;
+        BooleanFunction fun;
         BlifBuilder deInfo;
     };
 
@@ -27,12 +28,12 @@ private:
     BooleanFunction initBF;
     //ResultType bestDecomp;
     ResultType searchPrcoe(BooleanFunction bf,
-                           const SimulationResult& simData);
+                           SimulationResult& simData);
 
 public:
 
     ResultType operate(const BooleanFunction& bf,
-                       const SimulationResult& simData);
+                       SimulationResult& simData);
 
     AlgorithmDecompose();
     ~AlgorithmDecompose();
