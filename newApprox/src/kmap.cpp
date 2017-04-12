@@ -12,6 +12,7 @@
 
 using std::string;
 using std::vector;
+using std::map;
 
 Kmap::Kmap(
         const BooleanFunction &BF,
@@ -22,6 +23,10 @@ Kmap::Kmap(
     width = widthName.size();
     this->heightName = heightN;
     this->widthName = widthN;
+
+    for (int i = 0; i < height; ++i) {
+        kmap.push_back(TTable(""));
+    }
 
     for (int i = 0; i < (1 << height) ; ++i) {
         size_t base = 0;
@@ -95,7 +100,7 @@ BestApprox Kmap::divide(SimulationResult &simData) {
     // 4: MajorRow + complement of MajorRow
 
     // this is the most important part !!!!!
-    // but my thinking is cease !!!! WTF !!!!!
+    // but my thinking is ceased !!!! WTF !!!!!
 
     vector<NodeName> nodeNameSet = heightName;
     for (int i = 0; i < widthName.size(); ++i) {
@@ -103,6 +108,28 @@ BestApprox Kmap::divide(SimulationResult &simData) {
     }
     FocusedSimulationResult focusSim = simData.focus(nodeNameSet);
 
+    vector<int, TTable> set1, set2;
 
+}
+
+// FIXME
+// FIXME
+// FIXME
+
+TTable buildMajorRow(vector<int, TTable> set1,
+                     vector<int, TTable> set2,
+                     ModeType mode,
+                     FocusedSimulationResult& focusSim);
+
+int errorCompare(vector<int, TTable> set1,
+                 TTable target1,
+                 vector<int, TTable> set2,
+                 TTable target2,
+                 FocusedSimulationResult& focusSim) {
+
+    int count = 0;
+    for (auto item : set1) {
+        item.
+    }
 
 }
