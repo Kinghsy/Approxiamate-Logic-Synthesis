@@ -32,7 +32,7 @@ public:
     size_t operator^(const BooleanFunction &initBF);
 
     int getInputSize();
-    int getVal(const dyBitset& term);
+    int getVal(const DBitset& term);
     int getVal(const size_t term);
     bool isAll0s();
     bool isAll1s();

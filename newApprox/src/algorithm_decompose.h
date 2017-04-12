@@ -19,7 +19,7 @@ public:
     //std::deque<BooleanFunction> BooleanFunctionPool;
     struct ResultType {
         size_t errorCount;
-        DecompositionInfo deInfo;
+        BlifBuilder deInfo;
     };
 
 private:

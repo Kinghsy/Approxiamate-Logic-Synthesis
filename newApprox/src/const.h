@@ -7,9 +7,8 @@
 
 #include <boost/dynamic_bitset.hpp>
 
-typedef std::string nodeName;
-typedef boost::dynamic_bitset<> dyBitset;
-typedef int combineMethod;
+typedef std::string NodeName;
+typedef boost::dynamic_bitset<> DBitset;
 
 #define MAX_VALUE (1 << 30)
 

@@ -32,10 +32,10 @@ ResultType AlgorithmDecompose::searchPrcoe(
         BooleanFunction bf, const SimulationResult &simData) {
 
     if (bf.isAll0s() || bf.isAll1s()) {
-        DecompositionInfo::connection conn;
+        BlifBuilder::Connection conn;
         conn.n1 = ""; conn.n2 = "";
         conn.method = (bf.isAll0s()) ? ALL_OS:ALL_1S;
-        DecompositionInfo info(bf.getOutPortName(), conn);
+        BlifBuilder info(bf.getOutPortName(), conn);
         ResultType res;
         res.errorCount = 0; res.deInfo = info;
         return res;
@@ -44,10 +44,10 @@ ResultType AlgorithmDecompose::searchPrcoe(
     // include one input, which could be consider as a kind of cache?
 
     if (bf.getInputSize() <= 2) {
-        DecompositionInfo::connection conn;
+        BlifBuilder::Connection conn;
         conn.n1 = bf.getPortName(0); conn.n2 = bf.getPortName(1);
         conn.method = findMethod(bf);
-        DecompositionInfo info(bf.getOutPortName(), conn);
+        BlifBuilder info(bf.getOutPortName(), conn);
         ResultType res;
         res.errorCount = 0; res.deInfo = info;
         return res;
@@ -73,13 +73,13 @@ ResultType AlgorithmDecompose::searchPrcoe(
 
         ResultType leftRes = searchPrcoe(approx.leftFunc, simData);
         ResultType rightRes = searchPrcoe(approx.rightFunc, simData);
-        DecompositionInfo::connection conn;
+        BlifBuilder::Connection conn;
         conn.n1 = leftRes.deInfo.outputNodeName();
         conn.n2 = rightRes.deInfo.outputNodeName();
         conn.method = approx.method;
 
-        DecompositionInfo thisStep(bf.getOutPortName(), conn);
-        DecompositionInfo wholeDecompInfo =
+        BlifBuilder thisStep(bf.getOutPortName(), conn);
+        BlifBuilder wholeDecompInfo =
                 combineDecompositionInfo(thisStep, leftRes.deInfo, rightRes.deInfo);
         if ( ((wholeDecompInfo.buildDecompInfo()) ^ (initBF)) < bestApproximation.errorCount) {
             bestApproximation.errorCount =  (wholeDecompInfo.buildDecompInfo()) ^ (initBF);
