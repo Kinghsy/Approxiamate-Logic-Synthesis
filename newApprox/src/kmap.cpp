@@ -39,6 +39,7 @@ size_t countErrorWithTarget(const TTable& target, const TTable& nowRun,
 
 TTable calcMajorRow(vector<TTableRela>& vec, size_t bits, const FocusedSimulationResult& simData);
 
+string num2string(size_t bits, size_t num);
 
 tempNodeNameGenertor nodeNameGen;
 
