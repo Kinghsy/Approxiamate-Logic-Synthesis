@@ -30,6 +30,12 @@ public:
         BooleanFunction rightFunc;
         int errorCount;
         TTable method;
+        BestApprox() :
+                leftFunc(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
+                rightFunc(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
+                method(NORMAL_1_INPUT) {
+            errorCount = MAX_VALUE;
+        }
     };
 
     Kmap(const BooleanFunction& BF,
@@ -69,5 +75,7 @@ public:
 
 
 };
+
+std::string num2string(size_t bits, size_t num);
 
 #endif //VE490_KMAP_H

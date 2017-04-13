@@ -122,6 +122,12 @@ const TTable NORMAL_1_INPUT= TTable("01");
 const TTable XOR_TABLE= TTable("0110");
 const TTable AND_TABLE= TTable("0001");
 const TTable OR_TABLE = TTable("0111");
+const TTable LEFT_RELA_TABLE = TTable("0101"); // only relevant to left.
+const TTable LEFT_RELA_NOT_TABLE = TTable("1010"); // only relevant to left and has an not gate.
+const TTable RIGHT_RELA_TABLE = TTable("0011"); // only relevant to right.
+const TTable RIGHT_RELA_NOT_TABLE = TTable("1100"); // only relevant to right and has an not gate.
+const TTable ALL_IRR_TABLE_0 = TTable("0000"); // irrelevant to both sides, and return 0 always.
+const TTable ALL_IRR_TABLE_1 = TTable("1111"); // irrelevant to both sides, and return 1 always.
 
 TTable combineTruthTable(
         const TTable& t1, const TTable& t2,
