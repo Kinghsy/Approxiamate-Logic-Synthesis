@@ -4,7 +4,7 @@
 set(NEW_SOURCE_FILES
         src/boolean_function.h
         src/algorithm_decompose.h
-        src/decomposition_info.h
+        src/blif_builder.h
         src/kmap.h
         src/ttable.h
         src/const.h

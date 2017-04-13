@@ -15,9 +15,6 @@
 using std::string;
 using std::vector;
 
-AlgorithmDecompose::AlgorithmDecompose() {}
-
-AlgorithmDecompose::~AlgorithmDecompose() {}
 
 ResultType AlgorithmDecompose::operate(
         const BooleanFunction &bf,

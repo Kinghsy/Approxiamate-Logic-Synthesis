@@ -3,7 +3,7 @@
 //
 
 #include "const.h"
-#include "truth_table.h"
+#include "ttable.h"
 
 // Duplicates the first n bits and fill them in the "l"
 // fillWith<16>(4, 0010 0100 0111 0110B)

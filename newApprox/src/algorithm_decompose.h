@@ -11,7 +11,8 @@
 #include "boolean_function.h"
 #include "decomposition_info.h"
 #include "kmap.h"
-#include "../../circuit_profile/sim_profile.h"
+
+class SimulationResult;
 
 class AlgorithmDecompose {
 
@@ -35,8 +36,8 @@ public:
     ResultType operate(const BooleanFunction& bf,
                        SimulationResult& simData);
 
-    AlgorithmDecompose();
-    ~AlgorithmDecompose();
+    AlgorithmDecompose() {}
+    ~AlgorithmDecompose() {}
 
 };
 
