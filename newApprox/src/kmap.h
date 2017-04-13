@@ -8,7 +8,7 @@
 #include<vector>
 
 #include "boolean_function.h"
-#include "truth_table.h"
+#include "ttable.h"
 #include "const.h"
 #include "../../circuit_profile/sim_profile.h"
 

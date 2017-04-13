@@ -5,7 +5,7 @@
 #include <map>
 
 #include "const.h"
-#include "truth_table.h"
+#include "ttable.h"
 #include "kmap.h"
 #include "boolean_function.h"
 #include "decomposition_info.h"

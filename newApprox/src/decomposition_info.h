@@ -8,7 +8,7 @@
 #include<map>
 #include<set>
 
-#include "truth_table.h"
+#include "ttable.h"
 #include "boolean_function.h"
 #include "kmap.h"
 #include "const.h"

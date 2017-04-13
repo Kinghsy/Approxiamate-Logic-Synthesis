@@ -4,6 +4,7 @@
 
 #include "truth_table.h"
 #include "exception.h"
+#include "../newApprox/src/truth_table.h"
 #include <iostream>
 #include <cassert>
 
@@ -72,3 +73,5 @@ void TruthTable::print() {
         cout << (int)i << " ";
     cout << endl;
 }
+
+

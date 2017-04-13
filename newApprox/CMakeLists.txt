@@ -6,12 +6,13 @@ set(NEW_SOURCE_FILES
         src/algorithm_decompose.h
         src/decomposition_info.h
         src/kmap.h
-        src/truth_table.h
+        src/ttable.h
         src/const.h
 
         src/algorithm_decompose.cpp
         src/kmap.cpp
         src/boolean_function.cpp
+        src/ttable.cpp
     )
 
 

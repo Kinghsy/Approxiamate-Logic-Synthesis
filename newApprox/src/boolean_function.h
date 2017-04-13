@@ -12,7 +12,7 @@
 
 #include "const.h"
 #include "kmap.h"
-#include "truth_table.h"
+#include "ttable.h"
 
 class BooleanFunction {
 private:
