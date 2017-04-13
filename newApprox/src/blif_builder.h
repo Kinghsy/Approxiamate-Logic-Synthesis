@@ -5,13 +5,10 @@
 #ifndef VE490_DECOMPOSITION_INFO_H
 #define VE490_DECOMPOSITION_INFO_H
 
-#include<map>
-#include<set>
-
-#include "ttable.h"
-#include "boolean_function.h"
-#include "kmap.h"
+#include <unordered_map>
+#include <set>
 #include "const.h"
+#include "ttable.h"
 
 class BlifBuilder
 {
@@ -22,7 +19,7 @@ class BlifBuilder
         NodeName in2;
         TTable method;
 
-        std::string toBlifString();
+        std::string toBlifString() const;
     };
 
     std::vector<Connection> data;
@@ -44,12 +41,12 @@ public:
     // for real program convenience
     // return combineDecompositionInfo(combineBilfBuilder(d1, d2) , d3)
 
-    NodeName outputNode();
+    NodeName outputNode() const;
 
-    void exportBlif(const std::string& filename);
-    std::string exportBlifBody();
+    void exportBlif(const std::string& filename) const;
+    std::string exportBlifBody() const;
 
-    std::set<NodeName> inputName();
+    std::set<NodeName> inputName() const;
 };
 
 BlifBuilder

@@ -2,15 +2,17 @@
 // Created by king on 17-4-11.
 //
 
-#ifndef VE490_KMAP_H
-#define VE490_KMAP_H
+#ifndef VE490_NEW_KMAP_H
+#define VE490_NEW_KMAP_H
 
 #include<vector>
 
-#include "boolean_function.h"
-#include "ttable.h"
 #include "const.h"
-#include "../../circuit_profile/sim_profile.h"
+#include "bool_function.h"
+
+class BooleanFunction;
+class TTable;
+class SimulationResult;
 
 class Kmap {
 

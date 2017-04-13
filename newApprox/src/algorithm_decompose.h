@@ -8,8 +8,8 @@
 #include <deque>
 
 #include "const.h"
-#include "boolean_function.h"
-#include "decomposition_info.h"
+#include "bool_function.h"
+#include "blif_builder.h"
 #include "kmap.h"
 
 class SimulationResult;

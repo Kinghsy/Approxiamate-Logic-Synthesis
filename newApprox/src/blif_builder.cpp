@@ -38,15 +38,15 @@ combineBilfBuilder(const BlifBuilder &d1, const BlifBuilder &d2,
     return ret;
 }
 
-NodeName BlifBuilder::outputNode() {
+NodeName BlifBuilder::outputNode() const {
     return outputNodeName;
 }
 
-void BlifBuilder::exportBlif(const std::string &filename) {
+void BlifBuilder::exportBlif(const std::string &filename) const {
 
 }
 
-std::set<NodeName> BlifBuilder::inputName() {
+std::set<NodeName> BlifBuilder::inputName() const {
     std::set<NodeName> ret;
     std::transform(input.begin(), input.end(), ret.begin(),
                    [](decltype(input.begin()) it) {
@@ -55,7 +55,7 @@ std::set<NodeName> BlifBuilder::inputName() {
     return ret;
 }
 
-std::string BlifBuilder::Connection::toBlifString() {
+std::string BlifBuilder::Connection::toBlifString() const {
     std::stringstream ss;
     ss << ".name " << this->in1 << " " << this->in2 << " ";
     ss << this->out << "\n";

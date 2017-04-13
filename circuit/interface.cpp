@@ -1,17 +1,18 @@
-#include <algorithm>
+
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 #include <vector>
-#include "../lib/libblif/bnet.h"
-
 #include <truth_table.h>
+
+
+#include "../lib/libblif/interface.h"
+
 #include "interface.h"
 #include "pattern_gen.h"
-#include "../lib/cudd-2.5.0/cudd/cudd.h"
-#include "../lib/libblif/bnet.h"
-#include "../lib/libblif/cudd_build_v2.h"
+#include "../newApprox/src/blif_builder.h"
 
 
 using namespace std;
@@ -378,8 +379,8 @@ void BlifBooleanNet::exportFfcToBlifFile(const BlifBooleanNet::FFC &ffc,
     const BnetNode *nd = getNodeByName(cnode);
 
     fout << "# ffc of " << ffc.name << "@" << net->name << endl;
-    fout << "# inputDepth = " << ffc.depth2Input << endl;
-    fout << "# outputDepth = " << ffc.depth2Output << endl;
+//    fout << "# inputDepth = " << ffc.depth2Input << endl;
+//    fout << "# outputDepth = " << ffc.depth2Output << endl;
     fout << "# number of inputs = " << ffc.inputNode.size() << endl;
     fout << "# total number of nodes = " << ffc.nodeSet.size() << endl;
     fout << "# all nodes: ";
@@ -469,7 +470,7 @@ const set<BlifBooleanNet::BnetNodeID> &BlifBooleanNet::outputNodeSet() const {
 
 void
 BlifBooleanNet::exportPartialBlif(const std::string &fname,
-                                  unordered_set<BlifBooleanNet::BnetNodeID> omits) const {
+                                  set<BlifBooleanNet::BnetNodeID> omits) const {
     FILE* fp = fopen(fname.c_str(), "w+");
     BnetNode *nd;
     BnetTabline *tl;
@@ -515,5 +516,20 @@ BlifBooleanNet::exportPartialBlif(const std::string &fname,
     fclose(fp);
 }
 
+
+void BlifBooleanNet::exportReplacedBlif(const std::string &fname,
+                                        const BlifBooleanNet::FFC &ffc,
+                                        const BlifBuilder &blifBuilder) {
+    assert(std::is_permutation(
+                   ffc.inputNode.begin(), ffc.inputNode.end(),
+                   blifBuilder.inputName().begin()));
+    assert(ffc.name == blifBuilder.outputNode());
+
+    this->exportPartialBlif(fname, ffc.nodeSet);
+
+    ofstream file(fname);
+
+    file << blifBuilder.exportBlifBody();
+}
 
 

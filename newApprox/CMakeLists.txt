@@ -2,7 +2,7 @@
 # Builing of dependent libraries
 
 set(NEW_SOURCE_FILES
-        src/boolean_function.h
+        src/bool_function.h
         src/algorithm_decompose.h
         src/blif_builder.h
         src/kmap.h
@@ -11,7 +11,7 @@ set(NEW_SOURCE_FILES
 
         src/algorithm_decompose.cpp
         src/kmap.cpp
-        src/boolean_function.cpp
+        src/bool_function.cpp
         src/ttable.cpp
         src/blif_builder.cpp
     )

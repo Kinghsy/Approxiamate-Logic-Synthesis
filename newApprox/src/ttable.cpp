@@ -66,7 +66,7 @@ DBitset TTable::expandTo(const DBitset &mask) const {
     return uf;
 }
 
-friend
+
 TTable combineTruthTable(const TTable &t1, const TTable &t2,
                          const DBitset &t1Mask, const DBitset &t2Mask,
                          const TTable &method) {

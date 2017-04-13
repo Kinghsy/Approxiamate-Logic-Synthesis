@@ -112,8 +112,8 @@ BlifBooleanNet::getFFC() const {
                 ffc.inputNode.begin(),
                 ffc.inputNode.end()
         );
-        ffc.minDepth2Input = getMinDepths2Input(ffc.totalSet);
-        ffc.minDepth2Output = getMinDepths2Output(ffc.totalSet);
+//        ffc.minDepth2Input = getMinDepths2Input(ffc.totalSet);
+//        ffc.minDepth2Output = getMinDepths2Output(ffc.totalSet);
         allFfc.insert(std::make_pair(ffc.name, ffc));
     }
     return allFfc;
@@ -202,7 +202,7 @@ BlifBooleanNet::getInputFromSet(
     return inputSet;
 }
 
-int BlifBooleanNet::getMinDepths2Input(const std::set<BnetNodeID> &s) const {
+//int BlifBooleanNet::getMinDepths2Input(const std::set<BnetNodeID> &s) const {
 //    std::vector<int> v;
 //    v.resize(s.size());
 //    std::transform(s.begin(), s.end(), v.begin(),
@@ -211,11 +211,11 @@ int BlifBooleanNet::getMinDepths2Input(const std::set<BnetNodeID> &s) const {
 //                   }
 //    );
 //    return *min_element(v.begin(), v.end());
-    assert(0);
-    return -1;
-}
+//    assert(0);
+//    return -1;
+//}
 
-int BlifBooleanNet::getMinDepths2Output(const std::set<BnetNodeID> &s) const {
+//int BlifBooleanNet::getMinDepths2Output(const std::set<BnetNodeID> &s) const {
 //    std::vector<int> v;
 //    v.resize(s.size());
 //    std::transform(s.begin(), s.end(), v.begin(),
@@ -224,6 +224,6 @@ int BlifBooleanNet::getMinDepths2Output(const std::set<BnetNodeID> &s) const {
 //                   }
 //    );
 //    return *min_element(v.begin(), v.end());
-    assert(0);
-    return -1;
-}
+//    assert(0);
+//    return -1;
+//}

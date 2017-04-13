@@ -2,8 +2,8 @@
 // Created by king on 17-4-11.
 //
 
-#ifndef VE490_BOOLEAN_FUNCTION_H
-#define VE490_BOOLEAN_FUNCTION_H
+#ifndef VE490_NEW_BOOLEAN_FUNCTION_H
+#define VE490_NEW_BOOLEAN_FUNCTION_H
 
 #include <cstdlib>
 #include <boost/dynamic_bitset.hpp>
@@ -21,7 +21,7 @@ private:
     std::vector<NodeName> portName;
     NodeName outPortName;
 public:
-    BooleanFunction(): truthTab(std::string("00"));
+    BooleanFunction(): truthTab(std::string("00")) {};
     BooleanFunction(const int &inputSize,
                     TTable& truthTab,
                     const std::vector<NodeName >& portName,

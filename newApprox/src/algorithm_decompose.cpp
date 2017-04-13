@@ -7,8 +7,8 @@
 #include "const.h"
 #include "ttable.h"
 #include "kmap.h"
-#include "boolean_function.h"
-#include "decomposition_info.h"
+#include "bool_function.h"
+#include "blif_builder.h"
 #include "algorithm_decompose.h"
 #include "truth_table.h"
 

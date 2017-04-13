@@ -8,7 +8,8 @@
 #include "const.h"
 #include "ttable.h"
 #include "kmap.h"
-#include "boolean_function.h"
+#include "bool_function.h"
+#include "../../circuit_profile/sim_profile.h"
 
 using std::string;
 using std::vector;
@@ -39,7 +40,7 @@ Kmap::Kmap(
             size_t exten = 0;
             size_t temp2 = j;
             for (int k = 0; k < width; ++k) {
-                exten += (temp2 % 2) * (1 << (BF.getProtNum(widthN[k])))
+                exten += (temp2 % 2) * (1 << (BF.getProtNum(widthN[k])));
             }
 
             int res = BF.getVal(base + exten);

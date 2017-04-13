@@ -29,7 +29,7 @@ public:
             : data(1ul << nInputs, value), inputSize(nInputs) {}
 
     TTable(const std::string& valStr, size_t nInputs) {
-        size_t length = valStr.size();=
+        size_t length = valStr.size();
         assert(length == (1ul << nInputs));
         inputSize = nInputs;
         data = DBitset(valStr);

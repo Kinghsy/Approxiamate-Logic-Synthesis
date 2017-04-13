@@ -19,6 +19,7 @@
 struct DdManager;
 struct BnetNetwork;
 struct BnetNode;
+class BlifBuilder;
 
 class BlifBooleanNet {
 public:
@@ -26,10 +27,10 @@ public:
 
     struct FFC {
         BnetNodeID name;
-        int depth2Input;
-        int depth2Output;
-        int minDepth2Input;
-        int minDepth2Output;
+//        int depth2Input;
+//        int depth2Output;
+//        int minDepth2Input;
+//        int minDepth2Output;
         std::set<BnetNodeID> inputNode;
         std::set<BnetNodeID> nodeSet;
         std::set<BnetNodeID> totalSet;
@@ -93,8 +94,8 @@ public:
     const std::set<BnetNodeID> & internalNodeSet() const;
     const std::set<BnetNodeID> & totalNodeSet() const;
 
-    int getMinDepths2Input(const std::set<BnetNodeID>& s) const;
-    int getMinDepths2Output(const std::set<BnetNodeID>& s) const;
+//    int getMinDepths2Input(const std::set<BnetNodeID>& s) const;
+//    int getMinDepths2Output(const std::set<BnetNodeID>& s) const;
 
     TruthTable truthTable() const;
 
@@ -113,7 +114,11 @@ public:
     void exportBlifToFile(const std::string& fname) const;
 
     void exportPartialBlif(const std::string& fname,
-                           std::unordered_set<BnetNodeID> omits) const;
+                           std::set<BnetNodeID> omits) const;
+
+    void exportReplacedBlif(const std::string& fname,
+                            const FFC& ffc,
+                            const BlifBuilder& blifBuilder);
 
     void exportFfcToBlifFile(const FFC& ffc,const std::string& filename) const;
     void exportGraphViz(const std::string& fname) const;
@@ -132,8 +137,5 @@ public:
 
     ~BlifBooleanNet();
 };
-
-
-
 
 #endif //VE490_INTERFACE_H

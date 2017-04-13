@@ -7,9 +7,10 @@
 #include <vector>
 #include <map>
 
+#include "ttable.h"
 #include "const.h"
 #include "kmap.h"
-#include "ttable.h"
+
 
 using std::string;
 using std::vector;
@@ -111,8 +112,8 @@ BooleanFunction combineBooleanFunction(
     NodeName outPortName = outName;
 
     // TTable;
-    DBitset leftMask<>(newInputSize, 0);
-    DBitset rightMask<>(newInputSize, 0);
+    DBitset leftMask(newInputSize, 0);
+    DBitset rightMask(newInputSize, 0);
     for (int i = 0; i < bf1.inputSize; ++i) {
         leftMask[i] = 1;
     }
