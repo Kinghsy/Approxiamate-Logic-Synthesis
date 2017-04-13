@@ -33,24 +33,24 @@ public:
     };
 
     Kmap(const BooleanFunction& BF,
-         std::vector<NodeName > heightName,
-         std::vector<NodeName > widthName);
+         const std::vector<NodeName > &heightName,
+         const std::vector<NodeName > &widthName);
     ~Kmap();
 
-    bool operator== (const Kmap& initKmap);  // without name
+    bool operator== (const Kmap& initKmap) const;  // without name
         // notice that == operation for Kmap in no-named,
         //  == operation for TruthTable is no-named,
         //  == operation for BooleanFunction is named.
         // FIXME
-    size_t operator^ (const Kmap& initKmap);
-    TTable& operator[] (const int& i);
+    size_t operator^ (const Kmap& initKmap) const;
+    TTable& operator[] (int i) ;
 
-    BestApprox divide(SimulationResult& simData);
+    BestApprox divide(const SimulationResult& simData);
 
-    size_t getHeight();
-    size_t getWidth();
-    NodeName getHeightName(const int& i);
-    NodeName getWidthName(const int& j);
+    size_t getHeight() const;
+    size_t getWidth() const;
+    NodeName getHeightName(int i) const;
+    NodeName getWidthName(int j) const;
 
 
 };

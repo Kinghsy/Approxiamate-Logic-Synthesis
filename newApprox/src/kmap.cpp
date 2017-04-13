@@ -17,8 +17,8 @@ using std::map;
 
 Kmap::Kmap(
         const BooleanFunction &BF,
-        std::vector<NodeName> heightN,
-        std::vector<NodeName> widthN) {
+        const std::vector<NodeName> &heightN,
+        const std::vector<NodeName> &widthN) {
 
     height = heightName.size();
     width = widthName.size();
@@ -55,7 +55,7 @@ Kmap::~Kmap() {
         kmap.pop_back();
 }
 
-bool Kmap::operator==(const Kmap &initKmap) {
+bool Kmap::operator==(const Kmap &initKmap) const {
     // FIXME
     for (int i = 0; i < height; ++i)
         for (int j = 0; j < width; ++j)
@@ -63,7 +63,7 @@ bool Kmap::operator==(const Kmap &initKmap) {
     return true;
 }
 
-size_t Kmap::operator^(const Kmap &initKmap) {
+size_t Kmap::operator^(const Kmap &initKmap) const {
     size_t count = 0;
     for (int i = 0; i < height; ++i)
         for (int j = 0; j < width; ++j)
@@ -71,29 +71,29 @@ size_t Kmap::operator^(const Kmap &initKmap) {
     return count;
 }
 
-TTable& Kmap::operator[](const int &i) {
+TTable& Kmap::operator[](int i) {
     return kmap[i];
 }
 
-size_t Kmap::getHeight() {
+size_t Kmap::getHeight() const {
     return height;
 }
 
-size_t Kmap::getWidth() {
+size_t Kmap::getWidth() const {
     return width;
 }
 
-NodeName Kmap::getHeightName(const int &i) {
+NodeName Kmap::getHeightName(int i) const {
     if (i >= height) assert(0);
     return heightName[i];
 }
 
-NodeName Kmap::getWidthName(const int &j) {
+NodeName Kmap::getWidthName(int j) const {
     if (j >= width) assert(0);
     return widthName[j];
 }
 
-BestApprox Kmap::divide(SimulationResult &simData) {
+BestApprox Kmap::divide(const SimulationResult &simData){
 
     // 1: 0 + 1
     // 2: MajorRow + 0

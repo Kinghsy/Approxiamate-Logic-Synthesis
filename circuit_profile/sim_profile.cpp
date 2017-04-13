@@ -97,11 +97,11 @@ FocusedSimulationResult::FocusedSimulationResult
     }
 }
 
-size_t FocusedSimulationResult::count(const std::string &term) {
+size_t FocusedSimulationResult::count(const std::string &term) const {
     return data.at(term);
 }
 
-size_t FocusedSimulationResult::count(const std::vector<std::string> &termSet) {
+size_t FocusedSimulationResult::count(const std::vector<std::string> &termSet) const {
     size_t sum = 0;
     for (const std::string& term : termSet) {
         sum += data.at(term);
@@ -110,6 +110,6 @@ size_t FocusedSimulationResult::count(const std::vector<std::string> &termSet) {
 }
 
 FocusedSimulationResult
-SimulationResult::focus(const std::vector<std::string> &node) {
+SimulationResult::focus(const std::vector<std::string> &node) const {
     return FocusedSimulationResult(*this, node);
 }

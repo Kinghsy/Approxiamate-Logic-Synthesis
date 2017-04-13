@@ -26,9 +26,9 @@ struct SimulationResult {
     std::vector<std::string> internalName;
 
     SimulationResult(const BlifBooleanNet& net,
-                     size_t nSamples);
+                     size_t nSamples) const;
 
-    FocusedSimulationResult focus(const std::vector<std::string>& node);
+    FocusedSimulationResult focus(const std::vector<std::string>& node) const;
 };
 
 class FocusedSimulationResult {
@@ -45,8 +45,8 @@ public:
     FocusedSimulationResult(const SimulationResult& result,
                             const std::vector<std::string>& node);
 
-    size_t count(const std::string& term);
-    size_t count(const std::vector<std::string>& termSet);
+    size_t count(const std::string& term) const;
+    size_t count(const std::vector<std::string>& termSet) const;
 };
 
 struct CompareResult {
