@@ -28,13 +28,13 @@ private:
 
     BooleanFunction initBF;
     //ResultType bestDecomp;
-    ResultType searchPrcoe(BooleanFunction bf,
-                           SimulationResult& simData);
+    ResultType searchPrcoe(const BooleanFunction& bf,
+                           const SimulationResult& simData);
 
 public:
 
-    ResultType operate(const BooleanFunction& bf,
-                       SimulationResult& simData);
+    ResultType operator()(const BooleanFunction& bf,
+                          const SimulationResult& simData);
 
     AlgorithmDecompose() {}
     ~AlgorithmDecompose() {}

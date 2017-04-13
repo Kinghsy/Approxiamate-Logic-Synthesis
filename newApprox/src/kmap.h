@@ -19,9 +19,9 @@ class Kmap {
 private:
 
     size_t height, width;
-    std::vector<TTable > kmap;
-    std::vector<NodeName > heightName;
-    std::vector<NodeName > widthName;
+    std::vector<TTable> kmap;
+    std::vector<NodeName> heightName;
+    std::vector<NodeName> widthName;
 
 public:
 
@@ -43,12 +43,14 @@ public:
         //  == operation for BooleanFunction is named.
         // FIXME
     size_t operator^ (const Kmap& initKmap) const;
-    TTable& operator[] (int i) ;
+
+    TTable& operator[] (size_t i) {return kmap[i];}
+    const TTable& operator[] (size_t i) const {return kmap[i];}
 
     BestApprox divide(const SimulationResult& simData);
 
-    size_t getHeight() const;
-    size_t getWidth() const;
+    size_t getHeight() const {return height;}
+    size_t getWidth() const {return width;}
     NodeName getHeightName(int i) const;
     NodeName getWidthName(int j) const;
 

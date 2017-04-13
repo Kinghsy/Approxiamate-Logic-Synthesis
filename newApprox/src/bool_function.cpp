@@ -16,20 +16,18 @@ using std::string;
 using std::vector;
 
 BooleanFunction::BooleanFunction
-        (const int& inSize,
-         TTable& tTab,
+        (size_t inSize, TTable& tTab,
          const vector<NodeName >& pName,
-         const NodeName& oPName): truthTab(string("00"))
+         const NodeName& oPName): truthTab(tTab)
 {
-
+    assert(inSize == tTab.nInputs());
     inputSize =inSize;
     truthTab = tTab;
     portName = pName;
     outPortName = oPName;
 }
 
-BooleanFunction::~BooleanFunction() {
-}
+
 
 void BooleanFunction::operator=(const BooleanFunction &initBF) {
     this->inputSize = initBF.inputSize;
@@ -46,7 +44,7 @@ bool BooleanFunction::operator==(const BooleanFunction &initBF) {
         return false;
 
     for (int i = 0; i < this->inputSize; ++i) {
-        if (this->getProtNum( initBF.getPortName(i) ) == -1)
+        if (this->getPortNum( initBF.getPortName(i) ) == -1)
             return false;
     }
 
@@ -54,7 +52,7 @@ bool BooleanFunction::operator==(const BooleanFunction &initBF) {
         size_t base = 0;
         size_t temp = i;
         for (int k = 0; k < inputSize; ++k) {
-            base += (temp % 2) * ( 1 << (this->getProtNum( initBF.getPortName(k))));
+            base += (temp % 2) * ( 1 << (this->getPortNum( initBF.getPortName(k))));
             temp = temp / 2;
         }
         if (this->truthTab[base] != initBF.truthTab[i])
@@ -74,7 +72,7 @@ int BooleanFunction::operator^(const BooleanFunction &initBF) {
         return -1;
 
     for (int i = 0; i < this->inputSize; ++i) {
-        if (this->getProtNum( initBF.getPortName(i) ) == -1)
+        if (this->getPortNum( initBF.getPortName(i) ) == -1)
             //assert(0);
             return -1;
     }
@@ -84,7 +82,7 @@ int BooleanFunction::operator^(const BooleanFunction &initBF) {
         size_t base = 0;
         size_t temp = i;
         for (int k = 0; k < inputSize; ++k) {
-            base += (temp % 2) * ( 1 << (this->getProtNum( initBF.getPortName(k))));
+            base += (temp % 2) * ( 1 << (this->getPortNum( initBF.getPortName(k))));
             temp = temp / 2;
         }
         if (this->truthTab[base] != initBF.truthTab[i])
@@ -130,17 +128,9 @@ BooleanFunction combineBooleanFunction(
 }
 
 
-int BooleanFunction::getProtNum(const NodeName &name) const  {
+int BooleanFunction::getPortNum(const NodeName &name) const  {
     for (int i = 0; i < inputSize; ++i) {
         if (portName[i] == name) return i;
     }
     return -1;
-}
-
-NodeName BooleanFunction::getPortName(const int &i) const {
-    return portName[i];
-}
-
-NodeName BooleanFunction::getOutPortName() const {
-    return outPortName;
 }

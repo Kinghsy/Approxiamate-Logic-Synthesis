@@ -20,33 +20,23 @@ Kmap::Kmap(
         const std::vector<NodeName> &heightN,
         const std::vector<NodeName> &widthN) {
 
+    heightName = heightN;
+    widthName = widthN;
     height = heightName.size();
     width = widthName.size();
-    this->heightName = heightN;
-    this->widthName = widthN;
 
-    for (int i = 0; i < height; ++i) {
-        kmap.push_back(TTable(""));
-    }
+    auto rowselector = DBitset(BF.getInputSize());
+    auto colselector = DBitset(BF.getInputSize());
 
-    for (int i = 0; i < (1 << height) ; ++i) {
-        size_t base = 0;
-        size_t temp1 = i;
-        for (int k = 0; k < height; ++k){
-            base += (temp1 % 2) * ( 1 << (BF.getProtNum(heightN[k])) );
-            temp1 = temp1 / 2;
-        }
-        for (int j = 0; j < width; ++j) {
-            size_t exten = 0;
-            size_t temp2 = j;
-            for (int k = 0; k < width; ++k) {
-                exten += (temp2 % 2) * (1 << (BF.getProtNum(widthN[k])));
-            }
+    for (const auto& elem : heightN)
+        colselector.set(BF.getPortNum(elem));
 
-            int res = BF.getVal(base + exten);
-            kmap[i][j] = res;
-        }
-    }
+    for (const auto& elem : widthN)
+        rowselector.set(BF.getPortNum(elem));
+
+    assert(colselector == ~rowselector);
+
+    kmap = BF.getTTable().breakdown(rowselector, colselector);
 
 }
 
@@ -71,17 +61,8 @@ size_t Kmap::operator^(const Kmap &initKmap) const {
     return count;
 }
 
-TTable& Kmap::operator[](int i) {
-    return kmap[i];
-}
 
-size_t Kmap::getHeight() const {
-    return height;
-}
 
-size_t Kmap::getWidth() const {
-    return width;
-}
 
 NodeName Kmap::getHeightName(int i) const {
     if (i >= height) assert(0);
@@ -109,7 +90,7 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
     }
     FocusedSimulationResult focusSim = simData.focus(nodeNameSet);
 
-    vector<int, TTable> set1, set2;
+    //vector<int, TTable> set1, set2;
 
 }
 
@@ -117,20 +98,20 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
 // FIXME
 // FIXME
 
-TTable buildMajorRow(vector<int, TTable> set1,
-                     vector<int, TTable> set2,
-                     ModeType mode,
-                     FocusedSimulationResult& focusSim);
-
-int errorCompare(vector<int, TTable> set1,
-                 TTable target1,
-                 vector<int, TTable> set2,
-                 TTable target2,
-                 FocusedSimulationResult& focusSim) {
-
-    int count = 0;
-    for (auto item : set1) {
-        item.
-    }
-
-}
+//TTable buildMajorRow(vector<int, TTable> set1,
+//                     vector<int, TTable> set2,
+//                     ModeType mode,
+//                     FocusedSimulationResult& focusSim);
+//
+//int errorCompare(vector<int, TTable> set1,
+//                 TTable target1,
+//                 vector<int, TTable> set2,
+//                 TTable target2,
+//                 FocusedSimulationResult& focusSim) {
+//
+////    int count = 0;
+////    for (auto item : set1) {
+////        item.
+////    }
+//
+//}

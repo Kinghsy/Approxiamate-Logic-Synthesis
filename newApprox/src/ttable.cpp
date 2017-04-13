@@ -2,21 +2,9 @@
 // Created by tripack on 17-4-12.
 //
 
+#include <common.h>
 #include "const.h"
 #include "ttable.h"
-
-// Duplicates the first n bits and fill them in the "l"
-// fillWith<16>(4, 0010 0100 0111 0110B)
-//  => (0110 0110 0110 0110B)
-static DBitset fillWith(size_t n, DBitset f) {
-    return f.size() == n ? (f) : fillWith(n << 1, f | (f << n));
-}
-
-static inline  DBitset ones(size_t length, size_t n) {
-    DBitset mask(n, 0);
-    mask.set().resize(length);
-    return mask;
-}
 
 // Does post-split masking
 // Splits 0 - 2^(n - 1)
@@ -101,7 +89,7 @@ TTable TTable::cofactor(size_t n, bool t) const{
 }
 
 
-TTable TTable::project(std::unordered_map<size_t, bool> condition) const {
+TTable TTable::project(const std::unordered_map<size_t, bool>& condition) const {
     assert(condition.size() < inputSize);
     size_t resultSize = condition.size() - inputSize;
     DBitset result(1ul << resultSize);
@@ -119,5 +107,31 @@ TTable TTable::project(std::unordered_map<size_t, bool> condition) const {
         if(take) result[counter++] = data[i];
     }
     assert(counter == result.size());
-    return TTable(result, inputSize - 1);
+    return TTable(result, resultSize);
+}
+
+
+TTable TTable::project(const std::vector<size_t> &location,
+                       const DBitset &condition) const {
+    assert(location.size() == condition.size());
+    size_t resultSize = condition.size() - inputSize;
+    DBitset result(1ul << resultSize);
+    int counter = 0;
+    for (size_t i = 0; i < data.size(); i++) {
+        DBitset subset = extract(DBitset(1ul << inputSize, i), location);
+        if (subset == condition)
+            result[counter++] = data[i];
+    }
+    assert(counter == result.size());
+    return TTable(result, resultSize);
+}
+
+std::vector<TTable>
+TTable::breakdown(const DBitset &row, const DBitset &col) {
+    auto s = ::breakdown(this->data, row, col);
+    std::vector<TTable> ret;
+    for (const auto& e : s) {
+        ret.push_back(TTable(e));
+    }
+    return ret;
 }

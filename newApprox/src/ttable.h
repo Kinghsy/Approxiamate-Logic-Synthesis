@@ -5,11 +5,8 @@
 #ifndef VE490_T_TABLE_H
 #define VE490_T_TABLE_H
 
-#include <boost/dynamic_bitset.hpp>
-#include "const.h"
+#include "common.h"
 #include <unordered_map>
-
-class KMap;
 
 class TTable {
     size_t inputSize;
@@ -26,6 +23,12 @@ public:
     TTable(const DBitset& table, size_t nInputs) {
         assert((1ul << nInputs) == table.size() && nInputs != 0);
         inputSize = nInputs;
+        data = table;
+    };
+
+    TTable(const DBitset& table) {
+        inputSize = getLSB(table);
+        assert(table.size() == (1ul << inputSize));
         data = table;
     };
 
@@ -98,7 +101,12 @@ public:
     inline size_t count() { return data.count();}
 
 
-    TTable project(std::unordered_map<size_t, bool> condition) const;
+    TTable project(const std::unordered_map<size_t, bool>& condition) const;
+
+    TTable project(const std::vector<size_t>& location,
+                   const DBitset& condition) const;
+
+    std::vector<TTable> breakdown(const DBitset& row, const DBitset& col);
 
     friend TTable combineTruthTable(
             const TTable& t1, const TTable& t2,

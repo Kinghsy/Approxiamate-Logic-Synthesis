@@ -520,16 +520,16 @@ BlifBooleanNet::exportPartialBlif(const std::string &fname,
 void BlifBooleanNet::exportReplacedBlif(const std::string &fname,
                                         const BlifBooleanNet::FFC &ffc,
                                         const BlifBuilder &blifBuilder) {
-    assert(std::is_permutation(
-                   ffc.inputNode.begin(), ffc.inputNode.end(),
-                   blifBuilder.inputName().begin()));
-    assert(ffc.name == blifBuilder.outputNode());
-
-    this->exportPartialBlif(fname, ffc.nodeSet);
-
-    ofstream file(fname);
-
-    file << blifBuilder.exportBlifBody();
+//    assert(std::is_permutation(
+//                   ffc.inputNode.begin(), ffc.inputNode.end(),
+//                   blifBuilder.inputName().begin()));
+//    assert(ffc.name == blifBuilder.outputNode());
+//
+//    this->exportPartialBlif(fname, ffc.nodeSet);
+//
+//    ofstream file(fname);
+//
+//    //file << blifBuilder.exportBlifBody();
 }
 
 

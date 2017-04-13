@@ -11,5 +11,6 @@
 #include "resource.h"
 #include "memorize.h"
 #include "urandom.h"
+#include "bitset_manipulate.h"
 
 #endif //VE281_FA16_COMMON_H

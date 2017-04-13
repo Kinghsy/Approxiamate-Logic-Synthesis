@@ -16,9 +16,9 @@ using std::string;
 using std::vector;
 
 
-ResultType AlgorithmDecompose::operate(
-        const BooleanFunction &bf,
-        SimulationResult &simData) {
+AlgorithmDecompose::ResultType
+AlgorithmDecompose::operator()(const BooleanFunction &bf,
+                               const SimulationResult &simData) {
 
     initBF = bf;
     return searchPrcoe(bf, simData);
@@ -26,8 +26,9 @@ ResultType AlgorithmDecompose::operate(
 
 }
 
-ResultType AlgorithmDecompose::searchPrcoe(
-        BooleanFunction bf, SimulationResult &simData) {
+AlgorithmDecompose::ResultType
+AlgorithmDecompose::searchPrcoe(const BooleanFunction& bf,
+                                const SimulationResult &simData) {
 
     if (bf.getInputSize() == 1) {
         ResultType res;
