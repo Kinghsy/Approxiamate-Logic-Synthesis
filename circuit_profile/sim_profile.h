@@ -26,7 +26,7 @@ struct SimulationResult {
     std::vector<std::string> internalName;
 
     SimulationResult(const BlifBooleanNet& net,
-                     size_t nSamples) const;
+                     size_t nSamples);
 
     FocusedSimulationResult focus(const std::vector<std::string>& node) const;
 };

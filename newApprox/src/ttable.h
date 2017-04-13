@@ -18,9 +18,13 @@ class TTable {
     DBitset expandTo(const DBitset& mask) const;
 
 public:
+    TTable(size_t nInputs) {
+        assert(nInputs > 0);
+        data = DBitset(1ul << nInputs);
+    }
 
     TTable(const DBitset& table, size_t nInputs) {
-        assert((1ul << nInputs) == table.size());
+        assert((1ul << nInputs) == table.size() && nInputs != 0);
         inputSize = nInputs;
         data = table;
     };
@@ -30,14 +34,14 @@ public:
 
     TTable(const std::string& valStr, size_t nInputs) {
         size_t length = valStr.size();
-        assert(length == (1ul << nInputs));
+        assert(length == (1ul << nInputs) && nInputs != 0);
         inputSize = nInputs;
         data = DBitset(valStr);
     }
 
     TTable(const std::string& valStr) {
         size_t length = valStr.size();
-        assert(length != 0);
+        assert(length > 1);
         size_t shift = __builtin_ctz(length);
         assert(length == (1ul << shift));
         inputSize = shift;

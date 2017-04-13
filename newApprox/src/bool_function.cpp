@@ -129,21 +129,6 @@ BooleanFunction combineBooleanFunction(
 
 }
 
-int BooleanFunction::getInputSize() {
-    return inputSize;
-}
-
-int BooleanFunction::getVal(const size_t term) {
-    return truthTab[term];
-}
-
-int BooleanFunction::getVal(const DBitset &term) {
-    return truthTab[term];
-}
-
-TTable& BooleanFunction::getTTable() {
-    return truthTab;
-}
 
 int BooleanFunction::getProtNum(const NodeName &name) const  {
     for (int i = 0; i < inputSize; ++i) {

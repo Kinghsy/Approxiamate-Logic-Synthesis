@@ -93,7 +93,7 @@ NodeName Kmap::getWidthName(int j) const {
     return widthName[j];
 }
 
-BestApprox Kmap::divide(const SimulationResult &simData){
+Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
 
     // 1: 0 + 1
     // 2: MajorRow + 0

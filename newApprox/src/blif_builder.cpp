@@ -20,15 +20,15 @@ combineBilfBuilder(const BlifBuilder &d1, const BlifBuilder &d2,
     BlifBuilder ret;
     ret.outputNodeName = newOutput;
 
-    BlifBuilder::Connection connection;
+    BlifBuilder::Connection connection (
+            newOutput,
+            d1.outputNodeName,
+            d2.outputNodeName,
+            table
+    );
 
     ret.data.insert(ret.data.end(), d1.data.begin(), d1.data.end());
     ret.data.insert(ret.data.end(), d2.data.begin(), d2.data.end());
-
-    connection.in1 = d1.outputNodeName;
-    connection.in2 = d2.outputNodeName;
-    connection.method = table;
-    connection.out = newOutput;
 
     ret.data.push_back(connection);
 
@@ -48,10 +48,9 @@ void BlifBuilder::exportBlif(const std::string &filename) const {
 
 std::set<NodeName> BlifBuilder::inputName() const {
     std::set<NodeName> ret;
-    std::transform(input.begin(), input.end(), ret.begin(),
-                   [](decltype(input.begin()) it) {
-                       return (*it).first;
-                   });
+    for (const auto& elem : input) {
+        ret.insert(elem.first);
+    }
     return ret;
 }
 
@@ -67,3 +66,9 @@ std::string BlifBuilder::Connection::toBlifString() const {
 
     return ss.str();
 }
+
+BlifBuilder::Connection::Connection
+        (const NodeName &out_,
+         const NodeName &i1_, const NodeName &i2_,
+         const TTable &method_)
+        : out(out_), in1(i1_), in2(i2_), method(method_) {}

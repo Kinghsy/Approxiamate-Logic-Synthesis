@@ -19,6 +19,10 @@ class BlifBuilder
         NodeName in2;
         TTable method;
 
+        Connection(const NodeName& out_,
+                   const NodeName& i1_, const NodeName& i2_,
+                   const TTable& method_);
+
         std::string toBlifString() const;
     };
 

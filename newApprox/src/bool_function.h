@@ -38,12 +38,13 @@ public:
             const TTable& method,
             const NodeName& outName);
 
-    int getInputSize();
-    int getVal(const DBitset& term);
-    int getVal(const size_t term);
-    bool isAll0s();
-    bool isAll1s();
-    TTable& getTTable();
+    int getInputSize() const {return inputSize;}
+    int getVal(const DBitset& term) const {return truthTab[term];}
+    int getVal(const size_t term) const {return truthTab[term];}
+    bool isAll0s() const;
+    bool isAll1s() const;
+
+    TTable& getTTable() {return truthTab;}
 
     //friend TTable findMethod(const BooleanFunction& bf);
 
