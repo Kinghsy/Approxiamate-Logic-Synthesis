@@ -61,19 +61,6 @@ size_t Kmap::operator^(const Kmap &initKmap) const {
     return count;
 }
 
-
-
-
-NodeName Kmap::getHeightName(int i) const {
-    if (i >= height) assert(0);
-    return heightName[i];
-}
-
-NodeName Kmap::getWidthName(int j) const {
-    if (j >= width) assert(0);
-    return widthName[j];
-}
-
 Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
 
     // 1: 0 + 1

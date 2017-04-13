@@ -51,7 +51,7 @@ public:
         data = DBitset(valStr);
     }
 
-    inline size_t nInputs() {return this->inputSize;}
+    inline size_t nInputs() const {return this->inputSize;}
 
     inline DBitset::reference operator[](size_t term) {
         assert(term < (1ul << inputSize));

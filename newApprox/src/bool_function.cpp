@@ -16,7 +16,7 @@ using std::string;
 using std::vector;
 
 BooleanFunction::BooleanFunction
-        (size_t inSize, TTable& tTab,
+        (size_t inSize, const TTable& tTab,
          const vector<NodeName >& pName,
          const NodeName& oPName): truthTab(tTab)
 {
@@ -71,7 +71,7 @@ int BooleanFunction::operator^(const BooleanFunction &initBF) {
         //assert(0);
         return -1;
 
-    for (int i = 0; i < this->inputSize; ++i) {
+    for (size_t i = 0; i < this->inputSize; ++i) {
         if (this->getPortNum( initBF.getPortName(i) ) == -1)
             //assert(0);
             return -1;
@@ -100,11 +100,11 @@ BooleanFunction combineBooleanFunction(
 {
     // build inputs' set
     vector<NodeName> nodeSet = bf1.portName;
-    for (int i = 0; i < bf2.inputSize; ++i)
+    for (size_t i = 0; i < bf2.inputSize; ++i)
         nodeSet.push_back(bf2.getPortName(i));
 
     // inputSize;
-    int newInputSize = bf1.inputSize + bf2.inputSize;
+    size_t newInputSize = bf1.inputSize + bf2.inputSize;
 
     // outPortName;
     NodeName outPortName = outName;
@@ -115,7 +115,7 @@ BooleanFunction combineBooleanFunction(
     for (int i = 0; i < bf1.inputSize; ++i) {
         leftMask[i] = 1;
     }
-    for (int i = bf1.inputSize; i < newInputSize; ++i) {
+    for (size_t i = bf1.inputSize; i < newInputSize; ++i) {
         rightMask[i] = 1;
     }
     TTable resTTable = combineTruthTable(
@@ -127,10 +127,23 @@ BooleanFunction combineBooleanFunction(
 
 }
 
-
 int BooleanFunction::getPortNum(const NodeName &name) const  {
     for (int i = 0; i < inputSize; ++i) {
         if (portName[i] == name) return i;
     }
     return -1;
+}
+
+bool BooleanFunction::isAll0s() const {
+    for (size_t i = 0; i < (1 << inputSize); ++i) {
+        if (truthTab[i] == 1) return false;
+    }
+    return true;
+}
+
+bool BooleanFunction::isAll1s() const {
+    for (size_t i = 0; i < (1 << inputSize); ++i) {
+        if (truthTab[i] == 0) return false;
+    }
+    return true;
 }

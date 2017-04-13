@@ -22,6 +22,11 @@ public:
         size_t errorCount;
         BooleanFunction fun;
         BlifBuilder deInfo;
+        ResultType():
+                fun(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
+                deInfo(NodeName("")) {
+            errorCount = 0;
+        }
     };
 
 private:
@@ -36,7 +41,10 @@ public:
     ResultType operator()(const BooleanFunction& bf,
                           const SimulationResult& simData);
 
-    AlgorithmDecompose() {}
+    AlgorithmDecompose():
+            initBF(0, NORMAL_1_INPUT,
+                   std::vector<NodeName>(), NodeName("")) {
+    }
     ~AlgorithmDecompose() {}
 
 };

@@ -15,7 +15,6 @@
 using std::string;
 using std::vector;
 
-
 AlgorithmDecompose::ResultType
 AlgorithmDecompose::operator()(const BooleanFunction &bf,
                                const SimulationResult &simData) {
@@ -33,9 +32,11 @@ AlgorithmDecompose::searchPrcoe(const BooleanFunction& bf,
     if (bf.getInputSize() == 1) {
         ResultType res;
         if ((bf.getTTable()) == NOT_1_INPUT) {
-            res.deInfo.BlifBuilder(bf.getOutPortName(), true);
+            BlifBuilder temp(bf.getOutPortName(), true);
+            res.deInfo = temp;
         } else {
-            res.deInfo.BlifBuilder(bf.getOutPortName(), false);
+            BlifBuilder temp(bf.getOutPortName(), false);
+            res.deInfo = temp;
         } //FIXME
         res.errorCount = 0; res.fun = bf;
         return res;

@@ -24,7 +24,7 @@ private:
 public:
 
     BooleanFunction(size_t inputSize,
-                    TTable& truthTab,
+                    const TTable& truthTab,
                     const std::vector<NodeName>& portName,
                     const NodeName& outPortName);
 
@@ -38,19 +38,28 @@ public:
             const TTable& method,
             const NodeName& outName);
 
-    size_t getInputSize() const {return inputSize;}
-    bool getVal(const DBitset& term) const {return truthTab[term];}
-    bool getVal(const size_t term) const {return truthTab[term];}
+    inline size_t getInputSize() const {
+        return inputSize;
+    }
+    inline bool getVal(const DBitset& term) const {
+        return truthTab[term];
+    }
+    inline bool getVal(const size_t term) const {
+        return truthTab[term];
+    }
     bool isAll0s() const;
     bool isAll1s() const;
 
-    TTable getTTable() const {return truthTab;}
+    TTable getTTable() const {
+        return truthTab;
+    }
 
-    //friend TTable findMethod(const BooleanFunction& bf);
-    //
-
-    NodeName getOutPortName() const {return outPortName;}
-    NodeName getPortName(size_t i) const {return portName.at(i);}
+    inline NodeName getOutPortName() const {
+        return outPortName;
+    }
+    inline NodeName getPortName(size_t i) const {
+        return portName.at(i);
+    }
     int getPortNum(const NodeName& name) const;
 };
 
@@ -60,5 +69,9 @@ BooleanFunction combineBooleanFunction(
         const TTable& method,
         const NodeName& outName
 );
+
+/*const BooleanFunction baseBooleanFunction(
+        0, TTable(1,1), std::vector<NodeName>(), NodeName("")
+);*/
 
 #endif //VE490_BOOLEAN_FUNCTION_H

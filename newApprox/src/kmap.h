@@ -41,18 +41,31 @@ public:
         // notice that == operation for Kmap in no-named,
         //  == operation for TruthTable is no-named,
         //  == operation for BooleanFunction is named.
-        // FIXME
     size_t operator^ (const Kmap& initKmap) const;
 
-    TTable& operator[] (size_t i) {return kmap[i];}
-    const TTable& operator[] (size_t i) const {return kmap[i];}
+    inline TTable& operator[] (size_t i) {
+        return kmap[i];
+    }
+    inline const TTable& operator[] (size_t i) const {
+        return kmap[i];
+    }
 
     BestApprox divide(const SimulationResult& simData);
 
-    size_t getHeight() const {return height;}
-    size_t getWidth() const {return width;}
-    NodeName getHeightName(int i) const;
-    NodeName getWidthName(int j) const;
+    inline size_t getHeight() const {
+        return height;
+    }
+    inline size_t getWidth() const {
+        return width;
+    }
+    inline NodeName getHeightName(int i) const {
+        if (i >= height) assert(0);
+        return heightName[i];
+    }
+    inline NodeName getWidthName(int j) const {
+        if (j >= width) assert(0);
+        return widthName[j];
+    }
 
 
 };
