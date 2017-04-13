@@ -93,4 +93,6 @@ private:
 };
 
 
+
+
 #endif //VE490_TRUTH_TABLE_H

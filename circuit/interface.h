@@ -111,6 +111,10 @@ public:
     CircuitProfile profile(int samples);
 
     void exportBlifToFile(const std::string& fname) const;
+
+    void exportPartialBlif(const std::string& fname,
+                           std::unordered_set<BnetNodeID> omits) const;
+
     void exportFfcToBlifFile(const FFC& ffc,const std::string& filename) const;
     void exportGraphViz(const std::string& fname) const;
     void exportGraphVizwithHighlight(const std::string& fname,

@@ -4,7 +4,6 @@
 
 #include "truth_table.h"
 #include "exception.h"
-#include "../newApprox/src/truth_table.h"
 #include <iostream>
 #include <cassert>
 

@@ -13,16 +13,15 @@ set(NEW_SOURCE_FILES
         src/kmap.cpp
         src/boolean_function.cpp
         src/ttable.cpp
+        src/blif_builder.cpp
     )
 
 
-#list(APPEND SOURCE_FILES src/boolean_function.h
-                        # )
-
+# list(APPEND SOURCE_FILES src/boolean_function.h #)
 
 #add_subdirectory(testcase)
 
 # The default target
-#add_executable(approxiamate ${SOURCE_FILES})
+# add_executable(approxiamate ${SOURCE_FILES})
 
 add_library(newApprox ${NEW_SOURCE_FILES})

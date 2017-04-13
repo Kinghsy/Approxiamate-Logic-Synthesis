@@ -21,10 +21,16 @@ class BlifBuilder
         NodeName in1;
         NodeName in2;
         TTable method;
+
+        std::string toBlifString();
     };
 
-    std::vector<NodeName, Connection> data;
+    std::vector<Connection> data;
+    std::unordered_map<NodeName, bool> input;
+
     NodeName outputNodeName;
+
+    BlifBuilder() {}
 
 public:
 
@@ -41,6 +47,7 @@ public:
     NodeName outputNode();
 
     void exportBlif(const std::string& filename);
+    std::string exportBlifBody();
 
     std::set<NodeName> inputName();
 };
