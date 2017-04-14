@@ -9,8 +9,9 @@
 
 #include "const.h"
 #include "bool_function.h"
+#include "../../common/ttable.h"
 
-class BooleanFunction;
+class BoolFunction;
 class TTable;
 class SimulationResult;
 
@@ -26,8 +27,8 @@ private:
 public:
 
     struct BestApprox {
-        BooleanFunction leftFunc;
-        BooleanFunction rightFunc;
+        BoolFunction leftFunc;
+        BoolFunction rightFunc;
         int errorCount;
         TTable method;
         BestApprox() :
@@ -38,7 +39,7 @@ public:
         }
     };
 
-    Kmap(const BooleanFunction& BF,
+    Kmap(const BoolFunction& BF,
          const std::vector<NodeName > &heightName,
          const std::vector<NodeName > &widthName);
     ~Kmap();
@@ -46,7 +47,7 @@ public:
     bool operator== (const Kmap& initKmap) const;  // without name
         // notice that == operation for Kmap in no-named,
         //  == operation for TruthTable is no-named,
-        //  == operation for BooleanFunction is named.
+        //  == operation for BoolFunction is named.
     size_t operator^ (const Kmap& initKmap) const;
 
     inline TTable& operator[] (size_t i) {

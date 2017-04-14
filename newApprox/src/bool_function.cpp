@@ -14,8 +14,10 @@
 
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 
-BooleanFunction::BooleanFunction
+BoolFunction::BoolFunction
         (size_t inSize, const TTable& tTab,
          const vector<NodeName >& pName,
          const NodeName& oPName): truthTab(tTab)
@@ -27,16 +29,14 @@ BooleanFunction::BooleanFunction
     outPortName = oPName;
 }
 
-
-
-void BooleanFunction::operator=(const BooleanFunction &initBF) {
+void BoolFunction::operator=(const BoolFunction &initBF) {
     this->inputSize = initBF.inputSize;
     this->truthTab = initBF.truthTab;
     this->portName = initBF.portName;
     this->outPortName = initBF.outPortName;
 }
 
-bool BooleanFunction::operator==(const BooleanFunction &initBF) {
+bool BoolFunction::operator==(const BoolFunction &initBF) {
     if (this->inputSize != initBF.inputSize)
         return false;
 
@@ -62,7 +62,7 @@ bool BooleanFunction::operator==(const BooleanFunction &initBF) {
     return true;
 }
 
-int BooleanFunction::operator^(const BooleanFunction &initBF) {
+int BoolFunction::operator^(const BoolFunction &initBF) {
     if (this->inputSize != initBF.inputSize)
         //assert(0);
         return -1;
@@ -92,9 +92,9 @@ int BooleanFunction::operator^(const BooleanFunction &initBF) {
     return count;
 }
 
-BooleanFunction combineBooleanFunction(
-        const BooleanFunction& bf1,
-        const BooleanFunction& bf2,
+BoolFunction combineBooleanFunction(
+        const BoolFunction& bf1,
+        const BoolFunction& bf2,
         const TTable& method,
         const NodeName& outName )
 {
@@ -121,29 +121,45 @@ BooleanFunction combineBooleanFunction(
     TTable resTTable = combineTruthTable(
             bf1.truthTab, bf2.truthTab, leftMask, rightMask, method);
 
-    return BooleanFunction(
+    return BoolFunction(
             newInputSize, resTTable, nodeSet, outPortName
     );
 
 }
 
-int BooleanFunction::getPortNum(const NodeName &name) const  {
+int BoolFunction::getPortNum(const NodeName &name) const  {
     for (int i = 0; i < inputSize; ++i) {
         if (portName[i] == name) return i;
     }
     return -1;
 }
 
-bool BooleanFunction::isAll0s() const {
+bool BoolFunction::isAll0s() const {
     for (size_t i = 0; i < (1 << inputSize); ++i) {
         if (truthTab[i] == 1) return false;
     }
     return true;
 }
 
-bool BooleanFunction::isAll1s() const {
+bool BoolFunction::isAll1s() const {
     for (size_t i = 0; i < (1 << inputSize); ++i) {
         if (truthTab[i] == 0) return false;
     }
     return true;
+}
+
+void BoolFunction::display() const {
+    cout << "inputSize: " << inputSize << endl;
+    cout << "inputs names: ";
+    for (auto& item:portName ) {
+        cout << item << " ";
+    }
+    cout << endl;
+    cout << "output name: " << outPortName << endl;
+    cout << "truthtable: ";
+    for (size_t i = 0; i < (1 << inputSize) ; ++i) {
+        cout << truthTab[i];
+    }
+    cout << endl;
+
 }

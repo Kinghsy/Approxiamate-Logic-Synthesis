@@ -17,10 +17,9 @@ class SimulationResult;
 class AlgorithmDecompose {
 
 public:
-    //std::deque<BooleanFunction> BooleanFunctionPool;
     struct ResultType {
         size_t errorCount;
-        BooleanFunction fun;
+        BoolFunction fun;
         BlifBuilder deInfo;
         ResultType():
                 fun(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
@@ -31,14 +30,14 @@ public:
 
 private:
 
-    BooleanFunction initBF;
+    BoolFunction initBF;
     //ResultType bestDecomp;
-    ResultType searchPrcoe(const BooleanFunction& bf,
+    ResultType searchPrcoe(const BoolFunction& bf,
                            const SimulationResult& simData);
 
 public:
 
-    ResultType operator()(const BooleanFunction& bf,
+    ResultType operator()(const BoolFunction& bf,
                           const SimulationResult& simData);
 
     AlgorithmDecompose():

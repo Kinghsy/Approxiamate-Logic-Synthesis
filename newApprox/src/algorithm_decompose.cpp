@@ -17,7 +17,7 @@ using std::string;
 using std::vector;
 
 AlgorithmDecompose::ResultType
-AlgorithmDecompose::operator()(const BooleanFunction &bf,
+AlgorithmDecompose::operator()(const BoolFunction &bf,
                                const SimulationResult &simData) {
 
     initBF = bf;
@@ -27,7 +27,7 @@ AlgorithmDecompose::operator()(const BooleanFunction &bf,
 }
 
 AlgorithmDecompose::ResultType
-AlgorithmDecompose::searchPrcoe(const BooleanFunction& bf,
+AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
                                 const SimulationResult &simData) {
 
     if (bf.getInputSize() == 1) {
@@ -66,10 +66,10 @@ AlgorithmDecompose::searchPrcoe(const BooleanFunction& bf,
         ResultType rightRes = searchPrcoe(approx.rightFunc, simData);
         // search for the left best solution and right best solution
 
-        BooleanFunction approxFun = combineBooleanFunction(
+        BoolFunction approxFun = combineBooleanFunction(
                 leftRes.fun, rightRes.fun, approx.method, bf.getOutPortName()
         );
-        // obtain approximation boolean function and compare it with initial
+        // obtain approximation bool function and compare it with initial
 
         if ( (approxFun^bf) < bestApproximation.errorCount) {
             bestApproximation.errorCount =  approxFun ^ bf;

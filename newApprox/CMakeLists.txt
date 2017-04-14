@@ -2,6 +2,8 @@
 # Builing of dependent libraries
 
 set(NEW_SOURCE_FILES
+        src/const.h
+
         src/bool_function.h
         src/algorithm_decompose.h
         src/kmap.h
@@ -14,7 +16,7 @@ set(NEW_SOURCE_FILES
 
 # list(APPEND SOURCE_FILES src/boolean_function.h #)
 
-#add_subdirectory(testcase)
+add_subdirectory(testcase)
 
 # The default target
 # add_executable(approxiamate ${SOURCE_FILES})
