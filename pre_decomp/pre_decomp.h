@@ -9,23 +9,29 @@
 #include <common.h>
 #include <unordered_map>
 #include <bitset>
+#include <memory>
 
 class PreDecomp {
 public:
+
     struct DbEntry {
-        int nInputs;
-        std::bitset<6> leftMask;
-        std::bitset<6> rightMask;
-        std::bitset<6> discardMask;
-        std::string combine;
-        std::bitset<64> left;
-        std::bitset<64> right;
-        std::bitset<64> function;
+        size_t nInputs;
+        DBitset leftMask;
+        DBitset rightMask;
+        DBitset discardMask;
+        TTable combine ;
+        TTable left;
+        TTable right;
+        TTable function;
+
+        DbEntry() : combine(1), left(1),
+                    right(1), function(1) {}
     };
 
 private:
 
-    std::vector<std::unordered_map<std::bitset<64>, DbEntry> > data;
+    std::vector<std::vector<std::bitset<64> > > metaData;
+    std::vector<std::vector<DbEntry> > data;
 
     static PreDecomp* instance;
     std::string libPath;
@@ -33,7 +39,7 @@ private:
 
 public:
 
-    DbEntry getMatch(const std::string& fun, int inputSize);
+    const DbEntry& getMatch(const std::string& fun, size_t inputSize);
 
     size_t nLut3() {return data[3].size();}
     size_t nLut4() {return data[4].size();}

@@ -43,35 +43,64 @@ PreDecomp::PreDecomp(const std::string &libName) {
         cerr << "Please run 'precomp_rel' to regenerate the database" << endl;
         exit(-1);
     }
+    metaData.resize(7); // Currently 6
     data.resize(7); // Currently 6
     string line;
     while (std::getline(db, line)) {
+
+        if (line.empty()) continue;
+
         std::stringstream ss(line);
         DbEntry entry;
 
-        ss >> entry.nInputs >> entry.function;
+        std::string combineStr;
+        std::string functionStr;
+
+
+        ss >> entry.nInputs >> functionStr;
         ss >> entry.leftMask >> entry.rightMask
            >> entry.left >> entry.right
-           >> entry.combine >> entry.discardMask;
+           >> combineStr >> entry.discardMask;
+
+        std::bitset<64> keyFun(functionStr);
+        entry.function = TTable(functionStr);
+
+        if (combineStr == "AND") {
+            entry.combine = AND_TABLE;
+        } else if (combineStr == "NAND") {
+            entry.combine = ~AND_TABLE;
+        } else if (combineStr == "XOR") {
+            entry.combine = XOR_TABLE;
+        } else if (combineStr == "NXOR") {
+            entry.combine = ~XOR_TABLE;
+        } else if (combineStr == "LEFT") {
+            entry.combine = LEFT_RELA_TABLE;
+        } else if (combineStr == "RIGHT") {
+            entry.combine = RIGHT_RELA_TABLE;
+        } else {
+            assert(0);
+        }
 
         if (!ss) {
             if (line != "") {
                 cerr << "Cannot parse line:\n" << line << endl;
                 cerr << "Got:"
-                     << entry.nInputs << "\t" << entry.function << "\t"
-                     << entry.leftMask.to_string() << "\t"
-                     << entry.rightMask.to_string() << "\t"
-                     << entry.left << "\t"
-                     << entry.right << "\t"
-                     << entry.combine << "\t"
-                     << entry.discardMask.to_string() << "\t";
+                     << entry.nInputs << "\t"
+                     << entry.function.toString() << "\t"
+                     << bitset2Str(entry.leftMask) << "\t"
+                     << bitset2Str(entry.rightMask) << "\t"
+                     << entry.left.toString() << "\t"
+                     << entry.right.toString() << "\t"
+                     << entry.combine.toString() << "\t"
+                     << bitset2Str(entry.discardMask) << "\t";
                 cerr << endl;
             }
             continue;
         }
 
-        entry.nInputs = unPow(entry.nInputs);
-        data[entry.nInputs][entry.function] = entry;
+        entry.nInputs = entry.function.nInputs();
+        metaData[entry.nInputs].push_back(keyFun);
+        data[entry.nInputs].push_back(entry);
     }
     db.close();
 }
@@ -85,18 +114,17 @@ PreDecomp &PreDecomp::getInstance() {
 
 PreDecomp::~PreDecomp() {}
 
-PreDecomp::DbEntry PreDecomp::getMatch(const std::string &funStr, int inputSize) {
-    auto& dataSet = data.at(inputSize);
+const PreDecomp::DbEntry& PreDecomp::getMatch(const std::string &funStr, size_t inputSize) {
+    auto& metadataSet = metaData.at(inputSize);
     std::bitset<64> function(funStr);
     std::bitset<64> validMask((1ull << (1ull << inputSize)) - 1);
     function &= validMask;
     size_t minError = 64;
     const DbEntry* minEntry = nullptr;
-    for (const auto& e: dataSet) {
-        const auto& entry = e.second;
-        size_t error = (entry.function ^ function).count();
+    for (size_t i = 0; i < metadataSet.size(); i++) {
+        size_t error = (metadataSet[i]^ function).count();
         if (error < minError) {
-            minEntry = &entry;
+            minEntry = &(data.at(inputSize).at(i));
             minError = error;
         }
     }

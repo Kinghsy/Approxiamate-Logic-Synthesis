@@ -7,6 +7,7 @@
 #include <random>
 #include <ctime>
 #include <iostream>
+#include <bitset>
 
 #include "../circuit/interface.h"
 #include "../pre_decomp/pre_decomp.h"
@@ -28,9 +29,17 @@ int main() {
 
     s.take();
 
-    auto e = pd.getMatch("01011011001101110", 6);
+    std::string funStr = "01011011001101110";
+
+    auto e = pd.getMatch(funStr, 6);
 
     s.take();
+
+    std::cout << std::bitset<64>(funStr) << std::endl;
+    std::cout << e.function << " " << e.nInputs << std::endl;
+    std::cout << e.leftMask << " " << e.rightMask << std::endl;
+    std::cout << e.combine << std::endl;
+    std::cout << e.left << " " << e.right << std::endl;
 
     s.report();
 
