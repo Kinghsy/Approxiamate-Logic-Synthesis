@@ -14,7 +14,8 @@ if(Boost_FOUND)
 endif()
 
 add_definitions(
-        -DPROJECT_BASE="${PROJECT_SOURCE_DIR}")
+        -DPROJECT_BASE="${PROJECT_SOURCE_DIR}"
+        -DBOOST_DYNAMIC_BITSET_DONT_USE_FRIENDS)
 
 include_directories(lib/GTest/googletest/include)
 include_directories(lib/abc/include)

@@ -12,5 +12,7 @@
 #include "memorize.h"
 #include "urandom.h"
 #include "bitset_manipulate.h"
+#include "ttable.h"
+#include "blif_builder.h"
 
 #endif //VE281_FA16_COMMON_H

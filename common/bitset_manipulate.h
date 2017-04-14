@@ -6,6 +6,7 @@
 #define VE490_BITSET_MANIPULATE_H
 
 #include <boost/dynamic_bitset.hpp>
+#include <boost/functional/hash.hpp>
 #include <iostream>
 
 typedef boost::dynamic_bitset<> DBitset;
@@ -56,6 +57,11 @@ static inline DBitset extract(const DBitset& bitset,
     }
     return extract(bitset, ind);
 };
+
+static inline size_t getLSB(size_t bitset) {
+    assert(bitset != 0);
+    return __builtin_ctz(bitset);
+}
 
 static inline size_t getLSB(const DBitset& bitset) {
     assert(!bitset.empty());

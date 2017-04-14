@@ -80,6 +80,25 @@ TEST(BIT_MANIP, BREAKDOWN) {
 }
 
 TEST(TTABLE, BASIC) {
+    TTable fun("10110010");
+    ASSERT_EQ(fun.nInputs(), 3);
+    ASSERT_EQ(fun.toString(), "10110010");
+    ASSERT_EQ((TTable("10110010").count()), 4);
+    ASSERT_EQ(TTable(DBitset(string("10110010"))), TTable("10110010"));
+    ASSERT_EQ(TTable(0xB2ull, 3), TTable("10110010"));
 
 }
 
+
+TEST(TTABLE, COMBINE) {
+    TTable fun1("10110010");
+    TTable fun2("1101");
+
+    auto combinedTable =
+            combineTruthTable(fun1, fun2,
+                              DBitset(string("00111")),
+                              DBitset(string("11000")), OR_TABLE);
+
+    ASSERT_EQ(combinedTable.toString(), "0000");
+
+}

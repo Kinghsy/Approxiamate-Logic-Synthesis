@@ -7,6 +7,7 @@
 
 #include "bitset_manipulate.h"
 #include <unordered_map>
+#include <ostream>
 
 class TTable {
     size_t inputSize;
@@ -27,20 +28,13 @@ public:
     };
 
     TTable(const DBitset& table) {
-        inputSize = getLSB(table);
+        inputSize = getLSB(table.size());
         assert(table.size() == (1ul << inputSize));
         data = table;
     };
 
     TTable(unsigned long long int value, size_t nInputs)
             : data(1ul << nInputs, value), inputSize(nInputs) {}
-
-    TTable(const std::string& valStr, size_t nInputs) {
-        size_t length = valStr.size();
-        assert(length == (1ul << nInputs) && nInputs != 0);
-        inputSize = nInputs;
-        data = DBitset(valStr);
-    }
 
     TTable(const std::string& valStr) {
         size_t length = valStr.size();
@@ -49,6 +43,14 @@ public:
         assert(length == (1ul << shift));
         inputSize = shift;
         data = DBitset(valStr);
+    }
+
+    TTable(const std::string& valStr, size_t nInputs) {
+        size_t length = 1ul << nInputs;
+        assert(length >= valStr.size());
+        inputSize = nInputs;
+        data = DBitset(valStr);
+        data.resize(length);
     }
 
     inline size_t nInputs() const {return this->inputSize;}
@@ -92,13 +94,17 @@ public:
         return *this;
     }
 
+    inline TTable operator~() const {
+        return ~this->data;
+    }
+
     inline TTable operator^(const TTable& t2) const {
         assert(this->inputSize == t2.inputSize);
         return TTable(this->data ^ t2.data, inputSize);
     }
 
     inline bool operator== (const TTable& t2) const {
-        assert(this->inputSize == t2.inputSize);
+        if (this->inputSize != t2.inputSize) return false;
         return this->data == t2.data;
     }
 
@@ -114,13 +120,32 @@ public:
 
     std::vector<TTable> breakdown(const DBitset& row, const DBitset& col);
 
+    TTable cofactor(size_t input, bool = true) const;
+
     friend TTable combineTruthTable(
             const TTable& t1, const TTable& t2,
             const DBitset& t1Mask, const DBitset& t2Mask,
             const TTable& method);
 
-    TTable cofactor(size_t input, bool = true) const;
+    friend struct std::hash<TTable>;
+
+    friend std::ostream &operator<<(std::ostream &os, const TTable &table);
+    friend std::istream &operator>>(std::istream &is, TTable &table);
 };
+
+namespace std {
+    template<>
+    struct hash<TTable> {
+        std::size_t operator()(const TTable& key) const {
+            using boost::hash_value;
+            using boost::hash_combine;
+            size_t seed = 0;
+            hash_combine(seed, hash_value(key.data.m_bits));
+            hash_combine(seed, hash_value(key.inputSize));
+            return seed;
+        }
+    };
+}
 
 const TTable NOT_1_INPUT= TTable("10");
 const TTable NORMAL_1_INPUT= TTable("01");

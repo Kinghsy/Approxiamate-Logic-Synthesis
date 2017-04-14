@@ -133,3 +133,16 @@ TTable::breakdown(const DBitset &row, const DBitset &col) {
     }
     return ret;
 }
+
+std::ostream &operator<<(std::ostream &os,
+                         const TTable &table) {
+    return os << table.toString();
+}
+
+std::istream &operator>>(std::istream &is,
+                         TTable &table) {
+    std::string s;
+    is >> s;
+    table = TTable(s);
+    return is;
+}
