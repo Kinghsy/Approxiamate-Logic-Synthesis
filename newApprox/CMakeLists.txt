@@ -4,16 +4,11 @@
 set(NEW_SOURCE_FILES
         src/bool_function.h
         src/algorithm_decompose.h
-        src/blif_builder.h
         src/kmap.h
-        src/ttable.h
-        src/const.h
 
         src/algorithm_decompose.cpp
         src/kmap.cpp
         src/bool_function.cpp
-        src/ttable.cpp
-        src/blif_builder.cpp
     )
 
 

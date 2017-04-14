@@ -2,8 +2,6 @@
 // Created by tripack on 17-4-12.
 //
 
-#include <common.h>
-#include "const.h"
 #include "ttable.h"
 
 // Does post-split masking

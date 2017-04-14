@@ -7,8 +7,10 @@
 
 #include <unordered_map>
 #include <set>
-#include "const.h"
 #include "ttable.h"
+
+typedef std::string NodeName;
+typedef boost::dynamic_bitset<> DBitset;
 
 class BlifBuilder
 {

@@ -3,16 +3,17 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
-
 #include <vector>
-#include <truth_table.h>
+#include <common.h>
+
+#include "../approxiamate/approx_common/truth_table.h"
 
 
 #include "../lib/libblif/interface.h"
 
 #include "interface.h"
 #include "pattern_gen.h"
-#include "../newApprox/src/blif_builder.h"
+
 
 
 using namespace std;

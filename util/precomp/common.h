@@ -75,14 +75,7 @@ constexpr uint64_t lut1[] = {
 
 constexpr size_t nLUT1 = sizeof(lut1)/sizeof(*lut1);
 
-// Duplicates the first n bits and fill them in the "l"
-// fillWith<16>(4, 0010 0100 0111 0110B)
-//  => (0110 0110 0110 0110B)
-template<size_t l>
 
-std::bitset<l> fillWith(size_t n, std::bitset<l> f) {
-    return l == n ? (f) : fillWith<l>(n << 1, f | (f << n));
-}
 
 template<size_t l>
 std::bitset<l> ones(size_t n = l) {
@@ -94,6 +87,19 @@ std::bitset<l> ones(size_t n = l) {
     } else {
         assert(0);
     }
+}
+
+// Duplicates the first n bits and fill them in the "l"
+// fillWith<16>(4, 0010 0100 0111 0110B)
+//  => (0110 0110 0110 0110B)
+template<size_t l>
+std::bitset<l> fillWith(size_t n, std::bitset<l> f) {
+    f &= ones<l>(n);
+    while (l > n) {
+        f |= f << n;
+        n <<= 1;
+    }
+    return f;
 }
 
 // Does post-split masking

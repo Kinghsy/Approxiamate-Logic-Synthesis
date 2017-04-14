@@ -8,9 +8,10 @@
 #include "ttable.h"
 #include "kmap.h"
 #include "bool_function.h"
-#include "blif_builder.h"
 #include "algorithm_decompose.h"
-#include "truth_table.h"
+
+#include <ttable.h>
+#include <blif_builder.h>
 
 using std::string;
 using std::vector;

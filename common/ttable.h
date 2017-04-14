@@ -5,7 +5,7 @@
 #ifndef VE490_T_TABLE_H
 #define VE490_T_TABLE_H
 
-#include "common.h"
+#include "bitset_manipulate.h"
 #include <unordered_map>
 
 class TTable {
@@ -52,6 +52,12 @@ public:
     }
 
     inline size_t nInputs() const {return this->inputSize;}
+
+    inline std::string toString() const {
+        std::string s;
+        boost::to_string(data, s);
+        return s;
+    }
 
     inline DBitset::reference operator[](size_t term) {
         assert(term < (1ul << inputSize));

@@ -6,15 +6,14 @@
 #define VE490_BITSET_MANIPULATE_H
 
 #include <boost/dynamic_bitset.hpp>
+#include <iostream>
 
 typedef boost::dynamic_bitset<> DBitset;
 
-
-// Duplicates the first n bits and fill them in the "l"
-// fillWith<16>(4, 0010 0100 0111 0110B)
-//  => (0110 0110 0110 0110B)
-static DBitset fillWith(size_t n, DBitset f) {
-    return f.size() == n ? (f) : fillWith(n << 1, f | (f << n));
+static inline std::string bitset2Str(const DBitset& bitset) {
+    std::string s;
+    boost::to_string(bitset, s);
+    return s;
 }
 
 // For a bitset of length "length", fill its least significant
@@ -24,6 +23,20 @@ static inline DBitset ones(size_t length, size_t n) {
     mask.set().resize(length);
     return mask;
 }
+
+
+// Duplicates the first n bits and fill them in the "l"
+// fillWith<16>(4, 0010 0100 0111 0110B)
+//  => (0110 0110 0110 0110B)
+static inline DBitset fillWith(size_t n, DBitset f) {
+    f &= ones(f.size(), n);
+    while (f.size() > n) {
+        f |= f << n;
+        n <<= 1;
+    }
+    return f;
+}
+
 
 static inline DBitset extract(const DBitset& bitset,
                               const std::vector<size_t> ind) {
@@ -49,6 +62,10 @@ static inline size_t getLSB(const DBitset& bitset) {
     return bitset.find_first();
 }
 
+
+
+
+
 // Puts a one dimensional bitset into a 2D array
 // with inputs specified by col on the column
 static std::vector<DBitset>
@@ -67,7 +84,8 @@ breakdown(const DBitset& bitset,
     for (size_t i = 0; i < bitset.size(); i++) {
         auto currInd = DBitset(total, i);
         auto key = extract(currInd, col);
-        result[key.to_ulong()] = extract(currInd, row);
+        auto rowKey = extract(currInd, row);
+        result[key.to_ulong()][rowKey.to_ulong()] = bitset[i] ;
     }
 
     return result;

@@ -3,11 +3,12 @@
 //
 
 #include <set>
-#include "const.h"
 #include "blif_builder.h"
 #include "ttable.h"
 #include <algorithm>
 #include <sstream>
+
+
 
 BlifBuilder::BlifBuilder(const NodeName &node, bool flip) {
     input.insert(std::make_pair(node, flip));

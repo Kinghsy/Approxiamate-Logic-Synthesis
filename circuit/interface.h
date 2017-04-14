@@ -11,7 +11,7 @@
 
 #include <string>
 #include <vector>
-#include <truth_table.h>
+#include "../approxiamate/approx_common/truth_table.h"
 #include <set>
 #include <map>
 #include <unordered_map>
