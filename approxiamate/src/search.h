@@ -7,10 +7,8 @@
 
 #include "boolean_function.h"
 #include "conts.h"
-#include "../../common/truth_table.h"
+#include <truth_table.h>
 #include <memory.h>
-
-
 #include <graph_common.h>
 #include <binary_tree_impl.h>
 #include <tree_impl.h>

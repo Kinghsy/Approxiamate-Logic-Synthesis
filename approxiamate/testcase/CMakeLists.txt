@@ -21,12 +21,11 @@ add_executable(SearchTreeTest search_tree_test.cpp
         ../src/search.h
         ../src/boolean_function.h
         ../src/conts.h
-        ../../common/truth_table.h
         ../src/boolean_function.cpp
         ../src/search_node.cpp
         ../src/search_space.cpp
         ../src/search_tree.cpp
-        ../../common/truth_table.cpp)
+        ../approx_common/truth_table.cpp)
 target_link_libraries(SearchTreeTest
         gtest gtest_main)
 
@@ -54,3 +53,5 @@ target_link_libraries(PredecompTest
         readline termcap pthread
         precomp_lib
 )
+
+target_include_directories(PredecompTest BEFORE PRIVATE ../approx_common)

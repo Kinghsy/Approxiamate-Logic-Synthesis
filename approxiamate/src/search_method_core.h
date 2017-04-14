@@ -9,7 +9,7 @@
 #include "conts.h"
 #include "search.h"
 
-#include "../../common/truth_table.h"
+#include <truth_table.h>
 
 TruthTable calculApproxTruthTable(TruthTable &truthTab, int ActivedMode);
 TruthTable calculApproxTruthTable_BranchAndBound(TruthTable &truthTab);

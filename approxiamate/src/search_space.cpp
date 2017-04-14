@@ -5,8 +5,8 @@
 #include "search.h"
 #include "conts.h"
 #include "boolean_function.h"
-#include "../../common/truth_table.h"
-#include "../../common/OrderedQueue.h"
+#include "truth_table.h"
+#include "OrderedQueue.h"
 
 
 #include <binary_tree_impl.h>

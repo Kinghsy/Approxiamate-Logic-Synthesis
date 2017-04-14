@@ -7,7 +7,7 @@
 #include "search.h"
 #include "search_method_core.h"
 
-#include "../../common/truth_table.h"
+#include "truth_table.h"
 
 using namespace std;
 
