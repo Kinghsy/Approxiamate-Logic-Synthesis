@@ -44,7 +44,7 @@ string num2string(size_t bits, size_t num);
 tempNodeNameGenertor nodeNameGen;
 
 Kmap::Kmap(
-        const BooleanFunction &BF,
+        const BoolFunction &BF,
         const std::vector<NodeName> &heightN,
         const std::vector<NodeName> &widthN) {
 
@@ -107,8 +107,8 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
     TTable all1((1 << width) - 1, width);
     BestApprox case1;
     case1.errorCount = 0;
-    case1.rightFunc = BooleanFunction(width, TTable(0, width), widthName, nodeNameGen.gen());
-    //case1.leftFunc = BooleanFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
+    case1.rightFunc = BoolFunction(width, TTable(0, width), widthName, nodeNameGen.gen());
+    //case1.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
     case1.method = LEFT_RELA_TABLE;
     TTable leftt(0, height);
 
@@ -125,7 +125,7 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
             leftt[i] = 1;
         }
     }
-    case1.leftFunc = BooleanFunction(height, TTable(leftt), heightName, nodeNameGen.gen());
+    case1.leftFunc = BoolFunction(height, TTable(leftt), heightName, nodeNameGen.gen());
 
 
     if (case1.leftFunc.isAll1s()) case1.method = ALL_IRR_TABLE_1;
@@ -142,8 +142,8 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
         TTable majorRow = calcMajorRow(majorSet, height, focusSim);
         BestApprox case2temp;
         case2temp.errorCount = 0;
-        //case2temp.leftFunc = BooleanFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
-        case2temp.rightFunc = BooleanFunction(width, majorRow, widthName, nodeNameGen.gen());
+        //case2temp.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
+        case2temp.rightFunc = BoolFunction(width, majorRow, widthName, nodeNameGen.gen());
         case2temp.method = AND_TABLE;
         TTable lefttt(0, height);
 
@@ -162,7 +162,7 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
                 majorSetTemp.push_back(TTableRela(i, line));
             }
         }
-        case2temp.leftFunc = BooleanFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
+        case2temp.leftFunc = BoolFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
 
 
         if (case2temp.errorCount >= case2.errorCount) break;
@@ -189,8 +189,8 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
         TTable majorRow = calcMajorRow(majorSet, height, focusSim);
         BestApprox case3temp;
         case3temp.errorCount = 0;
-        //case3temp.leftFunc = BooleanFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
-        case3temp.rightFunc = BooleanFunction(width, majorRow, widthName, nodeNameGen.gen());
+        //case3temp.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
+        case3temp.rightFunc = BoolFunction(width, majorRow, widthName, nodeNameGen.gen());
         case3temp.method = OR_TABLE;
         TTable lefttt(0, height);
 
@@ -209,7 +209,7 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
                 lefttt[i] = 1;
             }
         }
-        case3temp.leftFunc = BooleanFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
+        case3temp.leftFunc = BoolFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
 
         if (case3temp.errorCount >= case3.errorCount) break;
         majorSet = majorSetTemp;
@@ -241,8 +241,8 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
         TTable compMajorRow = majorRow; compMajorRow.flip();
         BestApprox case4temp;
         case4temp.errorCount = 0;
-        //case4temp.leftFunc = BooleanFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
-        case4temp.rightFunc = BooleanFunction(width, majorRow, widthName, nodeNameGen.gen());
+        //case4temp.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
+        case4temp.rightFunc = BoolFunction(width, majorRow, widthName, nodeNameGen.gen());
         case4temp.method = XOR_TABLE;
         TTable lefttt(0, height);
 
@@ -263,7 +263,7 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
                 compMajorSetTemp.push_back(TTableRela(i,line));
             }
         }
-        case4temp.leftFunc = BooleanFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
+        case4temp.leftFunc = BoolFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
 
         if (case4temp.errorCount >= case4.errorCount) break;
         majorSet = majorSetTemp;

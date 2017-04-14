@@ -11,10 +11,9 @@
 #include <map>
 
 #include "const.h"
-#include "kmap.h"
-#include "ttable.h"
+#include "../../common/ttable.h"
 
-class BooleanFunction {
+class BoolFunction {
 private:
     size_t inputSize;
     TTable truthTab;
@@ -23,18 +22,18 @@ private:
 
 public:
 
-    BooleanFunction(size_t inputSize,
+    BoolFunction(size_t inputSize,
                     const TTable& truthTab,
                     const std::vector<NodeName>& portName,
                     const NodeName& outPortName);
 
-    void operator= (const BooleanFunction &initBF);
-    bool operator== (const BooleanFunction &initBF);
-    int operator^(const BooleanFunction &initBF);
+    void operator= (const BoolFunction &initBF);
+    bool operator== (const BoolFunction &initBF);
+    int operator^(const BoolFunction &initBF);
 
-    friend BooleanFunction combineBooleanFunction(
-            const BooleanFunction& bf1,
-            const BooleanFunction& bf2,
+    friend BoolFunction combineBooleanFunction(
+            const BoolFunction& bf1,
+            const BoolFunction& bf2,
             const TTable& method,
             const NodeName& outName);
 
@@ -61,17 +60,14 @@ public:
         return portName.at(i);
     }
     int getPortNum(const NodeName& name) const;
+    void display() const;
 };
 
-BooleanFunction combineBooleanFunction(
-        const BooleanFunction& bf1,
-        const BooleanFunction& bf2,
+BoolFunction combineBooleanFunction(
+        const BoolFunction& bf1,
+        const BoolFunction& bf2,
         const TTable& method,
         const NodeName& outName
 );
-
-/*const BooleanFunction baseBooleanFunction(
-        0, TTable(1,1), std::vector<NodeName>(), NodeName("")
-);*/
 
 #endif //VE490_BOOLEAN_FUNCTION_H
