@@ -1,4 +1,3 @@
-ABC_USE_PIC=1
 
 CC   := gcc
 CXX  := g++
@@ -45,9 +44,9 @@ INCLUDES += -Isrc
 ARCHFLAGS ?= $(shell $(CC) arch_flags.c -o $(ARCHFLAGS_EXE) && $(ARCHFLAGS_EXE))
 ARCHFLAGS := $(ARCHFLAGS)
 
-OPTFLAGS  ?= 
+OPTFLAGS  ?= -g -O
 
-CFLAGS    += -Wall  -Wno-unused-function -Wno-write-strings -Wno-sign-compare -Ofast $(ARCHFLAGS)
+CFLAGS    += -Wall -Wno-unused-function -Wno-write-strings -Wno-sign-compare $(ARCHFLAGS)
 ifneq ($(findstring arm,$(shell uname -m)),)
 	CFLAGS += -DABC_MEMALIGN=4
 endif
@@ -125,7 +124,7 @@ endif
 
 
 $(info $(MSG_PREFIX)Using CFLAGS=$(CFLAGS))
-CXXFLAGS += $(CFLAGS)
+CXXFLAGS += -O2 -march=native $(CFLAGS)
 
 SRC  :=
 GARBAGE := core core.* *.stackdump ./tags $(PROG) arch_flags

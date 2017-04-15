@@ -62,6 +62,8 @@
 #include "map/mpm/mpm.h"
 #include "opt/fret/fretime.h"
 #include "opt/nwk/nwkMerge.h"
+#include "base/acb/acbPar.h"
+
 
 #ifndef _WIN32
 #include <unistd.h>
@@ -121,6 +123,7 @@ static int Abc_CommandLutmin                 ( Abc_Frame_t * pAbc, int argc, cha
 static int Abc_CommandMfs                    ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandMfs2                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandMfs3                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
+static int Abc_CommandMfse                   ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandTrace                  ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandGlitch                 ( Abc_Frame_t * pAbc, int argc, char ** argv );
 static int Abc_CommandSpeedup                ( Abc_Frame_t * pAbc, int argc, char ** argv );
@@ -777,6 +780,7 @@ void Abc_Init( Abc_Frame_t * pAbc )
     Cmd_CommandAdd( pAbc, "Synthesis",    "mfs",           Abc_CommandMfs,              1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "mfs2",          Abc_CommandMfs2,             1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "mfs3",          Abc_CommandMfs3,             1 );
+    Cmd_CommandAdd( pAbc, "Synthesis",    "mfse",          Abc_CommandMfse,              1 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "trace",         Abc_CommandTrace,            0 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "glitch",        Abc_CommandGlitch,           0 );
     Cmd_CommandAdd( pAbc, "Synthesis",    "speedup",       Abc_CommandSpeedup,          1 );
@@ -5648,6 +5652,155 @@ usage:
     Abc_Print( -2, "\t-p       : toggle printing decompositions [default = %s]\n",                              pPars->fPrintDecs? "yes": "no" );
     Abc_Print( -2, "\t-d       : toggle printing delay profile statistics [default = %s]\n",                    pPars->fDelayVerbose? "yes": "no" );
     Abc_Print( -2, "\t-l       : toggle printing library usage statistics [default = %s]\n",                    pPars->fLibVerbose? "yes": "no" );
+    Abc_Print( -2, "\t-v       : toggle printing optimization summary [default = %s]\n",                        pPars->fVerbose? "yes": "no" );
+    Abc_Print( -2, "\t-w       : toggle printing detailed stats for each node [default = %s]\n",                pPars->fVeryVerbose? "yes": "no" );
+    Abc_Print( -2, "\t-h       : print the command usage\n");
+    return 1;
+}
+
+/**Function*************************************************************
+
+  Synopsis    []
+
+  Description []
+
+  SideEffects []
+
+  SeeAlso     []
+
+***********************************************************************/
+int Abc_CommandMfse( Abc_Frame_t * pAbc, int argc, char ** argv )
+{
+    extern Abc_Ntk_t * Abc_NtkOptMfse( Abc_Ntk_t * pNtk, Acb_Par_t * pPars );
+    Abc_Ntk_t * pNtkNew, * pNtk = Abc_FrameReadNtk(pAbc);
+    Acb_Par_t Pars, * pPars = &Pars; int c;
+    Acb_ParSetDefault( pPars );
+    Extra_UtilGetoptReset();
+    while ( ( c = Extra_UtilGetopt( argc, argv, "IOWFLCadvwh" ) ) != EOF )
+    {
+        switch ( c )
+        {
+        case 'I':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-I\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            pPars->nTfiLevMax = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( pPars->nTfiLevMax < 0 )
+                goto usage;
+            break;
+        case 'O':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-O\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            pPars->nTfoLevMax = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( pPars->nTfoLevMax < 0 )
+                goto usage;
+            break;
+        case 'W':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-W\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            pPars->nWinNodeMax = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( pPars->nWinNodeMax < 0 )
+                goto usage;
+            break;
+        case 'F':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-F\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            pPars->nFanoutMax = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( pPars->nFanoutMax < 0 )
+                goto usage;
+            break;
+        case 'L':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-L\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            pPars->nGrowthLevel = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( pPars->nGrowthLevel < -ABC_INFINITY || pPars->nGrowthLevel > ABC_INFINITY )
+                goto usage;
+            break;
+        case 'C':
+            if ( globalUtilOptind >= argc )
+            {
+                Abc_Print( -1, "Command line switch \"-C\" should be followed by an integer.\n" );
+                goto usage;
+            }
+            pPars->nBTLimit = atoi(argv[globalUtilOptind]);
+            globalUtilOptind++;
+            if ( pPars->nBTLimit < 0 )
+                goto usage;
+            break;
+        case 'a':
+            pPars->fArea ^= 1;
+            break;
+        case 'd':
+            pPars->fUseAshen ^= 1;
+            break;
+        case 'v':
+            pPars->fVerbose ^= 1;
+            break;
+        case 'w':
+            pPars->fVeryVerbose ^= 1;
+            break;
+        case 'h':
+            goto usage;
+        default:
+            goto usage;
+        }
+    }
+    if ( pNtk == NULL )
+    {
+        Abc_Print( -1, "Empty network.\n" );
+        return 1;
+    }
+    if ( !Abc_NtkIsLogic(pNtk) )
+    {
+        Abc_Print( -1, "This command can only be applied to a logic network.\n" );
+        return 1;
+    }
+    pPars->nLutSize = Abc_NtkGetFaninMax( pNtk );
+    if ( pPars->nLutSize > 6 )
+    {
+        Abc_Print( -1, "Command is only applicable to LUT size no more than 6.\n" );
+        return 1;
+    }
+    Abc_NtkToSop( pNtk, -1, ABC_INFINITY );
+    pNtkNew = Abc_NtkOptMfse( pNtk, pPars );
+    if ( pNtkNew == NULL )
+    {
+        Abc_Print( -1, "Command \"mfse\" has failed.\n" );
+        return 1;
+    }
+    Abc_FrameReplaceCurrentNetwork( pAbc, pNtkNew );
+    return 0;
+
+usage:
+    Abc_Print( -2, "usage: mfse [-IOWFLC <num>] [-advwh]\n" );
+    Abc_Print( -2, "\t           performs don't-care-based optimization of logic networks\n" );
+    Abc_Print( -2, "\t-I <num> : the number of levels in the TFI cone (2 <= num) [default = %d]\n",             pPars->nTfiLevMax );
+    Abc_Print( -2, "\t-O <num> : the number of levels in the TFO cone (0 <= num) [default = %d]\n",             pPars->nTfoLevMax );
+    Abc_Print( -2, "\t-W <num> : the max number of nodes in the window (1 <= num) [default = %d]\n",            pPars->nWinNodeMax );
+    Abc_Print( -2, "\t-F <num> : the max number of fanouts to skip (1 <= num) [default = %d]\n",                pPars->nFanoutMax );
+    Abc_Print( -2, "\t-L <num> : the max increase in node level after resynthesis (0 <= num) [default = %d]\n", pPars->nGrowthLevel );
+    Abc_Print( -2, "\t-C <num> : the max number of conflicts in one SAT run (0 = no limit) [default = %d]\n",   pPars->nBTLimit );
+    Abc_Print( -2, "\t-a       : toggle minimizing area [default = %s]\n",                                      pPars->fArea? "area": "delay" );
+    Abc_Print( -2, "\t-d       : toggle using Ashenhurst decomposition [default = %s]\n",                       pPars->fUseAshen? "yes": "no" );
     Abc_Print( -2, "\t-v       : toggle printing optimization summary [default = %s]\n",                        pPars->fVerbose? "yes": "no" );
     Abc_Print( -2, "\t-w       : toggle printing detailed stats for each node [default = %s]\n",                pPars->fVeryVerbose? "yes": "no" );
     Abc_Print( -2, "\t-h       : print the command usage\n");
@@ -12231,6 +12384,8 @@ int Abc_CommandTest( Abc_Frame_t * pAbc, int argc, char ** argv )
 //        extern void Cba_PrsReadBlifTest();
 //        Cba_PrsReadBlifTest();
     }
+//    Abc_NtkComputePaths( Abc_FrameReadNtk(pAbc) );
+//    Acb_DataReadTest();
     return 0;
 usage:
     Abc_Print( -2, "usage: test [-CKDNM] [-aovwh] <file_name>\n" );
@@ -32773,7 +32928,7 @@ int Abc_CommandAbc9Fraig( Abc_Frame_t * pAbc, int argc, char ** argv )
     Cec_ManFraSetDefaultParams( pPars );
     pPars->fSatSweeping = 1;
     Extra_UtilGetoptReset();
-    while ( ( c = Extra_UtilGetopt( argc, argv, "WRILDCrmdcnwvh" ) ) != EOF )
+    while ( ( c = Extra_UtilGetopt( argc, argv, "WRILDCrmdcknwvh" ) ) != EOF )
     {
         switch ( c )
         {
@@ -32855,6 +33010,9 @@ int Abc_CommandAbc9Fraig( Abc_Frame_t * pAbc, int argc, char ** argv )
         case 'c':
             pPars->fRunCSat ^= 1;
             break;
+        case 'k':
+            pPars->fUseCones ^= 1;
+            break;
         case 'n':
             fUseAlgo ^= 1;
             break;
@@ -32881,7 +33039,7 @@ int Abc_CommandAbc9Fraig( Abc_Frame_t * pAbc, int argc, char ** argv )
     return 0;
 
 usage:
-    Abc_Print( -2, "usage: &fraig [-WRILDC <num>] [-rmdcnwvh]\n" );
+    Abc_Print( -2, "usage: &fraig [-WRILDC <num>] [-rmdcknwvh]\n" );
     Abc_Print( -2, "\t         performs combinational SAT sweeping\n" );
     Abc_Print( -2, "\t-W num : the number of simulation words [default = %d]\n", pPars->nWords );
     Abc_Print( -2, "\t-R num : the number of simulation rounds [default = %d]\n", pPars->nRounds );
@@ -32893,6 +33051,7 @@ usage:
     Abc_Print( -2, "\t-m     : toggle miter vs. any circuit [default = %s]\n", pPars->fCheckMiter? "miter": "circuit" );
     Abc_Print( -2, "\t-d     : toggle using double output miters [default = %s]\n", pPars->fDualOut? "yes": "no" );
     Abc_Print( -2, "\t-c     : toggle using circuit-based solver [default = %s]\n", pPars->fRunCSat? "yes": "no" );
+    Abc_Print( -2, "\t-k     : toggle using logic cones in the SAT solver [default = %s]\n", pPars->fUseCones? "yes": "no" );
     Abc_Print( -2, "\t-n     : toggle using new implementation [default = %s]\n", fUseAlgo? "yes": "no" );
     Abc_Print( -2, "\t-w     : toggle printing even more verbose information [default = %s]\n", pPars->fVeryVerbose? "yes": "no" );
     Abc_Print( -2, "\t-v     : toggle printing verbose information [default = %s]\n", pPars->fVerbose? "yes": "no" );
@@ -43337,7 +43496,7 @@ int Abc_CommandAbc9Test( Abc_Frame_t * pAbc, int argc, char ** argv )
 //    extern void Gia_ManCheckFalseTest( Gia_Man_t * p, int nSlackMax );
 //    extern void Gia_ParTest( Gia_Man_t * p, int nWords, int nProcs );
 //    extern void Gia_ManTisTest( Gia_Man_t * pInit );
-    extern void Gia_Iso3Test( Gia_Man_t * p );
+    extern void Gia_StoComputeCuts( Gia_Man_t * p );
 
     Extra_UtilGetoptReset();
     while ( ( c = Extra_UtilGetopt( argc, argv, "WPFsvh" ) ) != EOF )
@@ -43441,7 +43600,7 @@ int Abc_CommandAbc9Test( Abc_Frame_t * pAbc, int argc, char ** argv )
 //    Jf_ManTestCnf( pAbc->pGia );
 //    Gia_ManCheckFalseTest( pAbc->pGia, nFrames );
 //    Gia_ParTest( pAbc->pGia, nWords, nProcs );
-//Cec2_ManSimulateTest( pAbc->pGia );
+    Gia_StoComputeCuts( pAbc->pGia );
 //    printf( "\nThis command is currently disabled.\n\n" );
     return 0;
 usage:

@@ -1079,6 +1079,14 @@ SOURCE=.\src\base\acb\acbMfs.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\src\base\acb\acbPar.h
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\base\acb\acbSets.c
+# End Source File
+# Begin Source File
+
 SOURCE=.\src\base\acb\acbUtil.c
 # End Source File
 # End Group
@@ -4544,6 +4552,10 @@ SOURCE=.\src\aig\gia\giaCSatOld.c
 # Begin Source File
 
 SOURCE=.\src\aig\gia\giaCTas.c
+# End Source File
+# Begin Source File
+
+SOURCE=.\src\aig\gia\giaCut.c
 # End Source File
 # Begin Source File
 
