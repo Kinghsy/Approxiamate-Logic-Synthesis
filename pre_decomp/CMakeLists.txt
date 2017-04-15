@@ -4,3 +4,6 @@ target_compile_options(preDecomp BEFORE
         PRIVATE -Ofast
         PRIVATE -march=native
         )
+
+set_property(TARGET preDecomp
+        PROPERTY INTERPROCEDURAL_OPTIMIZATION True)

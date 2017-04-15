@@ -67,7 +67,11 @@ TTable combineTruthTable(const TTable &t1, const TTable &t2,
     if (method == AND_TABLE)
         return TTable(result1 & result2, combinedInput);
     if (method == OR_TABLE)
-        return TTable(result1 & result2, combinedInput);
+        return TTable(result1 | result2, combinedInput);
+    if (method == LEFT_RELA_TABLE)
+        return TTable(result1, combinedInput);
+    if (method == RIGHT_RELA_TABLE)
+        return TTable(result2, combinedInput);
 
     assert(0);
 }

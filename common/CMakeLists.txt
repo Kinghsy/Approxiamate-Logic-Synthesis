@@ -1,9 +1,4 @@
-add_executable(test_common
-        common_test.cpp
-        ttable.cpp
-        urandom.cpp
-        resource.cpp
-        blif_builder.cpp)
+add_executable(test_common common_test.cpp)
 
 add_library(common
         common.h exception.h
@@ -14,4 +9,11 @@ add_library(common
         blif_builder.cpp blif_builder.h
         ttable.cpp ttable.h)
 
-target_link_libraries(test_common gtest gtest_main)
+target_link_libraries(test_common gtest gtest_main common)
+
+target_compile_options(common BEFORE
+        PRIVATE -march=native
+        PRIVATE -Ofast)
+
+set_property(TARGET common
+        PROPERTY INTERPROCEDURAL_OPTIMIZATION True)

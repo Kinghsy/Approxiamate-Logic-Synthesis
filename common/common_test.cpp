@@ -99,6 +99,22 @@ TEST(TTABLE, COMBINE) {
                               DBitset(string("00111")),
                               DBitset(string("11000")), OR_TABLE);
 
-    ASSERT_EQ(combinedTable.toString(), "0000");
+    ASSERT_EQ(combinedTable.toString(),
+              "11111111111111111011001011111111");
 
+    combinedTable =
+            combineTruthTable(fun1, fun2,
+                              DBitset(string("00111")),
+                              DBitset(string("11000")), AND_TABLE);
+
+    ASSERT_EQ(combinedTable.toString(),
+              "10110010101100100000000010110010");
+
+    combinedTable =
+            combineTruthTable(fun1, fun2,
+                              DBitset(string("00111")),
+                              DBitset(string("11000")), XOR_TABLE);
+
+    ASSERT_EQ(combinedTable.toString(),
+              "01001101010011011011001001001101");
 }
