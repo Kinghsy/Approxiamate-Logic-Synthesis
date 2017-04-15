@@ -5,6 +5,7 @@
 #include <iostream>
 #include "../circuit/interface.h"
 #include "sim_profile.h"
+#include "../newApprox/src/const.h"
 
 using std::vector;
 using std::string;
@@ -29,7 +30,8 @@ SimulationResult::SimulationResult(
 FocusedSimulationResult::FocusedSimulationResult
         (const SimulationResult &result,
          const std::vector<std::string> &node)
-        : nodeOrder(node) {
+        : nodeOrder(node), data(0, 1ul << (node.size())) {
+
     size_t size = node.size();
     if (size > 16) {
         std::cerr << "Cannot not focus on more than 16 nodes" << std::endl;
@@ -67,7 +69,7 @@ FocusedSimulationResult::FocusedSimulationResult
 
 
     for (int j = 0; j < result.nSamples; ++j) {
-        std::string function;
+        DBitset dBitset(size);
         for (int i = 0; i < size; ++i) {
             size_t ind = index[i];
             const std::vector<int>& inputResult = result.inputResult[j];
@@ -87,26 +89,36 @@ FocusedSimulationResult::FocusedSimulationResult
                 default:
                     assert(0);
             }
-            if (result == 0)
-                function.push_back('0');
-            else
-                function.push_back('1');
+            dBitset[i] = result;
         }
-        // TODO: Could be problematic? Standard should have specified int()==0
-        data[function]++;
+        data[dBitset.to_ulong()]++;
     }
 }
 
 size_t FocusedSimulationResult::count(const std::string &term) const {
-    return data.at(term);
+    return data.at(std::bitset<64>(term).to_ullong());
 }
 
 size_t FocusedSimulationResult::count(const std::vector<std::string> &termSet) const {
     size_t sum = 0;
     for (const std::string& term : termSet) {
-        sum += data.at(term);
+        sum += data.at(std::bitset<64>(term).to_ullong());
     }
     return sum;
+}
+
+size_t FocusedSimulationResult::count(const DBitset &term) const {
+    assert(term.size() == this->nodeOrder.size());
+    return data.at(term.to_ulong());
+}
+
+size_t FocusedSimulationResult::count(const vector<DBitset> &termSet) const{
+    assert(termSet[0].size() == this->nodeOrder.size());
+    size_t count = 0;
+    for (const auto& term : termSet) {
+        count += data.at(term.to_ulong());
+    }
+    return 0;
 }
 
 FocusedSimulationResult

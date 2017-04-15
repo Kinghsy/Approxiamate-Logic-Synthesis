@@ -32,8 +32,8 @@ struct SimulationResult {
 };
 
 class FocusedSimulationResult {
-    std::unordered_map<std::string, size_t > data;
 
+    std::vector<size_t> data;
     const std::vector<std::string> nodeOrder;
 
 public:
@@ -45,8 +45,11 @@ public:
     FocusedSimulationResult(const SimulationResult& result,
                             const std::vector<std::string>& node);
 
+    size_t count(const DBitset& term) const;
+    size_t count(const std::vector<DBitset> &termSet) const;
     size_t count(const std::string& term) const;
     size_t count(const std::vector<std::string>& termSet) const;
+
 };
 
 struct CompareResult {

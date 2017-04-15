@@ -42,7 +42,6 @@ public:
     Kmap(const BoolFunction& BF,
          const std::vector<NodeName > &heightName,
          const std::vector<NodeName > &widthName);
-    ~Kmap();
 
     bool operator== (const Kmap& initKmap) const;  // without name
         // notice that == operation for Kmap in no-named,

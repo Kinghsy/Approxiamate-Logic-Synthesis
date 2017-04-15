@@ -68,24 +68,14 @@ Kmap::Kmap(
 
 }
 
-Kmap::~Kmap() {
-    while (kmap.size()>0)
-        kmap.pop_back();
-}
-
 bool Kmap::operator==(const Kmap &initKmap) const {
-    // FIXME
-    for (int i = 0; i < height; ++i)
-        for (int j = 0; j < width; ++j)
-            if (kmap[i][j] != initKmap.kmap[i][j]) return false;
-    return true;
+    return this->kmap == initKmap.kmap;
 }
 
 size_t Kmap::operator^(const Kmap &initKmap) const {
     size_t count = 0;
     for (int i = 0; i < height; ++i)
-        for (int j = 0; j < width; ++j)
-            count += (kmap[i][j] != initKmap.kmap[i][j]) ? 1:0 ;
+        count += (this->kmap[i] ^ initKmap.kmap[i]).count();
     return count;
 }
 
