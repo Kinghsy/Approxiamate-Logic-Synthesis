@@ -4,6 +4,7 @@
 
 #include <src/base/main/main.h>
 #include "ex_abc.h"
+#include <common.h>
 
 extern "C" {
     #include <src/base/main/main.h>
@@ -20,6 +21,8 @@ ExAbc& ExAbc::getInstance() {
 ExAbc::ExAbc() {
     Abc_Start();
     abcFramework = Abc_FrameGetGlobalFrame();
+
+    this->execute("read_library " + DataPath.sub("mvsis") / "stdcell.bin");
 }
 
 ExAbc::~ExAbc() {
