@@ -8,6 +8,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <cmath>
 
 using std::ifstream;
 using std::string;
@@ -133,25 +134,29 @@ PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
     std::bitset<64> validMask(mask.to_ulong());
     function &= validMask;
 
+    const float SIZE_ERROR_BONUS = 0.02;
+
     if (inputSize <= 5) { // Compare error on all ouputs
         const DbEntry* minEntry = nullptr;
-        size_t minError = SIZE_MAX;
+        long minError = LONG_MAX;
         for (size_t i = 0; i < metadataSet.size(); i++) {
             auto diff = metadataSet[i]^ function;
             size_t error = 0;
             for (size_t ind = 0; ind < (1ul << inputSize); ind++) {
                 if (diff.test(ind)) error += simResult.count(ind);
             }
-            if (error < minError) {
+            size_t nDiscard = data.at(inputSize).at(i).discardMask.count();
+            float weightedErr = error - SIZE_ERROR_BONUS * nDiscard * simResult.cnSamples;
+            if (weightedErr < minError) {
                 minEntry = &(data.at(inputSize).at(i));
-                minError = error;
+                minError = lroundf(weightedErr);
             }
         }
         assert(minEntry);
         return *minEntry;
     } else {
         const DbEntry* minEntry = nullptr;
-        size_t minError = SIZE_MAX;
+        long minError = LONG_MAX;
 
         size_t nTerms = 1ul << inputSize;
 
@@ -176,57 +181,57 @@ PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
         };
 
         std::multimap<size_t, Candidate> minHeapUnmasked;
-        minError = SIZE_MAX;
+        minError = LONG_MAX;
         for (size_t i = 0; i < metadataSet.size(); i++) {
-            auto diff = (metadataSet[i]^ function).count();
+            auto diff = (metadataSet[i] ^ function).count();
             if (minHeapUnmasked.size() < CANDIDATE_NUMBER) {
-                minError = diff < minError ? diff : minError;
-                auto t = Candidate{&(data.at(inputSize).at(i)), function};
+                auto t = Candidate{&(data.at(inputSize).at(i)), metadataSet[i]};
                 minHeapUnmasked.emplace(diff, t);
+                minError = minHeapUnmasked.rbegin()->first;
                 continue;
             }
 
             if (diff < minError) {
                 minHeapUnmasked.erase(--minHeapUnmasked.end()); // Pops the last element
-                auto t = Candidate{&(data.at(inputSize).at(i)), function};
+                auto t = Candidate{&(data.at(inputSize).at(i)), metadataSet[i]};
                 minHeapUnmasked.insert(std::make_pair(diff, t));
-                auto minFun = minHeapUnmasked.rbegin()->second.function;
-                minError = (minFun ^ function).count();
+                minError = minHeapUnmasked.rbegin()->first;
             }
         }
 
         std::multimap<size_t, Candidate> minHeapMasked;
-        minError = SIZE_MAX;
+        minError = LONG_MAX;
         for (size_t i = 0; i < metadataSet.size(); i++) {
             auto diffFun = (metadataSet[i]^ function) & compareMask;
             auto diff = diffFun.count();
             if (minHeapMasked.size() < CANDIDATE_NUMBER) {
-                minError = diff < minError ? diff : minError;
-                auto t = Candidate{&(data.at(inputSize).at(i)), function};
+                auto t = Candidate{&(data.at(inputSize).at(i)), metadataSet[i]};
                 minHeapMasked.emplace(diff, t);
+                minError = minHeapMasked.rbegin()->first;
                 continue;
             }
 
             if (diff < minError) {
                 minHeapMasked.erase(--minHeapMasked.end()); // Pops the last element
-                auto t = Candidate{&(data.at(inputSize).at(i)), function};
-                minHeapMasked.insert(std::make_pair(diff, t));
-                auto minFun = minHeapMasked.rbegin()->second.function;
-                minError = ((minFun ^ function) & compareMask).count();
+                auto t = Candidate{&(data.at(inputSize).at(i)), metadataSet[i]};
+                minHeapMasked.emplace(diff, t);
+                minError = minHeapMasked.rbegin()->first;
             }
         }
 
-        minError = SIZE_MAX;
+        minError = LONG_MAX;
         minEntry = nullptr;
         for (auto &&item : minHeapUnmasked) {
             auto fun = item.second.function;
             auto diffFun = fun ^ function;
-            size_t error = 0;
+            int error = 0;
             for (size_t ind = 0; ind < (1ul << inputSize); ind++) {
                 if (diffFun.test(ind)) error += simResult.count(ind);
             }
-            if (error < minError) {
-                minError = error;
+            size_t nDiscard = item.second.entry->discardMask.count();
+            float weightedErr = error - SIZE_ERROR_BONUS * nDiscard * simResult.cnSamples;
+            if (weightedErr < minError) {
+                minError = lroundf(weightedErr);
                 minEntry = item.second.entry;
             }
         }
@@ -238,8 +243,10 @@ PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
             for (size_t ind = 0; ind < (1ul << inputSize); ind++) {
                 if (diffFun.test(ind)) error += simResult.count(ind);
             }
-            if (error < minError) {
-                minError = error;
+            size_t nDiscard = item.second.entry->discardMask.count();
+            float weightedErr = error - SIZE_ERROR_BONUS * nDiscard * simResult.cnSamples;
+            if (weightedErr < minError) {
+                minError = lroundf(weightedErr);
                 minEntry = item.second.entry;
             }
         }
