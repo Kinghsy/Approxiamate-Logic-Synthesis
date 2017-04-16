@@ -11,6 +11,8 @@
 #include <bitset>
 #include <memory>
 
+class FocusedSimulationResult;
+
 class PreDecomp {
 public:
 
@@ -19,7 +21,7 @@ public:
         DBitset leftMask;
         DBitset rightMask;
         DBitset discardMask;
-        TTable combine ;
+        TTable combine;
         TTable left;
         TTable right;
         TTable function;
@@ -39,6 +41,9 @@ private:
 
 public:
 
+    const DbEntry& getMatch(const std::string& fun, size_t inputSize,
+                            FocusedSimulationResult simResult);
+
     const DbEntry& getMatch(const std::string& fun, size_t inputSize);
 
     size_t nLut3() {return data[3].size();}
@@ -48,7 +53,7 @@ public:
 
     const int MINIMUM_VERSION = 101;
     static PreDecomp& getInstance();
-    ~PreDecomp() noexcept;
+    ~PreDecomp() noexcept {};
 
     PreDecomp(const PreDecomp& instance) = delete;
     PreDecomp(PreDecomp&& instance) = delete;

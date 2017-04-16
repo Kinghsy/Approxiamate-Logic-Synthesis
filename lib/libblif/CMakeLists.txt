@@ -8,4 +8,5 @@ add_library(blif ${SOURCE_LIB})
 
 target_compile_options(blif BEFORE
         PRIVATE -O3
+        PRIVATE -march=native
 )

@@ -3,6 +3,7 @@
 //
 
 #include "pre_decomp.h"
+#include "../circuit_profile/sim_profile.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -112,8 +113,6 @@ PreDecomp &PreDecomp::getInstance() {
     return *instance;
 }
 
-PreDecomp::~PreDecomp() {}
-
 const PreDecomp::DbEntry& PreDecomp::getMatch(const std::string &funStr, size_t inputSize) {
     auto& metadataSet = metaData.at(inputSize);
     std::bitset<64> function(funStr);
@@ -129,4 +128,133 @@ const PreDecomp::DbEntry& PreDecomp::getMatch(const std::string &funStr, size_t 
         }
     }
     return *minEntry;
+}
+
+
+const PreDecomp::DbEntry &
+PreDecomp::getMatch(const std::string &funStr, size_t inputSize,
+                    FocusedSimulationResult simResult) {
+    if (inputSize > 6) assert(0);
+    assert(inputSize == simResult.nodeOrder.size());
+    auto& metadataSet = metaData.at(inputSize);
+    std::bitset<64> function(funStr);
+    std::bitset<64> validMask((1ull << (1ull << inputSize)) - 1);
+    function &= validMask;
+
+    if (inputSize <= 5) { // Compare error on all ouputs
+        const DbEntry* minEntry = nullptr;
+        size_t minError = SIZE_MAX;
+        for (size_t i = 0; i < metadataSet.size(); i++) {
+            auto diff = metadataSet[i]^ function;
+            size_t error = 0;
+            for (size_t ind = 0; ind < (1ul << inputSize); ind++) {
+                if (diff.test(ind)) error += simResult.count(ind);
+            }
+            if (error < minError) {
+                minEntry = &(data.at(inputSize).at(i));
+                minError = error;
+            }
+        }
+        assert(minEntry);
+        return *minEntry;
+    } else {
+        const DbEntry* minEntry = nullptr;
+        size_t minError = SIZE_MAX;
+
+        size_t nTerms = 1ul << inputSize;
+
+        std::vector<size_t> errorByTerm = simResult.cdata;
+        std::sort(errorByTerm.begin(), errorByTerm.end());
+        size_t mid = errorByTerm[nTerms >> 1] + errorByTerm[(nTerms >> 1) - 1];
+        mid = mid >> 1;
+
+        std::bitset<64> compareMask;
+        compareMask.reset();
+
+        for (size_t ind = 0; ind < nTerms; ind++)
+            if (simResult.count(ind) > mid) compareMask.set(ind);
+
+        // Search the space, find 20 functions that
+        // differs by minimum number on the non-don't care set
+
+        const size_t CANDIDATE_NUMBER = 20;
+        struct Candidate {
+            DbEntry* entry;
+            std::bitset<64> function;
+        };
+
+        std::multimap<size_t, Candidate> minHeapUnmasked;
+        minError = SIZE_MAX;
+        for (size_t i = 0; i < metadataSet.size(); i++) {
+            auto diff = (metadataSet[i]^ function).count();
+            if (minHeapUnmasked.size() < CANDIDATE_NUMBER) {
+                minError = diff < minError ? diff : minError;
+                auto t = Candidate{&(data.at(inputSize).at(i)), function};
+                minHeapUnmasked.emplace(diff, t);
+                continue;
+            }
+
+            if (diff < minError) {
+                minHeapUnmasked.erase(--minHeapUnmasked.end()); // Pops the last element
+                auto t = Candidate{&(data.at(inputSize).at(i)), function};
+                minHeapUnmasked.insert(std::make_pair(diff, t));
+                auto minFun = minHeapUnmasked.rbegin()->second.function;
+                minError = (minFun ^ function).count();
+            }
+        }
+
+        std::multimap<size_t, Candidate> minHeapMasked;
+        minError = SIZE_MAX;
+        for (size_t i = 0; i < metadataSet.size(); i++) {
+            auto diffFun = (metadataSet[i]^ function) & compareMask;
+            auto diff = diffFun.count();
+            if (minHeapMasked.size() < CANDIDATE_NUMBER) {
+                minError = diff < minError ? diff : minError;
+                auto t = Candidate{&(data.at(inputSize).at(i)), function};
+                minHeapMasked.emplace(diff, t);
+                continue;
+            }
+
+            if (diff < minError) {
+                minHeapMasked.erase(--minHeapMasked.end()); // Pops the last element
+                auto t = Candidate{&(data.at(inputSize).at(i)), function};
+                minHeapMasked.insert(std::make_pair(diff, t));
+                auto minFun = minHeapMasked.rbegin()->second.function;
+                minError = ((minFun ^ function) & compareMask).count();
+            }
+        }
+
+        minError = SIZE_MAX;
+        minEntry = nullptr;
+        for (auto &&item : minHeapUnmasked) {
+            auto fun = item.second.function;
+            auto diffFun = fun ^ function;
+            size_t error = 0;
+            for (size_t ind = 0; ind < (1ul << inputSize); ind++) {
+                if (diffFun.test(ind)) error += simResult.count(ind);
+            }
+            if (error < minError) {
+                minError = error;
+                minEntry = item.second.entry;
+            }
+        }
+
+        for (auto &&item : minHeapMasked) {
+            auto fun = item.second.function;
+            auto diffFun = fun ^ function;
+            size_t error = 0;
+            for (size_t ind = 0; ind < (1ul << inputSize); ind++) {
+                if (diffFun.test(ind)) error += simResult.count(ind);
+            }
+            if (error < minError) {
+                minError = error;
+                minEntry = item.second.entry;
+            }
+        }
+
+        assert(minEntry);
+        return *minEntry;
+    }
+
+    assert(0);
 }

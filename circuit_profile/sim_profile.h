@@ -35,9 +35,10 @@ struct SimulationResult {
 class FocusedSimulationResult {
 
     std::vector<size_t> data;
-    const std::vector<std::string> nodeOrder;
 
 public:
+    const std::vector<size_t>& cdata;
+    const std::vector<std::string> nodeOrder;
 
     /* Notice this function is ordered!
      * The order of the query must be maintained
@@ -46,6 +47,7 @@ public:
     FocusedSimulationResult(const SimulationResult& result,
                             const std::vector<std::string>& node);
 
+    size_t count(size_t term) const {return data.at(term);}
     size_t count(const DBitset& term) const;
     size_t count(const std::vector<DBitset> &termSet) const;
     size_t count(const std::string& term) const;

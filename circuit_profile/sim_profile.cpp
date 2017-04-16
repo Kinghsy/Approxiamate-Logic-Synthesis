@@ -30,10 +30,14 @@ SimulationResult::SimulationResult(
 FocusedSimulationResult::FocusedSimulationResult
         (const SimulationResult &result,
          const std::vector<std::string> &node)
-        : nodeOrder(node), data(0, 1ul << (node.size())) {
+        : nodeOrder(node),
+          data(1ul << (node.size()), 0),
+          cdata(data) {
+
+    assert(data.size() == (1ul << node.size()));
 
     size_t size = node.size();
-    if (size > 16) {
+    if (size > 20) {
         std::cerr << "Cannot not focus on more than 16 nodes" << std::endl;
         assert(0);
     }
@@ -93,6 +97,10 @@ FocusedSimulationResult::FocusedSimulationResult
         }
         data[dBitset.to_ulong()]++;
     }
+
+    size_t sum = 0;
+    for (auto &&datum : data) sum += datum;
+    assert(sum == result.nSamples);
 }
 
 size_t FocusedSimulationResult::count(const std::string &term) const {
@@ -120,6 +128,8 @@ size_t FocusedSimulationResult::count(const vector<DBitset> &termSet) const{
     }
     return 0;
 }
+
+
 
 FocusedSimulationResult
 SimulationResult::focus(const std::vector<std::string> &node) const {
