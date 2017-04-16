@@ -56,8 +56,8 @@ void filterMffcByIntersection
                 std::back_inserter(intersection)
         );
         if (!intersection.empty()) {
+            std::cout << "\tErased '" << iter->first << "' by intersection." << endl;
             mffc.erase(iter++);
-            std::cerr << "Erased '" << iter->first << "' by intersection." << endl;
             continue;
         }
         iter++;

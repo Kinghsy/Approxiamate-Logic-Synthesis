@@ -57,13 +57,16 @@ int main(int argc, char* argv[]) {
 
     auto test =
             [](const FFC& ffc) -> bool {
-                return ffc.inputNode.size() == 6;
+                return ffc.inputNode.size() == 5;
             };
 
     auto ffc = findFirstFFC(mffcs, test);
     sw.take("FindFFC");
 
     while (ffc) {
+        std::cout << "Found MFFC of " << ffc->name << " over "
+                  << ffc->inputNode.size() << " inputs, "
+                  << ffc->nodeSet.size() << " nodes\n";
         net.exportFfcToBlifFile(*ffc, TempPath / fBlif("mffc"));
         auto mffc = BlifBooleanNet(TempPath / fBlif("mffc"));
         sw.take("FFC Load");
@@ -77,7 +80,9 @@ int main(int argc, char* argv[]) {
         std::cout << table << endl;
         std::cout << match.function << endl;
         sw.take("Match");
-        std::cout << "MatchError: " << countMatchError(table, match.function, focusedResult) << endl;
+        std::cout << "MatchError: " << countMatchError(table, match.function, focusedResult) << "\t";
+        std::cout << "discardInput: " << match.discardMask.count() << endl;
+
         filterMffcByIntersection(mffcs, *ffc);
         sw.take("Filter");
         ffc = findFirstFFC(mffcs, test);

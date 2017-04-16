@@ -36,8 +36,10 @@ struct SimulationResult {
 class FocusedSimulationResult {
 
     std::vector<size_t> data;
+    size_t nSamples;
 
 public:
+    const size_t& cnSamples = nSamples;
     const std::vector<size_t>& cdata;
     const std::vector<std::string> nodeOrder;
 

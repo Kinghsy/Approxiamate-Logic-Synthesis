@@ -4,5 +4,5 @@ add_library(profile
 
 target_compile_options(profile BEFORE
         PRIVATE -march=native
-        PRIVATE -O0)
+        PRIVATE -O3)
 

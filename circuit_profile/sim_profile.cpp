@@ -101,6 +101,7 @@ FocusedSimulationResult::FocusedSimulationResult
     size_t sum = 0;
     for (auto &&datum : data) sum += datum;
     assert(sum == result.nSamples);
+    this->nSamples = sum;
 }
 
 size_t FocusedSimulationResult::count(const std::string &term) const {
