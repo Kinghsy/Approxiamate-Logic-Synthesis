@@ -44,3 +44,5 @@ run/
 lib/abc/.hg/
 
 /data/precomp/db.pcdb
+
+.directory
