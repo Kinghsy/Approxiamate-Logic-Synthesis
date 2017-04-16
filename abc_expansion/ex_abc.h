@@ -23,6 +23,9 @@ public:
     void rewrite(bool z = false);
     void balance();
     void refactor(bool z = false);
+    void map();
+    void reboot();
+    double postMapArea();
 
 
 

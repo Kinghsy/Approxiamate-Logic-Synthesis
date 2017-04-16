@@ -49,5 +49,6 @@ GATE XOR3X1 17 Y=A * (B * (C) + !B * !(C)) + !A * !(B * (C) + !B * !(C)); PIN A 
 GATE XOR2X1 7 Y=!(A * (B) + !A * !(B)); PIN A NONINV 1 999 1 0 1 0 PIN B NONINV 1 999 1 0 1 0
 GATE XNOR3X4 25 Y=!(A * (B * (C) + !B * !(C)) + !A * !(B * (C) + !B * !(C))); PIN A NONINV 1 999 1 0 1 0 PIN B NONINV 1 999 1 0 1 0 PIN C NONINV 1 999 1 0 1 0
 GATE XNOR3X2 18 Y=!(A * (B * (C) + !B * !(C)) + !A * !(B * (C) + !B * !(C))); PIN A NONINV 1 999 1 0 1 0 PIN B NONINV 1 999 1 0 1 0 PIN C NONINV 1 999 1 0 1 0
-
+GATE zero	0	O=CONST0;
+GATE one	0	O=CONST1;
 

@@ -22,7 +22,7 @@ ExAbc::ExAbc() {
     Abc_Start();
     abcFramework = Abc_FrameGetGlobalFrame();
 
-    this->execute("read_library " + DataPath.sub("mvsis") / "stdcell.bin");
+    this->execute("read_library " + DataPath.sub("mvsis") / "mcnc.bin");
 }
 
 ExAbc::~ExAbc() {
@@ -39,6 +39,7 @@ int ExAbc::execute(const std::string &str) {
 }
 
 int ExAbc::loadBlif(const std::string &file) {
+    std::cout << "ABC loading " << file << std::endl;
     std::string quotedFile = "'" + file + "'";
     return execute("read_blif " + quotedFile);
 }
@@ -136,6 +137,25 @@ void ExAbc::refactor(bool z) {
         this->execute("refactor -z");
     else
         this->execute("refactor");
+}
+
+void ExAbc::map() {
+    this->execute("sweep");
+    this->execute("strash");
+    this->execute("map");
+}
+
+void ExAbc::reboot() {
+    Abc_Stop();
+    Abc_Start();
+    abcFramework = Abc_FrameGetGlobalFrame();
+    this->execute("read_library " + DataPath.sub("mvsis") / "mcnc.bin");
+
+}
+
+double ExAbc::postMapArea() {
+    Abc_Ntk_t *pNtk = Abc_FrameReadNtk((Abc_Frame_t*)abcFramework);
+    return Abc_NtkGetMappedArea(pNtk);;
 }
 
 

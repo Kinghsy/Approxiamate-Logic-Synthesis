@@ -13,9 +13,23 @@
 
 
 int main() {
+    StopWatch s;
+
     auto& instance = ExAbc::getInstance();
 
+    s.take();
+
     instance.loadBlif(BenchmarkAigPath / "C880.blif");
+
+    s.take();
+
+    instance.map();
+
+    s.take();
+
+    std::cout << instance.postMapArea() << std::endl;
+
+    s.report();
 
     return 0;
 }

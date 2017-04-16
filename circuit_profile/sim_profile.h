@@ -5,6 +5,7 @@
 #ifndef VE490_SIM_PROFILE_H
 #define VE490_SIM_PROFILE_H
 
+#include <common.h>
 #include <vector>
 #include <string>
 #include <bitset>

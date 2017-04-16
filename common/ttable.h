@@ -10,8 +10,8 @@
 #include <ostream>
 
 class TTable {
-    size_t inputSize;
     DBitset data;
+    size_t inputSize;
 
     DBitset expandTo(const DBitset& mask) const;
 
