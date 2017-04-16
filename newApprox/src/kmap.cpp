@@ -26,20 +26,21 @@ struct tempNodeNameGenertor {
     }
 };
 
-struct TTableRela {
-    size_t lineNum;
-    TTable line;
-    TTableRela(size_t i, const TTable& t): line(t) {
-        lineNum = i;
+string num2string(size_t bits, size_t num) {
+    string base = "";
+    size_t temp = num;
+    for (size_t k = 0; k < bits; ++k) {
+        base += (temp % 2) ? "1":"0";
+        temp = temp / 2;
     }
-};
+    return base;
+}
 
-size_t countErrorWithTarget(const TTable& target, const TTable& nowRun,
-                            string base, const FocusedSimulationResult& focusSim);
-
-TTable calcMajorRow(vector<TTableRela>& vec, size_t bits, const FocusedSimulationResult& simData);
-
-string num2string(size_t bits, size_t num);
+void randTTable(TTable& a, const size_t bits) {
+    for (size_t i = 0; i < bits; ++i) {
+        a[i] = rand() % 2;
+    }
+}
 
 tempNodeNameGenertor nodeNameGen;
 
@@ -50,8 +51,8 @@ Kmap::Kmap(
 
     heightName = heightN;
     widthName = widthN;
-    height = heightName.size();
-    width = widthName.size();
+    height = ( 1 << (heightName.size()));
+    width = ( 1 << (widthName.size()));
 
     auto rowselector = DBitset(BF.getInputSize());
     auto colselector = DBitset(BF.getInputSize());
@@ -79,12 +80,23 @@ size_t Kmap::operator^(const Kmap &initKmap) const {
     return count;
 }
 
-Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
+BestApprox Kmap::divide(const SimulationResult &simData) {
 
-    // 1: 0 + 1
-    // 2: MajorRow + 0
-    // 3: MajorRpw + 1
-    // 4: MajorRow + complement of MajorRow
+    // case 1: 0s and 1s
+    //  operation DROP_RIGHT (LEFT_RELA_TABLE)
+    //  column = 1 if 1s is selected
+
+    // case 2: MajorRow + 0s
+    //  operation AND
+    //  column = 1 if RowPattern is selected
+
+    // case 3: 1s + MajorRow
+    //  operatrion OR
+    //  column = 1 if 1s is selected
+
+    // case 4: MajorRow + ~MajorRow
+    //  operation XOR
+    //  column = 1 if MajorRow is selected
 
     vector<NodeName> nodeNameSet = heightName;
     for (int i = 0; i < widthName.size(); ++i) {
@@ -92,73 +104,98 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
     }
     FocusedSimulationResult focusSim = simData.focus(nodeNameSet);
 
+    TTable All0s(0, width);
+    TTable All1s( ( 1 << width ) - 1, width);
+
+
     // case 1:
-    TTable all0(0, width);
-    TTable all1((1 << width) - 1, width);
-    BestApprox case1;
-    case1.errorCount = 0;
-    case1.rightFunc = BoolFunction(width, TTable(0, width), widthName, nodeNameGen.gen());
-    //case1.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
-    case1.method = LEFT_RELA_TABLE;
-    TTable leftt(0, height);
+    TTable rowPattern(0, width);
+    TTable columnPattern(0, height);
+    size_t err = MAX_VALUE;
 
-    for (size_t i = 0; i < height; ++i) {
-        TTable line = kmap[i];
-        string base = num2string(height, i);
-        size_t error1 = countErrorWithTarget(all0, line, base, focusSim);
-        size_t error2 = countErrorWithTarget(all1, line, base, focusSim);
-        if (error1 < error2) {
-            case1.errorCount += error1;
-            leftt[i] = 0;
-        } else {
-            case1.errorCount += error2;
-            leftt[i] = 1;
-        }
-    }
-    case1.leftFunc = BoolFunction(height, TTable(leftt), heightName, nodeNameGen.gen());
-
-
-    if (case1.leftFunc.isAll1s()) case1.method = ALL_IRR_TABLE_1;
-    if (case1.leftFunc.isAll0s()) case1.method = ALL_IRR_TABLE_0;
-
-
-    // case 2:
-    vector<TTableRela> majorSet;
-    for (size_t i = 0; i < height; ++i) {
-        majorSet.push_back(TTableRela(i, kmap[i]));
-    }
-    BestApprox case2; case2.errorCount = MAX_VALUE;
     while (true) {
-        TTable majorRow = calcMajorRow(majorSet, height, focusSim);
-        BestApprox case2temp;
-        case2temp.errorCount = 0;
-        //case2temp.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
-        case2temp.rightFunc = BoolFunction(width, majorRow, widthName, nodeNameGen.gen());
-        case2temp.method = AND_TABLE;
-        TTable lefttt(0, height);
+        TTable recordRowPattern(0, width);
+        recordRowPattern = rowPattern;
+        TTable recordColumnPattern(0, height);
+        recordColumnPattern = columnPattern;
 
-        vector<TTableRela> majorSetTemp;
-        for (size_t i = 0; i < height; ++i) {
-            TTable line = kmap[i];
-            string base = num2string(height, i);
-            size_t error1 = countErrorWithTarget(all0, line, base, focusSim);
-            size_t error2 = countErrorWithTarget(majorRow, line, base, focusSim);
-            if (error1 < error2) {
-                case2temp.errorCount += error1;
-                lefttt[i] = 0;
-            } else {
-                case2temp.errorCount += error2;
-                lefttt[i] = 1;
-                majorSetTemp.push_back(TTableRela(i, line));
-            }
+        // rowPattern --> columnPatternTemp
+        TTable columnPatternTemp(0, height);
+        columnPatternTemp = getColumnPattern(focusSim, All1s, All0s);
+        size_t errTemp = errorCountRowColumnPattern(
+                rowPattern, columnPatternTemp, LEFT_RELA_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            columnPattern = columnPatternTemp;
         }
-        case2temp.leftFunc = BoolFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
 
+        // columnPattern --> rowPatternTemp
+        TTable rowPatternTemp(0, width);
+        rowPatternTemp = getRowPattern(
+                columnPattern, focusSim, NORMAL_1_INPUT, NORMAL_1_INPUT);
+        errTemp = errorCountRowColumnPattern(
+                rowPatternTemp, columnPattern, LEFT_RELA_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            rowPattern = rowPatternTemp;
+        }
 
-        if (case2temp.errorCount >= case2.errorCount) break;
-        majorSet = majorSetTemp;
-        case2 = case2temp;
+        if ((recordRowPattern == rowPattern) &&
+        (recordColumnPattern == columnPattern)) break;
     }
+
+    BestApprox case1;
+    case1.leftFunc = BoolFunction(heightName.size(), columnPattern, heightName, nodeNameGen.gen());
+    case1.rightFunc = BoolFunction(widthName.size(), rowPattern, widthName, nodeNameGen.gen());
+    case1.errorCount = err;
+    case1.method = LEFT_RELA_TABLE;
+    if (case1.leftFunc.isAll1s())
+        case1.method = ALL_IRR_TABLE_1;
+    else if (case1.leftFunc.isAll0s())
+        case1.method = ALL_IRR_TABLE_0;
+    
+
+    // case 2
+    randTTable(rowPattern, width);
+    randTTable(columnPattern, height);
+    err = MAX_VALUE;
+
+    while (true) {
+        TTable recordRowPattern(0, width);
+        recordRowPattern = rowPattern;
+        TTable recordColumnPattern(0, height);
+        recordColumnPattern = columnPattern;
+
+        // rowPattern --> columnPatternTemp
+        TTable columnPatternTemp(0, height);
+        columnPatternTemp = getColumnPattern(focusSim, rowPattern, All0s);
+        size_t errTemp = errorCountRowColumnPattern(
+                rowPattern, columnPatternTemp, AND_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            columnPattern = columnPatternTemp;
+        }
+
+        // columnPattern --> rowPatternTemp
+        TTable rowPatternTemp(0, width);
+        rowPatternTemp = getRowPattern(
+                columnPattern, focusSim, ALL_0_1_INPUT, NORMAL_1_INPUT);
+        errTemp = errorCountRowColumnPattern(
+                rowPatternTemp, columnPattern, AND_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            rowPattern = rowPatternTemp;
+        }
+
+        if ((recordRowPattern == rowPattern) &&
+            (recordColumnPattern == columnPattern)) break;
+    }
+
+    BestApprox case2;
+    case2.leftFunc = BoolFunction(heightName.size(), columnPattern, heightName, nodeNameGen.gen());
+    case2.rightFunc = BoolFunction(widthName.size(), rowPattern, widthName, nodeNameGen.gen());
+    case2.errorCount = err;
+    case2.method = AND_TABLE;
     if (case2.leftFunc.isAll1s() && case2.rightFunc.isAll1s())
         case2.method = ALL_IRR_TABLE_1;
     else if (case2.leftFunc.isAll0s() || case2.rightFunc.isAll0s())
@@ -169,46 +206,51 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
         case2.method = LEFT_RELA_TABLE;
 
 
-    // case 3:
-    vector<TTableRela>().swap(majorSet);
-    for (size_t i = 0; i < height; ++i) {
-        majorSet.push_back(TTableRela(i, kmap[i]));
-    }
-    BestApprox case3; case3.errorCount = MAX_VALUE;
+    // case 3
+    randTTable(rowPattern, width);
+    randTTable(columnPattern, height);
+    err = MAX_VALUE;
+
     while (true) {
-        TTable majorRow = calcMajorRow(majorSet, height, focusSim);
-        BestApprox case3temp;
-        case3temp.errorCount = 0;
-        //case3temp.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
-        case3temp.rightFunc = BoolFunction(width, majorRow, widthName, nodeNameGen.gen());
-        case3temp.method = OR_TABLE;
-        TTable lefttt(0, height);
+        TTable recordRowPattern(0, width);
+        recordRowPattern = rowPattern;
+        TTable recordColumnPattern(0, height);
+        recordColumnPattern = columnPattern;
 
-        vector<TTableRela> majorSetTemp;
-        for (size_t i = 0; i < height; ++i) {
-            TTable line = kmap[i];
-            string base = num2string(height, i);
-            size_t error1 = countErrorWithTarget(majorRow, line, base, focusSim);
-            size_t error2 = countErrorWithTarget(all1, line, base, focusSim);
-            if (error1 < error2) {
-                case3temp.errorCount += error1;
-                lefttt[i] = 0;
-                majorSetTemp.push_back(TTableRela(i, line));
-            } else {
-                case3temp.errorCount += error2;
-                lefttt[i] = 1;
-            }
+        // rowPattern --> columnPatternTemp
+        TTable columnPatternTemp(0, height);
+        columnPatternTemp = getColumnPattern(focusSim, All1s, rowPattern);
+        size_t errTemp = errorCountRowColumnPattern(
+                rowPattern, columnPatternTemp, OR_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            columnPattern = columnPatternTemp;
         }
-        case3temp.leftFunc = BoolFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
 
-        if (case3temp.errorCount >= case3.errorCount) break;
-        majorSet = majorSetTemp;
-        case3 = case3temp;
+        // columnPattern --> rowPatternTemp
+        TTable rowPatternTemp(0, width);
+        rowPatternTemp = getRowPattern(
+                columnPattern, focusSim, NORMAL_1_INPUT, ALL_1_1_INPUT);
+        errTemp = errorCountRowColumnPattern(
+                rowPatternTemp, columnPattern, OR_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            rowPattern = rowPatternTemp;
+        }
+
+        if ((recordRowPattern == rowPattern) &&
+            (recordColumnPattern == columnPattern)) break;
     }
-    if (case3.leftFunc.isAll0s() && case3.rightFunc.isAll0s())
-        case3.method = ALL_IRR_TABLE_0;
-    else if (case3.leftFunc.isAll1s() || case3.rightFunc.isAll1s())
+
+    BestApprox case3;
+    case3.leftFunc = BoolFunction(heightName.size(), columnPattern, heightName, nodeNameGen.gen());
+    case3.rightFunc = BoolFunction(widthName.size(), rowPattern, widthName, nodeNameGen.gen());
+    case3.errorCount = err;
+    case3.method = OR_TABLE;
+    if (case3.leftFunc.isAll1s() || case3.rightFunc.isAll1s())
         case3.method = ALL_IRR_TABLE_1;
+    else if (case3.leftFunc.isAll0s() && case3.rightFunc.isAll0s())
+        case3.method = ALL_IRR_TABLE_0;
     else if (case3.leftFunc.isAll0s())
         case3.method = RIGHT_RELA_TABLE;
     else if (case3.rightFunc.isAll0s())
@@ -216,127 +258,171 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData){
 
 
     // case 4
-    vector<TTableRela>().swap(majorSet);
-    vector<TTableRela> compMajorSet;
-    for (size_t i = 0; i < height; ++i) {
-        majorSet.push_back(TTableRela(i, kmap[i]));
-    }
-    BestApprox case4; case4.errorCount = MAX_VALUE;
+    randTTable(rowPattern, width);
+    randTTable(columnPattern, height);
+    err = MAX_VALUE;
+
     while (true) {
-        for (auto& item: compMajorSet) {
-            TTable tempTTable = item.line.flip();
-            majorSet.push_back(TTableRela(item.lineNum, tempTTable));
-        }
-        TTable majorRow = calcMajorRow(majorSet, height, focusSim);
-        TTable compMajorRow = majorRow; compMajorRow.flip();
-        BestApprox case4temp;
-        case4temp.errorCount = 0;
-        //case4temp.leftFunc = BoolFunction(height, TTable(0, height), heightName, nodeNameGen.gen());
-        case4temp.rightFunc = BoolFunction(width, majorRow, widthName, nodeNameGen.gen());
-        case4temp.method = XOR_TABLE;
-        TTable lefttt(0, height);
+        TTable recordRowPattern(0, width);
+        recordRowPattern = rowPattern;
+        TTable recordColumnPattern(0, height);
+        recordColumnPattern = columnPattern;
 
-        vector<TTableRela> majorSetTemp;
-        vector<TTableRela> compMajorSetTemp;
-        for (size_t i = 0; i < height; ++i) {
-            TTable line = kmap[i];
-            string base = num2string(height, i);
-            size_t error1 = countErrorWithTarget(majorRow, line, base, focusSim);
-            size_t error2 = countErrorWithTarget(compMajorRow, line, base, focusSim);
-            if (error1 < error2) {
-                case4temp.errorCount += error1;
-                lefttt[i] = 0;
-                majorSetTemp.push_back(TTableRela(i, line));
-            } else {
-                case4temp.errorCount += error2;
-                lefttt[i] = 1;
-                compMajorSetTemp.push_back(TTableRela(i,line));
-            }
+        // rowPattern --> columnPatternTemp
+        TTable columnPatternTemp(0, height);
+        TTable compRowPattern(0, width);
+        compRowPattern = rowPattern;
+        compRowPattern.flip();
+        columnPatternTemp = getColumnPattern(focusSim, compRowPattern, rowPattern);
+        size_t errTemp = errorCountRowColumnPattern(
+                rowPattern, columnPatternTemp, XOR_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            columnPattern = columnPatternTemp;
         }
-        case4temp.leftFunc = BoolFunction(height, TTable(lefttt), heightName, nodeNameGen.gen());
 
-        if (case4temp.errorCount >= case4.errorCount) break;
-        majorSet = majorSetTemp;
-        compMajorSet = compMajorSetTemp;
-        case4 = case4temp;
+        // columnPattern --> rowPatternTemp
+        TTable rowPatternTemp(0, width);
+        rowPatternTemp = getRowPattern(
+                columnPattern, focusSim, NORMAL_1_INPUT, NOT_1_INPUT);
+        errTemp = errorCountRowColumnPattern(
+                rowPatternTemp, columnPattern, XOR_TABLE, focusSim);
+        if (errTemp < err) {
+            err = errTemp;
+            rowPattern = rowPatternTemp;
+        }
+
+        if ((recordRowPattern == rowPattern) &&
+            (recordColumnPattern == columnPattern)) break;
     }
+
+    BestApprox case4;
+    case4.leftFunc = BoolFunction(heightName.size(), columnPattern, heightName, nodeNameGen.gen());
+    case4.rightFunc = BoolFunction(widthName.size(), rowPattern, widthName, nodeNameGen.gen());
+    case4.errorCount = err;
+    case4.method = XOR_TABLE;
     if ((case4.leftFunc.isAll0s() && case4.rightFunc.isAll1s()) ||
         (case4.leftFunc.isAll1s() && case4.rightFunc.isAll0s()))
         case4.method = ALL_IRR_TABLE_1;
     else if ((case4.leftFunc.isAll0s() && case4.rightFunc.isAll0s()) ||
-             (case4.leftFunc.isAll1s() && case4.rightFunc.isAll1s()))
+        (case4.leftFunc.isAll1s() && case4.rightFunc.isAll1s()))
         case4.method = ALL_IRR_TABLE_0;
-    else if (case4.leftFunc.isAll0s())
-        case4.method = RIGHT_RELA_TABLE;
     else if (case4.leftFunc.isAll1s())
         case4.method = RIGHT_RELA_NOT_TABLE;
-    else if (case4.rightFunc.isAll0s())
-        case4.method = LEFT_RELA_TABLE;
+    else if (case4.leftFunc.isAll0s())
+        case4.method = RIGHT_RELA_TABLE;
     else if (case4.rightFunc.isAll1s())
         case4.method = LEFT_RELA_NOT_TABLE;
+    else if (case4.rightFunc.isAll0s())
+        case4.method = LEFT_RELA_TABLE;
 
 
-    // conclusion
+    // conclude
     if ((case1.errorCount <= case2.errorCount)
         && (case1.errorCount <= case3.errorCount)
         && (case1.errorCount <= case4.errorCount))
         return case1;
     else if ((case2.errorCount <= case3.errorCount)
-            && (case2.errorCount <= case4.errorCount))
+             && (case2.errorCount <= case4.errorCount))
         return case2;
     else if (case3.errorCount <= case4.errorCount)
         return case3;
     else return case4;
 
+
+
 }
 
-TTable calcMajorRow(vector<TTableRela>& vec, size_t bits,
-                    const FocusedSimulationResult& focusSim) {
+TTable Kmap::getColumnPattern(const FocusedSimulationResult &focusSim,
+                              const TTable &targetOf1,
+                              const TTable &targetOf0) {
+// rowPattern --> columnPattern
 
-    vector<size_t > count[2];
-    size_t len = vec[0].line.nInputs();
-    for (size_t k = 0; k < (1 << len); ++k) {
-        count[0].push_back(0);
-        count[1].push_back(0);
+// taraget1 means if columnPattern of this row is selected as 1,
+// the outcome of this row should be target1.
+
+    TTable column(0, height);
+    for (size_t i = 0; i < height; ++i) {
+        string base = num2string(heightName.size(), i);
+        size_t err_0, err_1;
+        err_0 = 0; err_1 = 0;
+        TTable diff_0 = targetOf0 ^ kmap[i];
+        TTable diff_1 = targetOf1 ^ kmap[i];
+        for (size_t j = 0; j < width; ++j) {
+            string exten = num2string(widthName.size(), j);
+            err_0 += (diff_0[j] * focusSim.count(base + exten));
+            err_1 += (diff_1[j] * focusSim.count(base + exten));
+        }
+        column[i] = (err_0 < err_1) ? 0:1;
     }
-    for (auto& item : vec) {
-        string base = num2string(item.lineNum, bits);
-        size_t n = item.line.nInputs();
-        for (size_t i = 0; i < (1 << n); ++i) {
-            string exten = num2string(i, n);
-            count[item.line[i]][i] += focusSim.count(base + exten);
+    return column;
+}
+
+TTable Kmap::getRowPattern(const TTable &columnPattern, 
+                           const FocusedSimulationResult &focusSim, 
+                           const TTable &transOf0,
+                           const TTable &transOf1) {
+// columnPattern --> rowPattern
+
+// transOf0 means if rowPattern of this column is selected as 0,
+// the outcome of it under columnPattern should follow transOf0.    
+
+    TTable columnOf0(0, heightName.size());
+    TTable columnOf1(1, heightName.size());
+    for (size_t i = 0; i < height; ++i) {
+        columnOf0[i] = transOf0[columnPattern[i]];
+        columnOf1[i] = transOf1[columnPattern[i]];
+    }
+
+    TTable row(0, width);
+    for (size_t j = 0; j < width ; ++j) {
+        string exten = num2string(widthName.size(), j);
+        size_t err_0, err_1;
+        err_0 = 0; err_1 = 0;
+        for (size_t i = 0; i < height; ++i) {
+            string base = num2string(heightName.size(), i);
+            err_0 += (kmap[i][j] ^ columnOf0[i]) * focusSim.count(base + exten);
+            err_1 += (kmap[i][j] ^ columnOf1[i]) * focusSim.count(base + exten);
+        }
+        row[j] = (err_0 < err_1) ? 0:1;
+    }
+    return row;
+}
+
+size_t Kmap::errorCountRowColumnPattern(
+        const TTable &rowPattern, 
+        const TTable &columnPattern,
+        const TTable &combineMethod,
+        const FocusedSimulationResult &focusSim
+) {
+    
+// under given rowPattern, columnPattern and combineMethod,
+// check the current error. (total bits flip in different cases)
+    size_t totalInputs = rowPattern.nInputs() + columnPattern.nInputs();
+    DBitset colMask(0, totalInputs);
+    DBitset rowMask(0, totalInputs);
+
+    for (size_t i = 0; i < (columnPattern.nInputs()); ++i) {
+        colMask[i] = 1;
+    }
+    for (size_t i = columnPattern.nInputs(); i < totalInputs; ++i) {
+        rowMask[i] = 1;
+    }
+
+    TTable combineTTable(0, totalInputs);
+    combineTTable = combineTruthTable(columnPattern, rowPattern,
+                        colMask, rowMask, combineMethod);
+    vector<TTable> newMap = combineTTable.breakdown(rowMask, colMask);
+
+    size_t err = 0;
+    for (size_t i = 0; i < height; ++i) {
+        string base = num2string(heightName.size(), i);
+        for (size_t j = 0; j < width; ++j) {
+            string exten = num2string(widthName.size(), j);
+            err += (newMap[i][j] ^ kmap[i][j]) * focusSim.count(base + exten);
         }
     }
 
-    TTable majorRow(0, len);
-    for (size_t k = 0; k < (1 << len) ; ++k)
-        if (count[1][k] > count[0][k])
-            majorRow[k] = 1;
-
-    return majorRow;
-}
-
-size_t countErrorWithTarget(const TTable& target, const TTable& nowRun,
-    string base, const FocusedSimulationResult& focusSim) {
-
-    size_t num = nowRun.nInputs();
-    size_t len = 1 << num;
-    size_t error = 0;
-    for (size_t i = 0; i < len; ++i) {
-        if (target[i] == nowRun[i]) continue;
-        string exten = num2string(len, i);
-        error += focusSim.count(base + exten);
-    }
-    return error;
-}
-
-string num2string(size_t bits, size_t num) {
-    string base = "";
-    size_t temp = num;
-    for (size_t k = 0; k < bits; ++k) {
-        base += (temp % 2) ? "1":"0";
-        temp = temp / 2;
-    }
-    return base;
+    return err;
 }
 

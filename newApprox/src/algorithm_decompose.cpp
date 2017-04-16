@@ -17,11 +17,14 @@ using std::string;
 using std::vector;
 
 AlgorithmDecompose::ResultType
-AlgorithmDecompose::operator()(const BoolFunction &bf,
+AlgorithmDecompose::operate(const BoolFunction &bf,
                                const SimulationResult &simData) {
 
     initBF = bf;
-    return searchPrcoe(bf, simData);
+    srand(time(nullptr));
+    ResultType res = searchPrcoe(bf, simData);
+    srand(0);
+    return res;
     //return bestDecomp;
 
 }
@@ -51,6 +54,7 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
 
     bestApproximation.errorCount = MAX_VALUE;
     for (size_t i = 1; i < (1 << bf.getInputSize() - 1); ++i) {
+        if (i % 2 == 0) continue; // keep the first input always in the left function( as column )
 
         size_t temp = i;
         vector<string > portSet[2];

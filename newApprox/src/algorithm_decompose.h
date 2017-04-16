@@ -37,7 +37,7 @@ private:
 
 public:
 
-    ResultType operator()(const BoolFunction& bf,
+    ResultType operate(const BoolFunction& bf,
                           const SimulationResult& simData);
 
     AlgorithmDecompose():

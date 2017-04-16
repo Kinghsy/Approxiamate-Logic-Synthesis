@@ -10,6 +10,7 @@
 #include "const.h"
 #include "bool_function.h"
 #include "../../common/ttable.h"
+#include "../../circuit_profile/sim_profile.h"
 
 class BoolFunction;
 class TTable;
@@ -24,12 +25,32 @@ private:
     std::vector<NodeName> heightName;
     std::vector<NodeName> widthName;
 
+    TTable getColumnPattern(
+            const FocusedSimulationResult& focusSim,
+            const TTable& targetOf1,
+            const TTable& targetOf0
+    );
+
+    TTable getRowPattern(
+            const TTable& columnPattern,
+            const FocusedSimulationResult& focusSim,
+            const TTable& transOf0,
+            const TTable& transOf1
+    );
+
+    size_t errorCountRowColumnPattern(
+            const TTable& rowPattern,
+            const TTable& columnPattern,
+            const TTable& combineMethod,
+            const FocusedSimulationResult& focusSim
+    );
+
 public:
 
     struct BestApprox {
         BoolFunction leftFunc;
         BoolFunction rightFunc;
-        int errorCount;
+        size_t errorCount;
         TTable method;
         BestApprox() :
                 leftFunc(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
