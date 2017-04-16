@@ -41,10 +41,13 @@ private:
 
 public:
 
-    const DbEntry& getMatch(const std::string& fun, size_t inputSize,
-                            FocusedSimulationResult simResult);
+    const DbEntry& getMatch(const TTable& fun,const  std::vector<NodeName>& nodeName,
+                            FocusedSimulationResult simResult) const;
 
-    const DbEntry& getMatch(const std::string& fun, size_t inputSize);
+    const DbEntry& getMatch(const DBitset& fun, size_t inputSize,
+                            const FocusedSimulationResult& simResult) const;
+
+    const DbEntry& getMatch(const DBitset& fun, size_t inputSize) const;
 
     size_t nLut3() {return data[3].size();}
     size_t nLut4() {return data[4].size();}
@@ -61,6 +64,10 @@ public:
     PreDecomp& operator=(PreDecomp&& instance) = delete;
 
 };
+
+
+
+
 
 
 #endif //VE490_PRE_DECOMP_H

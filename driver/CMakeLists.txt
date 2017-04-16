@@ -18,7 +18,7 @@ add_executable(playground playground.cpp)
 add_executable(verify_simulator verify_simulator.cpp)
 add_executable(preDecomp_test pre_decomp.cpp)
 add_executable(abc_playground abc_playground.cpp)
-add_executable(mffcDriver mffc.cpp)
+add_executable(mffcDriver mffc.cpp ${SOURCE_FILES})
 
 set(ALL_LIBS
         policy mffc blif profile libexabc libabc

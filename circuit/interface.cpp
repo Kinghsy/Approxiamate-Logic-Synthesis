@@ -89,32 +89,27 @@ BlifBooleanNet::~BlifBooleanNet() {
     releaseSimulationContext();
 }
 
-TruthTable BlifBooleanNet::truthTable() const {
+TTable BlifBooleanNet::truthTable() const {
     prepareBDD();
     BnetNode *auxnd;
     st_lookup(net->hash,net->outputs[0],&auxnd);
     DdNode *ddnode_pt = auxnd->dd;
 
     int nInputs = net->ninputs;
-    vector<int> out;
+    DBitset out;
 
     ulli max = power2(nInputs);
     int *ivec = new int[nInputs];
     for (ulli i = 0; i < max ; ++i) {
         getBits(i, ivec, nInputs);
-        int n =
-                (Cudd_ReadOne(ddmanager.get()) == Cudd_Eval(ddmanager.get(), ddnode_pt, ivec));
+        bool n =(Cudd_ReadOne(ddmanager.get()) == Cudd_Eval(ddmanager.get(), ddnode_pt, ivec));
         out.push_back(n);
     }
     delete[] ivec;
 
-    TruthTable table(nInputs, out);
-    for (int j = 0; j < nInputs; ++j) {
-        table.getName(j) = net->inputs[j];
-    }
-    table.outName = auxnd->name;
+    assert(out.size() == (1ul << nInputs));
 
-    return table;
+    return TTable(out, nInputs);
 }
 
 int BlifBooleanNet::evalAt(const std::vector<int> &v,
@@ -531,6 +526,10 @@ void BlifBooleanNet::exportReplacedBlif(const std::string &fname,
 //    ofstream file(fname);
 //
 //    //file << blifBuilder.exportBlifBody();
+}
+
+void BlifBooleanNet::prepareSimulator() {
+    this->getSimulationContext();
 }
 
 

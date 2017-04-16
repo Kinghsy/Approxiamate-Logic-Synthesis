@@ -6,15 +6,13 @@
 
 using std::map;
 using std::vector;
-
-typedef BlifBooleanNet::BnetNodeID BnetNodeID;
-typedef BlifBooleanNet::FFC FFC;
+using std::endl;
 
 void filterMffcBySize(map<BnetNodeID, FFC>& mffc) {
     auto iter= mffc.cbegin();
     while (iter != mffc.cend()) {
         if (iter->second.nodeSet.size() == 1) {
-            std::cerr << "Erased '" << iter->first << "' by size." << std::endl;
+            //std::cerr << "Erased '" << iter->first << "' by size." << std::endl;
             mffc.erase(iter++);
             continue;
         }
@@ -41,4 +39,13 @@ void filterMffcContainOutput(map<BnetNodeID, FFC>& mffc,
 
         iter++;
     }
+}
+
+
+const FFC* findFirstFFC(map<BnetNodeID, FFC>& mffc,
+                     std::function<bool(const FFC&)> test) {
+    for (const auto& elem : mffc) {
+        if (test(elem.second)) return &elem.second;
+    }
+    return nullptr;
 }

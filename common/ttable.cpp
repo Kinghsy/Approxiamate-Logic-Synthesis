@@ -129,7 +129,7 @@ TTable TTable::project(const std::vector<size_t> &location,
 }
 
 std::vector<TTable>
-TTable::breakdown(const DBitset &row, const DBitset &col) {
+TTable::breakdown(const DBitset &row, const DBitset& col) {
     auto s = ::breakdown(this->data, row, col);
     std::vector<TTable> ret;
     for (const auto& e : s) {

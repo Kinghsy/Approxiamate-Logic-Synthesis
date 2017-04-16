@@ -6,6 +6,7 @@
 #include <algorithm>
 
 #include "../circuit/interface.h"
+#include "header.h"
 
 
 using std::cout;
@@ -34,44 +35,50 @@ int main(int argc, char* argv[]) {
     filterMffcContainOutput(mffcs, net.outputNodeList());
     sw.take("FilterOutput");
 
-    for (const auto& pair : mffcs) {
-        cout << std::setw(10) << pair.first << " ";
-        const auto& attr = pair.second;
-        cout << attr.inputNode.size() << " " << attr.nodeSet.size() << " ";
-        for (auto &&item : attr.nodeSet) {
-            cout << item << " ";
-            assert(!net.outputNodeSet().count(item) || item == pair.first);
-        }
-        cout << endl;
-    }
+//    for (const auto& pair : mffcs) {
+//        cout << std::setw(10) << pair.first << " ";
+//        const auto& attr = pair.second;
+//        cout << attr.inputNode.size() << " " << attr.nodeSet.size() << " ";
+//        for (auto &&item : attr.nodeSet) {
+//            cout << item << " ";
+//            assert(!net.outputNodeSet().count(item) || item == pair.first);
+//        }
+//        cout << endl;
+//    }
 
-    auto simResult = net.profileBySimulation(100);
+    net.prepareSimulator();
 
-    for (auto &&row : simResult.outputName) {
-        cout << row << "\t";
-    }
-    cout << endl;
+    sw.take("Compiling");
 
-    auto name = simResult.outputName;
-    name.resize(5);
+    auto simResult = net.profileBySimulation(10000);
 
-    for (auto && e : name) cout << e << " "; cout << endl;
+    sw.take("Simulation");
 
+    auto ffc = findFirstFFC(mffcs,
+                            [](const FFC& ffc) -> bool {
+                                return ffc.inputNode.size() == 6;
+                            });
+    assert(ffc);
 
-    for (auto &&row : simResult.outputResult) {
-        for (auto &&col : row) {
-            cout << col;
-        }
-        cout << "\n";
-    }
+    sw.take("FindFFC");
 
-    auto focus = simResult.focus(name);
-    for (size_t i = 0; i < (1ul << 5); i ++) {
-        std::cout << DBitset(5, i) << " " << focus.count(DBitset(5, i)) << endl;
-    }
-
-
+    net.exportFfcToBlifFile(*ffc, TempPath / fBlif("mffc"));
+    auto mffc = BlifBooleanNet(TempPath / fBlif("mffc"));
+    sw.take("FFC Load");
+    TTable table = mffc.truthTable();
+    sw.take("FFC TTable");
+    auto focusedResult = simResult.focus(mffc.inputNodeList());
+    sw.take("Focus");
+    auto& preDecomp = PreDecomp::getInstance();
+    sw.take("preDecomp");
+    auto& match = preDecomp.getMatch(table, mffc.inputNodeList(), focusedResult);
+    std::cout << table << endl;
+    std::cout << match.function << endl;
+    sw.take("Match");
+    std::cout << "MatchError: " << countMatchError(table, match.function, focusedResult) << endl;
     sw.report();
+
+    std::cout << focusedResult << endl;
 
     return 0;
 }

@@ -113,9 +113,10 @@ PreDecomp &PreDecomp::getInstance() {
     return *instance;
 }
 
-const PreDecomp::DbEntry& PreDecomp::getMatch(const std::string &funStr, size_t inputSize) {
+const PreDecomp::DbEntry&
+PreDecomp::getMatch(const DBitset &funStr, size_t inputSize) const {
     auto& metadataSet = metaData.at(inputSize);
-    std::bitset<64> function(funStr);
+    std::bitset<64> function(funStr.to_ulong());
     std::bitset<64> validMask((1ull << (1ull << inputSize)) - 1);
     function &= validMask;
     size_t minError = 64;
@@ -132,12 +133,12 @@ const PreDecomp::DbEntry& PreDecomp::getMatch(const std::string &funStr, size_t 
 
 
 const PreDecomp::DbEntry &
-PreDecomp::getMatch(const std::string &funStr, size_t inputSize,
-                    FocusedSimulationResult simResult) {
+PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
+                    const FocusedSimulationResult& simResult) const {
     if (inputSize > 6) assert(0);
     assert(inputSize == simResult.nodeOrder.size());
     auto& metadataSet = metaData.at(inputSize);
-    std::bitset<64> function(funStr);
+    std::bitset<64> function(funStr.to_ulong());
     std::bitset<64> validMask((1ull << (1ull << inputSize)) - 1);
     function &= validMask;
 
@@ -179,7 +180,7 @@ PreDecomp::getMatch(const std::string &funStr, size_t inputSize,
 
         const size_t CANDIDATE_NUMBER = 20;
         struct Candidate {
-            DbEntry* entry;
+            const DbEntry* entry;
             std::bitset<64> function;
         };
 
@@ -258,3 +259,13 @@ PreDecomp::getMatch(const std::string &funStr, size_t inputSize,
 
     assert(0);
 }
+
+
+const PreDecomp::DbEntry &
+PreDecomp::getMatch(const TTable &fun,const std::vector<NodeName> &nodeName,
+                    FocusedSimulationResult simResult) const {
+    assert(nodeName == simResult.nodeOrder);
+    return getMatch(fun.cdata(), fun.nInputs());
+}
+
+

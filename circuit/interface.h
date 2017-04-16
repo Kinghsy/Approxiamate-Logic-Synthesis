@@ -97,7 +97,7 @@ public:
 //    int getMinDepths2Input(const std::set<BnetNodeID>& s) const;
 //    int getMinDepths2Output(const std::set<BnetNodeID>& s) const;
 
-    TruthTable truthTable() const;
+    TTable truthTable() const;
 
     const std::vector<BnetNodeID>& topologicalSort() const;
 
@@ -130,6 +130,8 @@ public:
 
     void verifySimulator(int samples);
 
+    void prepareSimulator();
+
     SimulationResult profileBySimulation(int samples);
 
     CompareResult compareBySimulation(const BlifBooleanNet& net2,
@@ -137,5 +139,8 @@ public:
 
     ~BlifBooleanNet();
 };
+
+
+
 
 #endif //VE490_INTERFACE_H

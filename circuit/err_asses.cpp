@@ -28,14 +28,10 @@ BlifCompareResult fullCompareBlifs(const BlifBooleanNet &model,
     r.nInputs = model.nInputs();
     r.nSamples = 1 << r.nInputs;
 
-    TruthTable modelTruthTable = model.truthTable();
-    TruthTable comparedTruthTable = compared.truthTable();
+    TTable modelTruthTable = model.truthTable();
+    TTable comparedTruthTable = compared.truthTable();
 
-    for (int i = 0; i < r.nSamples ; ++i) {
-        if ((int)(modelTruthTable[i]) != (int)(comparedTruthTable[i]) ) {
-            r.errorCount++;
-        }
-    }
+    r.errorCount = (modelTruthTable ^ comparedTruthTable).count();
     return r;
 }
 

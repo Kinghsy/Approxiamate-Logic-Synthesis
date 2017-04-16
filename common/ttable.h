@@ -16,6 +16,9 @@ class TTable {
     DBitset expandTo(const DBitset& mask) const;
 
 public:
+
+    const DBitset& cdata() const {return data;}
+
     TTable(size_t nInputs) {
         assert(nInputs > 0);
         data = DBitset(1ul << nInputs);
@@ -54,6 +57,7 @@ public:
     }
 
     inline size_t nInputs() const {return this->inputSize;}
+    inline size_t nTerms() const {return data.size();}
 
     inline std::string toString() const {
         std::string s;
@@ -118,7 +122,8 @@ public:
     TTable project(const std::vector<size_t>& location,
                    const DBitset& condition) const;
 
-    std::vector<TTable> breakdown(const DBitset& row, const DBitset& col);
+    std::vector<TTable> breakdown(const DBitset& row,
+                                  const DBitset& col);
 
     TTable cofactor(size_t input, bool = true) const;
 
