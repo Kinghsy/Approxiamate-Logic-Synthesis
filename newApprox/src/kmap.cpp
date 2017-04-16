@@ -80,7 +80,7 @@ size_t Kmap::operator^(const Kmap &initKmap) const {
     return count;
 }
 
-BestApprox Kmap::divide(const SimulationResult &simData) {
+Kmap::BestApprox Kmap::divide(const SimulationResult &simData) {
 
     // case 1: 0s and 1s
     //  operation DROP_RIGHT (LEFT_RELA_TABLE)
