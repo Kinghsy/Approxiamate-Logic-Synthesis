@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <bitset>
+#include <ostream>
 
 class BlifBooleanNet;
 
@@ -53,6 +54,8 @@ public:
     size_t count(const std::string& term) const;
     size_t count(const std::vector<std::string>& termSet) const;
 
+    friend std::ostream &operator<<(std::ostream &os, const FocusedSimulationResult &result);
+
 };
 
 struct CompareResult {
@@ -61,5 +64,8 @@ struct CompareResult {
     size_t nErrors;
 
 };
+
+size_t countMatchError(const TTable &orignal, const TTable &next,
+                       const FocusedSimulationResult &sim);
 
 #endif //VE490_SIM_PROFILE_H

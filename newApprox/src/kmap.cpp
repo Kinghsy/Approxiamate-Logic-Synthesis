@@ -314,7 +314,6 @@ TTable calcMajorRow(vector<TTableRela>& vec, size_t bits,
             majorRow[k] = 1;
 
     return majorRow;
-
 }
 
 size_t countErrorWithTarget(const TTable& target, const TTable& nowRun,

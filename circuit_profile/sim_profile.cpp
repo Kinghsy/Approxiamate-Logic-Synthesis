@@ -135,3 +135,31 @@ FocusedSimulationResult
 SimulationResult::focus(const std::vector<std::string> &node) const {
     return FocusedSimulationResult(*this, node);
 }
+
+size_t countMatchError(const TTable &orignal, const TTable &next,
+                       const FocusedSimulationResult &sim) {
+    TTable diff = orignal ^ next;
+    size_t error = 0;
+    for (size_t i = 0; i < diff.nTerms(); i++) {
+        if (diff[i]) error += sim.count(i);
+    }
+    return error;
+}
+
+
+std::ostream &operator<<(std::ostream &os, const FocusedSimulationResult &result) {
+    os << "Focused result on\n";
+    for (const auto& node : result.nodeOrder) {
+        os << std::setw(7) << node << " ";
+    }
+    os << "\n";
+    size_t count = 0;
+    for (size_t i = 0; i < result.data.size(); ++i) {
+        count += result.data[i];
+        os << DBitset(result.nodeOrder.size(), i)
+           << " " << result.data[i] << "\n";
+    }
+    os << "Total " << count << " samples\n";
+
+    return os;
+}

@@ -19,20 +19,6 @@ using std::endl;
 
 PreDecomp* PreDecomp::instance = nullptr;
 
-static int unPow(int x) {
-    switch (x) {
-        case 1: return 0;
-        case 2: return 1;
-        case 4: return 2;
-        case 8: return 3;
-        case 16: return 4;
-        case 32: return 5;
-        case 64: return 6;
-        default:
-            assert(0);
-    }
-}
-
 PreDecomp::PreDecomp(const std::string &libName) {
     this->libPath = libName;
     ifstream db(libPath);
@@ -117,13 +103,17 @@ const PreDecomp::DbEntry&
 PreDecomp::getMatch(const DBitset &funStr, size_t inputSize) const {
     auto& metadataSet = metaData.at(inputSize);
     std::bitset<64> function(funStr.to_ulong());
-    std::bitset<64> validMask((1ull << (1ull << inputSize)) - 1);
+    DBitset mask = ones(64, 1ul << inputSize);
+    std::bitset<64> validMask(mask.to_ulong());
+    //std::cout << function << endl;
+    //std::cout << validMask << endl;
     function &= validMask;
     size_t minError = 64;
     const DbEntry* minEntry = nullptr;
     for (size_t i = 0; i < metadataSet.size(); i++) {
-        size_t error = (metadataSet[i]^ function).count();
+        size_t error = (metadataSet[i] ^ function).count();
         if (error < minError) {
+            //std::cout << metadataSet[i] << endl;
             minEntry = &(data.at(inputSize).at(i));
             minError = error;
         }
@@ -139,7 +129,8 @@ PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
     assert(inputSize == simResult.nodeOrder.size());
     auto& metadataSet = metaData.at(inputSize);
     std::bitset<64> function(funStr.to_ulong());
-    std::bitset<64> validMask((1ull << (1ull << inputSize)) - 1);
+    DBitset mask = ones(64, 1ul << inputSize);
+    std::bitset<64> validMask(mask.to_ulong());
     function &= validMask;
 
     if (inputSize <= 5) { // Compare error on all ouputs
@@ -265,7 +256,7 @@ const PreDecomp::DbEntry &
 PreDecomp::getMatch(const TTable &fun,const std::vector<NodeName> &nodeName,
                     FocusedSimulationResult simResult) const {
     assert(nodeName == simResult.nodeOrder);
-    return getMatch(fun.cdata(), fun.nInputs());
+    return getMatch(fun.cdata(), fun.nInputs(), simResult);
 }
 
 

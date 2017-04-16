@@ -5,7 +5,6 @@
 #ifndef VE490_DRIVER_HEADER_H
 #define VE490_DRIVER_HEADER_H
 
-#include <map>
 #include "../circuit/interface.h"
 #include "../pre_decomp/pre_decomp.h"
 
@@ -19,5 +18,8 @@ void filterMffcContainOutput(std::map<BnetNodeID, FFC>& mffc,
 
 const FFC* findFirstFFC(std::map<BnetNodeID, FFC>& mffc,
                      std::function<bool(const FFC&)> test);
+
+void filterMffcByIntersection(std::map<BnetNodeID, FFC>& mffc, const FFC& prev);
+
 
 #endif //VE490_HEADER_H

@@ -2,8 +2,8 @@
 // Created by tripack on 16-11-8.
 //
 
-#ifndef VE490_INTERFACE_H
-#define VE490_INTERFACE_H
+#ifndef VE490_CIRCUIT_INTERFACE_H
+#define VE490_CIRCUIT_INTERFACE_H
 
 #include "memorize.h"
 #include "../circuit_profile/profile.h"
