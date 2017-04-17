@@ -22,7 +22,7 @@ add_executable(NewKmapTest
         ../../common/bitset_manipulate.h)
 target_link_libraries(NewKmapTest gtest gtest_main)
 target_link_libraries(NewKmapTest newApprox
-        mffc blif profile common
+        mffc blif common profile
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})
 
