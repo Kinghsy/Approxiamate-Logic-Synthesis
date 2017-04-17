@@ -7,7 +7,9 @@
 #include <vector>
 #include <map>
 
-#include "ttable.h"
+#include "bool_function.h"
+//#include "../../common/ttable.h"
+#include "../../common/ttable.h"
 #include "const.h"
 #include "kmap.h"
 
@@ -37,7 +39,7 @@ void BoolFunction::operator=(const BoolFunction &initBF) {
 }
 
 bool BoolFunction::operator==(const BoolFunction &initBF) {
-    if (this->inputSize != initBF.inputSize)
+    /*if (this->inputSize != initBF.inputSize)
         return false;
 
     if (this->outPortName != initBF.outPortName)
@@ -46,24 +48,15 @@ bool BoolFunction::operator==(const BoolFunction &initBF) {
     for (int i = 0; i < this->inputSize; ++i) {
         if (this->getPortNum( initBF.getPortName(i) ) == -1)
             return false;
-    }
+    }*/
+    bool reorderRes = reorder(initBF.portName, initBF.outPortName);
 
-    for (int i = 0; i < (1 << (this->inputSize)); ++i) {
-        size_t base = 0;
-        size_t temp = i;
-        for (int k = 0; k < inputSize; ++k) {
-            base += (temp % 2) * ( 1 << (this->getPortNum( initBF.getPortName(k))));
-            temp = temp / 2;
-        }
-        if (this->truthTab[base] != initBF.truthTab[i])
-            return false;
-    }
-
-    return true;
+    if (!reorderRes) return false;
+    return ( this->truthTab == initBF.truthTab );
 }
 
 int BoolFunction::operator^(const BoolFunction &initBF) {
-    if (this->inputSize != initBF.inputSize)
+    /*if (this->inputSize != initBF.inputSize)
         //assert(0);
         return -1;
 
@@ -89,7 +82,12 @@ int BoolFunction::operator^(const BoolFunction &initBF) {
             count ++;
     }
 
-    return count;
+    return count;*/
+    bool reorderRes = reorder(initBF.portName, initBF.outPortName);
+    if (!reorderRes) return -1;
+    TTable temp = (this->truthTab) ^ (initBF.truthTab);
+    return temp.count();
+
 }
 
 BoolFunction combineBooleanFunction(
@@ -162,4 +160,28 @@ void BoolFunction::display() const {
     }
     cout << endl;
 
+}
+
+bool BoolFunction::reorder(const vector<NodeName> &newNodeSet,
+            const NodeName& newOutName) {
+
+    if (outPortName.size() != newOutName.size()) return false;
+    if (outPortName != newOutName) return false;
+    for (auto& item : newNodeSet )
+        if ( getPortNum(item) == -1 ) return false;
+
+    TTable newTTable(0, inputSize);
+    for (size_t i = 0; i < ( 1 << inputSize); ++i) {
+        size_t temp = i;
+        size_t base = 0;
+        for (size_t k = 0; k < inputSize; ++k) {
+            base += (temp % 2 ) * ( 1 << getPortNum(newNodeSet[k]));
+            temp = temp / 2;
+        }
+        newTTable[i] = truthTab[base];
+    }
+
+    truthTab = newTTable;
+    portName = newNodeSet;
+    return true;
 }

@@ -61,6 +61,9 @@ public:
     }
     int getPortNum(const NodeName& name) const;
     void display() const;
+
+    bool reorder(const std::vector<NodeName>& newNodeSet,
+            const NodeName& newOutName);
 };
 
 BoolFunction combineBooleanFunction(
