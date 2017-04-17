@@ -97,5 +97,15 @@ breakdown(const DBitset& bitset,
     return result;
 }
 
+template <typename T>
+std::vector<T> pickByDbitset(const std::vector<T>& v,
+                             const DBitset& set) {
+    assert(set.size() == v.size());
+    std::vector<T> ret;
+    for (size_t i = 0; i < set.size(); i++) {
+        if (set.test(i)) ret.push_back(v.at(i));
+    }
+    return ret;
+}
 
 #endif //VE490_BITSET_MANIPULATE_H

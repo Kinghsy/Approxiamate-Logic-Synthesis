@@ -21,6 +21,8 @@ using std::endl;
 PreDecomp* PreDecomp::instance = nullptr;
 
 PreDecomp::PreDecomp(const std::string &libName) {
+    std::cout << "Initializing PreDecomp Database\n";
+    std::cout << "This could take a while!\n";
     this->libPath = libName;
     ifstream db(libPath);
     int version = 0;
@@ -65,6 +67,10 @@ PreDecomp::PreDecomp(const std::string &libName) {
             entry.combine = LEFT_RELA_TABLE;
         } else if (combineStr == "RIGHT") {
             entry.combine = RIGHT_RELA_TABLE;
+        } else if (combineStr == "CONST_ZERO") {
+            entry.combine = ALL_IRR_TABLE_0;
+        } else if (combineStr == "CONST_ONE") {
+            entry.combine = ALL_IRR_TABLE_1;
         } else {
             assert(0);
         }
@@ -91,6 +97,8 @@ PreDecomp::PreDecomp(const std::string &libName) {
         data[entry.nInputs].push_back(entry);
     }
     db.close();
+
+    std::cout << "Done!\n";
 }
 
 PreDecomp &PreDecomp::getInstance() {

@@ -11,7 +11,7 @@
 link_directories(${CUDD_LINK_DIR})
 
 set(SOURCE_FILES
-        filter_mffc.cpp precomp_sim.cpp)
+       header.h filter_mffc.cpp precomp_sim.cpp)
 
 add_executable(main main.cpp ${SOURCE_FILES})
 add_executable(playground playground.cpp)

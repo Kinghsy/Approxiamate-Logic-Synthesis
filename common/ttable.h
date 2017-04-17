@@ -127,6 +127,8 @@ public:
 
     TTable cofactor(size_t input, bool = true) const;
 
+    friend void flipBinaryTTableInput(TTable& t, bool in1, bool in2);
+
     friend TTable combineTruthTable(
             const TTable& t1, const TTable& t2,
             const DBitset& t1Mask, const DBitset& t2Mask,
@@ -160,7 +162,7 @@ const TTable ALL_1_1_INPUT = TTable("11");
 const TTable XOR_TABLE= TTable("0110");
 const TTable AND_TABLE= TTable("0001");
 const TTable OR_TABLE = TTable("0111");
-const TTable LEFT_RELA_TABLE = TTable("0101"); // only relevant to left.
+const TTable LEFT_RELA_TABLE = TTable("0101"    ); // only relevant to left.
 const TTable LEFT_RELA_NOT_TABLE = TTable("1010"); // only relevant to left and has an not gate.
 const TTable RIGHT_RELA_TABLE = TTable("0011"); // only relevant to right.
 const TTable RIGHT_RELA_NOT_TABLE = TTable("1100"); // only relevant to right and has an not gate.
@@ -172,6 +174,7 @@ TTable combineTruthTable(
         const DBitset& t1Mask, const DBitset& t2Mask,
         const TTable& method);
 
+void flipBinaryTTableInput(TTable& t, bool in1, bool in2);
 
 
 #endif //VE490_TRUTH_TABLE_H

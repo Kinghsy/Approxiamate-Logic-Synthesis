@@ -54,7 +54,7 @@ public:
     size_t nLut5() {return data[5].size();}
     size_t nLut6() {return data[6].size();}
 
-    const int MINIMUM_VERSION = 101;
+    const int MINIMUM_VERSION = 102;
     static PreDecomp& getInstance();
     ~PreDecomp() noexcept {};
 

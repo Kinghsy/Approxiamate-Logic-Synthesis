@@ -6,6 +6,8 @@
 #define VE281_FA16_GENERATOR_H
 #include "exception.h"
 #include <cstdlib>
+#include <cassert>
+#include <string>
 
 template <class T>
 class Generator {
@@ -56,6 +58,27 @@ public:
     bool hasEnded() const {return count >= size;}
     Generator<int>* clone() const {
         return new RandomIntGenerator(size);
+    }
+};
+
+class NodeNameGenerator : public Generator<std::string> {
+    std::string base;
+    int counter = 0;
+
+public:
+    NodeNameGenerator(const std::string& baseName) {
+        assert(!baseName.empty());
+        base = baseName;
+    }
+
+    std::string generate() override {
+        return base + std::to_string(counter++);
+    }
+
+    bool hasEnded() const override {return false;}
+
+    Generator<std::string> *clone() const override {
+       assert(0);
     }
 };
 

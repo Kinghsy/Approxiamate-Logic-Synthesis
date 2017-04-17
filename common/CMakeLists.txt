@@ -7,7 +7,7 @@ add_library(common
         bitset_manipulate.h
         urandom.cpp urandom.h
         blif_builder.cpp blif_builder.h
-        ttable.cpp ttable.h)
+        ttable.cpp ttable.h static_utils.h)
 
 target_link_libraries(test_common gtest gtest_main common)
 

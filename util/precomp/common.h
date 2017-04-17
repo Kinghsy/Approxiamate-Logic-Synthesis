@@ -264,16 +264,17 @@ void enumerate(
     PrecompResultAttribute<kOut> constAttr;
     constAttr.maskLeft.flip();
     constAttr.maskDiscard.flip();
-    constAttr.combine = "LEFT";
 
     std::bitset<1ul << kOut> zeroFun;
 
     constAttr.rightFun = zeroFun.to_string();
 
     constAttr.leftFun = zeroFun.to_string();
+    constAttr.combine = "CONST_ZERO";
     result[zeroFun] = constAttr;
 
     constAttr.leftFun = zeroFun.flip().to_string();
+    constAttr.combine = "CONST_ONE";
     result[zeroFun] = constAttr;
 
     auto comb = selectWithin<kOut>(kIn1);

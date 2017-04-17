@@ -150,3 +150,15 @@ std::istream &operator>>(std::istream &is,
     table = TTable(s);
     return is;
 }
+
+void flipBinaryTTableInput(TTable &t, bool in1, bool in2) {
+    assert(t.inputSize == 2);
+    if (in1) {
+        t.data[0] ^= t.data[1] ^= t.data[0];
+        t.data[2] ^= t.data[3] ^= t.data[2];
+    }
+    if (in2) {
+        t.data[0] ^= t.data[2] ^= t.data[0];
+        t.data[1] ^= t.data[3] ^= t.data[1];
+    }
+}

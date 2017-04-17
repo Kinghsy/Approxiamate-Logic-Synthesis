@@ -69,6 +69,7 @@ int main(int argc, char* argv[]) {
                   << ffc->nodeSet.size() << " nodes\n";
         net.exportFfcToBlifFile(*ffc, TempPath / fBlif("mffc"));
         auto mffc = BlifBooleanNet(TempPath / fBlif("mffc"));
+        std::cout << "Inputs: " << mffc.inputNodeList() << endl;
         sw.take("FFC Load");
         TTable table = mffc.truthTable();
         sw.take("FFC TTable");
@@ -82,6 +83,17 @@ int main(int argc, char* argv[]) {
         sw.take("Match");
         std::cout << "MatchError: " << countMatchError(table, match.function, focusedResult) << "\t";
         std::cout << "discardInput: " << match.discardMask.count() << endl;
+
+        auto builderAlg = BuildCircuitFromMatch(ffc->name);
+        auto blifBuilder = builderAlg(match, mffc.inputNodeList());
+        std::cout << blifBuilder;
+        sw.take("BuildBlif");
+
+        blifBuilder.exportBlif(TempPath / fBlif("mffc_approx"));
+        auto netAprrox = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
+        sw.take("ReloadBlif");
+
+        assert(mffc.truthTable() == match.function);
 
         filterMffcByIntersection(mffcs, *ffc);
         sw.take("Filter");

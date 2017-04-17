@@ -14,5 +14,6 @@
 #include "bitset_manipulate.h"
 #include "ttable.h"
 #include "blif_builder.h"
+#include "static_utils.h"
 
 #endif //VE281_FA16_COMMON_H
