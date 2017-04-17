@@ -94,6 +94,7 @@ public:
         return widthName[j];
     }
 
+    void display() const;
 
 };
 

@@ -15,6 +15,8 @@
 using std::string;
 using std::vector;
 using std::map;
+using std::cout;
+using std::endl;
 
 struct tempNodeNameGenertor {
     string base = "tempNodeTempNode";
@@ -67,6 +69,28 @@ Kmap::Kmap(
 
     kmap = BF.getTTable().breakdown(rowselector, colselector);
 
+}
+
+void Kmap::display() const {
+    cout << "size (h*w):  " << height << " * " << width << endl;
+
+    cout << " height name:" ;
+    for (int i = 0; i < heightName.size(); ++i)
+        cout << heightName[i];
+    cout << endl;
+    cout << " width name:" ;
+    for (int i = 0; i < widthName.size(); ++i)
+        cout << widthName[i];
+    cout << endl;
+
+    cout << " map:" << endl;
+    for (int i = 0; i < height; ++i) {
+        cout << "  ";
+        for (int j = 0; j < width; ++j) {
+            cout << kmap[i][j] << " ";
+        }
+        cout << endl;
+    }
 }
 
 bool Kmap::operator==(const Kmap &initKmap) const {
