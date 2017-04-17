@@ -6,23 +6,17 @@ link_directories("../../lib/cudd-2.5.0/epd")
 link_directories("../../lib/cudd-2.5.0/dddmp")
 link_directories("../../lib/cudd-2.5.0/mtr")
 
-
-add_executable(NewBoolFunctionTest
-        bool_function_test.cpp
-        ../../common/ttable.cpp ../../common/ttable.h
-        ../../common/bitset_manipulate.h)
+add_executable(NewBoolFunctionTest bool_function_test.cpp)
 target_link_libraries(NewBoolFunctionTest gtest gtest_main)
 target_link_libraries(NewBoolFunctionTest newApprox common)
 
 
-add_executable(NewKmapTest
-        kmap_test.cpp
-        ../../common/ttable.h ../../common/ttable.cpp
-        ../../common/blif_builder.h ../../common/blif_builder.cpp
-        ../../common/bitset_manipulate.h)
+add_executable(NewKmapTest kmap_test.cpp)
+
 target_link_libraries(NewKmapTest gtest gtest_main)
+
 target_link_libraries(NewKmapTest newApprox
-        mffc blif common profile
+        profile mffc blif common
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})
 
