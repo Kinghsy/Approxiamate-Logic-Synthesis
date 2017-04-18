@@ -23,7 +23,7 @@ BoolFunction::BoolFunction
          const vector<NodeName >& pName,
          const NodeName& oPName): truthTab(tTab)
 {
-    assert(inSize == tTab.nInputs());
+    //assert(inSize == tTab.nInputs());
     inputSize =inSize;
     truthTab = tTab;
     portName = pName;

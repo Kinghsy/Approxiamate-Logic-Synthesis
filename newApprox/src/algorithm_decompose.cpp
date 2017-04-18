@@ -49,7 +49,7 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
 
 
     // here means this bf at least has two inputs and it is divideble
-    // now try some method to divide bf's inputs into two sets.
+    // now try some method to divideCore bf's inputs into two sets.
 
     ResultType bestApproximation;
     bestApproximation.errorCount = MAX_VALUE;
@@ -64,8 +64,8 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
             temp = temp / 2;
         }
         Kmap fig(bf, portSet[1], portSet[0]);
-        Kmap::BestApprox approx = fig.divide(simData);
-        // approx contains the best divide information
+        Kmap::BestApprox approx = fig.divideCore(simData);
+        // approx contains the best divideCore information
 
         // if branch and bound, please add in this line.
         // do some pre-operation.

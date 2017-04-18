@@ -27,7 +27,7 @@ public:
         BestApprox() :
                 leftFunc(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
                 rightFunc(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
-                method(NORMAL_1_INPUT) {
+                method(XOR_TABLE) {
             errorCount = MAX_VALUE;
         }
     };
@@ -87,7 +87,8 @@ public:
         return kmap[i];
     }
 
-    BestApprox divide(const SimulationResult& simData);
+    BestApprox divideCore(const SimulationResult &simData);
+    BestApprox divide(const SimulationResult &simData);
 
     inline size_t getHeight() const {
         return height;

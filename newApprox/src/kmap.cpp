@@ -105,6 +105,16 @@ size_t Kmap::operator^(const Kmap &initKmap) const {
 }
 
 Kmap::BestApprox Kmap::divide(const SimulationResult &simData) {
+    BestApprox record = divideCore(simData);
+    for (int i = 0; i < DIVIDE_ROUND; ++i) {
+        BestApprox temp = divideCore(simData);
+        if (temp.errorCount < record.errorCount)
+            record = temp;
+    }
+    return record;
+}
+
+Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
 
     // case 1: 0s and 1s
     //  operation DROP_RIGHT (LEFT_RELA_TABLE)
@@ -173,7 +183,10 @@ Kmap::BestApprox Kmap::divide(const SimulationResult &simData) {
     // case 2
     randTTable(rowPattern, width);
     randTTable(columnPattern, height);
-
+    /*rowPattern[0] = 0;
+    rowPattern[1] = 1;
+    rowPattern[2] = 0;
+    rowPattern[3] = 0;*/
     while (true) {
         TTable recordRowPattern(0, width);
         recordRowPattern = rowPattern;
@@ -317,7 +330,7 @@ TTable Kmap::getColumnPattern(const FocusedSimulationResult &focusSim,
 // rowPattern --> columnPattern
 
     TTable colPatternTemp(0, height);
-    colPatternTemp = colPatternTemp;
+    colPatternTemp = columnPattern;
     for (size_t i = 0; i < height; ++i) {
         DBitset line(heightName.size() + widthName.size(), 0);
         num2Dbits(line, heightName.size(), 0, i);

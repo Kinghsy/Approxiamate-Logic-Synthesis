@@ -20,5 +20,7 @@ typedef int ModeType;
 #define CASE_3 3
 #define CASE_4 4
 
+#define DIVIDE_ROUND (1 << 6)
+
 
 #endif //VE490_CONST_H
