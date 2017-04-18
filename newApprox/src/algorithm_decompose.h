@@ -31,7 +31,6 @@ public:
 private:
 
     BoolFunction initBF;
-    //ResultType bestDecomp;
     ResultType searchPrcoe(const BoolFunction& bf,
                            const SimulationResult& simData);
 

@@ -18,35 +18,7 @@ class SimulationResult;
 
 class Kmap {
 
-private:
-
-    size_t height, width;
-    std::vector<TTable> kmap;
-    std::vector<NodeName> heightName;
-    std::vector<NodeName> widthName;
-
-    TTable getColumnPattern(
-            const FocusedSimulationResult& focusSim,
-            const TTable& targetOf1,
-            const TTable& targetOf0
-    );
-
-    TTable getRowPattern(
-            const TTable& columnPattern,
-            const FocusedSimulationResult& focusSim,
-            const TTable& transOf0,
-            const TTable& transOf1
-    );
-
-    size_t errorCountRowColumnPattern(
-            const TTable& rowPattern,
-            const TTable& columnPattern,
-            const TTable& combineMethod,
-            const FocusedSimulationResult& focusSim
-    );
-
 public:
-
     struct BestApprox {
         BoolFunction leftFunc;
         BoolFunction rightFunc;
@@ -59,6 +31,44 @@ public:
             errorCount = MAX_VALUE;
         }
     };
+
+private:
+
+    size_t height, width;
+    std::vector<TTable> kmap;
+    std::vector<NodeName> heightName;
+    std::vector<NodeName> widthName;
+
+    TTable getColumnPattern(
+            const FocusedSimulationResult& focusSim,
+            const TTable& columnPattern,
+            const TTable& rowPattern,
+            const TTable& combineMethod
+    );
+
+    TTable getRowPattern(
+            const FocusedSimulationResult& focusSim,
+            const TTable& columnPattern,
+            const TTable& rowPattern,
+            const TTable& combineMethed
+    );
+
+    size_t errorCountRowColumnPattern(
+            const size_t column,
+            const size_t row,
+            const bool columnVal,
+            const bool rowVal,
+            const TTable& combineMethod
+    );
+
+    Kmap::BestApprox errorCountWhole(
+            const FocusedSimulationResult& focusSim,
+            const TTable& columnPattern,
+            const TTable& rowPattern,
+            const TTable& combineMethod
+    );
+
+public:
 
     Kmap(const BoolFunction& BF,
          const std::vector<NodeName > &heightName,
@@ -98,6 +108,7 @@ public:
 
 };
 
-std::string num2string(size_t bits, size_t num);
+void num2Dbits(DBitset& db, size_t bits,
+               size_t start, size_t num);
 
 #endif //VE490_KMAP_H

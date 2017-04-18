@@ -42,7 +42,8 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
             BlifBuilder temp(bf.getOutPortName(), false);
             res.deInfo = temp;
         } //FIXME
-        res.errorCount = 0; res.fun = bf;
+        res.errorCount = 0;
+        res.fun = bf;
         return res;
     }
 
@@ -51,20 +52,24 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
     // now try some method to divide bf's inputs into two sets.
 
     ResultType bestApproximation;
-
     bestApproximation.errorCount = MAX_VALUE;
-    for (size_t i = 1; i < (1 << bf.getInputSize() - 1); ++i) {
+
+    for (size_t i = 1; i < (1 << bf.getInputSize()) - 1; ++i) {
         if (i % 2 == 0) continue; // keep the first input always in the left function( as column )
 
         size_t temp = i;
         vector<string > portSet[2];
-        for (int j = 0; j < bf.getInputSize(); ++j) {
+        for (size_t j = 0; j < bf.getInputSize(); ++j) {
             portSet[temp % 2].push_back(bf.getPortName(j));
-            temp = temp >> 1;
+            temp = temp / 2;
         }
         Kmap fig(bf, portSet[1], portSet[0]);
         Kmap::BestApprox approx = fig.divide(simData);
         // approx contains the best divide information
+
+        // if branch and bound, please add in this line.
+        // do some pre-operation.
+        // BRANCH_AND_BOUND, BFS
 
         ResultType leftRes = searchPrcoe(approx.leftFunc, simData);
         ResultType rightRes = searchPrcoe(approx.rightFunc, simData);

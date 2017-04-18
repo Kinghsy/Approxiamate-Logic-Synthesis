@@ -165,8 +165,8 @@ namespace std {
     };
 }
 
-const TTable NOT_1_INPUT        = TTable("10");
-const TTable NORMAL_1_INPUT     = TTable("01");
+const TTable NOT_1_INPUT        = TTable("01");
+const TTable NORMAL_1_INPUT     = TTable("10");
 const TTable ALL_0_1_INPUT      = TTable("00");
 const TTable ALL_1_1_INPUT      = TTable("11");
 

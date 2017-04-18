@@ -8,7 +8,6 @@
 #include <map>
 
 #include "bool_function.h"
-//#include "../../common/ttable.h"
 #include "../../common/ttable.h"
 #include "const.h"
 #include "kmap.h"
