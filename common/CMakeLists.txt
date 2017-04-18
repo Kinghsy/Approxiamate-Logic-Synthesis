@@ -5,6 +5,7 @@ add_library(common
         generator.h stopwatch.h
         resource.cpp resource.h
         bitset_manipulate.h
+        memorize.h
         urandom.cpp urandom.h
         blif_builder.cpp blif_builder.h
         ttable.cpp ttable.h static_utils.h)

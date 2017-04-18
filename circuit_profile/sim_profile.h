@@ -53,10 +53,9 @@ public:
     size_t count(size_t term) const {return data.at(term);}
     size_t count(const DBitset& term) const;
     size_t count(const std::vector<DBitset> &termSet) const;
-    size_t count(const std::string& term) const;
-    size_t count(const std::vector<std::string>& termSet) const;
 
-    friend std::ostream &operator<<(std::ostream &os, const FocusedSimulationResult &result);
+    friend std::ostream &operator<<(std::ostream &os,
+                                    const FocusedSimulationResult &result);
 
 };
 

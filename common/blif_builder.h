@@ -29,7 +29,7 @@ class BlifBuilder
         friend std::ostream &operator<<(std::ostream &os,
                                         const Connection &connection);
 
-        std::string toBlifString() const;
+
     };
 
     std::vector<Connection> data;

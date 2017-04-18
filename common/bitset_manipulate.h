@@ -68,8 +68,18 @@ static inline size_t getLSB(const DBitset& bitset) {
     return bitset.find_first();
 }
 
+static inline DBitset catBitset(const DBitset& d1, const DBitset& d2) {
+    DBitset result = d1;
+    DBitset ld2 = d2;
+    ld2.resize(d1.size() + d2.size());
+    result.resize(d1.size() + d2.size());
+    result |= ld2 << (d1.size());
+    return result;
+}
 
-
+static inline DBitset operator+(const DBitset& d1, const DBitset& d2) {
+    return catBitset(d1, d2);
+}
 
 
 // Puts a one dimensional bitset into a 2D array
@@ -107,5 +117,17 @@ std::vector<T> pickByDbitset(const std::vector<T>& v,
     }
     return ret;
 }
+
+template <typename T>
+DBitset vec2bitset(const std::vector<T>& v){
+    DBitset result(v.size());
+    auto data = v.data();
+    for (size_t i = 0; i < v.size(); i++) {
+        result[i] = data[i] > 0 ? 1 : 0;
+    }
+    return result;
+}
+
+
 
 #endif //VE490_BITSET_MANIPULATE_H

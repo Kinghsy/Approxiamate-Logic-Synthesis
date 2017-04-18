@@ -10,6 +10,10 @@
 using namespace std;
 
 TEST(DBITSET, BASIC) {
+
+    ASSERT_EQ(vec2bitset<size_t>({0, 0, 1, 0}),
+              DBitset(string("0100")));
+
     ASSERT_EQ(DBitset(string("01011100")), DBitset(8, 0x5Cul));
     ASSERT_EQ(DBitset(string("01011100"))[2], 1);
     ASSERT_EQ(DBitset(string("01011100"))[4], 1);
@@ -38,6 +42,13 @@ TEST(BIT_MANIP, BASIC) {
     ASSERT_EQ(
             fillWith(1, DBitset(string("0010010001110110"))),
             DBitset(string("0000000000000000")));
+
+    ASSERT_EQ(catBitset(DBitset(string("10100")), DBitset(string("10110"))),
+              DBitset(string("1011010100")));
+
+    ASSERT_EQ(DBitset(string("10100")) + DBitset(string("10110")),
+              DBitset(string("1011010100")));
+
 }
 
 TEST(BIT_MANIP, EXTRACT) {
@@ -86,6 +97,32 @@ TEST(TTABLE, BASIC) {
     ASSERT_EQ((TTable("10110010").count()), 4);
     ASSERT_EQ(TTable(DBitset(string("10110010"))), TTable("10110010"));
     ASSERT_EQ(TTable(0xB2ull, 3), TTable("10110010"));
+    ASSERT_EQ(fun[vec2bitset<size_t>({0, 0, 0})], 0);
+    ASSERT_EQ(fun[vec2bitset<size_t>({0, 0, 1})], 1);
+    ASSERT_EQ(fun[vec2bitset<size_t>({0, 1, 0})], 0);
+    ASSERT_EQ(fun[vec2bitset<size_t>({0, 1, 1})], 0);
+    ASSERT_EQ(fun[vec2bitset<size_t>({1, 0, 0})], 1);
+    ASSERT_EQ(fun[vec2bitset<size_t>({1, 0, 1})], 1);
+    ASSERT_EQ(fun[vec2bitset<size_t>({1, 1, 0})], 0);
+    ASSERT_EQ(fun[vec2bitset<size_t>({1, 1, 1})], 1);
+
+    ASSERT_EQ(fun[0], 0);
+    ASSERT_EQ(fun[1], 1);
+    ASSERT_EQ(fun[2], 0);
+    ASSERT_EQ(fun[3], 0);
+    ASSERT_EQ(fun[4], 1);
+    ASSERT_EQ(fun[5], 1);
+    ASSERT_EQ(fun[6], 0);
+    ASSERT_EQ(fun[7], 1);
+
+    ASSERT_EQ(fun[DBitset(string("000"))], 0);
+    ASSERT_EQ(fun[DBitset(string("001"))], 1);
+    ASSERT_EQ(fun[DBitset(string("010"))], 0);
+    ASSERT_EQ(fun[DBitset(string("011"))], 0);
+    ASSERT_EQ(fun[DBitset(string("100"))], 1);
+    ASSERT_EQ(fun[DBitset(string("101"))], 1);
+    ASSERT_EQ(fun[DBitset(string("110"))], 0);
+    ASSERT_EQ(fun[DBitset(string("111"))], 1);
 
 }
 

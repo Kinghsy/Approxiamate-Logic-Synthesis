@@ -104,17 +104,6 @@ FocusedSimulationResult::FocusedSimulationResult
     this->nSamples = sum;
 }
 
-size_t FocusedSimulationResult::count(const std::string &term) const {
-    return data.at(std::bitset<64>(term).to_ullong());
-}
-
-size_t FocusedSimulationResult::count(const std::vector<std::string> &termSet) const {
-    size_t sum = 0;
-    for (const std::string& term : termSet) {
-        sum += data.at(std::bitset<64>(term).to_ullong());
-    }
-    return sum;
-}
 
 size_t FocusedSimulationResult::count(const DBitset &term) const {
     assert(term.size() == this->nodeOrder.size());

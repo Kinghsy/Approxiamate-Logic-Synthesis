@@ -36,6 +36,12 @@ public:
         data = table;
     };
 
+    TTable(const std::vector<size_t> v)
+            : TTable(vec2bitset(v)) {}
+
+    TTable(const std::vector<size_t> v, size_t nInputs)
+            : TTable(vec2bitset(v), nInputs) {}
+
     TTable(unsigned long long int value, size_t nInputs)
             : data(1ul << nInputs, value), inputSize(nInputs) {}
 
@@ -84,6 +90,11 @@ public:
         assert(term.size() == inputSize);
         return data[term.to_ulong()];
     }
+
+    // Below 2 function intentionally left blank so that
+    // using them gives you compile error.
+    DBitset::reference operator[](const std::string& term);
+    inline DBitset::const_reference operator[](const std::string& term) const;
 
     inline TTable& set(size_t term, bool b) {
         assert(term < (1ul << inputSize));
@@ -154,20 +165,22 @@ namespace std {
     };
 }
 
-const TTable NOT_1_INPUT = TTable("10");
-const TTable NORMAL_1_INPUT = TTable("01");
-const TTable ALL_0_1_INPUT = TTable("00");
-const TTable ALL_1_1_INPUT = TTable("11");
+const TTable NOT_1_INPUT        = TTable("10");
+const TTable NORMAL_1_INPUT     = TTable("01");
+const TTable ALL_0_1_INPUT      = TTable("00");
+const TTable ALL_1_1_INPUT      = TTable("11");
 
-const TTable XOR_TABLE= TTable("0110");
-const TTable AND_TABLE= TTable("0001");
-const TTable OR_TABLE = TTable("0111");
-const TTable LEFT_RELA_TABLE = TTable("0101"    ); // only relevant to left.
-const TTable LEFT_RELA_NOT_TABLE = TTable("1010"); // only relevant to left and has an not gate.
-const TTable RIGHT_RELA_TABLE = TTable("0011"); // only relevant to right.
-const TTable RIGHT_RELA_NOT_TABLE = TTable("1100"); // only relevant to right and has an not gate.
-const TTable ALL_IRR_TABLE_0 = TTable("0000"); // irrelevant to both sides, and return 0 always.
-const TTable ALL_IRR_TABLE_1 = TTable("1111"); // irrelevant to both sides, and return 1 always.
+const TTable XOR_TABLE              = TTable("0110");
+const TTable NXOR_TABLE             = ~XOR_TABLE;
+const TTable AND_TABLE              = TTable("1000");
+const TTable NAND_TABLE             = ~AND_TABLE;
+const TTable OR_TABLE               = TTable("1110");
+const TTable LEFT_RELA_TABLE        = TTable("1010"); // only relevant to left.
+const TTable LEFT_RELA_NOT_TABLE    = ~LEFT_RELA_TABLE; // only relevant to left and has an not gate.
+const TTable RIGHT_RELA_TABLE       = TTable("1100"); // only relevant to right.
+const TTable RIGHT_RELA_NOT_TABLE   = ~RIGHT_RELA_TABLE; // only relevant to right and has an not gate.
+const TTable ALL_IRR_TABLE_0        = TTable("0000"); // irrelevant to both sides, and return 0 always.
+const TTable ALL_IRR_TABLE_1        = ~ALL_IRR_TABLE_0; // irrelevant to both sides, and return 1 always.
 
 TTable combineTruthTable(
         const TTable& t1, const TTable& t2,

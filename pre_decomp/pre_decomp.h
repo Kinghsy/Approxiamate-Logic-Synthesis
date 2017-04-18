@@ -65,9 +65,4 @@ public:
 
 };
 
-
-
-
-
-
 #endif //VE490_PRE_DECOMP_H
