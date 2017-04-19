@@ -7,7 +7,7 @@
 
 #include "../src/bool_function.h"
 #include "../src/kmap.h"
-#include "../src/algorithm_decompose_test.h"
+#include "../src/algorithm_decompose.h"
 #include "../../common/ttable.h"
 #include "../../driver/header.h"
 
@@ -66,7 +66,7 @@ TEST(ALGORITHM__Test, TEST_CASE_1) {
     fun.display();
 
     AlgorithmDecompose decompose;
-    AlgorithmDecompose::ResultType res = decompose.operate(fun, simResult);
+    AlgorithmDecompose::ResultType res = decompose.operate(fun, simResult, BRANCH_AND_BOUND);
 
     res.fun.display();
     cout << res.errorCount << endl;

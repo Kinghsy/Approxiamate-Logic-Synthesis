@@ -30,6 +30,18 @@ public:
                 method(XOR_TABLE) {
             errorCount = MAX_VALUE;
         }
+        bool operator< (const BestApprox& t) {
+            return (errorCount < t.errorCount);
+        }
+        bool operator<= (const BestApprox& t) {
+            return (errorCount <= t.errorCount);
+        }
+        bool operator> (const BestApprox& t) {
+            return (errorCount > t.errorCount);
+        }
+        bool operator>= (const BestApprox& t) {
+            return (errorCount >= t.errorCount);
+        }
     };
 
 private:

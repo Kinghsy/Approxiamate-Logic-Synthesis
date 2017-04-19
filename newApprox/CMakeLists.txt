@@ -3,9 +3,10 @@
 
 set(NEW_SOURCE_FILES
         src/const.h
+        src/min_set.h
 
         src/bool_function.h
-        src/algorithm_decompose_test.h
+        src/algorithm_decompose.h
         src/kmap.h
 
         src/algorithm_decompose.cpp

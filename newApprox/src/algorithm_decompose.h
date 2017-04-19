@@ -32,12 +32,14 @@ private:
 
     BoolFunction initBF;
     ResultType searchPrcoe(const BoolFunction& bf,
-                           const SimulationResult& simData);
+                           const SimulationResult& simData,
+                           const ActivedMode ApplicatedMode);
 
 public:
 
     ResultType operate(const BoolFunction& bf,
-                          const SimulationResult& simData);
+                       const SimulationResult& simData,
+                       const ActivedMode ApplicatedMode);
 
     AlgorithmDecompose():
             initBF(0, NORMAL_1_INPUT,

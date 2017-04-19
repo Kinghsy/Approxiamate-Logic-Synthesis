@@ -19,7 +19,7 @@ target_link_libraries(NewKmapTest newApprox
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})
 
-add_executable(NewAlgorithmDecomposeTest algorithm_decompose_test.cpp
+add_executable(NewAlgorithmDecomposeTest algorithm_decompose.cpp
         ../../driver/filter_mffc.cpp)
 target_link_libraries(NewAlgorithmDecomposeTest gtest gtest_main)
 target_link_libraries(NewAlgorithmDecomposeTest newApprox
