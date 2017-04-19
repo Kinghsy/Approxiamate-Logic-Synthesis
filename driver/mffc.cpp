@@ -7,6 +7,8 @@
 
 #include "../circuit/interface.h"
 #include "header.h"
+#include "../newApprox/src/algorithm_decompose.h"
+#include "../newApprox/src/bool_function.h"
 
 
 using std::cout;
@@ -63,6 +65,7 @@ int main(int argc, char* argv[]) {
     auto ffc = findFirstFFC(mffcs, test);
     sw.take("FindFFC");
 
+    /*
     while (ffc) {
         std::cout << "Found MFFC of " << ffc->name << " over "
                   << ffc->inputNode.size() << " inputs, "
@@ -94,6 +97,46 @@ int main(int argc, char* argv[]) {
         sw.take("ReloadBlif");
 
         assert(mffc.truthTable() == match.function);
+
+        filterMffcByIntersection(mffcs, *ffc);
+        sw.take("Filter");
+        ffc = findFirstFFC(mffcs, test);
+        sw.take("FindFFC");
+    }*/
+
+
+    AlgorithmDecompose algo;
+    while (ffc) {
+        std::cout << "Found MFFC of " << ffc->name << " over "
+                  << ffc->inputNode.size() << " inputs, "
+                  << ffc->nodeSet.size() << " nodes\n";
+        net.exportFfcToBlifFile(*ffc, TempPath / fBlif("mffc"));
+        auto mffc = BlifBooleanNet(TempPath / fBlif("mffc"));
+        std::cout << "Inputs: " << mffc.inputNodeList() << endl;
+        sw.take("FFC Load");
+        TTable table = mffc.truthTable();
+        sw.take("FFC TTable");
+
+        auto focusedResult = simResult.focus(mffc.inputNodeList());
+        sw.take("Focus");
+
+        BoolFunction fun(mffc.inputNodeList().size(), table,
+                mffc.inputNodeList(), mffc.outputNodeList()[0]);
+        AlgorithmDecompose::ResultType res =
+                algo.operate(fun, simResult, BRANCH_AND_BOUND);
+
+        std::cout << table << endl;
+        std::cout << res.fun.getTTable() << endl;
+        sw.take("Match");
+        std::cout << "MatchError: " << countMatchError(table, res.fun.getTTable(), focusedResult) << "\t";
+        std::cout << "MissMatchError(By Decomp): " <<  res.errorCount << endl;
+
+        res.deInfo.printBody(cout);
+        sw.take("BuildBlif");
+
+        res.deInfo.exportBlif(TempPath / fBlif("mffc_approx"));
+        auto netAprrox = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
+        sw.take("ReloadBlif");
 
         filterMffcByIntersection(mffcs, *ffc);
         sw.take("Filter");

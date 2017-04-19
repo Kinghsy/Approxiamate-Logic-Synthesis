@@ -42,8 +42,8 @@ public:
                        const ActivedMode ApplicatedMode);
 
     AlgorithmDecompose():
-            initBF(0, NORMAL_1_INPUT,
-                   std::vector<NodeName>(), NodeName("")) {
+            initBF(2, AND_TABLE,
+                   std::vector<NodeName>(), NodeName("abc")) {
     }
     ~AlgorithmDecompose() {}
 
