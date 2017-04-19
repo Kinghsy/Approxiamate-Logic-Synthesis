@@ -5,7 +5,7 @@ set(NEW_SOURCE_FILES
         src/const.h
 
         src/bool_function.h
-        src/algorithm_decompose.h
+        src/algorithm_decompose_test.h
         src/kmap.h
 
         src/algorithm_decompose.cpp

@@ -73,4 +73,5 @@ BoolFunction combineBooleanFunction(
         const NodeName& outName
 );
 
+
 #endif //VE490_BOOLEAN_FUNCTION_H

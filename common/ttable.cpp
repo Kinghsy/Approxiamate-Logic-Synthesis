@@ -72,6 +72,14 @@ TTable combineTruthTable(const TTable &t1, const TTable &t2,
         return TTable(result1, combinedInput);
     if (method == RIGHT_RELA_TABLE)
         return TTable(result2, combinedInput);
+    if (method == LEFT_RELA_NOT_TABLE)
+        return TTable(~result1, combinedInput);
+    if (method == RIGHT_RELA_NOT_TABLE)
+        return TTable(~result2, combinedInput);
+    if (method == ALL_IRR_TABLE_0)
+        return TTable(0, combinedInput);
+    if (method == ALL_IRR_TABLE_1)
+        return TTable((1<<combinedInput)-1, combinedInput);
 
     assert(0);
 }

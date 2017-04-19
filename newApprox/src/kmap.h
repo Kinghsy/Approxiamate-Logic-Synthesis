@@ -61,14 +61,14 @@ private:
             const TTable& combineMethod
     );
 
+public:
+
     Kmap::BestApprox errorCountWhole(
             const FocusedSimulationResult& focusSim,
             const TTable& columnPattern,
             const TTable& rowPattern,
             const TTable& combineMethod
     );
-
-public:
 
     Kmap(const BoolFunction& BF,
          const std::vector<NodeName > &heightName,

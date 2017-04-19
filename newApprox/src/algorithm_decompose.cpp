@@ -8,13 +8,16 @@
 #include "ttable.h"
 #include "kmap.h"
 #include "bool_function.h"
-#include "algorithm_decompose.h"
+#include "algorithm_decompose_test.h"
 
 #include <ttable.h>
 #include <blif_builder.h>
 
 using std::string;
 using std::vector;
+
+size_t boolErrorCount(BoolFunction& f1, BoolFunction& f2, SimulationResult);
+
 
 AlgorithmDecompose::ResultType
 AlgorithmDecompose::operate(const BoolFunction &bf,
@@ -59,12 +62,14 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
 
         size_t temp = i;
         vector<string > portSet[2];
+        vector<string > nodeSet;
         for (size_t j = 0; j < bf.getInputSize(); ++j) {
+            nodeSet.push_back(bf.getPortName(j));
             portSet[temp % 2].push_back(bf.getPortName(j));
             temp = temp / 2;
         }
         Kmap fig(bf, portSet[1], portSet[0]);
-        Kmap::BestApprox approx = fig.divideCore(simData);
+        Kmap::BestApprox approx = fig.divide(simData);
         // approx contains the best divideCore information
 
         // if branch and bound, please add in this line.
@@ -80,8 +85,15 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
         );
         // obtain approximation bool function and compare it with initial
 
-        if ( (approxFun^bf) < bestApproximation.errorCount) {
-            bestApproximation.errorCount =  approxFun ^ bf;
+        approxFun == bf; // reorder.
+
+        FocusedSimulationResult focus(simData, nodeSet);
+        Kmap::BestApprox recombine = fig.errorCountWhole(
+                focus, leftRes.fun.getTTable(), rightRes.fun.getTTable(), approx.method
+        );
+
+        if ( recombine.errorCount < bestApproximation.errorCount) {
+            bestApproximation.errorCount =  recombine.errorCount;
             bestApproximation.deInfo = combineBilfBuilder(
                     leftRes.deInfo, rightRes.deInfo, approx.method, bf.getOutPortName()
             );
@@ -92,3 +104,5 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
     return bestApproximation;
 
 }
+
+

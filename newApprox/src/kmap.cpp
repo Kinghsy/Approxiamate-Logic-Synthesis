@@ -138,30 +138,30 @@ Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
     }
     FocusedSimulationResult focusSim(simData, nodeNameSet);
 
-    TTable All0s(0, width);
-    TTable All1s( ( 1 << width ) - 1, width);
+    TTable All0s(0, widthName.size());
+    TTable All1s( ( 1 << width ) - 1, widthName.size());
 
 
 
     // case 1:
-    TTable rowPattern(0, width);
-    TTable columnPattern(0, height);
+    TTable rowPattern(0, widthName.size());
+    TTable columnPattern(0, heightName.size());
     randTTable(columnPattern, height);
 
     while (true) {
-        TTable recordRowPattern(0, width);
+        TTable recordRowPattern(0, widthName.size());
         recordRowPattern = rowPattern;
-        TTable recordColumnPattern(0, height);
+        TTable recordColumnPattern(0, heightName.size());
         recordColumnPattern = columnPattern;
 
         // rowPattern --> columnPatternTemp
-        TTable columnPatternTemp(0, height);
+        TTable columnPatternTemp(0, heightName.size());
         columnPatternTemp = getColumnPattern(
                 focusSim, columnPattern, rowPattern, LEFT_RELA_TABLE);
         columnPattern = columnPatternTemp;
 
         // columnPattern --> rowPatternTemp
-        TTable rowPatternTemp(0, width);
+        TTable rowPatternTemp(0, widthName.size());
         rowPatternTemp = getRowPattern(
                 focusSim, columnPattern, rowPattern, LEFT_RELA_TABLE);
         rowPattern = rowPatternTemp;
@@ -188,19 +188,19 @@ Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
     rowPattern[2] = 0;
     rowPattern[3] = 0;*/
     while (true) {
-        TTable recordRowPattern(0, width);
+        TTable recordRowPattern(0, widthName.size());
         recordRowPattern = rowPattern;
-        TTable recordColumnPattern(0, height);
+        TTable recordColumnPattern(0, heightName.size());
         recordColumnPattern = columnPattern;
 
         // rowPattern --> columnPatternTemp
-        TTable columnPatternTemp(0, height);
+        TTable columnPatternTemp(0, heightName.size());
         columnPatternTemp = getColumnPattern(
                 focusSim, columnPattern, rowPattern, AND_TABLE);
         columnPattern = columnPatternTemp;
 
         // columnPattern --> rowPatternTemp
-        TTable rowPatternTemp(0, width);
+        TTable rowPatternTemp(0, widthName.size());
         rowPatternTemp = getRowPattern(
                 focusSim, columnPattern, rowPattern, AND_TABLE);
         rowPattern = rowPatternTemp;
@@ -228,19 +228,19 @@ Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
     randTTable(columnPattern, height);
 
     while (true) {
-        TTable recordRowPattern(0, width);
+        TTable recordRowPattern(0, widthName.size());
         recordRowPattern = rowPattern;
-        TTable recordColumnPattern(0, height);
+        TTable recordColumnPattern(0, heightName.size());
         recordColumnPattern = columnPattern;
 
         // rowPattern --> columnPatternTemp
-        TTable columnPatternTemp(0, height);
+        TTable columnPatternTemp(0, heightName.size());
         columnPatternTemp = getColumnPattern(
                 focusSim, columnPattern, rowPattern, OR_TABLE);
         columnPattern = columnPatternTemp;
 
         // columnPattern --> rowPatternTemp
-        TTable rowPatternTemp(0, width);
+        TTable rowPatternTemp(0, widthName.size());
         rowPatternTemp = getRowPattern(
                 focusSim, columnPattern, rowPattern, OR_TABLE);
         rowPattern = rowPatternTemp;
@@ -267,19 +267,19 @@ Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
     randTTable(rowPattern, width);
     randTTable(columnPattern, height);
     while (true) {
-        TTable recordRowPattern(0, width);
+        TTable recordRowPattern(0, widthName.size());
         recordRowPattern = rowPattern;
-        TTable recordColumnPattern(0, height);
+        TTable recordColumnPattern(0, heightName.size());
         recordColumnPattern = columnPattern;
 
         // rowPattern --> columnPatternTemp
-        TTable columnPatternTemp(0, height);
+        TTable columnPatternTemp(0, heightName.size());
         columnPatternTemp = getColumnPattern(
                 focusSim, columnPattern, rowPattern, XOR_TABLE);
         columnPattern = columnPatternTemp;
 
         // columnPattern --> rowPatternTemp
-        TTable rowPatternTemp(0, width);
+        TTable rowPatternTemp(0, widthName.size());
         rowPatternTemp = getRowPattern(
                 focusSim, columnPattern, rowPattern, XOR_TABLE);
         rowPattern = rowPatternTemp;
@@ -329,7 +329,7 @@ TTable Kmap::getColumnPattern(const FocusedSimulationResult &focusSim,
                               const TTable &combineMethod) {
 // rowPattern --> columnPattern
 
-    TTable colPatternTemp(0, height);
+    TTable colPatternTemp(0, heightName.size());
     colPatternTemp = columnPattern;
     for (size_t i = 0; i < height; ++i) {
         DBitset line(heightName.size() + widthName.size(), 0);
@@ -356,7 +356,7 @@ TTable Kmap::getRowPattern(const FocusedSimulationResult& focusSim,
                            const TTable& combineMethed) {
 // columnPattern --> rowPattern
 
-    TTable rowPatternTemp(0, width);
+    TTable rowPatternTemp(0, widthName.size());
     rowPatternTemp = rowPattern;
     for (size_t j = 0; j < width ; ++j) {
         DBitset line(heightName.size()+widthName.size(), 0);
@@ -424,41 +424,3 @@ Kmap::BestApprox Kmap::errorCountWhole(const FocusedSimulationResult &focusSim,
 }
 
 
-/*size_t Kmap::errorCountRowColumnPattern(
-        const TTable &rowPattern, 
-        const TTable &columnPattern,
-        const TTable &combineMethod,
-        const FocusedSimulationResult &focusSim
-) {
-    
-// under given rowPattern, columnPattern and combineMethod,
-// check the current error. (total bits flip in different cases)
-    size_t totalInputs = rowPattern.nInputs() + columnPattern.nInputs();
-    DBitset colMask(0, totalInputs);
-    DBitset rowMask(0, totalInputs);
-
-    for (size_t i = 0; i < (columnPattern.nInputs()); ++i) {
-        colMask[i] = 1;
-    }
-    for (size_t i = columnPattern.nInputs(); i < totalInputs; ++i) {
-        rowMask[i] = 1;
-    }
-
-    TTable combineTTable(0, totalInputs);
-    combineTTable = combineTruthTable(columnPattern, rowPattern,
-                        colMask, rowMask, combineMethod);
-    vector<TTable> newMap = combineTTable.breakdown(rowMask, colMask);
-
-    size_t err = 0;
-    for (size_t i = 0; i < height; ++i) {
-        string base = num2string(heightName.size(), i);
-        for (size_t j = 0; j < width; ++j) {
-            string exten = num2string(widthName.size(), j);
-            err += (newMap[i][j] ^ kmap[i][j]) * focusSim.count(base + exten);
-        }
-    }
-
-    return err;
-}
-
-*/

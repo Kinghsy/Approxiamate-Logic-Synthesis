@@ -68,22 +68,21 @@ TEST(TEST_NEW_BOOL_FUNCTION, test_case_1) {
 TEST(TEST_NEW_BOOL_FUNCTION, test_case_2) {
 
     vector<string> inputs1;
+    inputs1.push_back("x0");
     inputs1.push_back("x1");
-    inputs1.push_back("x2");
     string output1("c1");
-    BoolFunction fun1(2, TTable("1110"), inputs1, output1);
+    BoolFunction fun1(2, TTable(8, 2), inputs1, output1);
     fun1.display();
 
     vector<string> inputs2;
-    inputs2.push_back("x3");
-    inputs2.push_back("x4");
+    inputs2.push_back("x2");
     string output2("c2");
-    BoolFunction fun2(2, TTable("1110"), inputs2, output2);
+    BoolFunction fun2(1, TTable(2, 1), inputs2, output2);
     fun2.display();
 
     BoolFunction fun3(1,TTable("01"), inputs1, output1);
 
-    fun3 = combineBooleanFunction(fun1, fun2, AND_TABLE, string("out"));
+    fun3 = combineBooleanFunction(fun1, fun2, OR_TABLE, string("out"));
     fun3.display();
 
     int g;
