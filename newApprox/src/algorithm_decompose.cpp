@@ -54,7 +54,6 @@ AlgorithmDecompose::operate(const BoolFunction &bf,
     ResultType res = searchPrcoe(bf, simData, ApplicatedMode);
     srand(0);
     return res;
-    //return bestDecomp;
 
 }
 
@@ -77,12 +76,11 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
         return res;
     }
 
-
     // here means this bf at least has two inputs and it is divideble
     // now try some method to divideCore bf's inputs into two sets.
-
     ResultType bestApproximation;
     bestApproximation.errorCount = MAX_VALUE;
+
     vector<string > nodeSet;
     for (int j = 0; j < bf.getInputSize(); ++j) {
         nodeSet.push_back(bf.getPortName(j));
@@ -90,13 +88,14 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
     FocusedSimulationResult focus(simData, nodeSet);
 
     MinSet<Kmap::BestApprox> bfsSeries(bf.getInputSize());
+    vector<Kmap::BestApprox> searchSeries;
 
     for (size_t i = 1; i < (1 << bf.getInputSize()) - 1; ++i) {
 
         if (i % 2 == 0) continue; // keep the first input always in the left function( as column )
 
         size_t temp = i;
-        vector<string > portSet[2];
+        vector<string> portSet[2];
         for (size_t j = 0; j < bf.getInputSize(); ++j) {
             portSet[temp % 2].push_back(bf.getPortName(j));
             temp = temp / 2;
@@ -106,16 +105,32 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
         // approx contains the best divideCore information
 
         // BRANCH_AND_BOUND
-        if ( ApplicatedMode == BRANCH_AND_BOUND ) {
-            if (approx.errorCount >= bestApproximation.errorCount)
-                continue;
+        if ((ApplicatedMode == BRANCH_AND_BOUND)
+            || (ApplicatedMode == FULL_SEARCH)) {
+            searchSeries.push_back(approx);
         }
 
         // BFS_SEARCH
-        if ( ApplicatedMode == BFS_SEARCH ) {
+        if (ApplicatedMode == BFS_SEARCH) {
             bfsSeries.push(approx);
-            continue;
         }
+    }
+
+    while ((bfsSeries.size() > 0) || (searchSeries.size() > 0)) {
+        Kmap::BestApprox approx;
+        if ((ApplicatedMode == FULL_SEARCH )
+            || (ApplicatedMode == BRANCH_AND_BOUND)) {
+            approx = searchSeries.back();
+            searchSeries.pop_back();
+        }
+        if (ApplicatedMode == BFS_SEARCH) {
+            approx = bfsSeries.back();
+            bfsSeries.popBack();
+        }
+
+        if (ApplicatedMode == BRANCH_AND_BOUND)
+            if (approx.errorCount >= bestApproximation.errorCount)
+                continue;
 
         ResultType leftRes = searchPrcoe(approx.leftFunc, simData, ApplicatedMode);
         ResultType rightRes = searchPrcoe(approx.rightFunc, simData, ApplicatedMode);
@@ -140,17 +155,10 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
             );
             bestApproximation.fun = approxFun;
         }
+
     }
 
-    if ( (ApplicatedMode == BRANCH_AND_BOUND)
-         || (ApplicatedMode == FULL_SEARCH) )
-        return bestApproximation;
-
-    while (bfsSeries.size() > 0) {
-        Kmap::BestApprox approx = bfsSeries.back();
-        bfsSeries.popBack();
-        // FIXME
-    }
+    return bestApproximation;
 
 }
 

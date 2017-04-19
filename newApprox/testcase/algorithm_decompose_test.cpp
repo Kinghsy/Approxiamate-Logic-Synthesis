@@ -66,7 +66,8 @@ TEST(ALGORITHM__Test, TEST_CASE_1) {
     fun.display();
 
     AlgorithmDecompose decompose;
-    AlgorithmDecompose::ResultType res = decompose.operate(fun, simResult, BRANCH_AND_BOUND);
+    AlgorithmDecompose::ResultType res =
+            decompose.operate(fun, simResult, BFS_SEARCH);
 
     res.fun.display();
     cout << res.errorCount << endl;
