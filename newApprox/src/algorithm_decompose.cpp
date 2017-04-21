@@ -65,10 +65,10 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
     if (bf.getInputSize() == 1) {
         ResultType res;
         if ((bf.getTTable()) == NOT_1_INPUT) {
-            BlifBuilder temp(bf.getOutPortName(), true);
+            BlifBuilder temp(bf.getPortName(0), true);
             res.deInfo = temp;
         } else {
-            BlifBuilder temp(bf.getOutPortName(), false);
+            BlifBuilder temp(bf.getPortName(0), false);
             res.deInfo = temp;
         } //FIXME
         res.errorCount = 0;

@@ -183,10 +183,12 @@ Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
     // case 2
     randTTable(rowPattern, width);
     randTTable(columnPattern, height);
-    /*rowPattern[0] = 0;
-    rowPattern[1] = 1;
-    rowPattern[2] = 0;
-    rowPattern[3] = 0;*/
+    for (int i = 0; i < height; ++i) {
+        if (kmap[i] == TTable(0, widthName.size())) continue;
+        if (kmap[i] == TTable((1 << widthName.size())-1, widthName.size())) continue;
+        rowPattern = kmap[i];
+        break;
+    }
     while (true) {
         TTable recordRowPattern(0, widthName.size());
         recordRowPattern = rowPattern;
@@ -226,7 +228,12 @@ Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
     // case 3
     randTTable(rowPattern, width);
     randTTable(columnPattern, height);
-
+    for (int i = 0; i < height; ++i) {
+        if (kmap[i] == TTable(0, widthName.size())) continue;
+        if (kmap[i] == TTable((1 << widthName.size())-1, widthName.size())) continue;
+        rowPattern = kmap[i];
+        break;
+    }
     while (true) {
         TTable recordRowPattern(0, widthName.size());
         recordRowPattern = rowPattern;
@@ -266,6 +273,12 @@ Kmap::BestApprox Kmap::divideCore(const SimulationResult &simData) {
     // case 4
     randTTable(rowPattern, width);
     randTTable(columnPattern, height);
+    for (int i = 0; i < height; ++i) {
+        if (kmap[i] == TTable(0, widthName.size())) continue;
+        if (kmap[i] == TTable((1 << widthName.size())-1, widthName.size())) continue;
+        rowPattern = kmap[i];
+        break;
+    }
     while (true) {
         TTable recordRowPattern(0, widthName.size());
         recordRowPattern = rowPattern;
