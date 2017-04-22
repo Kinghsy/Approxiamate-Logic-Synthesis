@@ -109,11 +109,13 @@ BlifBooleanNet::getFFC() const {
 //        ffc.depth2Output = attribute.depth2output.at(ffc.name);
         ffc.totalSet = ffc.nodeSet;
         for (auto& elem : ffc.inputNode) {
+            // Primary inputs will still be both in MFFC
+            // We need to remove them from the set
             if (ffc.nodeSet.count(elem)) {
-                //assert(!ffc.nodeSet.count(elem));
                 ffc.nodeSet.erase(elem);
             }
             ffc.totalSet.insert(elem);
+            assert(!ffc.nodeSet.count(elem));
         }
 //        ffc.minDepth2Input = getMinDepths2Input(ffc.totalSet);
 //        ffc.minDepth2Output = getMinDepths2Output(ffc.totalSet);
