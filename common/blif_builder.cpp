@@ -95,10 +95,10 @@ std::ostream &operator<<(std::ostream &ss,
     assert(connection.method.nInputs() == 2);
     ss << ".names " << *connection.in1 << " " << *connection.in2 << " ";
     ss << *connection.out << "\n";
-    ss << "00 " << connection.method[0] << "\n";
-    ss << "10 " << connection.method[1] << "\n";
-    ss << "01 " << connection.method[2] << "\n";
-    ss << "11 " << connection.method[3] << "\n";
+    if (connection.method[0]) ss << "00 " << connection.method[0] << "\n";
+    if (connection.method[1]) ss << "10 " << connection.method[1] << "\n";
+    if (connection.method[2]) ss << "01 " << connection.method[2] << "\n";
+    if (connection.method[3]) ss << "11 " << connection.method[3] << "\n";
     ss << std::endl;
     return ss;
 }
