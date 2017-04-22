@@ -41,6 +41,8 @@ string getMFFC(string infile, int minInput, int maxInput) {
 */
 
 BlifBooleanNet::BlifBooleanNet(const std::string &file) {
+
+    std::cout << "Loading blif file " << file << endl;
     filename = file;
 
     FILE *fp;
