@@ -111,10 +111,9 @@ BlifBooleanNet::getFFC() const {
         for (auto& elem : ffc.inputNode) {
             if (ffc.nodeSet.count(elem)) {
                 //assert(!ffc.nodeSet.count(elem));
-                ffc.totalSet.insert(elem);
-            } else {
-                // assert(0);
+                ffc.nodeSet.erase(elem);
             }
+            ffc.totalSet.insert(elem);
         }
 //        ffc.minDepth2Input = getMinDepths2Input(ffc.totalSet);
 //        ffc.minDepth2Output = getMinDepths2Output(ffc.totalSet);
