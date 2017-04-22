@@ -108,10 +108,14 @@ BlifBooleanNet::getFFC() const {
 //        ffc.depth2Input = attribute.depth2input.at(ffc.name);
 //        ffc.depth2Output = attribute.depth2output.at(ffc.name);
         ffc.totalSet = ffc.nodeSet;
-        ffc.totalSet.insert(
-                ffc.inputNode.begin(),
-                ffc.inputNode.end()
-        );
+        for (auto& elem : ffc.inputNode) {
+            if (ffc.nodeSet.count(elem)) {
+                //assert(!ffc.nodeSet.count(elem));
+                ffc.totalSet.insert(elem);
+            } else {
+                // assert(0);
+            }
+        }
 //        ffc.minDepth2Input = getMinDepths2Input(ffc.totalSet);
 //        ffc.minDepth2Output = getMinDepths2Output(ffc.totalSet);
         allFfc.insert(std::make_pair(ffc.name, ffc));
