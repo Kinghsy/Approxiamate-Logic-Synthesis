@@ -559,7 +559,14 @@ void BlifBooleanNet::exportReplacedBlif(
     fprintf(fp, "\n");
     nd = net->nodes;
     while (nd != NULL) {
-        if (omits.count(nd->name)) continue;
+        /*if (strcmp("_864gat_423_", nd->name) == 0) {
+            cout << "hello" << endl;
+        }
+        std::cout << nd->name << endl;*/
+        if (omits.count(nd->name)) {
+            nd = nd->next;
+            continue;
+        }
         if (nd->type != BNET_INPUT_NODE
             && nd->type != BNET_PRESENT_STATE_NODE) {
             fprintf(fp,".names");

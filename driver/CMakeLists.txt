@@ -22,7 +22,7 @@ add_executable(mffcDriver mffc.cpp ${SOURCE_FILES})
 
 set(ALL_LIBS
         policy mffc blif profile libexabc libabc
-        approx blif_replace preDecomp common
+        approx blif_replace preDecomp common newApprox
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})
 

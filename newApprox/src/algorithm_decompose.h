@@ -23,7 +23,7 @@ public:
         BlifBuilder deInfo;
         ResultType():
                 fun(0, NORMAL_1_INPUT, std::vector<NodeName>(), NodeName("")),
-                deInfo(NodeName("")) {
+                deInfo (  BlifBuilder::buildConst( NodeName(""), 1 ) ) {
             errorCount = 0;
         }
     };
