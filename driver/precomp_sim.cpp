@@ -27,25 +27,26 @@ BuildCircuitFromMatch::build(const PreDecomp::DbEntry &entry,
     const auto& leftFun = entry.left;
     const auto& rightFun = entry.right;
 
-    BlifBuilder leftBlif("none");
-    BlifBuilder rightBlif("none");
-
     if (entry.combine == ALL_IRR_TABLE_0) {
-        return BlifBuilder::BuildConst(thisNode, false);
+        return BlifBuilder::buildConst(thisNode, false);
     } else if (entry.combine == ALL_IRR_TABLE_1) {
-        return BlifBuilder::BuildConst(thisNode, true);
+        return BlifBuilder::buildConst(thisNode, true);
     }
+
+    BlifBuilder  leftBlif = BlifBuilder::buildConst("none", true);
+    BlifBuilder rightBlif = BlifBuilder::buildConst("none", true);
 
     if (leftFun.nInputs() == 1) {
         size_t nodeNum = entry.leftMask.find_first();
-        leftBlif = BlifBuilder(node.at(nodeNum),
-                               entry.left == NOT_1_INPUT);
+        leftBlif = BlifBuilder::buildInput(node.at(nodeNum),
+                                           entry.left == NOT_1_INPUT);
     } else if (leftFun.nInputs() == 2) {
         size_t leftNum = entry.leftMask.find_first();
         size_t rightNum = entry.leftMask.find_next(leftNum);
-        auto b1 = BlifBuilder(node.at(leftNum));
-        auto b2 = BlifBuilder(node.at(rightNum));
-        leftBlif = combineBilfBuilder(b1, b2, entry.left, thisNode);
+        auto b1 = BlifBuilder::buildInput(node.at(leftNum), false);
+        auto b2 = BlifBuilder::buildInput(node.at(rightNum), false);
+        leftBlif = combineBilfBuilder(b1, b2, entry.left,
+                                      nameGenerator.generate());
     } else {
         const auto leftMatch = preDecomp.getMatch(leftFun.cdata(), leftFun.nInputs());
         leftBlif = build(leftMatch, pickByDbitset(node, entry.leftMask),
@@ -54,13 +55,13 @@ BuildCircuitFromMatch::build(const PreDecomp::DbEntry &entry,
 
     if (rightFun.nInputs() == 1) {
         size_t nodeNum = entry.rightMask.find_first();
-        rightBlif = BlifBuilder(node.at(nodeNum),
-                                entry.right == NOT_1_INPUT);
+        rightBlif = BlifBuilder::buildInput(node.at(nodeNum),
+                                            entry.right == NOT_1_INPUT);
     } else if (rightFun.nInputs() == 2) {
         size_t leftNum = entry.rightMask.find_first();
         size_t rightNum = entry.rightMask.find_next(leftNum);
-        auto b1 = BlifBuilder(node.at(leftNum));
-        auto b2 = BlifBuilder(node.at(rightNum));
+        auto b1 = BlifBuilder::buildInput(node.at(leftNum), false);
+        auto b2 = BlifBuilder::buildInput(node.at(rightNum), false);
         rightBlif = combineBilfBuilder(b1, b2, entry.right,
                                        nameGenerator.generate());
     } else {

@@ -133,7 +133,8 @@ PreDecomp::getMatch(const DBitset &funStr, size_t inputSize) const {
 
 const PreDecomp::DbEntry &
 PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
-                    const FocusedSimulationResult& simResult) const {
+                    const FocusedSimulationResult& simResult,
+                    const float SIZE_ERROR_BONUS) const {
     if (inputSize > 6) assert(0);
     assert(inputSize == simResult.nodeOrder.size());
     auto& metadataSet = metaData.at(inputSize);
@@ -142,7 +143,7 @@ PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
     std::bitset<64> validMask(mask.to_ulong());
     function &= validMask;
 
-    const float SIZE_ERROR_BONUS = 0.02;
+
 
     if (inputSize <= 5) { // Compare error on all ouputs
         const DbEntry* minEntry = nullptr;
@@ -269,9 +270,11 @@ PreDecomp::getMatch(const DBitset &funStr, size_t inputSize,
 
 const PreDecomp::DbEntry &
 PreDecomp::getMatch(const TTable &fun,const std::vector<NodeName> &nodeName,
-                    FocusedSimulationResult simResult) const {
+                    FocusedSimulationResult simResult,
+                    const float SIZE_ERROR_BONUS) const {
     assert(nodeName == simResult.nodeOrder);
-    return getMatch(fun.cdata(), fun.nInputs(), simResult);
+    return getMatch(fun.cdata(), fun.nInputs(),
+                    simResult, SIZE_ERROR_BONUS);
 }
 
 

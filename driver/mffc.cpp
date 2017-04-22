@@ -7,8 +7,8 @@
 
 #include "../circuit/interface.h"
 #include "header.h"
-#include "../newApprox/src/algorithm_decompose.h"
-#include "../newApprox/src/bool_function.h"
+//#include "../newApprox/src/algorithm_decompose.h"
+//#include "../newApprox/src/bool_function.h"
 
 
 using std::cout;
@@ -59,14 +59,14 @@ int main(int argc, char* argv[]) {
 
     auto test =
             [](const FFC& ffc) -> bool {
-                return ((ffc.inputNode.size() <= 8) &&
-                        (ffc.inputNode.size() >= 6));
+                return ((ffc.inputNode.size() <= 6) &&
+                        (ffc.inputNode.size() >= 4));
             };
 
     auto ffc = findFirstFFC(mffcs, test);
     sw.take("FindFFC");
 
-    /*while (ffc) {
+    while (ffc) {
         std::cout << "Found MFFC of " << ffc->name << " over "
                   << ffc->inputNode.size() << " inputs, "
                   << ffc->nodeSet.size() << " nodes\n";
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
         sw.take("Focus");
         auto &preDecomp = PreDecomp::getInstance();
         sw.take("preDecomp");
-        auto &match = preDecomp.getMatch(table, mffc.inputNodeList(), focusedResult);
+        auto &match = preDecomp.getMatch(table, mffc.inputNodeList(), focusedResult, 0.005f);
         std::cout << table << endl;
         std::cout << match.function << endl;
         sw.take("Match");
@@ -96,63 +96,61 @@ int main(int argc, char* argv[]) {
         auto netAprrox = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
         sw.take("ReloadBlif");
 
-        assert(mffc.truthTable() == match.function);
-
         filterMffcByIntersection(mffcs, *ffc);
         sw.take("Filter");
         ffc = findFirstFFC(mffcs, test);
         sw.take("FindFFC");
     }
-*/
 
-    AlgorithmDecompose algo;
-    while (ffc) {
-        if (ffc->inputNode.size() != ffc->nodeSet.size() + 1) {
-            std::cout << "Found MFFC of " << ffc->name << " over "
-                      << ffc->inputNode.size() << " inputs, "
-                      << ffc->nodeSet.size() << " nodes\n";
-            net.exportFfcToBlifFile(*ffc, TempPath / fBlif("mffc"));
-            auto mffc = BlifBooleanNet(TempPath / fBlif("mffc"));
-            std::cout << "Inputs: " << mffc.inputNodeList() << endl;
-            sw.take("FFC Load");
-            TTable table = mffc.truthTable();
-            sw.take("FFC TTable");
 
-            /*auto focusedResult = simResult.focus(mffc.inputNodeList());
-            for (int i = 0; i < (1 << mffc.inputNodeList().size()); ++i) {
-                DBitset k(mffc.inputNodeList().size(), i);
-                cout << focusedResult.count(k) << endl;
-            }*/
-            sw.take("Focus");
-
-            BoolFunction fun(mffc.inputNodeList().size(), table,
-                             mffc.inputNodeList(), mffc.outputNodeList()[0]);
-            AlgorithmDecompose::ResultType res =
-                    algo.operate(fun, simResult, BRANCH_AND_BOUND);
-
-            std::cout << table << endl;
-            std::cout << res.fun.getTTable() << endl;
-            sw.take("Match");
-            std::cout << "MatchError: " << countMatchError(table, res.fun.getTTable(), focusedResult) << "\t";
-            std::cout << "MissMatchError(By Decomp): " << res.errorCount << endl;
-
-            res.deInfo.printBody(cout);
-            sw.take("BuildBlif");
-
-            res.deInfo.exportBlif(TempPath / fBlif("mffc_approx"));
-            auto netAprrox = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
-            sw.take("ReloadBlif");
-
-            //system("pause()");
-            //sleep(500);
-            //getchar();
-        }
-
-        filterMffcByIntersection(mffcs, *ffc);
-        sw.take("Filter");
-        ffc = findFirstFFC(mffcs, test);
-        sw.take("FindFFC");
-    }
+//    AlgorithmDecompose algo;
+//    while (ffc) {
+//        if (ffc->inputNode.size() != ffc->nodeSet.size() + 1) {
+//            std::cout << "Found MFFC of " << ffc->name << " over "
+//                      << ffc->inputNode.size() << " inputs, "
+//                      << ffc->nodeSet.size() << " nodes\n";
+//            net.exportFfcToBlifFile(*ffc, TempPath / fBlif("mffc"));
+//            auto mffc = BlifBooleanNet(TempPath / fBlif("mffc"));
+//            std::cout << "Inputs: " << mffc.inputNodeList() << endl;
+//            sw.take("FFC Load");
+//            TTable table = mffc.truthTable();
+//            sw.take("FFC TTable");
+//
+//            /*auto focusedResult = simResult.focus(mffc.inputNodeList());
+//            for (int i = 0; i < (1 << mffc.inputNodeList().size()); ++i) {
+//                DBitset k(mffc.inputNodeList().size(), i);
+//                cout << focusedResult.count(k) << endl;
+//            }*/
+//            sw.take("Focus");
+//
+//            BoolFunction fun(mffc.inputNodeList().size(), table,
+//                             mffc.inputNodeList(), mffc.outputNodeList()[0]);
+//            AlgorithmDecompose::ResultType res =
+//                    algo.operate(fun, simResult, BRANCH_AND_BOUND);
+//
+//            std::cout << table << endl;
+//            std::cout << res.fun.getTTable() << endl;
+//            sw.take("Match");
+//            std::cout << "MatchError: " << countMatchError(table, res.fun.getTTable(), focusedResult) << "\t";
+//            std::cout << "MissMatchError(By Decomp): " << res.errorCount << endl;
+//
+//            res.deInfo.printBody(cout);
+//            sw.take("BuildBlif");
+//
+//            res.deInfo.exportBlif(TempPath / fBlif("mffc_approx"));
+//            auto netAprrox = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
+//            sw.take("ReloadBlif");
+//
+//            //system("pause()");
+//            //sleep(500);
+//            //getchar();
+//        }
+//
+//        filterMffcByIntersection(mffcs, *ffc);
+//        sw.take("Filter");
+//        ffc = findFirstFFC(mffcs, test);
+//        sw.take("FindFFC");
+//    }
 
     sw.report();
     return 0;

@@ -290,7 +290,7 @@ void enumerate(
                 auto And = l & r;
                 auto nAnd = ~And;
                 auto Xor = l ^ r;
-                auto nXor = ~Xor;
+                //auto nXor = ~Xor;
 
                 attr.maskLeft = c;
                 attr.maskRight = ~c;
@@ -306,8 +306,8 @@ void enumerate(
                 insertToResult(result, nAnd, attr);
                 attr.combine = "XOR";
                 insertToResult(result, Xor, attr);
-                attr.combine = "NXOR";
-                insertToResult(result, nXor, attr);
+//                attr.combine = "NXOR";
+//                insertToResult(result, nXor, attr);
                 attr.combine = "LEFT";
                 attr.maskDiscard =
                         transfer<kOut, kIn1>(lpair.second.maskDiscard, c) | ~c;

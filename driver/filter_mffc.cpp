@@ -11,42 +11,36 @@ using std::endl;
 typedef std::function<bool(const FFC&)> FfcTestFun;
 
 void filterMffcBySize(map<BnetNodeID, FFC>& mffc) {
-    auto iter= mffc.cbegin();
-    while (iter != mffc.cend()) {
+    for (auto iter = mffc.begin(); iter != mffc.end();) {
         if (iter->second.nodeSet.size() == 1) {
             //std::cerr << "Erased '" << iter->first << "' by size." << std::endl;
-            mffc.erase(iter++);
-            continue;
+            iter = mffc.erase(iter);
+        } else {
+            ++iter;
         }
-        iter++;
     }
 }
 
 void filterMffcContainOutput(map<BnetNodeID, FFC>& mffc,
                              const vector<BnetNodeID>& output) {
-    auto iter = mffc.cbegin();
-    while (iter != mffc.cend()) {
-
+    for (auto iter = mffc.begin(); iter != mffc.end();) {
         bool needremove =
                 std::any_of(output.begin(), output.end(),
                             [&iter](const BnetNodeID& out) -> bool {
                                 return (iter->second.nodeSet.count(out) > 0) && out != iter->first;
                             });
-
         if (needremove) {
-            mffc.erase(iter++);
             std::cerr << "Erased '" << iter->first << "' by containing output." << endl;
-            continue;
+            iter = mffc.erase(iter);
+        } else {
+            ++iter;
         }
-
-        iter++;
     }
 }
 
 void filterMffcByIntersection
         (map<BnetNodeID, FFC>& mffc, const FFC& prev) {
-    auto iter = mffc.cbegin();
-    while (iter != mffc.cend()) {
+    for (auto iter = mffc.begin(); iter != mffc.end();) {
         auto& nodeSetPrev = prev.nodeSet;
         auto& nodeSetCurr = iter->second.nodeSet;
         std::vector<BnetNodeID> intersection;
@@ -57,10 +51,10 @@ void filterMffcByIntersection
         );
         if (!intersection.empty()) {
             std::cout << "\tErased '" << iter->first << "' by intersection." << endl;
-            mffc.erase(iter++);
-            continue;
+            iter = mffc.erase(iter);
+        } else {
+            ++iter;
         }
-        iter++;
     }
 }
 

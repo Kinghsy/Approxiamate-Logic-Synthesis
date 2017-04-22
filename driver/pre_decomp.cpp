@@ -31,7 +31,7 @@ int main() {
 
     std::string funStr = "01011011001101110";
 
-    auto e = pd.getMatch(funStr, 6);
+    auto e = pd.getMatch(DBitset(funStr), 6);
 
     s.take();
 

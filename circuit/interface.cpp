@@ -532,4 +532,63 @@ void BlifBooleanNet::prepareSimulator() {
     this->getSimulationContext();
 }
 
+void BlifBooleanNet::exportReplacedBlif(
+        const std::string &fname,
+        const vector<BlifBooleanNet::FFC> &ffcSet,
+        const std::vector<BlifBuilder> &blifSet) {
+    std::unordered_set<BnetNodeID> omits;
+    for (const FFC& ffc : ffcSet)
+        omits.insert(ffc.nodeSet.begin(), ffc.nodeSet.end());
+
+    FILE* fp = fopen(fname.c_str(), "w+");
+    BnetNode *nd;
+    BnetTabline *tl;
+    int i;
+
+    if (net == NULL) return;
+
+    (void) fprintf(fp,".model %s\n", net->name);
+    (void) fprintf(fp,".inputs ");
+    for(i = 0; i < net->npis; i++)
+        fprintf(fp, "%s ", net->inputs[i]);
+    fprintf(fp, "\n");
+
+    (void) fprintf(fp,".outputs ");
+    for(i = 0; i < net->npos; i++)
+        fprintf(fp, "%s ", net->outputs[i]);
+    fprintf(fp, "\n");
+    nd = net->nodes;
+    while (nd != NULL) {
+        if (omits.count(nd->name)) continue;
+        if (nd->type != BNET_INPUT_NODE
+            && nd->type != BNET_PRESENT_STATE_NODE) {
+            fprintf(fp,".names");
+            for (i = 0; i < nd->ninp; i++) {
+                (void) fprintf(fp," %s",nd->inputs[i]);
+            }
+            fprintf(fp," %s\n",nd->name);
+            tl = nd->f;
+            while (tl != NULL) {
+                if (tl->values != NULL) {
+                    (void) fprintf(fp,"%s %d\n",tl->values,
+                                   1 - nd->polarity);
+                } else {
+                    (void) fprintf(fp,"%d\n", 1 - nd->polarity);
+                }
+                tl = tl->next;
+            }
+        }
+        nd = nd->next;
+    }
+
+    fclose(fp);
+
+    ofstream fs;
+    fs.open(fname, ios_base::app);
+    for (const auto& blifBuider : blifSet)
+        blifBuider.printBody(fs);
+
+    fs << ".end\n";
+}
+
 

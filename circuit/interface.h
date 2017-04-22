@@ -120,6 +120,10 @@ public:
                             const FFC& ffc,
                             const BlifBuilder& blifBuilder);
 
+    void exportReplacedBlif(const std::string& fname,
+                            const std::vector<FFC>& ffcSet,
+                            const std::vector<BlifBuilder>& blifSet);
+
     void exportFfcToBlifFile(const FFC& ffc,const std::string& filename) const;
     void exportGraphViz(const std::string& fname) const;
     void exportGraphVizwithHighlight(const std::string& fname,

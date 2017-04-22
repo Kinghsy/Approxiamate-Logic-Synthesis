@@ -8,23 +8,29 @@
 #include <unordered_map>
 #include <set>
 #include <ostream>
+#include <memory>
 #include "ttable.h"
 
 typedef std::string NodeName;
 typedef boost::dynamic_bitset<> DBitset;
 
-class BlifBuilder
-{
+class BlifBuilder {
+private:
+    typedef std::shared_ptr<NodeName> NodeNamePtr;
+
+    enum TYPE {
+        INPUT, REVERSE_INPUT,
+        CONST_0, CONST_1, NET
+    };
+
+    TYPE type;
+
     struct Connection
     {
-        NodeName out;
-        NodeName in1;
-        NodeName in2;
-        TTable method;
-
-        Connection(const NodeName& out_,
-                   const NodeName& i1_, const NodeName& i2_,
-                   const TTable& method_);
+        NodeNamePtr out = nullptr;
+        NodeNamePtr in1 = nullptr;
+        NodeNamePtr in2 = nullptr;
+        TTable method = ALL_IRR_TABLE_0;
 
         friend std::ostream &operator<<(std::ostream &os,
                                         const Connection &connection);
@@ -33,27 +39,34 @@ class BlifBuilder
     };
 
     std::vector<Connection> data;
-    std::unordered_map<NodeName, bool> input;
-    std::unordered_map<NodeName, bool> constant;
+    std::vector<NodeNamePtr> input;
+    std::vector<NodeNamePtr> constant0;
+    std::vector<NodeNamePtr> constant1;
 
-    NodeName outputNodeName;
+    NodeNamePtr node;
 
     BlifBuilder() {}
+
+    BlifBuilder(TYPE t, const NodeName& node)
+        : type(t), node(std::make_shared<NodeName>(node)) {
+        if (t == INPUT || t == REVERSE_INPUT)
+            this->input.push_back(this->node);
+        if (t == CONST_0) this->constant0.push_back(this->node);
+        if (t == CONST_1) this->constant1.push_back(this->node);
+    }
 
 public:
     std::ostream& printBody(std::ostream &os) const;
 
-    static BlifBuilder BuildConst(const NodeName& node, bool value);
-
-    bool isConst() {return input.empty();}
-
-    BlifBuilder(const NodeName& node, bool flip=false);
+    static BlifBuilder buildConst(const NodeName& node, bool value);
+    static BlifBuilder buildInput(const NodeName& node, bool value);
 
     friend BlifBuilder
     combineBilfBuilder(const BlifBuilder &d1,
                        const BlifBuilder &d2,
                        const TTable &table,
                        const NodeName &newOutput);
+
     NodeName outputNode() const;
 
     void exportBlif(const std::string& filename) const;
