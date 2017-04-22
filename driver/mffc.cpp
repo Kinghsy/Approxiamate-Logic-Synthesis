@@ -89,14 +89,21 @@ int main(int argc, char* argv[]) {
 
         auto builderAlg = BuildCircuitFromMatch(ffc->name);
         auto blifBuilder = builderAlg(match, mffc.inputNodeList());
-        std::cout << blifBuilder;
-        sw.take("BuildBlif");
 
-        blifBuilder.exportBlif(TempPath / fBlif("mffc_approx"));
-        auto netAprrox = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
-        sw.take("ReloadBlif");
+        std::cout << "BuilderSize: " << blifBuilder.nNode() << "\n";
 
-        filterMffcByIntersection(mffcs, *ffc);
+        if (blifBuilder.nNode() == ffc->nodeSet.size()) {
+            filterCurrentMffc(mffcs, *ffc);
+        } else {
+            //std::cout << blifBuilder;
+            sw.take("BuildBlif");
+
+            blifBuilder.exportBlif(TempPath / fBlif("mffc_approx"));
+            auto netAprrox = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
+            sw.take("ReloadBlif");
+
+            filterMffcByIntersection(mffcs, *ffc);
+        }
         sw.take("Filter");
         ffc = findFirstFFC(mffcs, test);
         sw.take("FindFFC");
@@ -152,7 +159,7 @@ int main(int argc, char* argv[]) {
 //        sw.take("FindFFC");
 //    }
 
-    sw.report();
+    //sw.report();
     return 0;
 }
 

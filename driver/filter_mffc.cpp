@@ -23,23 +23,25 @@ void filterMffcBySize(map<BnetNodeID, FFC>& mffc) {
 
 void filterMffcContainOutput(map<BnetNodeID, FFC>& mffc,
                              const vector<BnetNodeID>& output) {
+    std::vector<decltype(mffc.begin())> removeSet;
     for (auto iter = mffc.begin(); iter != mffc.end();) {
         bool needremove =
                 std::any_of(output.begin(), output.end(),
                             [&iter](const BnetNodeID& out) -> bool {
                                 return (iter->second.nodeSet.count(out) > 0) && out != iter->first;
                             });
-        if (needremove) {
+        if (needremove) removeSet.push_back(iter);
+        ++iter;
+        for (auto i : removeSet) {
             std::cerr << "Erased '" << iter->first << "' by containing output." << endl;
-            iter = mffc.erase(iter);
-        } else {
-            ++iter;
+            mffc.erase(i);
         }
     }
 }
 
 void filterMffcByIntersection
         (map<BnetNodeID, FFC>& mffc, const FFC& prev) {
+    std::vector<decltype(mffc.begin())> removeSet;
     for (auto iter = mffc.begin(); iter != mffc.end();) {
         auto& nodeSetPrev = prev.nodeSet;
         auto& nodeSetCurr = iter->second.nodeSet;
@@ -49,13 +51,18 @@ void filterMffcByIntersection
                 nodeSetPrev.begin(), nodeSetPrev.end(),
                 std::back_inserter(intersection)
         );
-        if (!intersection.empty()) {
-            std::cout << "\tErased '" << iter->first << "' by intersection." << endl;
-            iter = mffc.erase(iter);
-        } else {
-            ++iter;
-        }
+        if (!intersection.empty()) removeSet.push_back(iter);
+        ++iter;
     }
+    for (auto i : removeSet) {
+        std::cout << "\tErased '" << i->first << "' by intersection." << endl;
+        mffc.erase(i);
+    }
+}
+
+void filterCurrentMffc(map<BnetNodeID, FFC>& ffc, const FFC& curr) {
+    std::cout << "No improvements, remove " << curr.name << "\n";
+    ffc.erase(curr.name);
 }
 
 

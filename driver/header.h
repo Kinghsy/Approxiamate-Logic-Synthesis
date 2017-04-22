@@ -21,6 +21,8 @@ const FFC* findFirstFFC(std::map<BnetNodeID, FFC>& mffc,
 
 void filterMffcByIntersection(std::map<BnetNodeID, FFC>& mffc, const FFC& prev);
 
+void filterCurrentMffc(std::map<BnetNodeID, FFC>& ffc, const FFC& curr);
+
 class BuildCircuitFromMatch {
     const BnetNodeID mffcNode;
     NodeNameGenerator nameGenerator;

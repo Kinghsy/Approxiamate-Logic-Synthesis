@@ -69,6 +69,8 @@ public:
 
     NodeName outputNode() const;
 
+    size_t nNode() const {return this->data.size();}
+
     void exportBlif(const std::string& filename) const;
 
     std::set<NodeName> inputName() const;
