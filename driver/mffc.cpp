@@ -32,7 +32,7 @@ int main(int argc, char* argv[]) {
     auto select =
             [](const FFC& ffc) -> bool {
                 return ((ffc.inputNode.size() <= 6) &&
-                        (ffc.inputNode.size() >= 4));
+                        (ffc.inputNode.size()>=4));
             };
     AlgorithmDecompose algo;
 
@@ -53,6 +53,8 @@ int main(int argc, char* argv[]) {
     auto filePath = BenchmarkAigPath;
 
     for (int i = 0; i < 10; ++i) {
+
+        cout << endl;
 
         sw.take("Take Round");
         cout << " Round: " << i << endl;
@@ -96,7 +98,7 @@ int main(int argc, char* argv[]) {
             BoolFunction fun(ffcCircuit.inputNodeList().size(), ffcTable,
                             ffcCircuit.inputNodeList(), ffcCircuit.outputNodeList()[0]);
             AlgorithmDecompose::ResultType res =
-                algo.operate(fun, unmodedSimResult, FULL_SEARCH);
+                algo.operate(fun, unmodedSimResult, BRANCH_AND_BOUND);
             sw.take("   algorithm decompose");
 
             cout << ffcTable << endl;
@@ -105,8 +107,14 @@ int main(int argc, char* argv[]) {
             cout << "  MissMatchError(By decomp): " << res.errorCount << endl;
             sw.take("   cout results");
 
-            res.deInfo.printBody(cout);
-            sw.take("   build blif");
+            cout << res.deInfo.nNode()  << " " << ffc->totalSet.size() - ffc->inputNode.size() << endl;
+            if (res.deInfo.nNode() == (ffc->totalSet.size() - ffc->inputNode.size())) {
+                filterCurrentMffc(ffcs, *ffc);
+                continue;
+            }
+
+            // res.deInfo.printBody(cout);
+            //sw.take("   build blif");
 
             res.deInfo.exportBlif(TempPath / fBlif("mffc_approx"));
             auto approxNet = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
