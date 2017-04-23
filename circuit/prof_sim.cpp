@@ -46,8 +46,10 @@ void *BlifBooleanNet::getSimulationContext() const{
 
     //std::cout << "Loading library at: " << library << std::endl;
     void* libhandle = dlopen(library.c_str(), RTLD_NOW | RTLD_LOCAL);
-
-    assert(libhandle != nullptr);
+    if (libhandle == nullptr) {
+        std::cerr << dlerror() << std::endl;
+        assert(libhandle != nullptr);
+    }
 
     //std::cout << "Accessing symbols... ";
     CircuitFun circuit = (CircuitFun)dlsym(libhandle, "circuit");
