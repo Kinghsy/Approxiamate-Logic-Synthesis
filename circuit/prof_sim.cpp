@@ -161,7 +161,7 @@ BlifBooleanNet::compareBySimulation(const BlifBooleanNet &net2,
      * ================= SIMULATION  ======================
      * ==================================================== */
 
-    std::cout << "Performing Pre-sim Checks..." << std::endl;
+    //std::cout << "Performing Pre-sim Checks..." << std::endl;
 
     // Validity checks
 
@@ -173,7 +173,7 @@ BlifBooleanNet::compareBySimulation(const BlifBooleanNet &net2,
     auto outputName1 = context1->outputNodeName();
     assert (outputName0 == outputName1);
 
-    std::cout << "Running Simulation..." << std::endl;
+    //std::cout << "Running Simulation..." << std::endl;
 
     InfiniteRandomPatternGenerator g(this->nInputs());
 
@@ -202,7 +202,7 @@ BlifBooleanNet::compareBySimulation(const BlifBooleanNet &net2,
     r.nSamples = nSamples;
     r.nErrors = error;
 
-    std::cout << "Done!" << std::endl;
+    //std::cout << "Done!" << std::endl;
 
     return r;
 }

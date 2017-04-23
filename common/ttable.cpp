@@ -161,12 +161,22 @@ std::istream &operator>>(std::istream &is,
 
 void flipBinaryTTableInput(TTable &t, bool in1, bool in2) {
     assert(t.inputSize == 2);
+    TTable tt(t.data, t.inputSize);
     if (in1) {
-        t.data[0] ^= t.data[1] ^= t.data[0];
-        t.data[2] ^= t.data[3] ^= t.data[2];
+        t.data[0] = tt.data[1];
+        t.data[1] = tt.data[0];
+        t.data[2] = tt.data[3];
+        t.data[3] = tt.data[2];
+        //t.data[0] ^= t.data[1] ^= t.data[0];
+        //t.data[2] ^= t.data[3] ^= t.data[2];
     }
+    TTable ttt(t.data, t.inputSize);
     if (in2) {
-        t.data[0] ^= t.data[2] ^= t.data[0];
-        t.data[1] ^= t.data[3] ^= t.data[1];
+        t.data[0] = ttt.data[2];
+        t.data[1] = ttt.data[3];
+        t.data[2] = ttt.data[0];
+        t.data[3] = ttt.data[1];
+        //t.data[0] ^= t.data[2] ^= t.data[0];
+        //t.data[1] ^= t.data[3] ^= t.data[1];
     }
 }

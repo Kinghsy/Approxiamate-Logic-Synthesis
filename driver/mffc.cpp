@@ -70,8 +70,8 @@ int main(int argc, char* argv[]) {
         auto unmodedSimResult = unmodedNet.profileBySimulation(SIM_ROUND);
         sw.take(" Simu Round Circuit");
 
-        //auto res = unmodedNet.compareBySimulation(initNet, SIM_ROUND);
-        //nowError += res.nErrors;
+        auto res = unmodedNet.compareBySimulation(initNet, SIM_ROUND);
+        nowError += res.nErrors;
         cout << "  now error: " << nowError << endl;
         cout << endl;
 
@@ -104,6 +104,8 @@ int main(int argc, char* argv[]) {
 
             BoolFunction fun(ffcCircuit.inputNodeList().size(), ffcTable,
                             ffcCircuit.inputNodeList(), ffcCircuit.outputNodeList()[0]);
+            //cout << ffcTable << endl;
+            //fun.display();
             AlgorithmDecompose::ResultType res =
                 algo.operate(fun, unmodedSimResult, BRANCH_AND_BOUND);
             sw.take("   algorithm decompose");
@@ -127,7 +129,7 @@ int main(int argc, char* argv[]) {
                 continue;
             }
 
-            nowError += countMatchError(ffcTable, res.fun.getTTable(), focusRes);
+            //nowError += countMatchError(ffcTable, res.fun.getTTable(), focusRes);
 
             // res.deInfo.printBody(cout);
             //sw.take("   build blif");
