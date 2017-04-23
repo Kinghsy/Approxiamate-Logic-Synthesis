@@ -68,6 +68,8 @@ public:
                        const NodeName &newOutput);
 
     NodeName outputNode() const;
+    
+    void replaceInputOrder(const std::vector<NodeName>& n);
 
     size_t nNode() const {return this->data.size();}
 

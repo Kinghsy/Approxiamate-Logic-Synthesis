@@ -19,6 +19,7 @@ add_executable(verify_simulator verify_simulator.cpp)
 add_executable(preDecomp_test pre_decomp.cpp)
 add_executable(abc_playground abc_playground.cpp)
 add_executable(mffcDriver mffc.cpp ${SOURCE_FILES})
+add_executable(decompSamllDriver decomp_small.cpp ${SOURCE_FILES})
 
 set(ALL_LIBS
         policy mffc blif profile libexabc libabc
@@ -32,6 +33,7 @@ target_link_libraries(verify_simulator ${ALL_LIBS})
 target_link_libraries(preDecomp_test ${ALL_LIBS})
 target_link_libraries(abc_playground ${ALL_LIBS})
 target_link_libraries(mffcDriver ${ALL_LIBS})
+target_link_libraries(decompSamllDriver ${ALL_LIBS})
 
 target_compile_options(mffcDriver BEFORE PRIVATE -O0)
 
