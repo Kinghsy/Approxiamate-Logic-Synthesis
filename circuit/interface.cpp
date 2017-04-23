@@ -600,4 +600,3 @@ void BlifBooleanNet::exportReplacedBlif(
     fs << ".end\n";
 }
 
-

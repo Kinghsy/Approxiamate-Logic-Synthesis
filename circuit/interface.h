@@ -20,6 +20,7 @@ struct DdManager;
 struct BnetNetwork;
 struct BnetNode;
 class BlifBuilder;
+class BoolFunction;
 
 class BlifBooleanNet {
 public:

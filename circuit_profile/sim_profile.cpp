@@ -130,8 +130,10 @@ size_t countMatchError(const TTable &orignal, const TTable &next,
                        const FocusedSimulationResult &sim) {
     TTable diff = orignal ^ next;
     size_t error = 0;
-    for (size_t i = 0; i < diff.nTerms(); i++) {
-        if (diff[i]) error += sim.count(i);
+    size_t id = diff.cdata().find_first();
+    while (id != diff.cdata().npos) {
+        error += sim.count(id);
+        id = diff.cdata().find_next(id);
     }
     return error;
 }

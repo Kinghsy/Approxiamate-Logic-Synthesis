@@ -8,10 +8,12 @@ set(NEW_SOURCE_FILES
         src/bool_function.h
         src/algorithm_decompose.h
         src/kmap.h
+        src/decomp_small.h
 
         src/algorithm_decompose.cpp
         src/kmap.cpp
         src/bool_function.cpp
+        src/decomp_small.cpp
     )
 
 
@@ -23,3 +25,7 @@ add_subdirectory(testcase)
 # add_executable(approxiamate ${SOURCE_FILES})
 
 add_library(newApprox ${NEW_SOURCE_FILES})
+
+target_compile_options(newApprox BEFORE
+        PRIVATE -O0
+        PRIVATE -march=native)

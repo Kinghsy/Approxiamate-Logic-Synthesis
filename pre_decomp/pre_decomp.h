@@ -41,14 +41,8 @@ private:
 
 public:
 
-    const DbEntry& getMatch(const TTable& fun,
-                            const std::vector<NodeName>& nodeName,
-                            FocusedSimulationResult simResult,
-                            const float SIZE_ERROR_BONUS = 0.02) const;
-
-    const DbEntry& getMatch(const DBitset& fun, size_t inputSize,
-                            const FocusedSimulationResult& simResult,
-                            const float SIZE_ERROR_BONUS = 0.02) const;
+    const std::vector<std::vector<std::bitset<64> > >& cmetaData = metaData;
+    const std::vector<std::vector<DbEntry> >& cdata = data;
 
     const DbEntry& getMatch(const DBitset& fun, size_t inputSize) const;
 
