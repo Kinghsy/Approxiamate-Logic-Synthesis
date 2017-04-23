@@ -23,20 +23,4 @@ void filterMffcByIntersection(std::map<BnetNodeID, FFC>& mffc, const FFC& prev);
 
 void filterCurrentMffc(std::map<BnetNodeID, FFC>& ffc, const FFC& curr);
 
-class BuildCircuitFromMatch {
-    const BnetNodeID mffcNode;
-    NodeNameGenerator nameGenerator;
-
-    BlifBuilder build(const PreDecomp::DbEntry& entry,
-                      const std::vector<BnetNodeID>& node,
-                      const BnetNodeID& thisNode);
-
-public:
-    BuildCircuitFromMatch(const BnetNodeID& node)
-            : mffcNode(node), nameGenerator(node + "_mffc") {}
-
-    BlifBuilder operator()(const PreDecomp::DbEntry& entry,
-                           const std::vector<BnetNodeID>& node);
-};
-
 #endif //VE490_HEADER_H

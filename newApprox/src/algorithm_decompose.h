@@ -14,8 +14,7 @@
 
 class SimulationResult;
 
-class AlgorithmDecompose {
-
+class IAlgorithmDecompose {
 public:
     struct ResultType {
         size_t errorCount;
@@ -28,6 +27,13 @@ public:
         }
     };
 
+    virtual ResultType operator() (const BoolFunction& bf,
+                                   const SimulationResult& simData) {
+        assert(0);
+    }
+};
+
+class AlgorithmDecompose : public IAlgorithmDecompose{
 private:
 
     BoolFunction initBF;

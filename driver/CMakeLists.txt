@@ -11,10 +11,10 @@
 link_directories(${CUDD_LINK_DIR})
 
 set(SOURCE_FILES
-       header.h filter_mffc.cpp precomp_sim.cpp)
+       header.h filter_mffc.cpp)
 
 add_executable(main main.cpp ${SOURCE_FILES})
-add_executable(playground playground.cpp)
+add_executable(playground playground.cpp filter_mffc.cpp)
 add_executable(verify_simulator verify_simulator.cpp)
 add_executable(preDecomp_test pre_decomp.cpp)
 add_executable(abc_playground abc_playground.cpp)
@@ -22,7 +22,7 @@ add_executable(mffcDriver mffc.cpp ${SOURCE_FILES})
 
 set(ALL_LIBS
         policy mffc blif profile libexabc libabc
-        approx blif_replace preDecomp common newApprox
+        newApprox blif_replace common preDecomp
         ${Boost_LIBRARIES}
         ${CUDD_LINK_LIB})
 

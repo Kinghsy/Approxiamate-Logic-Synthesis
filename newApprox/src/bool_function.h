@@ -23,9 +23,9 @@ private:
 public:
 
     BoolFunction(size_t inputSize,
-                    const TTable& truthTab,
-                    const std::vector<NodeName>& portName,
-                    const NodeName& outPortName);
+                 const TTable& truthTab,
+                 const std::vector<NodeName>& portName,
+                 const NodeName& outPortName);
 
     void operator= (const BoolFunction &initBF);
     bool operator== (const BoolFunction &initBF);
@@ -59,6 +59,11 @@ public:
     inline NodeName getPortName(size_t i) const {
         return portName.at(i);
     }
+
+    const std::vector<NodeName>& inputPorts() const {
+        return portName;
+    }
+
     int getPortNum(const NodeName& name) const;
     void display() const;
 

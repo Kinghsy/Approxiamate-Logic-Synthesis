@@ -104,11 +104,15 @@ std::ostream &operator<<(std::ostream &ss,
 }
 
 std::ostream &operator<<(std::ostream &os, const BlifBuilder &builder) {
+    std::set<NodeName> orderedInputs;
+    for (const auto &elem : builder.input)
+        orderedInputs.insert(*elem);
+
     os << ".model bignode\n";
     if (!builder.input.empty()) {
         os << ".inputs ";
-        for (const auto &elem : builder.input) {
-            os << *elem << " ";
+        for (const auto &elem : orderedInputs) {
+            os << elem << " ";
         }
     }
     os << "\n";
