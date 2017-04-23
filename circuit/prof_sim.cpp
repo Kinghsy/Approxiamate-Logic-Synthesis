@@ -30,7 +30,7 @@ void *BlifBooleanNet::getSimulationContext() const{
     if (simulationContext.isValid())
         return simulationContext.get();
 
-    std::cout << "Preparing Simulation Context." << std::endl;
+    //std::cout << "Preparing Simulation Context." << std::endl;
 
     int i = Random::randomInt();
     if (i < 0) i = -i;
@@ -40,15 +40,15 @@ void *BlifBooleanNet::getSimulationContext() const{
     this->exportToCpp(source);
 
     std::string cmd = "g++ -std=c++14 -shared -fPIC -Ofast -march=native " + source + " -o " + library;
-    std::cout << "Executing: " << cmd << std::endl;
+    //std::cout << "Executing: " << cmd << std::endl;
     system(cmd.c_str());
 
-    std::cout << "Loading library at: " << library << std::endl;
+    //std::cout << "Loading library at: " << library << std::endl;
     void* libhandle = dlopen(library.c_str(), RTLD_NOW | RTLD_LOCAL);
 
     assert(libhandle != nullptr);
 
-    std::cout << "Accessing symbols... ";
+    //std::cout << "Accessing symbols... ";
     CircuitFun circuit = (CircuitFun)dlsym(libhandle, "circuit");
     ConstVectorFun inputNode = (ConstVectorFun)dlsym(libhandle, "inputNode");
     ConstVectorFun outputNode = (ConstVectorFun)dlsym(libhandle, "outputNode");
@@ -69,7 +69,7 @@ void *BlifBooleanNet::getSimulationContext() const{
 
     simulationContext.setData((void*)ctx);
 
-    std::cout << "Done." << std::endl;
+    //std::cout << "Done." << std::endl;
 
     return simulationContext.get();
 }
@@ -87,7 +87,7 @@ BlifBooleanNet::profileBySimulation(int samples) {
 
     auto context = CONTEXT_PTR(getSimulationContext());
 
-    std::cout << "Begin simulation" << std::endl;
+    //std::cout << "Begin simulation" << std::endl;
 
     InfiniteRandomPatternGenerator g(this->nInputs());
 
@@ -111,7 +111,7 @@ BlifBooleanNet::profileBySimulation(int samples) {
         context->circuit(inputVec.data(), outputVec.data(), internalVec.data());
     }
 
-    std::cout << "Done." << std::endl;
+    //std::cout << "Done." << std::endl;
 
     return result;
 }

@@ -11,6 +11,7 @@
 #include "header.h"
 
 #define SIM_ROUND 10000
+#define TOLLENT_RATE 0.05
 
 
 using std::cout;
@@ -51,6 +52,7 @@ int main(int argc, char* argv[]) {
 
     auto unmodedCircuit = fBlif(baseName);
     auto filePath = BenchmarkAigPath;
+    size_t nowError = 0;
 
     for (int i = 0; i < 10; ++i) {
 
@@ -67,6 +69,11 @@ int main(int argc, char* argv[]) {
 
         auto unmodedSimResult = unmodedNet.profileBySimulation(SIM_ROUND);
         sw.take(" Simu Round Circuit");
+
+        //auto res = unmodedNet.compareBySimulation(initNet, SIM_ROUND);
+        //nowError += res.nErrors;
+        cout << "  now error: " << nowError << endl;
+        cout << endl;
 
         auto ffcs = unmodedNet.getFFC();
         sw.take(" Take Round FFC");
@@ -108,10 +115,19 @@ int main(int argc, char* argv[]) {
             sw.take("   cout results");
 
             cout << res.deInfo.nNode()  << " " << ffc->totalSet.size() - ffc->inputNode.size() << endl;
-            if (res.deInfo.nNode() == (ffc->totalSet.size() - ffc->inputNode.size())) {
+            if  (res.deInfo.nNode() == (ffc->totalSet.size() - ffc->inputNode.size())) {
                 filterCurrentMffc(ffcs, *ffc);
+                ffc = findFirstFFC(ffcs, select);
                 continue;
             }
+            if (nowError + countMatchError(ffcTable, res.fun.getTTable(), focusRes)
+                    > SIM_ROUND * TOLLENT_RATE) {
+                filterCurrentMffc(ffcs, *ffc);
+                ffc = findFirstFFC(ffcs, select);
+                continue;
+            }
+
+            nowError += countMatchError(ffcTable, res.fun.getTTable(), focusRes);
 
             // res.deInfo.printBody(cout);
             //sw.take("   build blif");
