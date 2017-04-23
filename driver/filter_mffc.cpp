@@ -55,7 +55,7 @@ void filterMffcByIntersection
         ++iter;
     }
     for (auto i : removeSet) {
-        std::cout << "\tErased '" << i->first << "' by intersection." << endl;
+        //std::cout << "\tErased '" << i->first << "' by intersection." << endl;
         mffc.erase(i);
     }
 }
