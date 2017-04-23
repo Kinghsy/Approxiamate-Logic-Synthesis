@@ -41,12 +41,15 @@ void *BlifBooleanNet::getSimulationContext() const{
 
     std::string cmd = "g++ -std=c++14 -shared -fPIC -Ofast -march=native " + source + " -o " + library;
     //std::cout << "Executing: " << cmd << std::endl;
-    system(cmd.c_str());
+    int ret = system(cmd.c_str());
+    assert(ret == 0);
 
     //std::cout << "Loading library at: " << library << std::endl;
     void* libhandle = dlopen(library.c_str(), RTLD_NOW | RTLD_LOCAL);
-
-    assert(libhandle != nullptr);
+    if (libhandle == nullptr) {
+        std::cerr << dlerror() << std::endl;
+        assert(libhandle != nullptr);
+    }
 
     //std::cout << "Accessing symbols... ";
     CircuitFun circuit = (CircuitFun)dlsym(libhandle, "circuit");

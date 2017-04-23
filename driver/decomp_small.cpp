@@ -19,7 +19,7 @@ int main() {
     PreDecomp::getInstance();
 
     StopWatch sw;
-    auto circuit = fBlif("C880");
+    auto circuit = fBlif("alu4");
     sw.start();
     auto net = BlifBooleanNet(BenchmarkAigPath / circuit);
     sw.take("Load");
