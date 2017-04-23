@@ -19,7 +19,7 @@ AlgorithmDecomposeSmall::operator()
     inputs = bf.inputPorts();
     output = bf.getOutPortName();
 
-    this->nameGenerator = NodeNameGenerator(output);
+    this->nameGenerator = NodeNameGenerator(output + "_mffc");
 
     auto focusedResult = simData.focus(inputs);
     auto &preDecomp = PreDecomp::getInstance();

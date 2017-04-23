@@ -53,7 +53,10 @@ BlifBooleanNet::BlifBooleanNet(const std::string &file) {
     }
     net = NULL;
     net = Bnet_ReadNetwork(fp);
-    if (net == NULL) assert(0);
+    if (net == NULL) {
+        std::cerr << "Error in file: " << file << std::endl;
+        assert(0);
+    }
 
     assert(net->noutputs == net->npos);
     assert(net->ninputs == net->npis);

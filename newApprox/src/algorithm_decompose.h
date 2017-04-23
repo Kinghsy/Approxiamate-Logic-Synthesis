@@ -28,26 +28,30 @@ public:
     };
 
     virtual ResultType operator() (const BoolFunction& bf,
-                                   const SimulationResult& simData) {
-        assert(0);
-    }
+                                   const SimulationResult& simData) = 0;
 };
 
 class AlgorithmDecompose : public IAlgorithmDecompose{
+public:
+    enum Mode {
+        FULL_SEARCH, BRANCH_AND_BOUND,
+        BFS_SEARCH, BFS_SEARCH_PRE_WIDTH
+    };
+
 private:
+    const Mode ApplicatedMode;
 
     BoolFunction initBF;
     ResultType searchPrcoe(const BoolFunction& bf,
-                           const SimulationResult& simData,
-                           const ActivedMode ApplicatedMode);
+                           const SimulationResult& simData);
 
 public:
 
-    ResultType operate(const BoolFunction& bf,
-                       const SimulationResult& simData,
-                       const ActivedMode ApplicatedMode);
+    ResultType operator()(const BoolFunction& bf,
+                          const SimulationResult& simData) override;
 
-    AlgorithmDecompose():
+    AlgorithmDecompose(const Mode ApplicateMode_):
+            ApplicatedMode(ApplicateMode_),
             initBF(2, AND_TABLE,
                    std::vector<NodeName>(), NodeName("abc")) {
     }

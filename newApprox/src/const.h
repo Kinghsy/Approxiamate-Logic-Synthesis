@@ -25,11 +25,6 @@ typedef int ModeType;
 #define DIVIDE_ROUND (1 << 3)
 
 
-typedef int ActivedMode;
-#define FULL_SEARCH 1
-#define BRANCH_AND_BOUND 2
-#define BFS_SEARCH 3
-#define BFS_SEARCH_PRE_WIDTH 4
 
 //ActivedMode ApplicatedMode = FULL_SEARCH;
 

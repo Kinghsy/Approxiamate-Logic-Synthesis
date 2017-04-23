@@ -45,13 +45,12 @@ size_t boolErrorCount(const BoolFunction& f1, const BoolFunction& f2,
 
 
 AlgorithmDecompose::ResultType
-AlgorithmDecompose::operate(const BoolFunction &bf,
-                            const SimulationResult &simData,
-                            const ActivedMode ApplicatedMode) {
+AlgorithmDecompose::operator()(const BoolFunction &bf,
+                               const SimulationResult &simData) {
 
     initBF = bf;
     srand(time(nullptr));
-    ResultType res = searchPrcoe(bf, simData, ApplicatedMode);
+    ResultType res = searchPrcoe(bf, simData);
     srand(0);
     return res;
 
@@ -59,8 +58,7 @@ AlgorithmDecompose::operate(const BoolFunction &bf,
 
 AlgorithmDecompose::ResultType
 AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
-                                const SimulationResult &simData,
-                                const ActivedMode ApplicatedMode) {
+                                const SimulationResult &simData) {
 
     if (bf.getInputSize() == 1) {
         ResultType res;
@@ -146,8 +144,8 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
             if (approx.errorCount >= bestApproximation.errorCount)
                 continue;
 
-        ResultType leftRes = searchPrcoe(approx.leftFunc, simData, ApplicatedMode);
-        ResultType rightRes = searchPrcoe(approx.rightFunc, simData, ApplicatedMode);
+        ResultType leftRes = searchPrcoe(approx.leftFunc, simData);
+        ResultType rightRes = searchPrcoe(approx.rightFunc, simData);
         // search for the left best solution and right best solution
 
         BoolFunction approxFun = combineBooleanFunction(
