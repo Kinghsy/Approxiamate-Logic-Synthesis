@@ -11,6 +11,7 @@
 #include "header.h"
 
 #define SIM_ROUND 10000
+#define TOLLENT_RATE 0.05
 
 
 using std::cout;
@@ -32,7 +33,7 @@ int main(int argc, char* argv[]) {
     auto select =
             [](const FFC& ffc) -> bool {
                 return ((ffc.inputNode.size() <= 6) &&
-                        (ffc.inputNode.size() >= 4));
+                        (ffc.inputNode.size() >= 2));
             };
     AlgorithmDecompose algo;
 
@@ -51,8 +52,13 @@ int main(int argc, char* argv[]) {
 
     auto unmodedCircuit = fBlif(baseName);
     auto filePath = BenchmarkAigPath;
-
-    for (int i = 0; i < 10; ++i) {
+    size_t nowError = 0;
+    bool flag = true;
+    int i = 0;
+    //for (int i = 0; i < 15; ++i) {
+    while (flag) {
+        i++; flag = false;
+        cout << endl;
 
         sw.take("Take Round");
         cout << " Round: " << i << endl;
@@ -65,6 +71,11 @@ int main(int argc, char* argv[]) {
 
         auto unmodedSimResult = unmodedNet.profileBySimulation(SIM_ROUND);
         sw.take(" Simu Round Circuit");
+
+        auto res = unmodedNet.compareBySimulation(initNet, SIM_ROUND);
+        nowError = res.nErrors;
+        cout << "  now error: " << nowError << endl;
+        cout << endl;
 
         auto ffcs = unmodedNet.getFFC();
         sw.take(" Take Round FFC");
@@ -79,12 +90,12 @@ int main(int argc, char* argv[]) {
         vector<BlifBuilder> blifSet;
 
         while (ffc) {
-            std::cout << " Found MFFC of " << ffc->name << " over "
+            /*std::cout << " Found MFFC of " << ffc->name << " over "
                       << ffc->inputNode.size() << " inputs, "
-                      << ffc->nodeSet.size() << " nodes" << endl;
+                      << ffc->nodeSet.size() << " nodes" << endl;*/
             unmodedNet.exportFfcToBlifFile(*ffc, TempPath / fBlif("mffc"));
             auto ffcCircuit = BlifBooleanNet(TempPath / fBlif("mffc"));
-            cout << " Inputs: " << ffcCircuit.inputNodeList() << endl;
+            //cout << " Inputs: " << ffcCircuit.inputNodeList() << endl;
             sw.take("  ffc load");
 
             TTable ffcTable = ffcCircuit.truthTable();
@@ -95,18 +106,47 @@ int main(int argc, char* argv[]) {
 
             BoolFunction fun(ffcCircuit.inputNodeList().size(), ffcTable,
                             ffcCircuit.inputNodeList(), ffcCircuit.outputNodeList()[0]);
+            //cout << ffcTable << endl;
+            //fun.display();
             AlgorithmDecompose::ResultType res =
-                algo.operate(fun, unmodedSimResult, FULL_SEARCH);
+                algo.operate(fun, unmodedSimResult, BRANCH_AND_BOUND);
             sw.take("   algorithm decompose");
+
+            /*cout << ffcTable << endl;
+            cout << res.fun.getTTable() << endl;
+            cout << "  MathchError: " << countMatchError(ffcTable, res.fun.getTTable(), focusRes) << "\t";
+            cout << "  MissMatchError(By decomp): " << res.errorCount << endl;
+            sw.take("   cout results");*/
+
+            //cout << res.deInfo.nNode()  << " " << ffc->totalSet.size() - ffc->inputNode.size() << endl;
+            if  (res.deInfo.nNode() == (ffc->totalSet.size() - ffc->inputNode.size())) {
+                filterCurrentMffc(ffcs, *ffc);
+                ffc = findFirstFFC(ffcs, select);
+                continue;
+            }
+            if (nowError + countMatchError(ffcTable, res.fun.getTTable(), focusRes)
+                    > SIM_ROUND * TOLLENT_RATE) {
+                filterCurrentMffc(ffcs, *ffc);
+                ffc = findFirstFFC(ffcs, select);
+                continue;
+            }
+
+            flag = true;
+            nowError += countMatchError(ffcTable, res.fun.getTTable(), focusRes);
+
+            cout << endl;
+            std::cout << " Found MFFC of " << ffc->name << " over "
+                      << ffc->inputNode.size() << " inputs, "
+                      << ffc->nodeSet.size() << " nodes" << endl;
+            cout << " Inputs: " << ffcCircuit.inputNodeList() << endl;
 
             cout << ffcTable << endl;
             cout << res.fun.getTTable() << endl;
             cout << "  MathchError: " << countMatchError(ffcTable, res.fun.getTTable(), focusRes) << "\t";
             cout << "  MissMatchError(By decomp): " << res.errorCount << endl;
-            sw.take("   cout results");
-
-            res.deInfo.printBody(cout);
-            sw.take("   build blif");
+            cout << "  Modified Size: " << ffc->totalSet.size() - ffc->inputNode.size() << " --> " << res.deInfo.nNode() << endl;
+            cout << "  current error: " << nowError << endl;
+            cout << endl;
 
             res.deInfo.exportBlif(TempPath / fBlif("mffc_approx"));
             auto approxNet = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
@@ -115,8 +155,8 @@ int main(int argc, char* argv[]) {
             ffcSet.push_back(*ffc);
             blifSet.push_back(res.deInfo);
 
-            break;
-            // FIXME
+            filterMffcByIntersection(ffcs, *ffc);
+            ffc = findFirstFFC(ffcs, select);
         }
 
         char tempCh[10];
@@ -127,7 +167,7 @@ int main(int argc, char* argv[]) {
         filePath = TempPath;
         unmodedCircuit = fBlif(baseName + string("__") + string(tempCh));
 
-        getchar();
+        //getchar();
 
     }
 

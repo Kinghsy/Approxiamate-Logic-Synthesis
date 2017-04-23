@@ -106,7 +106,14 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
             portSet[temp % 2].push_back(bf.getPortName(j));
             temp = temp / 2;
         }
+        /*if (i == 29) {
+            initBF.display();
+            bf.display();
+        }*/
         Kmap fig(bf, portSet[1], portSet[0]);
+        /*if (i == 29) {
+            fig.display();
+        }*/
         Kmap::BestApprox approx = fig.divide(simData);
         // approx contains the best divideCore information
 
@@ -159,6 +166,10 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
             bestApproximation.deInfo = combineBilfBuilder(
                     leftRes.deInfo, rightRes.deInfo, approx.method, bf.getOutPortName()
             );
+            //leftRes.fun.display();
+            //rightRes.fun.display();
+            //std::cout << (approx.method==XOR_TABLE) << std::endl;
+            //bestApproximation.deInfo.printBody(std::cout);
             bestApproximation.fun = approxFun;
         }
 

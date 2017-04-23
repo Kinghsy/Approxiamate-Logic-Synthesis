@@ -42,7 +42,7 @@ string getMFFC(string infile, int minInput, int maxInput) {
 
 BlifBooleanNet::BlifBooleanNet(const std::string &file) {
 
-    std::cout << "Loading blif file " << file << endl;
+    //std::cout << "Loading blif file " << file << endl;
     filename = file;
 
     FILE *fp;
@@ -67,13 +67,13 @@ BlifBooleanNet::BlifBooleanNet(const std::string &file) {
 
 void BlifBooleanNet::prepareBDD() const{
     if (ddmanager.isValid()) return;
-    std::cout << "Building BDD... This could take a while." << std::endl;
+    //std::cout << "Building BDD... This could take a while." << std::endl;
     DdManager* ddm =
             Cudd_Init(0, 0, CUDD_UNIQUE_SLOTS, CUDD_CACHE_SLOTS, 0);
     if (ddm == NULL) exit(-2);
     cudd_build_v2(net, &ddm, filename.c_str(), BNET_GLOBAL_DD);
     ddmanager.setData(ddm);
-    std::cout << "Done! BDD build complete." << std::endl;
+    //std::cout << "Done! BDD build complete." << std::endl;
 }
 
 
