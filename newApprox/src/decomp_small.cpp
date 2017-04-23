@@ -54,7 +54,7 @@ AlgorithmDecomposeSmall::operator()
 BlifBuilder AlgorithmDecomposeSmall::buildFromMatch
         (const PreDecomp::DbEntry &entry,
          const std::vector<NodeName> &node,
-         const NodeName &thisNode) {
+         const NodeName thisNode) {
 
     assert(entry.nInputs == node.size());
 

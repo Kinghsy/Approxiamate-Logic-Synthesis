@@ -2,6 +2,7 @@
 // Created by tripack on 17-4-12.
 //
 
+#include <common.h>
 #include <set>
 #include "blif_builder.h"
 #include "ttable.h"
@@ -28,17 +29,17 @@ combineBilfBuilder(const BlifBuilder &d1, const BlifBuilder &d2,
     if (table == ALL_IRR_TABLE_1)
         return BlifBuilder::buildConst(newOutput, true);
 
-    if (table == LEFT_RELA_TABLE) {
-        auto ret = d1;
-        *ret.node = newOutput;
-        return ret;
-    }
-
-    if (table == RIGHT_RELA_TABLE) {
-        auto ret = d2;
-        *ret.node = newOutput;
-        return ret;
-    }
+//    if (table == LEFT_RELA_TABLE) {
+//        auto ret = d1;
+//        *ret.node = newOutput;
+//        return ret;
+//    }
+//
+//    if (table == RIGHT_RELA_TABLE) {
+//        auto ret = d2;
+//        *ret.node = newOutput;
+//        return ret;
+//    }
 
 
     BlifBuilder ret(BlifBuilder::TYPE::NET, newOutput);
@@ -123,10 +124,12 @@ std::ostream &operator<<(std::ostream &os, const BlifBuilder &builder) {
 
 std::ostream &BlifBuilder::printBody(std::ostream &os) const {
     for (const auto& elem : constant1) {
+        assert(elem != nullptr);
         os << ".names " << *elem << "\n";
         os << "1" << "\n\n";
     }
     for (const auto& elem : constant0) {
+        assert(elem != nullptr);
         os << ".names " << *elem << "\n\n";
     }
 
@@ -136,5 +139,20 @@ std::ostream &BlifBuilder::printBody(std::ostream &os) const {
     }
 
     return os;
+}
+
+void BlifBuilder::replaceInputOrder(const std::vector<NodeName> &v) {
+    for (const auto& elem : this->input) {
+        if (std::find(v.begin(), v.end(), *elem) == v.end()) {
+            std::cout << v << std::endl;
+            for (auto e : input) std::cout << *e << " ";
+            std::cout << std::endl;
+            assert(0);
+        }
+    }
+    input.clear();
+    for (const auto& elem : v) {
+        input.push_back(std::make_shared<NodeName>(elem));
+    }
 }
 

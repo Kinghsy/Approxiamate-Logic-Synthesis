@@ -21,7 +21,7 @@ private:
 
     BlifBuilder buildFromMatch(const PreDecomp::DbEntry &entry,
                                const std::vector<NodeName>& nodeList,
-                               const NodeName &thisNode);
+                               const NodeName thisNode);
 
 public:
 

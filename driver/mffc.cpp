@@ -11,16 +11,16 @@
 #include "../newApprox/src/decomp_small.h"
 #include "header.h"
 
-#define SIM_ROUND 10000
+#define SIM_ROUND 40000
 #define TOLLENT_RATE 0.05
 
 // mode
 #define NEW_APPROX 1
 #define PRE_DECOMP 2
 #define MIXXED 3
-#define PRE_DECOMP_BOUNS 0.000
+#define PRE_DECOMP_BOUNS 0.0000
 
-int searchMode = NEW_APPROX;
+int searchMode = PRE_DECOMP;
 int newApproxMethd = BRANCH_AND_BOUND;
 
 using std::cout;
@@ -37,7 +37,7 @@ using std::unordered_map;
 
 int main(int argc, char* argv[]) {
 
-    NodeName baseName = "alu4";
+    NodeName baseName = "apex2";
 
     auto select =
             [](const FFC& ffc) -> bool {
@@ -134,12 +134,14 @@ int main(int argc, char* argv[]) {
 
             //cout << res.deInfo.nNode()  << " " << ffc->totalSet.size() - ffc->inputNode.size() << endl;
             if  (res.deInfo.nNode() == (ffc->totalSet.size() - ffc->inputNode.size())) {
+                cout << "  Modified Size: " << ffc->totalSet.size() - ffc->inputNode.size() << " --> " << res.deInfo.nNode() << endl;
                 filterCurrentMffc(ffcs, *ffc);
                 ffc = findFirstFFC(ffcs, select);
                 continue;
             }
             if (nowError + countMatchError(ffcTable, res.fun.getTTable(), focusRes)
                     > SIM_ROUND * TOLLENT_RATE) {
+                cout << "  Error exceed: " << nowError + countMatchError(ffcTable, res.fun.getTTable(), focusRes) << endl;
                 filterCurrentMffc(ffcs, *ffc);
                 ffc = findFirstFFC(ffcs, select);
                 continue;
@@ -170,8 +172,11 @@ int main(int argc, char* argv[]) {
             ffcSet.push_back(*ffc);
             blifSet.push_back(res.deInfo);
 
+            break;
+
             filterMffcByIntersection(ffcs, *ffc);
             ffc = findFirstFFC(ffcs, select);
+
         }
 
         char tempCh[10];

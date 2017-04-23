@@ -64,19 +64,20 @@ AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
 
     if (bf.getInputSize() == 1) {
         ResultType res;
+        //assert(bf.getPortName(0) != "");
         if ((bf.getTTable()) == NOT_1_INPUT) {
             BlifBuilder temp = BlifBuilder::buildInput(bf.getPortName(0), true);
             res.deInfo = temp;
         } else if ((bf.getTTable()) == NORMAL_1_INPUT ) {
             BlifBuilder temp = BlifBuilder::buildInput(bf.getPortName(0), false);
             res.deInfo = temp;
-        } else if ( bf.isAll0s() ) {
+        } /*else if ( bf.isAll0s() ) {
             BlifBuilder temp = BlifBuilder::buildConst(bf.getPortName(0), 0);
             res.deInfo = temp;
         } else if ( bf.isAll1s() ) {
             BlifBuilder temp = BlifBuilder::buildConst(bf.getPortName(0), 1);
             res.deInfo = temp;
-        }
+        }*/
         res.errorCount = 0;
         res.fun = bf;
         return res;

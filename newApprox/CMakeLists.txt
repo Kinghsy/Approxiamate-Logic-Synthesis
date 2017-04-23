@@ -27,5 +27,5 @@ add_subdirectory(testcase)
 add_library(newApprox ${NEW_SOURCE_FILES})
 
 target_compile_options(newApprox BEFORE
-        PRIVATE -O0
+        PRIVATE -O3
         PRIVATE -march=native)

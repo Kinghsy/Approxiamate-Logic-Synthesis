@@ -40,8 +40,9 @@ void *BlifBooleanNet::getSimulationContext() const{
     this->exportToCpp(source);
 
     std::string cmd = "g++ -std=c++14 -shared -fPIC -Ofast -march=native " + source + " -o " + library;
-    //std::cout << "Executing: " << cmd << std::endl;
-    system(cmd.c_str());
+    std::cout << "Executing: " << cmd << std::endl;
+    int rec = system(cmd.c_str());
+    assert(rec == 0);
 
     //std::cout << "Loading library at: " << library << std::endl;
     void* libhandle = dlopen(library.c_str(), RTLD_NOW | RTLD_LOCAL);
