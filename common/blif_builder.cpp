@@ -131,6 +131,7 @@ std::ostream &BlifBuilder::printBody(std::ostream &os) const {
     for (const auto& elem : constant0) {
         assert(elem != nullptr);
         os << ".names " << *elem << "\n\n";
+        os << "0" << "\n\n";
     }
 
     for (const auto& con : this->data) {
