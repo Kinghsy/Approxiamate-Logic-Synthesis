@@ -8,11 +8,20 @@
 #include "../circuit/interface.h"
 #include "../newApprox/src/bool_function.h"
 #include "../newApprox/src/algorithm_decompose.h"
+#include "../newApprox/src/decomp_small.h"
 #include "header.h"
 
 #define SIM_ROUND 10000
 #define TOLLENT_RATE 0.05
 
+// mode
+#define NEW_APPROX 1
+#define PRE_DECOMP 2
+#define MIXXED 3
+#define PRE_DECOMP_BOUNS 0.000
+
+int searchMode = NEW_APPROX;
+int newApproxMethd = BRANCH_AND_BOUND;
 
 using std::cout;
 using std::endl;
@@ -28,19 +37,20 @@ using std::unordered_map;
 
 int main(int argc, char* argv[]) {
 
-    NodeName baseName = "C880";
+    NodeName baseName = "alu4";
 
     auto select =
             [](const FFC& ffc) -> bool {
                 return ((ffc.inputNode.size() <= 6) &&
-                        (ffc.inputNode.size() >= 2));
+                        (ffc.inputNode.size() >= 3));
             };
     AlgorithmDecompose algo;
+    AlgorithmDecomposeSmall sAlgo(PRE_DECOMP_BOUNS);
 
     StopWatch sw;
     sw.start();
     auto initCircuit = fBlif(baseName);
-    auto initNet = BlifBooleanNet(BenchmarkAigPath / initCircuit);
+    auto initNet = BlifBooleanNet(McncAigPath / initCircuit);
     sw.take("Load Init");
 
     initNet.prepareSimulator();
@@ -51,10 +61,10 @@ int main(int argc, char* argv[]) {
 
 
     auto unmodedCircuit = fBlif(baseName);
-    auto filePath = BenchmarkAigPath;
+    auto filePath = McncAigPath;
     size_t nowError = 0;
     bool flag = true;
-    int i = 0;
+    int i = -1;
     //for (int i = 0; i < 15; ++i) {
     while (flag) {
         i++; flag = false;
@@ -108,8 +118,12 @@ int main(int argc, char* argv[]) {
                             ffcCircuit.inputNodeList(), ffcCircuit.outputNodeList()[0]);
             //cout << ffcTable << endl;
             //fun.display();
-            AlgorithmDecompose::ResultType res =
-                algo.operate(fun, unmodedSimResult, BRANCH_AND_BOUND);
+            AlgorithmDecompose::ResultType res;
+            if (ffc->inputNode.size() > 6 )
+                res = algo.operate(fun, unmodedSimResult, newApproxMethd);
+            else if (searchMode == PRE_DECOMP)
+                res = sAlgo(fun, unmodedSimResult);
+            else res = algo.operate(fun, unmodedSimResult, newApproxMethd);
             sw.take("   algorithm decompose");
 
             /*cout << ffcTable << endl;
@@ -149,6 +163,7 @@ int main(int argc, char* argv[]) {
             cout << endl;
 
             res.deInfo.exportBlif(TempPath / fBlif("mffc_approx"));
+            res.deInfo.printBody(std::cout);
             auto approxNet = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
             sw.take("   reload");
 
@@ -300,7 +315,7 @@ int main(int argc, char* argv[]) {
 //        sw.take("FindFFC");
 //    }
 
-    //sw.report();
+    sw.report();
     return 0;
 }
 

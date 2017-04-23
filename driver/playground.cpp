@@ -15,16 +15,32 @@
 
 using std::string;
 using std::vector;
+using std::cout;
+using std::endl;
 
 int main() {
 
+    auto net = BlifBooleanNet(TempPath / fBlif("testing"));
+    net.prepareSimulator();
+    auto simRes = net.profileBySimulation(100);
+
+    TTable tab = net.truthTable();
+    BoolFunction fun(net.inputNodeList().size(), tab,
+                net.inputNodeList(), net.outputNodeList()[0]);
+    AlgorithmDecompose algo;
+    AlgorithmDecompose::ResultType res =
+            algo.operate(fun, simRes, FULL_SEARCH);
+    res.deInfo.printBody(cout);
+
+
+/*
     auto& abc = ExAbc::getInstance();
     vector<string> vec;
 
     File c880("C880", ".blif");
     vec.push_back(BenchmarkAigPath / c880.toString());
 
-    for (int i = 0; i < 5; ++i) {
+    for (int i = 0; i < 3; ++i) {
         vec.push_back(TempPath / c880[""][i].toString());
     }
 
@@ -36,5 +52,6 @@ int main() {
         abc.map();
         std::cout << abc.postMapArea() << std::endl;
     }
+    */
     return 0;
 }

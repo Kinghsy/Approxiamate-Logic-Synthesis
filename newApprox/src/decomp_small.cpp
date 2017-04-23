@@ -27,19 +27,19 @@ AlgorithmDecomposeSmall::operator()
 
     size_t matchError = countMatchError(table, match.function, focusedResult);
 
-    std::cout << table << endl;
-    std::cout << match.function << endl;
-    std::cout << "MatchError: " << matchError << "\t";
-    std::cout << "discardInput: " << match.discardMask.count() << endl;
+    //std::cout << table << endl;
+    //std::cout << match.function << endl;
+    //std::cout << "\tMatchError: " << matchError << "\t";
+    //std::cout << "discardInput: " << match.discardMask.count() << endl;
 
-    for (size_t term = 0; term < focusedResult.cdata.size(); term++) {
+    /*for (size_t term = 0; term < focusedResult.cdata.size(); term++) {
         if ((table ^ match.function)[term])
             std::cout << term << ":" << focusedResult.cdata[term] << "; ";
-    }
-    std::cout << endl;
+    }*/
+    //std::cout << endl;
     auto blifBuilder = buildFromMatch(match, inputs, output);
 
-    std::cout << "BuilderSize: " << blifBuilder.nNode() << "\n";
+    //std::cout << "BuilderSize: " << blifBuilder.nNode() << "\n";
 
     ResultType rst;
 
