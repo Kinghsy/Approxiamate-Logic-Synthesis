@@ -31,6 +31,8 @@ public:
                                    const SimulationResult& simData) = 0;
 };
 
+typedef std::shared_ptr<IAlgorithmDecompose> AlgPtr;
+
 class AlgorithmDecompose : public IAlgorithmDecompose{
 public:
     enum Mode {
@@ -44,16 +46,18 @@ private:
     BoolFunction initBF;
     ResultType searchPrcoe(const BoolFunction& bf,
                            const SimulationResult& simData);
+    AlgPtr sAlgo;
 
 public:
 
     ResultType operator()(const BoolFunction& bf,
                           const SimulationResult& simData) override;
 
-    AlgorithmDecompose(const Mode ApplicateMode_):
+    AlgorithmDecompose(const Mode ApplicateMode_, AlgPtr& smallAlgo):
             ApplicatedMode(ApplicateMode_),
             initBF(2, AND_TABLE,
                    std::vector<NodeName>(), NodeName("abc")) {
+        sAlgo = smallAlgo;
     }
     ~AlgorithmDecompose() {}
 

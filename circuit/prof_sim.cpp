@@ -58,7 +58,7 @@ static std::tuple<NODE_TYPE, size_t> findNode(const vector<NodeName> &inpName,
 
     std::cerr << "Cannot find node by name: " << node << std::endl;
     // assert(0);
-    return {INPUT, 0};
+    return std::make_tuple(INPUT, 0);
 }
 
 static int accessResult(const vector<int>& vin,

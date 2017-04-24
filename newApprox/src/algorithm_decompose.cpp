@@ -60,6 +60,11 @@ AlgorithmDecompose::ResultType
 AlgorithmDecompose::searchPrcoe(const BoolFunction& bf,
                                 const SimulationResult &simData) {
 
+    if ((bf.getInputSize() <= 6) &&
+    (bf.getInputSize() >=3 )) {
+        return (*sAlgo)(bf, simData);
+    }
+
     if (bf.getInputSize() == 1) {
         ResultType res;
         //assert(bf.getPortName(0) != "");

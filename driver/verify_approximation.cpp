@@ -33,10 +33,10 @@ int main() {
             algo.operate(fun, simRes, FULL_SEARCH);
     res.deInfo.printBody(cout);*/
 
-    auto net0 = BlifBooleanNet(BenchmarkAigPath / fBlif("C880"));
+    auto net0 = BlifBooleanNet(BenchmarkAigPath / fBlif("C1908"));
 
     //auto net1 = BlifBooleanNet(TempPath / fBlif("apex2__3"));
-    auto net2 = BlifBooleanNet(TempPath / fBlif("C880__2"));
+    auto net2 = BlifBooleanNet(TempPath / fBlif("C1908__10"));
 
     //net1.verifySimulator(10000);
     net2.verifySimulator(10000);
@@ -99,15 +99,17 @@ int main() {
 //    }
 
     auto& abc = ExAbc::getInstance();
-    abc.loadBlif(BenchmarkAigPath / fBlif("C880"));
+    abc.loadBlif(BenchmarkAigPath / fBlif("C1908"));
     abc.resyn2();
     abc.map();
+    abc.execute("print_gates");
     std::cout << abc.postMapArea() << std::endl;
 
     abc.reboot();
-    abc.loadBlif(TempPath / fBlif("C880__2"));
+    abc.loadBlif(TempPath / fBlif("C1908__10"));
     abc.resyn2();
     abc.map();
+    abc.execute("print_gates");
     std::cout << abc.postMapArea() << std::endl;
 
     return 0;
