@@ -16,17 +16,18 @@ typedef boost::dynamic_bitset<> DBitset;
 
 class BlifBuilder {
 private:
+
     typedef std::shared_ptr<NodeName> NodeNamePtr;
 
     enum TYPE {
+        INVALID,
         INPUT, REVERSE_INPUT,
         CONST_0, CONST_1, NET
     };
 
     TYPE type;
 
-    struct Connection
-    {
+    struct Connection {
         NodeNamePtr out = nullptr;
         NodeNamePtr in1 = nullptr;
         NodeNamePtr in2 = nullptr;
@@ -35,10 +36,16 @@ private:
         friend std::ostream &operator<<(std::ostream &os,
                                         const Connection &connection);
 
+    };
 
+    struct SingleConnection {
+        NodeNamePtr in = nullptr;
+        NodeNamePtr out = nullptr;
+        bool negate = false;
     };
 
     std::vector<Connection> data;
+    std::vector<SingleConnection> wire;
     std::vector<NodeNamePtr> input;
     std::vector<NodeNamePtr> constant0;
     std::vector<NodeNamePtr> constant1;

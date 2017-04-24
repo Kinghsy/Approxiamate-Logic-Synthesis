@@ -61,7 +61,7 @@ void filterMffcByIntersection
 }
 
 void filterCurrentMffc(map<BnetNodeID, FFC>& ffc, const FFC& curr) {
-    std::cout << "No improvements, remove " << curr.name << "\n";
+    //std::cout << "No improvements, remove " << curr.name << "\n";
     ffc.erase(curr.name);
 }
 

@@ -20,4 +20,6 @@ class ExceptionTruthTable : public Exception {};
 class ExceptionInvalidVectorAssignment : public ExceptionTruthTable {};
 class ExceptionTruthTableInvalidSize : public ExceptionTruthTable {};
 
+static void throwFalse(bool i) {if(!i) throw i;}
+
 #endif //VE281_FA16_EXCEPTION_H

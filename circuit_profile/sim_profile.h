@@ -69,4 +69,7 @@ struct CompareResult {
 size_t countMatchError(const TTable &orignal, const TTable &next,
                        const FocusedSimulationResult &sim);
 
+void printMatchError(const TTable &orignal, const TTable &next,
+                     const FocusedSimulationResult &sim);
+
 #endif //VE490_SIM_PROFILE_H

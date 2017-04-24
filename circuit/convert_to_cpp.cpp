@@ -59,7 +59,7 @@ static string getFunctionString(const string& i1,
                                 BnetNode* node) {
     std::bitset<4> truthTable(0);
     BnetTabline* f = node->f;
-    //assert(f != nullptr);
+    assert(f != nullptr);
     while (f != nullptr) {
         string line = f->values;
         assert(line.size() == 2);
@@ -135,8 +135,8 @@ static string getFunctionString(const string& i,
     switch (truthTable.to_ulong()) {
         case 0x0: return "false";
         case 0x3: return "true";
-        case 0x1: return i;
-        case 0x2: return notG(i);
+        case 0x1: return notG(i);
+        case 0x2: return i;
         default:
             assert(0);
     }

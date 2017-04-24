@@ -142,6 +142,9 @@ public:
     CompareResult compareBySimulation(const BlifBooleanNet& net2,
                                       size_t nSamples);
 
+    CompareResult localErrorSim(const BlifBooleanNet& net2,
+                                size_t nSamples, NodeName node);
+
     ~BlifBooleanNet();
 };
 

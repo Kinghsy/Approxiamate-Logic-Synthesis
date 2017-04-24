@@ -12,7 +12,7 @@
 
 int main() {
 
-    BlifBooleanNet net(BenchmarkAigPath / "C880.blif");
+    BlifBooleanNet net(McncAigPath / "apex2.blif");
     auto i = net.inputNodeList();
     auto o = net.outputNodeList();
     auto all = net.totalNodeSet();
@@ -33,7 +33,7 @@ int main() {
 
     std::cout << net.gateCount() << std::endl;
 
-    net.verifySimulator(10000);
+    net.verifySimulator(40000);
 
     return 0;
 }

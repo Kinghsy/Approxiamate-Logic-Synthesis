@@ -8,6 +8,9 @@
 #include "interface.h"
 #include "pattern_gen.h"
 
+using std::vector;
+using std::string;
+
 #define CONTEXT_PTR(x) (static_cast<SimulationContext*>(x))
 
 typedef void (*CircuitFun)(const int input[],
@@ -23,7 +26,56 @@ struct SimulationContext {
     CircuitFun circuit;
 };
 
+enum NODE_TYPE {INPUT, OUTPUT, INTERNAL};
 
+static std::tuple<NODE_TYPE, size_t> findNode(const vector<NodeName> &inpName,
+                                              const vector<NodeName> &outName,
+                                              const vector<NodeName> &internalName,
+                                              NodeName node) {
+    NODE_TYPE type;
+    size_t index;
+    auto it = std::find(inpName.begin(), inpName.end(), node);
+    if (it != inpName.end()) {
+        type = INPUT;
+        index = it - inpName.begin();
+        return std::make_tuple(type, index);
+    }
+    it = std::find(outName.begin(), outName.end(), node);
+    if (it != outName.end()) {
+        type = OUTPUT;
+        index = it - outName.begin();
+        assert(outName[index] == outName[index]);
+        return std::make_tuple(type, index);
+
+    }
+    it = std::find(internalName.begin(), internalName.end(), node);
+    if (it != internalName.end()) {
+        type = INTERNAL;
+        index = it - internalName.begin();
+        assert(internalName[index] == internalName[index]);
+        return std::make_tuple(type, index);
+    }
+
+    std::cerr << "Cannot find node by name: " << node << std::endl;
+    // assert(0);
+    return {INPUT, 0};
+}
+
+static int accessResult(const vector<int>& vin,
+                        const vector<int>& vout,
+                        const vector<int>& vinternal,
+                        std::tuple<NODE_TYPE, size_t> ind) {
+    NODE_TYPE t;
+    size_t index;
+    std::tie(t, index) = ind;
+    switch (t) {
+        case INPUT: return vin.at(index);
+        case OUTPUT: return vout.at(index);
+        case INTERNAL: return vinternal.at(index);
+        default:
+            assert(0);
+    }
+}
 
 
 void *BlifBooleanNet::getSimulationContext() const{
@@ -92,6 +144,9 @@ BlifBooleanNet::profileBySimulation(int samples) {
 
     //std::cout << "Begin simulation" << std::endl;
 
+
+    std::cout << "Profiled File:" << this->filename << std::endl;
+
     InfiniteRandomPatternGenerator g(this->nInputs());
 
     SimulationResult result(*this, samples);
@@ -122,8 +177,6 @@ BlifBooleanNet::profileBySimulation(int samples) {
 void BlifBooleanNet::verifySimulator(int samples) {
 
     auto context = CONTEXT_PTR(getSimulationContext());
-
-    std::cout << "Begin simulation" << std::endl;
 
     SimulationResult result(*this, samples);
 
@@ -159,6 +212,9 @@ BlifBooleanNet::compareBySimulation(const BlifBooleanNet &net2,
 
     auto context0 = CONTEXT_PTR(this->getSimulationContext());
     auto context1 = CONTEXT_PTR(net2.getSimulationContext());
+
+    std::cout << "Sim File1:" << this->filename << std::endl;
+    std::cout << "Sim File2:" << net2.filename << std::endl;
 
     /*=====================================================
      * ================= SIMULATION  ======================
@@ -210,3 +266,70 @@ BlifBooleanNet::compareBySimulation(const BlifBooleanNet &net2,
     return r;
 }
 
+
+
+
+CompareResult
+BlifBooleanNet::localErrorSim(const BlifBooleanNet& net2,
+                              size_t nSamples, NodeName node) {
+    auto context0 = CONTEXT_PTR(this->getSimulationContext());
+    auto context1 = CONTEXT_PTR(net2.getSimulationContext());
+
+    /*=====================================================
+     * ================= SIMULATION  ======================
+     * ==================================================== */
+
+    //std::cout << "Performing Pre-sim Checks..." << std::endl;
+
+    // Validity checks
+
+    auto inputName0 = context0->inputNodeName();
+    auto inputName1 = context1->inputNodeName();
+    assert (inputName0 == inputName1);
+
+    auto outputName0 = context0->outputNodeName();
+    auto outputName1 = context1->outputNodeName();
+    assert (outputName0 == outputName1);
+
+    auto internalName0 = context0->internalNodeName();
+    auto internalName1 = context1->internalNodeName();
+
+    //std::cout << "Running Simulation..." << std::endl;
+
+    InfiniteRandomPatternGenerator g(this->nInputs());
+
+    size_t error = 0;
+
+    auto ind1 = findNode(inputName0, outputName0, internalName0, node);
+    auto ind2 = findNode(inputName0, outputName0, internalName0, node);
+
+    for (int j = 0; j < nSamples; j++) {
+        std::vector<int> p = g.generate();
+
+        std::vector<int> output0;
+        std::vector<int> output1;
+        std::vector<int> nodes0;
+        std::vector<int> nodes1;
+        nodes0.resize(this->internalNodeSet().size());
+        nodes1.resize(net2.internalNodeSet().size());
+        output0.resize(this->nOutputs());
+        output1.resize(net2.nOutputs());
+
+        context0->circuit(p.data(), output0.data(), nodes0.data());
+        context1->circuit(p.data(), output1.data(), nodes1.data());
+
+        auto r1 = accessResult(p, output0, nodes0, ind1);
+        auto r2 = accessResult(p, output1, nodes1, ind2);
+
+        if (r1 != r2) error++;
+    }
+
+    CompareResult r;
+
+    r.nSamples = nSamples;
+    r.nErrors = error;
+
+    //std::cout << "Done!" << std::endl;
+
+    return r;
+}

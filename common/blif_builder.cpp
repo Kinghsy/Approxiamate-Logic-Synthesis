@@ -11,11 +11,13 @@
 #include <fstream>
 
 BlifBuilder BlifBuilder::buildConst(const NodeName &node, bool value) {
+    if (node == "") return BlifBuilder(INVALID, node);
     if (value) return BlifBuilder(CONST_1, node);
     return BlifBuilder(CONST_0, node);
 }
 
 BlifBuilder BlifBuilder::buildInput(const NodeName &node, bool value) {
+    if (node == "") return BlifBuilder(INVALID, node);
     if (value) return BlifBuilder(REVERSE_INPUT, node);
     return BlifBuilder(INPUT, node);
 }
@@ -23,11 +25,64 @@ BlifBuilder BlifBuilder::buildInput(const NodeName &node, bool value) {
 BlifBuilder
 combineBilfBuilder(const BlifBuilder &d1, const BlifBuilder &d2,
                    const TTable &table, const NodeName &newOutput) {
+    assert(newOutput != "");
 
     if (table == ALL_IRR_TABLE_0)
         return BlifBuilder::buildConst(newOutput, false);
     if (table == ALL_IRR_TABLE_1)
         return BlifBuilder::buildConst(newOutput, true);
+
+    if (table == LEFT_RELA_TABLE) {
+        auto ret = d1;
+        BlifBuilder::SingleConnection con;
+        con.in = d1.node;
+        con.out = std::make_shared<NodeName>(newOutput);
+        con.negate = false;
+        if (d1.type == BlifBuilder::REVERSE_INPUT) con.negate = true;
+        ret.wire.push_back(con);
+        ret.node = con.out;
+        ret.type = BlifBuilder::NET;
+        return ret;
+    }
+    if (table == LEFT_RELA_NOT_TABLE) {
+        auto ret = d1;
+        BlifBuilder::SingleConnection con;
+        con.in = d1.node;
+        con.out = std::make_shared<NodeName>(newOutput);
+        con.negate = true;
+        if (d1.type == BlifBuilder::REVERSE_INPUT) con.negate = false;
+        ret.wire.push_back(con);
+        ret.node = con.out;
+        ret.type = BlifBuilder::NET;
+        return ret;
+    }
+    if (table == RIGHT_RELA_TABLE) {
+        auto ret = d2;
+        BlifBuilder::SingleConnection con;
+        con.in = d2.node;
+        con.out = std::make_shared<NodeName>(newOutput);
+        con.negate = false;
+        if (d1.type == BlifBuilder::REVERSE_INPUT) con.negate = true;
+        ret.wire.push_back(con);
+        ret.node = con.out;
+        ret.type = BlifBuilder::NET;
+        return ret;
+    }
+    if (table == RIGHT_RELA_NOT_TABLE) {
+        auto ret = d2;
+        BlifBuilder::SingleConnection con;
+        con.in = d2.node;
+        con.out = std::make_shared<NodeName>(newOutput);
+        con.negate = true;
+        if (d1.type == BlifBuilder::REVERSE_INPUT) con.negate = false;
+        ret.wire.push_back(con);
+        ret.node = con.out;
+        ret.type = BlifBuilder::NET;
+        return ret;
+    }
+
+    assert(d1.type != BlifBuilder::INVALID);
+    assert(d2.type != BlifBuilder::INVALID);
 
 //    if (table == LEFT_RELA_TABLE) {
 //        auto ret = d1;
@@ -58,6 +113,9 @@ combineBilfBuilder(const BlifBuilder &d1, const BlifBuilder &d2,
 
     ret.data.insert(ret.data.end(), d1.data.begin(), d1.data.end());
     ret.data.insert(ret.data.end(), d2.data.begin(), d2.data.end());
+
+    ret.wire.insert(ret.wire.end(), d1.wire.begin(), d1.wire.end());
+    ret.wire.insert(ret.wire.end(), d2.wire.begin(), d2.wire.end());
 
     ret.data.push_back(connection);
 
@@ -130,8 +188,14 @@ std::ostream &BlifBuilder::printBody(std::ostream &os) const {
     }
     for (const auto& elem : constant0) {
         assert(elem != nullptr);
-        os << ".names " << *elem << "\n\n";
+        os << ".names " << *elem << "\n";
         os << "0" << "\n\n";
+    }
+
+    for (const auto& elem : wire) {
+        os << ".names " << *elem.in << " " << *elem.out << "\n";
+        if (elem.negate) os << "0 1\n\n";
+        else os << "1 1\n\n";
     }
 
     for (const auto& con : this->data) {

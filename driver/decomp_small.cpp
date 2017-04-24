@@ -95,8 +95,19 @@ int main() {
             auto approxNet = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
             sw.take("ReloadBlif");
 
-            assert(approxNet.inputNodeList() == match.fun.inputPorts());
-            assert(approxNet.truthTable() == match.fun.getTTable());
+            try {
+                throwFalse(approxNet.inputNodeList() == match.fun.inputPorts());
+                throwFalse(approxNet.truthTable() == match.fun.getTTable());
+            } catch (...) {
+                std::cout << "\nDebug Info: " << std::endl;
+                std::cout << match.fun.inputPorts() << std::endl;
+                std::cout << approxNet.inputNodeList() << std::endl;
+                std::cout << match.fun.getTTable() << std::endl;
+                std::cout << approxNet.truthTable() << std::endl;
+                std::cout << "\n BLif:" << std::endl;
+                std::cout << match.deInfo << std::endl;
+                assert(0);
+            }
 
             filterMffcByIntersection(mffcs, *ffc);
         }

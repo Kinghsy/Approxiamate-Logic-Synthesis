@@ -138,6 +138,16 @@ size_t countMatchError(const TTable &orignal, const TTable &next,
     return error;
 }
 
+void printMatchError(const TTable &orignal, const TTable &next,
+                     const FocusedSimulationResult &sim) {
+    TTable diff = orignal ^ next;
+    size_t id = diff.cdata().find_first();
+    while (id != diff.cdata().npos) {
+        std::cout << id << "~" << sim.cdata.at(id) << "; ";
+        id = diff.cdata().find_next(id);
+    }
+    std::cout << std::endl;
+}
 
 std::ostream &operator<<(std::ostream &os, const FocusedSimulationResult &result) {
     os << "Focused result on\n";

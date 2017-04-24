@@ -12,28 +12,35 @@
 #include "header.h"
 
 #define SIM_ROUND 40000
-#define TOLLENT_RATE 0.05
+#define TOLLENT_RATE 0.05f
 
 // mode
 #define NEW_APPROX 1
 #define PRE_DECOMP 2
 #define MIXXED 3
-#define PRE_DECOMP_BOUNS 0.0000
+#define PRE_DECOMP_BOUNS 0.0000f
 
 int searchMode = PRE_DECOMP;
-int newApproxMethd = BRANCH_AND_BOUND;
+int newApproxMethd = AlgorithmDecompose::BRANCH_AND_BOUND;
 
 using std::cout;
 using std::endl;
 using std::setw;
 
-
 using std::string;
 using std::map;
 using std::vector;
 using std::unordered_map;
+typedef std::shared_ptr<IAlgorithmDecompose> AlgPtr;
 
+const AlgorithmDecompose::Mode searchStrategy
+        = AlgorithmDecompose::BRANCH_AND_BOUND;
 
+const std::string baseName  = "apex2";
+const auto blifCircuit      = fBlif(baseName);
+const auto blifMffc         = fBlif(baseName)["_mffc_"];
+const auto blifApproxMffc   = fBlif(baseName)["_mffc_approx_"];
+const AlgPtr algo(new AlgorithmDecomposeSmall);
 
 int main(int argc, char* argv[]) {
 
@@ -44,28 +51,29 @@ int main(int argc, char* argv[]) {
                 return ((ffc.inputNode.size() <= 6) &&
                         (ffc.inputNode.size() >= 3));
             };
-    AlgorithmDecompose algo;
-    AlgorithmDecomposeSmall sAlgo(PRE_DECOMP_BOUNS);
 
     StopWatch sw;
     sw.start();
-    auto initCircuit = fBlif(baseName);
-    auto initNet = BlifBooleanNet(McncAigPath / initCircuit);
-    sw.take("Load Init");
 
-    initNet.prepareSimulator();
-    sw.take("Compile Init");
+    auto initNet = BlifBooleanNet(McncAigPath / blifCircuit);
+    sw.take("LoadInit");
 
     auto initSimResult = initNet.profileBySimulation(SIM_ROUND);
-    sw.take("Simu Init");
+    sw.take("SimInit");
 
+    //PreDecomp& dp = PreDecomp::getInstance();
+    sw.take("LoadPreDecomp");
 
     auto unmodedCircuit = fBlif(baseName);
     auto filePath = McncAigPath;
     size_t nowError = 0;
     bool flag = true;
     int i = -1;
+
     //for (int i = 0; i < 15; ++i) {
+
+    vector<NodeName> lastFocus;
+    NodeName lastFfcNode;
     while (flag) {
         i++; flag = false;
         cout << endl;
@@ -99,6 +107,13 @@ int main(int argc, char* argv[]) {
         vector<FFC> ffcSet;
         vector<BlifBuilder> blifSet;
 
+        std::cout << "Last Focus: " << lastFocus << std::endl;
+        auto lastFocusSim = unmodedSimResult.focus(lastFocus);
+        std::cout << lastFocusSim.cdata << std::endl;
+        cout << "Local Error at " << lastFfcNode << "\n";
+        auto localErr = unmodedNet.localErrorSim(initNet, 10000, lastFfcNode);
+        cout << localErr.nErrors << "\n\n";
+
         while (ffc) {
             /*std::cout << " Found MFFC of " << ffc->name << " over "
                       << ffc->inputNode.size() << " inputs, "
@@ -112,18 +127,16 @@ int main(int argc, char* argv[]) {
             sw.take("  ffc truth table");
 
             auto focusRes = unmodedSimResult.focus(ffcCircuit.inputNodeList());
+
+
             sw.take("   focus");
 
             BoolFunction fun(ffcCircuit.inputNodeList().size(), ffcTable,
                             ffcCircuit.inputNodeList(), ffcCircuit.outputNodeList()[0]);
             //cout << ffcTable << endl;
             //fun.display();
-            AlgorithmDecompose::ResultType res;
-            if (ffc->inputNode.size() > 6 )
-                res = algo.operate(fun, unmodedSimResult, newApproxMethd);
-            else if (searchMode == PRE_DECOMP)
-                res = sAlgo(fun, unmodedSimResult);
-            else res = algo.operate(fun, unmodedSimResult, newApproxMethd);
+            AlgorithmDecompose::ResultType res
+                    = (*algo)(fun, unmodedSimResult);
             sw.take("   algorithm decompose");
 
             /*cout << ffcTable << endl;
@@ -134,7 +147,7 @@ int main(int argc, char* argv[]) {
 
             //cout << res.deInfo.nNode()  << " " << ffc->totalSet.size() - ffc->inputNode.size() << endl;
             if  (res.deInfo.nNode() == (ffc->totalSet.size() - ffc->inputNode.size())) {
-                cout << "  Modified Size: " << ffc->totalSet.size() - ffc->inputNode.size() << " --> " << res.deInfo.nNode() << endl;
+                // cout << "  Modified Size: " << ffc->totalSet.size() - ffc->inputNode.size() << " --> " << res.deInfo.nNode() << endl;
                 filterCurrentMffc(ffcs, *ffc);
                 ffc = findFirstFFC(ffcs, select);
                 continue;
@@ -158,21 +171,44 @@ int main(int argc, char* argv[]) {
 
             cout << ffcTable << endl;
             cout << res.fun.getTTable() << endl;
+            printMatchError(ffcTable, res.fun.getTTable(), focusRes);
+            cout << focusRes.cdata << endl;
             cout << "  MathchError: " << countMatchError(ffcTable, res.fun.getTTable(), focusRes) << "\t";
             cout << "  MissMatchError(By decomp): " << res.errorCount << endl;
             cout << "  Modified Size: " << ffc->totalSet.size() - ffc->inputNode.size() << " --> " << res.deInfo.nNode() << endl;
             cout << "  current error: " << nowError << endl;
             cout << endl;
 
+
+
+            res.deInfo.replaceInputOrder(ffcCircuit.inputNodeList());
+
             res.deInfo.exportBlif(TempPath / fBlif("mffc_approx"));
             res.deInfo.printBody(std::cout);
             auto approxNet = BlifBooleanNet(TempPath / fBlif("mffc_approx"));
             sw.take("   reload");
 
+            try {
+
+                throwFalse(approxNet.inputNodeList() == res.fun.inputPorts());
+                throwFalse(approxNet.truthTable() == res.fun.getTTable());
+            } catch (...) {
+                std::cout << "\nDebug Info: " << std::endl;
+                std::cout << res.fun.inputPorts() << std::endl;
+                std::cout << approxNet.inputNodeList() << std::endl;
+                std::cout << res.fun.getTTable() << std::endl;
+                std::cout << approxNet.truthTable() << std::endl;
+                std::cout << "\n BLif:" << std::endl;
+                std::cout << res.deInfo << std::endl;
+                assert(0);
+            }
+
             ffcSet.push_back(*ffc);
             blifSet.push_back(res.deInfo);
+            lastFocus = ffcCircuit.inputNodeList();
+            lastFfcNode = ffc->name;
 
-            break;
+            //break;
 
             filterMffcByIntersection(ffcs, *ffc);
             ffc = findFirstFFC(ffcs, select);
@@ -183,6 +219,10 @@ int main(int argc, char* argv[]) {
         sprintf(tempCh, "%d", i);
         unmodedNet.exportReplacedBlif(TempPath / fBlif(baseName + string("__") + string(tempCh)),
                         ffcSet, blifSet);
+
+
+
+        std::cout << "Now Focus: " << lastFocus <<  std::endl;
 
         filePath = TempPath;
         unmodedCircuit = fBlif(baseName + string("__") + string(tempCh));
@@ -320,7 +360,7 @@ int main(int argc, char* argv[]) {
 //        sw.take("FindFFC");
 //    }
 
-    sw.report();
+    //sw.report();
     return 0;
 }
 
