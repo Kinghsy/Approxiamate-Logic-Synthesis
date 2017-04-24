@@ -17,6 +17,8 @@ using std::list;
 using std::map;
 using std::set;
 
+typedef std::string BnetNodeID;
+
 const std::vector<string> &BlifBooleanNet::topologicalSort() const {
     if (topSortedNodes.isValid())
         return topSortedNodes.get();
@@ -66,24 +68,40 @@ void BlifBooleanNet::prepareDepth2Input(BnetNode *node) {
 //    }
 }
 
-void BlifBooleanNet::prepareDepth2Output(BnetNode *node) {
-//    int thisDepth = attribute.depth2output.at(node->name);
-//    for (int i = 0; i < node->ninp; ++i) {
-//        char* name = node->inputs[i];
-//        if (attribute.depth2output.count(name)) {
-//            int& currentDepth = attribute.depth2output.at(name);
-//            if (currentDepth > thisDepth + 1)
-//                currentDepth = thisDepth + 1;
-//        } else {
-//            attribute.depth2output.insert(
-//                    std::make_pair(name, thisDepth + 1)
-//            );
-//        }
-//        prepareDepth2Output(getNodeByName(name));
-//    }
+const std::unordered_map<BnetNodeID, size_t>&
+    BlifBooleanNet::depth2Output() const {
+
+    if (this->d2out.isValid())
+        return d2out.get();
+
+    std::unordered_map<BnetNodeID, size_t> distance;
+
+    std::function<void(const BnetNodeID&, size_t)> recur =
+            [&distance, this, &recur](const BnetNodeID& name, size_t curr) {
+        BnetNode* node = getNodeByName(name);
+        distance[name] = curr;
+        for (size_t i = 0; i < node->ninp; i++) {
+            auto it = distance.find(node->inputs[i]);
+            if (it == distance.end()) {
+                recur(node->inputs[i], curr + 1);
+            } else {
+                if (it->second <= curr + 1) continue;
+                recur(it->first, curr + 1);
+            }
+        }
+    };
+
+    for (int i = 0; i < this->net->noutputs; i++) {
+        recur(net->outputs[i], 0);
+    }
+
+    d2out.setData(distance);
+
+    return d2out.get();
 }
 
 void BlifBooleanNet::prepareDepths() {
+
 //    for (int i = 0; i < net->ninputs; ++i) {
 //        BnetNode* node = getNodeByName(net->inputs[i]);
 //        attribute.depth2input[net->inputs[i]] = 0;

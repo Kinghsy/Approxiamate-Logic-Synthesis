@@ -12,13 +12,13 @@
 #include "header.h"
 
 #define SIM_ROUND 40000
-#define TOLLENT_RATE 0.05f
+#define TOLLENT_RATE 0.10f
 
 // mode
 #define NEW_APPROX 1
 #define PRE_DECOMP 2
 #define MIXXED 3
-#define PRE_DECOMP_BOUNS 0.0000f
+#define PRE_DECOMP_BOUNS 0.005f
 
 int searchMode = PRE_DECOMP;
 int newApproxMethd = AlgorithmDecompose::BRANCH_AND_BOUND;
@@ -36,15 +36,15 @@ typedef std::shared_ptr<IAlgorithmDecompose> AlgPtr;
 const AlgorithmDecompose::Mode searchStrategy
         = AlgorithmDecompose::BRANCH_AND_BOUND;
 
-const std::string baseName  = "apex2";
+const std::string baseName  = "C880";
 const auto blifCircuit      = fBlif(baseName);
 const auto blifMffc         = fBlif(baseName)["_mffc_"];
 const auto blifApproxMffc   = fBlif(baseName)["_mffc_approx_"];
-const AlgPtr algo(new AlgorithmDecomposeSmall);
+const AlgPtr algo(new AlgorithmDecompose(searchStrategy));
 
 int main(int argc, char* argv[]) {
 
-    NodeName baseName = "apex2";
+    NodeName baseName = "C880";
 
     auto select =
             [](const FFC& ffc) -> bool {
@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
     StopWatch sw;
     sw.start();
 
-    auto initNet = BlifBooleanNet(McncAigPath / blifCircuit);
+    auto initNet = BlifBooleanNet(BenchmarkAigPath / blifCircuit);
     sw.take("LoadInit");
 
     auto initSimResult = initNet.profileBySimulation(SIM_ROUND);
@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
     sw.take("LoadPreDecomp");
 
     auto unmodedCircuit = fBlif(baseName);
-    auto filePath = McncAigPath;
+    auto filePath = BenchmarkAigPath;
     size_t nowError = 0;
     bool flag = true;
     int i = -1;

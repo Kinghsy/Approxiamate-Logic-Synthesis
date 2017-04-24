@@ -61,11 +61,11 @@ private:
     mutable Memorized<std::set<BnetNodeID> > internalNodes;
     mutable Memorized<std::vector<BnetNodeID> > topSortedNodes;
     mutable Memorized<void*> simulationContext;
+    mutable Memorized<std::unordered_map<BnetNodeID, size_t> > d2out;
 
     BnetNode* getNodeByName(const std::string& name) const;
 
     void prepareDepth2Input(BnetNode *node);
-    void prepareDepth2Output(BnetNode *node);
     void prepareDepths();
 
     void* getSimulationContext() const;
@@ -95,8 +95,8 @@ public:
     const std::set<BnetNodeID> & internalNodeSet() const;
     const std::set<BnetNodeID> & totalNodeSet() const;
 
+    const std::unordered_map<BnetNodeID, size_t>& depth2Output() const;
 //    int getMinDepths2Input(const std::set<BnetNodeID>& s) const;
-//    int getMinDepths2Output(const std::set<BnetNodeID>& s) const;
 
     TTable truthTable() const;
 

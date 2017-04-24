@@ -17,7 +17,7 @@ target_compile_definitions(libexabc
         PRIVATE "ABC_USE_PTHREADS"
         )
 
-target_compile_options(libexabc BEFORE PRIVATE -O0)
+target_compile_options(libexabc BEFORE PRIVATE -O3)
 
 set(DRIVER driver.cpp)
 

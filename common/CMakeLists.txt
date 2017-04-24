@@ -14,7 +14,7 @@ target_link_libraries(test_common gtest gtest_main common)
 
 target_compile_options(common BEFORE
         PRIVATE -march=native
-        PRIVATE -Ofast)
+        PRIVATE -O3)
 
 set_property(TARGET common
         PROPERTY INTERPROCEDURAL_OPTIMIZATION True)

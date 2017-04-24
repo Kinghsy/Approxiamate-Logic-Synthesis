@@ -25,6 +25,10 @@ set(SOURCE_LIB
 
 add_library(mffc ${SOURCE_LIB})
 
+target_compile_options(mffc BEFORE
+        PRIVATE -O3
+        PRIVATE -march=native)
+
 add_executable(mffc_test ${SOURCE_DRIVER})
 
 target_link_libraries(mffc_test
