@@ -39,7 +39,7 @@ int ExAbc::execute(const std::string &str) {
 }
 
 int ExAbc::loadBlif(const std::string &file) {
-    std::cout << "ABC loading " << file << std::endl;
+    //std::cout << "ABC loading " << file << std::endl;
     std::string quotedFile = "'" + file + "'";
     return execute("read_blif " + quotedFile);
 }

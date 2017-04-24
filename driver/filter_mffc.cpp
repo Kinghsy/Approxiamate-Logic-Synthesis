@@ -12,7 +12,10 @@ typedef std::function<bool(const FFC&)> FfcTestFun;
 
 void filterMffcBySize(map<BnetNodeID, FFC>& mffc) {
     for (auto iter = mffc.begin(); iter != mffc.end();) {
-        if (iter->second.nodeSet.size() == 1) {
+        bool needDelete = false;
+        needDelete |= (iter->second.inputNode.size() < 3);
+        needDelete |= (iter->second.inputNode.size() > 20);
+        if (needDelete) {
             //std::cerr << "Erased '" << iter->first << "' by size." << std::endl;
             iter = mffc.erase(iter);
         } else {
