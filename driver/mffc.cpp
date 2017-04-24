@@ -12,7 +12,7 @@
 #include "header.h"
 
 #define SIM_ROUND 40000
-#define TOLLENT_RATE 0.10f
+#define TOLLENT_RATE 0.03f
 
 // mode
 #define NEW_APPROX 1
@@ -31,24 +31,27 @@ using std::string;
 using std::map;
 using std::vector;
 using std::unordered_map;
-typedef std::shared_ptr<IAlgorithmDecompose> AlgPtr;
 
 const AlgorithmDecompose::Mode searchStrategy
         = AlgorithmDecompose::BRANCH_AND_BOUND;
+#define searchStrategyBouns 0.002
 
-const std::string baseName  = "C880";
+const std::string baseName  = "C1908";
 const auto blifCircuit      = fBlif(baseName);
 const auto blifMffc         = fBlif(baseName)["_mffc_"];
 const auto blifApproxMffc   = fBlif(baseName)["_mffc_approx_"];
-const AlgPtr algo(new AlgorithmDecompose(searchStrategy));
+
+AlgPtr sAlgo(new AlgorithmDecomposeSmall(searchStrategyBouns));
+const AlgPtr algo(new AlgorithmDecompose(searchStrategy, sAlgo));
+
 
 int main(int argc, char* argv[]) {
 
-    NodeName baseName = "C880";
+    NodeName baseName = "C1908";
 
     auto select =
             [](const FFC& ffc) -> bool {
-                return ((ffc.inputNode.size() <= 6) &&
+                return ((ffc.inputNode.size() <= 8) &&
                         (ffc.inputNode.size() >= 3));
             };
 
@@ -113,6 +116,7 @@ int main(int argc, char* argv[]) {
         cout << "Local Error at " << lastFfcNode << "\n";
         auto localErr = unmodedNet.localErrorSim(initNet, 10000, lastFfcNode);
         cout << localErr.nErrors << "\n\n";
+
 
         while (ffc) {
             /*std::cout << " Found MFFC of " << ffc->name << " over "
